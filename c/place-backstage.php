@@ -1,7 +1,6 @@
 <?php
 require __DIR__ . "./parts/test_connect_db.php";
 
-
 $perPage = 10;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
