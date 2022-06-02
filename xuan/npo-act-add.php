@@ -438,15 +438,15 @@ async function sendData(){
 
     // 前面已定義過，這邊就不再定義
     // const start = document.getElementById('start');
-    const end = document.getElementById('end');
-    console.log(start)
+    const end = document.querySelector('#end');
+    // console.log(start);
 
     start.addEventListener('change', function() {
         if (start.value)
             end.min = start.value;
         }, false);
     
-        end.addEventLiseter('change', function() {
+        end.addEventListener('change', function() {
         if (end.value)
             start.max = end.value;
         }, false);
