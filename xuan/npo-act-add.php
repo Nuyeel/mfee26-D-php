@@ -431,6 +431,11 @@ async function sendData(){
 // 日期(不能選今天以前，不能選小於開始時間)
             const start = document.getElementById('start');
             start.min = new Date().toISOString().split("T")[0];
+            start.min = new Date().toISOString().split("T")[0];
+            start.min = new Date().toISOString().split("T")[0];
+            start.min = new Date().toISOString().split("T")[0];
+            start.min = new Date().toISOString().split("T")[0];
+            start.min = new Date().toISOString().split("T")[0];
 
             // datePicker.min = new Date().toISOString().split("T")[0];
 

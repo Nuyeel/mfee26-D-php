@@ -15,7 +15,14 @@ if($page<1){
 }
 
 // 計算總共有幾筆，以建立頁籤 
-$t_sql = "SELECT COUNT(1) FROM npo_act";
+// $t_sql = "SELECT COUNT(1) FROM npo_act";
+
+
+
+$t_sql = "SELECT COUNT(1) FROM test_view";
+
+
+
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0]; 
 //結果為索引式陣列，因為只有一個，所以取第一個[0]
 
@@ -36,7 +43,7 @@ if($totalRows > 0){
 
 // echo $totalRows; exit;  //這行是用來測試$totalRows是否有成功取值
 
-$sql = sprintf("SELECT * FROM npo_act LIMIT %s, %s", ($page-1)*$perPage ,$perPage );
+$sql = sprintf("SELECT * FROM test_view LIMIT %s, %s", ($page-1)*$perPage ,$perPage );
 
 $rows = $pdo->query($sql)->fetchAll();
 ?> 
@@ -152,7 +159,7 @@ $rows = $pdo->query($sql)->fetchAll();
         <div class="card m-2 mt-3 card-f" style="width: 23rem; border-radius:10px">
 
             <div class="d-flex justify-content-between" style="padding:10px 15px">
-            <span class="bg-info text-white" style="padding:3px 10px;border-radius:5px"><?= $r['type_sid'] ?></span>
+            <span class="bg-info text-white" style="padding:3px 10px;border-radius:5px"><?= $r['name'] ?></span>
             <span>組織名稱(尚未連結)</span>
             </div>
 
