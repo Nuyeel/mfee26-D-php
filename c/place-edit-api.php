@@ -12,7 +12,7 @@ $output = [
 // echo json_encode($output, JSON_UNESCAPED_UNICODE);
 // exit;
 
-$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
+$sid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
 
 $date = $_POST['date'];
 $country = $_POST['country'];

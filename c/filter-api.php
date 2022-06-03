@@ -32,4 +32,5 @@ $rows = $pdo->query($sql)->fetchAll();
 // SELECT * FROM `place` WHERE `year` = 2035 AND `country` = '台灣';
 
 // echo json_encode($output, JSON_UNESCAPED_UNICODE);
-print_r($rows);
+echo json_encode($rows, JSON_UNESCAPED_UNICODE);
+// print_r($rows);
