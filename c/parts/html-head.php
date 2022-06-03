@@ -38,19 +38,110 @@
         }
 
         .place-card {
-            background-color: #eee;
+            background-color: #fff;
             border-radius: 10px;
+            transition: 1s;
+        }
+
+        .place-card:hover .card-icons i {
+            transform: translateY(2px);
+        }
+
+        .place-card .card-icons i {
+            font-size: 28px;
+            transform: translateY(10px);
+            transition: 1s;
         }
 
         .placeCardBtn .saveBtn,
         .placeCardBtn .chooseBtn {
             font-size: 15px;
+            border: none;
+            color: #fff;
+        }
+
+        .placeCardBtn .saveBtn {
+            background-color: #c24242;
+        }
+
+        .placeCardBtn .saveBtn:hover {
+            background-color: #832a2a;
+        }
+
+        .placeCardBtn .chooseBtn {
+            background-color: #2b4d8d;
+        }
+
+        .placeCardBtn .chooseBtn:hover {
+            background-color: #1f3763;
+        }
+
+        .top-wrap {
+            background-color: #d35202;
+        }
+
+        .top-time,
+        .top-place {
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 2rem;
+            text-align: center;
+        }
+
+        .top .title {
+            background-color: #ccc;
+        }
+
+        .top {
+            text-align: center;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.5rem;
+            height: 70%;
+            border: 1px solid #555;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .top p {
+            font-size: 22px;
+            margin-bottom: 0;
+        }
+
+        .top-place .country {
+            font-size: 22px;
+            color: #1f3763;
+        }
+
+        .top-place .city {
+            font-size: 18px;
+        }
+
+        .top h4 {
+            font-weight: bold;
+            font-size: 24px;
+            border-bottom: 1.5px solid #1f3763;
+            padding: 15px 5px 8px;
+            margin: 0 8px 0px;
             color: #222;
         }
 
-        .btn-success {
-            background-color: #28a745;
-            border: none;
+        .place-info {
+            text-align: center;
+            background-color: #eee;
+            color: #fff;
+        }
+
+        .place-info p {
+            font-size: 16px;
+            margin-bottom: 0;
+            padding: 5px;
+            color: #945808;
+        }
+
+        .place-info .remain {
+            color: #c24242;
+            font-weight: bold;
         }
     </style>
 </head>

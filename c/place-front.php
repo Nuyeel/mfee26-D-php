@@ -2,7 +2,6 @@
 require __DIR__ . "./parts/test_connect_db.php";
 
 
-
 $perPage = 10;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
@@ -49,7 +48,7 @@ if ($totalRows > 0) {
         <!-- 主區塊 -->
         <div class="main col-md-9 px-2">
             <!-- 篩選搜尋 -->
-            <div class="filter-section px-4 py-4 mb-4">
+            <div class="filter-section px-4 py-4">
                 <form name="filterForm" action="" onsubmit="filterData(); return false">
                     <div class="d-flex mb-3">
                         <div class="col-md-6">
@@ -122,31 +121,45 @@ if ($totalRows > 0) {
                 </div>
             </div>
             <!-- 列表區 -->
-            <div class="list-section border border-secondary px-2">
+            <div class="list-section px-1">
                 <div class="d-flex flex-wrap">
                     <?php foreach ($rows as $r) : ?>
                         <div class="place-card-wrap col-4 p-2">
-                            <div class="place-card p-3 m-1 border border-secondary">
-                                <div class="top d-flex">
-                                    <div class="top-time col">
-                                        <h4>良辰</h4>
-                                        <p class="year"><?= $r['year'] ?></p>
-                                        <p class="month"><?= $r['month'] ?></p>
+                            <div class="place-card m-3">
+                                <div class="card-icons d-flex justify-content-around">
+                                    <i class="fa-solid fa-clock"></i>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div class="top mb-1 shadow">
+                                    <div class="d-flex mb-3">
+                                        <input type="hidden" value="<?= $r['sid'] ?>">
+                                        <div class="top-time col d-flex flex-column justify-content-between">
+                                            <div class="title mb-3">
+                                                <h4>良辰</h4>
+                                            </div>
+                                            <div class="d-flex flex-column align-items-center justify-content-center py-3">
+                                                <p class="year fs-4"><?= $r['year'] ?></p>
+                                                <p class="month"><?= $r['month'] ?>月</p>
+                                            </div>
+                                        </div>
+                                        <div class="top-place col d-flex flex-column justify-content-between">
+                                            <div class="title mb-3">
+                                                <h4>吉地</h4>
+                                            </div>
+                                            <p class="country "><?= $r['country'] ?></p>
+                                            <p class="city"><?= $r['city'] ?><br><?= $r['dist'] ?></p>
+                                        </div>
                                     </div>
-                                    <div class="top-place col">
-                                        <h4>吉地</h4>
-                                        <p class="country"><?= $r['country'] ?></p>
-                                        <p><?= $r['city'] ?> <?= $r['dist'] ?></p>
+                                    <div class="place-info d-flex align-items-center">
+                                        <p class="quota col">轉生限額：<?= $r['quota'] ?></p>
+                                        <p class="remain col">剩餘名額：<?= $r['quota'] - $r['booked'] ?></p>
                                     </div>
                                 </div>
-                                <div class="place-info d-flex">
-                                    <p class="quota col">轉生限額：<?= $r['quota'] ?></p>
-                                    <p class="remain col">剩餘名額：<?= $r['quota'] - $r['booked'] ?></p>
-                                </div>
-                                <div class="bottom">
-                                    <div class="placeCardBtn d-flex justify-content-between">
-                                        <button class="saveBtn btn btn-warning p-2"><i class="fa-brands fa-gratipay"></i> 收藏良辰吉地</button>
-                                        <button class="chooseBtn btn btn-success p-2"><i class="fa-solid fa-cart-arrow-down"></i> 加入轉生訂單</button>
+
+                                <div class="bottom py-2">
+                                    <div class="placeCardBtn d-flex justify-content-end">
+                                        <button class="saveBtn btn btn-warning p-2 me-2"><i class="fa-brands fa-gratipay"></i> 收藏</button>
+                                        <button class="chooseBtn btn btn-success p-2 me-2"><i class="fa-solid fa-cart-arrow-down"></i> 加入</button>
                                     </div>
                                 </div>
                             </div>
@@ -222,19 +235,42 @@ if ($totalRows > 0) {
     };
     nowDate();
 
-    // 篩選器
-    const renderCity = () => {
-        const country = document.querySelector("#country");
-        let countryHtml = "";
-        let cityHtml = "";
 
-        const countryAr = ["臺灣", "美國"];
-        countryAr.forEach((e, i) => {
-            countryHtml += `<option value="${i}">${e}</option>`;
+    // 篩選器
+    let renderData;
+    const country = document.querySelector("#country");
+    const city = document.querySelector('#city');
+    const dist = document.querySelector('#dist');
+
+    function renderCountry() {
+        fetch("render-dist-api.php").then(r => r.json()).then(obj => {
+            renderData = obj;
+            // console.log(renderData);
+
+            const countrys = renderData.countrys;
+            for (let k in countrys) {
+                country.innerHTML += `<option value="${k}">${k}</option>`;
+            };
         });
-        country.innerHTML += countryHtml;
     };
-    renderCity();
+    renderCountry();
+
+    function changeCity(value) {
+        // 先清空city選單
+        city.innerHTML = `<option selected disabled>選擇城市...</option>`;
+
+        const countrys = renderData.countrys;
+        const distList = renderData.distList;
+
+        for (let k in countrys) {
+            if (value == k) {
+                countrys[k].forEach(e => {
+                    city.innerHTML += `<option value="${e}">${e}</option>`;
+                });
+            }
+        };
+    };
+
 
     const renderDate = () => {
         const year = document.querySelector("#year");
