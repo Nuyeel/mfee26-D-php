@@ -1,6 +1,6 @@
 <?php require __DIR__ .  '/parts/connect_db.php' ;
 
-$pageName = 'npo-add';
+$pageName = 'npo-act-add';
 $title = '上架活動';
 
 ?>
@@ -94,6 +94,7 @@ $title = '上架活動';
                         onsubmit="return false;"
                         method="post"
                         enctype="multipart/form-data"
+                        class="image_upload";
                 >
 
                     <h5 class="card-title text-center" >開始建立活動資訊！</h5>
@@ -124,7 +125,7 @@ $title = '上架活動';
 
                         <div class="mb-4">
                             <label for="name" class="form-label ">活動名稱 <i class="fa-solid fa-asterisk ml-4" style="font-size:11px ; color:red"></i></label>
-                            <input type="text" class="form-control-lg form-control  "  id="name" name="name" placeholder="請填寫活動名稱" required>
+                            <input type="text" class="form-control-lg form-control  "  id="name" name="name" placeholder="請填寫活動名稱" >
                             <!-- 下面是錯誤時跳出的提示通知 -->
                             <div class="form-text "></div>
                         </div>
@@ -203,7 +204,7 @@ $title = '上架活動';
                         <div class="mb-4">
                             <label for="ammount" class="form-label">活動名額 <i class="fa-solid fa-asterisk ml-4" style="font-size:11px ; color:red"> </i></label>
                             <div class="form-text text-secondary"></div>
-                            <input type="text" class=" form-control w-25" id="ammount" name="ammount" pattern="09\d{8}" placeholder="請填寫招募人數" required>
+                            <input type="text" class=" form-control w-25" id="ammount" name="ammount" pattern="09\d{8}" placeholder="請填寫招募人數" >
                             <div class="form-text"></div>
 
                         </div>
@@ -245,7 +246,7 @@ $title = '上架活動';
                                 <div class="form-group col-md-8 mt-1 ">
                                 <div class="act_address_2 form-text text-secondary mt-1 ">詳細地址</div>   
                                 
-                                <input type="text" class="form-control-lg form-control address_2"  id="act_address_2" name="act_address_2"  required placeholder="ex: 中華路一段">
+                                <input type="text" class="form-control-lg form-control address_2"  id="act_address_2" name="act_address_2"  placeholder="ex: 中華路一段">
 
                                 <div class="form-text address2 w-100" >
                                 </div>
@@ -400,13 +401,18 @@ async function sendData(){
     const r = await fetch('npo-act-add-api.php', {
         method: 'POST',
         body: fd,
+        // body: JSON.parse(fd),
     });
+
+        
     const result = await r.json();
+    // const result = await r;
+    // const result = await r.test;
     console.log(result);
 
     if (result.success) {
         setTimeout(() => {
-                location.href = 'npo-list.php'; // 跳轉到活動一覽頁
+                location.href = 'event-manage.php'; // 跳轉到活動一覽頁
             }, 2000);
         };
 

@@ -3,7 +3,7 @@
 <?php require __DIR__ .  '/parts/connect_db.php';
 
 $pageName = 'npo-manage';
-$title = '活動申請列表';
+$title = 'NPO申請列表';
 
 
 $perPage = 12;  //每一頁有幾筆

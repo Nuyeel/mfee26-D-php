@@ -1,7 +1,7 @@
 <?php require __DIR__ .  '/parts/connect_db.php' ;
 
 $pageName = 'npo-add';
-$title = '上架活動';
+$title = '上架NPO';
 
 ?>
 <!-- php以前是樣板語言，用來生HTML內容。現在都改用框架了 -->
@@ -327,11 +327,11 @@ async function sendData(){
     const result = await r.json();
     console.log(result);
 
-    if (result.success) {
-        setTimeout(() => {
-                location.href = 'npo-act-add.php'; // 跳轉到建立活動頁
-            }, 2000);
-        };
+    // if (result.success) {
+    //     setTimeout(() => {
+    //             location.href = 'npo-act-add.php'; // 跳轉到建立活動頁
+    //         }, 2000);
+    //     };
 
     }
 

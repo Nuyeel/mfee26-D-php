@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人生轉運站</title>
+
+    <!-- Bootstrapt 5.1 Link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <!-- FontAwesome 連結 -->
+    <link rel="stylesheet" href="fontawesome/css/all.css" />
+
+    <!-- Jquery連結-購物車需要 -->
+    <script src="./parts/jquery-3.6.0.min.js"></script>
+
+</head>
+
+    <style>
+      /* Nav-Link text-color */
+    .link-c{
+        color: rgb(15, 15, 15);
+    }
+
+    .card-f:hover{
+        cursor: pointer;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1); 
+        transform: translateY(-5px);
+        transition: .1s linear;
+    }
+
+
+    </style>
+
+
+</head>
+
+<body> 
+
+<!-- NAV-BAR -->
+<div class="container w-75 " >
+
+    <nav class="navbar navbar-expand-lg bg-white  ">
+        <div class="container-fluid ">
+            <img src="./list-img/LOGO.svg" alt="" style="width: 100px;margin: 15px 5px auto auto;">
+            <a class="navbar-brand" href="./index_.php" style="color:rgb(10, 82, 121); font-weight: bold;">Life Transfer Station</a>
+
+            <!-- 搜尋功能 -->
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="探索活動" aria-label="Search" style="border-radius: 15px; background-color:rgb(242, 242, 242);border: 0px;">
+
+            </form>
+
+            <div class="collapse navbar-collapse" style="margin-left: 50px" >
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link link-c" href="npo-list.php">活動一覽</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link link-c" href="npo-add.php">新增主辦方</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link link-c" href="npo-act-add.php">建立活動</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link link-c" href="member-add.php">註冊</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link  link-c bg-info text-white" href="#" style="border-radius:10px; font-weight: 700; margin-left: 10px; padding: 6px;">登入</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link  link-c bg-info text-white" href="cart-list.php" style="border-radius:10px; font-weight: 700; margin-left: 10px; padding: 6px; ">購物車</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link  link-c bg-warning text-white" href="member-list.php" style="border-radius:10px; font-weight: 700; margin-left: 10px; padding: 6px; ">會員管理</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link  link-c bg-danger text-white" href="npo-manage.php" style="border-radius:10px; font-weight: 700; margin-left: 10px; padding: 6px; ">活動管理</a>
+                </li>
+
+            </ul>
+
+        </div>
+        </div>
+    </nav>
+    
+</div>
+
+
+
+<!-- 這邊是側邊欄位的CSS -->
+<style>
+
+    /* 讓左側dropdowmn變hover */
+    .dropdown:hover .dropdown-menu {
+    display: block;
+    /* margin-top: 0;  */
+    /*  remove the gap so it doesn't close 但目前測起來沒有好像沒差??  */
+    }  
+
+    /* 讓btn的padding加多一點 */
+    .padding-top-bottom{
+        padding: 8px 5px;
+    }
+
+    .padding-top{
+        padding-top: 15px;
+    }
+
+    .padding-left{
+        padding-left: 8px;
+    }
+
+    .margin-top-bottom{
+        margin: 15px 0;
+    }
+
+    .btn-white{
+        background-color: #fff;
+    }
+
+    .btn-white:hover{
+        background-color: #e2e6ea;
+    }
+
+</style>
+
+
+
+<!-- 麵包屑 -->
+<div class="container w-75 mt-5" >
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">報名活動</li>
+        </ol>
+    </nav>
+</div>
+
+<!-- 輪播牆 -->
+<div class="container w-75 mt-3" style="width:100%; height:300px;">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+        <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner" style=" width:100%; height:300px;">  
+        <div class="carousel-item active">
+            <img src="./list-img/c01.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            <h5>First slide label</h5>
+            <p>Some representative placeholder content for the first slide.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="./list-img/dog.jpg" style="object-fit:center "class="d-block w-100" alt="..." >
+            <div class="carousel-caption d-none d-md-block">
+            <h5>Second slide label</h5>
+            <p>Some representative placeholder content for the second slide.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="./list-img/c01.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+            <h5>Third slide label</h5>
+            <p>Some representative placeholder content for the third slide.</p>
+            </div>
+        </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+
+<!-- 頁籤 -->
+<div class="container w-75 d-flex  justify-content-center mt-5">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination" >
+            <!-- <li class="page-item active">
+                <a class="page-link" href="?page=1">1</a>
+            </li>          -->
+        </ul>
+    </nav>
+</div>
+
+
+
+<div class="container w-75 d-flex">
+
+<!-- 篩選核取方塊 -->
+<div style="width:20%;">
+    <div class="margin-top-bottom w-75">
+        <h5>進階搜尋</h5>
+    </div>  
+
+
+        <a class="btn btn-white d-block  padding-top-bottom border-bottom border-top w-75" href="#" role="button">全部活動</a>
+        <a class="btn btn-white d-block  padding-top-bottom border-bottom border-top w-75" href="#" role="button">時間(由近至遠)</a>
+        <a class="btn btn-white d-block  padding-top-bottom border-bottom w-75" href="#" role="button">時間(由遠至近)</a>
+
+
+
+
+        <!-- 活動類型分類 -->
+        <div class="dropdown dropright border-bottom w-75 ">
+
+                <a class="btn padding-top-bottom " href="#" role="button" id="dropdownMenuLink" aria-expanded="false">
+                    活動種類 &nbsp (27422)
+                </a>
+
+                <!-- 把活動分類用迴圈下去跑 -->
+                
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                
+                                    <li><a class="dropdown-item" href="?cate=1">
+                    
+                    環境  (0)</a>
+                
+                    </li>
+                                    <li><a class="dropdown-item" href="?cate=2">
+                    
+                    動保  (0)</a>
+                
+                    </li>
+                                    <li><a class="dropdown-item" href="?cate=3">
+                    
+                    長照  (0)</a>
+                
+                    </li>
+                                    <li><a class="dropdown-item" href="?cate=4">
+                    
+                    兒少  (0)</a>
+                
+                    </li>
+                                    <li><a class="dropdown-item" href="?cate=5">
+                    
+                    身心障礙  (0)</a>
+                
+                    </li>
+                                    <li><a class="dropdown-item" href="?cate=6">
+                    
+                    其他  (0)</a>
+                
+                    </li>
+                                </ul>
+
+        </div>   
+
+
+
+
+        <!-- 地區分類 -->
+        <div class="dropdown    dropright border-bottom w-75 ">
+                <a class="btn padding-top-bottom " href="#" role="button" id="dropdownMenuLink" aria-expanded="false">
+                    活動地點 &nbsp (27422)
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">北部(3)</a></li>
+                    <li><a class="dropdown-item" href="#">中部(6)</a></li>
+                    <li><a class="dropdown-item" href="#">南部(13)</a></li>
+                    <li><a class="dropdown-item" href="#">東部(40)</a></li>
+                    <li><a class="dropdown-item" href="#">離島(40)</a></li>
+                </ul>
+        </div>   
+
+
+
+
+
+
+</div>
+
+
+<!-- 卡片式 -->
+<div class="container d-flex align-content-start flex-wrap cardgroup" style="width:80%;">
+
+
+            <!-- <div class="card m-2 mt-3 card-f" style="width: 23rem; border-radius:10px">
+
+            <div class="d-flex justify-content-between" style="padding:10px 15px">
+            <span class="bg-info text-white" style="padding:3px 10px;border-radius:5px">環境</span>
+            <span>組織名稱(尚未連結)</span>
+            </div>
+
+            <div style=" width:100%;height:150px;overflow:hidden">
+            <img src="./list-img/cat-01.jpg" class="card-img-top" alt="..." style="width:100%;hight:100%;">
+            </div>
+
+            <div class="card-body">
+                <h5 class="card-title mt-2" style="font-weight:bold">台南淨遊趣</h5>
+                <p class="card-text mt-3 text-primary"><i class="fa-solid fa-location-dot"></i>&nbsp臺南市</p>
+                <p class="card-text">活動時間：2022-06-08</p>
+                <p class="card-text">人數需求：100人</p>
+                <p class="card-text mt-1">$：（尚未連結）</p>
+
+
+                <button class="add-to-cart-btn" data-sid="1" >加入購物車</button>
+
+
+                <p class="card-text text-white bg-danger  mb-3 mt-5" style="border-radius:5px;padding:6px;text-align:center;width:50%;margin-left:auto"><br />
+                <b>Notice</b>:  Undefined index: value in <b>C:\xamp\htdocs\mfee26-D-php\xuan\npo-list.php</b> on line <b>304</b><br />
+                陰德值：</p>
+
+            </div> -->
+<!-- </div> -->
+            
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script> 
+
+
+
+
+<script>
+
+// 這邊是前端render資料的部分
+
+    let data;
+
+
+    const renderPageBtn = (pageNum) => {
+                return `
+                <li class="page-item">
+                        <a class="page-link" href="?page=${pageNum}">${pageNum}</a>
+                </li>
+                `;
+            };
+            const renderPagination = (page = 1, totalPages = 5) => {
+                let str = '';
+                for (let i = 1; i <= 5; i++) {
+                    str += renderPageBtn(i);
+                }
+                document.querySelector('.pagination').innerHTML = str;
+            };
+
+
+    // 要回傳的資料DOM格式
+
+    // 這邊要寫入後面會用到的變數欄位值
+    const renderRow= ({
+        npo_name_sid,
+        type_sid,
+        act_title, 
+        place_city, 
+        start, 
+        limit_num, 
+    }) =>{
+
+        return` 
+        
+        <div class="card m-2 mt-3 card-f" style="width: 23rem; border-radius:10px">
+
+            <div class="d-flex justify-content-between" style="padding:10px 15px">
+            <span class="bg-info text-white" style="padding:3px 10px;border-radius:5px">${type_sid}</span>
+            <span>${npo_name_sid}</span>
+            </div>
+
+            <div style=" width:100%;height:150px;overflow:hidden">
+            <img src="./list-img/cat-01.jpg" class="card-img-top" alt="..." style="width:100%;hight:100%;">
+            </div>
+
+            <div class="card-body">
+                <h5 class="card-title mt-2" style="font-weight:bold">${act_title}</h5>
+                <p class="card-text mt-3 text-primary"><i class="fa-solid fa-location-dot"></i>&nbsp${place_city}</p>
+                <p class="card-text">活動時間：${start}</p>
+                <p class="card-text">人數需求：${limit_num}人</p>
+                <p class="card-text mt-1">$：（尚未連結）</p>
+
+
+                <button class="add-to-cart-btn" data-sid="1" >加入購物車</button>
+
+
+                <p class="card-text text-white bg-danger  mb-3 mt-5" style="border-radius:5px;padding:6px;text-align:center;width:50%;margin-left:auto"><br />
+                陰德值：</p>
+
+            </div>
+        </div> `
+
+    };
+
+
+
+    // 把資料塞回去DOM中
+        function renderTable() {
+                const card = document.querySelector(".cardgroup");
+                let html = "";
+                if (data.rows && data.rows.length) {
+                    html = data.rows.map((r) => renderRow(r)).join("");
+                }
+                card.innerHTML = html;
+            }
+
+
+    fetch("npo-list-api.php?page=2")
+        .then((r)=>r.json())
+        .then((obj) => {
+            data = obj;
+            renderTable();
+            renderPagination();
+        });
+
+
+// 這邊是跟購物車有關的JS
+
+$('.add-to-cart-btn').on('click', event => {
+    // 用箭頭函式這邊不用要this
+    const btn = $(event.currentTarget);
+    const sid = btn.attr('data-sid');
+    const quantity = '1';
+
+    // 下面這行是老師原本可選數量的版本code
+    // 此版本使用者可以選數量
+    // const quantity = btn.closest('.card').find('select').val();
+
+
+    console.log({
+        sid,
+        quantity
+    });
+
+    // Jquery GET寫法
+    $.get('cart-api.php', {
+        sid,
+        quantity
+    }, function(data) {
+        console.log(data);
+        showCount(data);
+    }, 'json');
+
+
+});
+
+</script>
+
+
+
+</body>
+</html> 
