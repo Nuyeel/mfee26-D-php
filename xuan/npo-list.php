@@ -7,15 +7,22 @@ $perPage = 6;  //每一頁有幾筆
 // $_GET['page']裡面變數要打啥都OK，只要跟到時在網址列上打的相同即可
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1 ;
 $cate = isset($_GET['cate']) ? intval($_GET['cate']) : 0; //預設值為: 查看所有商品
+$city_area = isset($_GET['area']) ? intval($_GET['area']) : 0; //預設值為: 查看所有商品
 
 $params = []; 
 
 $where = ' WHERE 1 '; // 1代表 true
+// $where_a = ' WHERE 1 ';
+
 if (!empty($cate)) {
     $where .= " AND type_sid=$cate "; //如果有選種類的話，抓該種類的sid值(增加條件)
     $params['cate'] = $cate; //有分頁就會把分頁值塞進來
+}else if(!empty($city_area)){
+    $where .= " AND area_sid=$city_area ";
+    $params['area'] = $city_area;
+} else {
+    $where = ' WHERE 1 ';
 }
-
 
 
 
@@ -27,19 +34,8 @@ if($page<1){
     exit;
 }
 
-// 計算總共有幾筆，以建立頁籤 
-// $t_sql = "SELECT COUNT(1) FROM npo_act";
 
-
-
-$t_sql = "SELECT COUNT(1) FROM npo_act $where " ;
-
-
-// 分類資料
-$c_sql = "SELECT * FROM `npo_act_type` ";
-$cates = $pdo->query($c_sql)->fetchAll();
-
-
+$t_sql = "SELECT COUNT(*) FROM( (`npo_act` JOIN `npo_act_type` ON `npo_act`.`type_sid` = `npo_act_type`.`sid`) INNER JOIN `npo_name` ON `npo_act`.`npo_name_sid` = `npo_name`.`sid`) INNER JOIN `city_type` ON `npo_act`.`place_city`= `city_type`.`city_sid`  $where " ;
 
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0]; 
 //結果為索引式陣列，因為只有一個，所以取第一個[0]
@@ -59,11 +55,25 @@ if($totalRows > 0){
 }
 
 
-// echo $totalRows; exit;  //這行是用來測試$totalRows是否有成功取值
+// 照活動類型分類
+$sql = sprintf(
+"SELECT * FROM( (`npo_act` JOIN `npo_act_type` ON `npo_act`.`type_sid` = `npo_act_type`.`sid`) INNER JOIN `npo_name` ON `npo_act`.`npo_name_sid` = `npo_name`.`sid`) INNER JOIN `city_type` ON `npo_act`.`place_city`= `city_type`.`city_sid` $where LIMIT %s, %s", ($page-1)*$perPage ,$perPage );
 
-$sql = sprintf("SELECT * FROM npo_act $where LIMIT %s, %s", ($page-1)*$perPage ,$perPage );
-
+// $sql = sprintf("SELECT * FROM npo_act $where LIMIT %s, %s", ($page-1)*$perPage ,$perPage );
 $rows = $pdo->query($sql)->fetchAll();
+
+
+$npo_name = sprintf(
+"SELECT * FROM `npo_act` JOIN `npo_name` ON `npo_act`.`npo_name_sid` = `npo_name`.`sid`");
+$npo_n = $pdo->query($npo_name)->fetchAll();
+
+
+// 計算 各區 活動數量
+$area_type = sprintf("SELECT `city_type`.`area_name`, `city_type`.`area_sid`, COUNT(*) FROM `npo_act`,`city_type` WHERE `npo_act`.`place_city`=`city_type`.`city_sid` GROUP BY `city_type`.`area_sid` " );
+
+$area = $pdo->query($area_type)->fetchAll();
+
+
 ?> 
 
 <!-- 從這邊開始是HTML內容(=V =呈現) -->
@@ -77,8 +87,6 @@ $rows = $pdo->query($sql)->fetchAll();
     /* 讓左側dropdowmn變hover */
     .dropdown:hover .dropdown-menu {
     display: block;
-    /* margin-top: 0;  */
-    /*  remove the gap so it doesn't close 但目前測起來沒有好像沒差??  */
     }  
 
     /* 讓btn的padding加多一點 */
@@ -130,21 +138,21 @@ $rows = $pdo->query($sql)->fetchAll();
         </div>
         <div class="carousel-inner" style=" width:100%; height:300px;">  
         <div class="carousel-item active">
-            <img src="./list-img/c01.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-            <h5>First slide label</h5>
+            <img src="./list-img/dog02.jpg" class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover ">
+            <div class="carousel-caption d-none d-md-block ">
+            <h5 >拉拉拉</h5>
             <p>Some representative placeholder content for the first slide.</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="./list-img/dog.jpg" style="object-fit:center "class="d-block w-100" alt="..." >
+            <img src="./list-img/dog04.jpg" style="object-fit:center "class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover " >
             <div class="carousel-caption d-none d-md-block">
             <h5>Second slide label</h5>
             <p>Some representative placeholder content for the second slide.</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="./list-img/c01.jpg" class="d-block w-100" alt="...">
+            <img src="./list-img/dog03.jpg" class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover ">
             <div class="carousel-caption d-none d-md-block">
             <h5>Third slide label</h5>
             <p>Some representative placeholder content for the third slide.</p>
@@ -215,36 +223,55 @@ $rows = $pdo->query($sql)->fetchAll();
 
 <!-- 篩選核取方塊 -->
 <div style="width:20%;">
-    <div class="margin-top-bottom w-75">
+    <div class="margin-top-bottom w-75" style="text-align:center">
         <h5>進階搜尋</h5>
     </div>  
 
 
-        <a class="btn btn-white d-block  padding-top-bottom border-bottom border-top w-75" href="#" role="button">全部活動</a>
-        <a class="btn btn-white d-block  padding-top-bottom border-bottom border-top w-75" href="#" role="button">時間(由近至遠)</a>
-        <a class="btn btn-white d-block  padding-top-bottom border-bottom w-75" href="#" role="button">時間(由遠至近)</a>
+<?php
+
+    // 分類資料
+    // $c_sql = "SELECT * FROM `npo_act_type` ";
+    $c_sql = "SELECT `npo_act_type`.`sid`, `npo_act_type`.`name` ,COUNT(*) 
+    FROM `npo_act_type`,`npo_act` 
+    WHERE `npo_act_type`.`sid`=`npo_act`.`type_sid`
+    GROUP BY `npo_act_type`.`sid`,`npo_act_type`.`name`; ";
+
+    $cates = $pdo->query($c_sql)->fetchAll();
+
+
+    // 計算所有活動總額 
+    // $event_sum = sprintf("SELECT COUNT(*) FROM `npo_act` WHERE `type_sid` IN(1);");
+    $event_sum = sprintf("SELECT COUNT(*) FROM `npo_act` ");
+    $sum = $pdo->query($event_sum)->fetch(PDO::FETCH_NUM)[0];
 
 
 
+?>
 
+
+        <!-- 活動一覽首頁(全部活動) -->
+        <div class="dropdown dropright border-bottom w-75 " style="text-align:center">
+                <a class="btn padding-top-bottom " href="npo-list.php" role="button" id="dropdownMenuLink" aria-expanded="false" >
+                    全部活動  ( <?= $sum ?> )
+                </a>
+        </div>   
+        
         <!-- 活動類型分類 -->
-        <div class="dropdown dropright border-bottom w-75 ">
-
+        <div class="dropdown dropright border-bottom w-75 " style="text-align:center">
                 <a class="btn padding-top-bottom " href="#" role="button" id="dropdownMenuLink" aria-expanded="false">
-                    活動種類 &nbsp (27422)
+                    活動種類 
                 </a>
 
-                <!-- 把活動分類用迴圈下去跑 -->
-                
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                
-                <?php foreach ($cates as $c) : ?>
-                    <li><a class="dropdown-item" href="?cate=<?= $c['sid'] ?>">
+                <!-- 把活動分類用迴圈下去跑 -->                
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">                
+                    <?php foreach ($cates as $c) : ?>
+                        <li><a class="dropdown-item" href="?cate=<?= $c['sid'] ?>">
+                        
+                        <?= $c['name'] ?>  ( <?= $c['COUNT(*)'] ?> )</a>
                     
-                    <?= $c['name'] ?>  (<?= $c['quantity'] ?>)</a>
-                
-                    </li>
-                <?php endforeach; ?>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
 
         </div>   
@@ -253,18 +280,33 @@ $rows = $pdo->query($sql)->fetchAll();
 
 
         <!-- 地區分類 -->
-        <div class="dropdown    dropright border-bottom w-75 ">
+        <div class="dropdown    dropright border-bottom w-75 " style="text-align:center">
                 <a class="btn padding-top-bottom " href="#" role="button" id="dropdownMenuLink" aria-expanded="false">
-                    活動地點 &nbsp (27422)
+                    活動地點
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <li><a class="dropdown-item" href="#">北部(3)</a></li>
-                    <li><a class="dropdown-item" href="#">中部(6)</a></li>
-                    <li><a class="dropdown-item" href="#">南部(13)</a></li>
-                    <li><a class="dropdown-item" href="#">東部(40)</a></li>
-                    <li><a class="dropdown-item" href="#">離島(40)</a></li>
+                    <?php foreach ($area as $a) : ?>
+                        <li><a class="dropdown-item" href="?area=<?= $a['area_sid'] ?>"><?= $a['area_name'] ?> ( <?= $a['COUNT(*)'] ?> )</a></li>
+                    <?php endforeach; ?>
                 </ul>
-        </div>   
+        </div> 
+        
+
+
+        <div class="form-check  w-75 mt-4" style="text-align:center">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                <label class="form-check-label" for="flexRadioDefault2">
+                活動時間（由近至遠）
+                </label>
+        </div>
+
+        <div class="form-check  w-75 mt-3" style="text-align:center">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label class="form-check-label" for="flexRadioDefault1">
+                活動時間（由遠至近）
+                </label>
+                </div>
+        
 
 
 
@@ -278,30 +320,33 @@ $rows = $pdo->query($sql)->fetchAll();
 <div class="container d-flex align-content-start flex-wrap " style="width:80%;">
 
 
-    <?php foreach($rows as $r): ?>
-        <div class="card m-2 mt-3 card-f" style="width: 23rem; border-radius:10px">
 
+    <?php foreach($rows as $r): ?>
+        <div onclick="location.href='event-detail.php';" class="card m-2 mt-3 card-f" style="width: 23rem; border-radius:10px">
+
+            <a href="event-detail.php"></a>
             <div class="d-flex justify-content-between" style="padding:10px 15px">
             <span class="bg-info text-white" style="padding:3px 10px;border-radius:5px"><?= $r['name'] ?></span>
-            <span>組織名稱(尚未連結)</span>
             </div>
 
             <div style=" width:100%;height:150px;overflow:hidden">
             <img src="<?= $r['img'] ?>" class="card-img-top" alt="..." style="width:100%;hight:100%;">
             </div>
+    
 
             <div class="card-body">
                 <h5 class="card-title mt-2" style="font-weight:bold"><?= $r['act_title'] ?></h5>
-                <p class="card-text mt-3 text-primary"><i class="fa-solid fa-location-dot"></i>&nbsp<?= $r['place_city'] ?></p>
+                <span><?= $r['npo_name'] ?></span>
+                <p class="card-text mt-3 text-primary"><i class="fa-solid fa-location-dot"></i>&nbsp<?= $r['city'] ?></p>
                 <p class="card-text"><?= "活動時間：{$r['start']}" ?></p>
                 <p class="card-text"><?= "人數需求：{$r['limit_num']}人" ?></p>
-                <p class="card-text mt-1"><?= "\$：（尚未連結）" ?></p>
+                <p class="card-text mt-1"><?= "報名費：{$r['price']}元" ?></p>
 
 
                 <button class="add-to-cart-btn" data-sid="<?= $r['sid']?>" >加入購物車</button>
 
 
-                <p class="card-text text-white bg-danger  mb-3 mt-5" style="border-radius:5px;padding:6px;text-align:center;width:50%;margin-left:auto"><?= "陰德值：{$r['value']}" ?></p>
+                <p class="card-text text-white bg-danger  mb-3 mt-5" style="border-radius:5px;padding:6px;text-align:center;width:50%;margin-left:auto"><?= "陰德值回饋：{$r['value']}" ?></p>
             <!-- <a href="#" class="btn btn-primary" style="width:4rem"><?= $r['type_sid'] ?></a> -->
             </div>
         </div>
