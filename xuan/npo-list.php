@@ -349,7 +349,7 @@ $area = $pdo->query($area_type)->fetchAll();
                 <p class="card-text mt-1"><?= "報名費：{$r['price']}元" ?></p>
 
 
-                <button class="add-to-cart-btn" data-sid="<?= $r['sid']?>" >加入購物車</button>
+                <!-- <button class="add-to-cart-btn" data-sid="<?= $r['sid']?>" >加入購物車</button> -->
 
 
                 <p class="card-text text-white bg-danger  mb-3 mt-5" style="border-radius:5px;padding:6px;text-align:center;width:50%;margin-left:auto"><?= "陰德值回饋：{$r['value']}" ?></p>

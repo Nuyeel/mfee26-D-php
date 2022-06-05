@@ -1,90 +1,86 @@
 <?php
 session_start();
 $pageName = 'cart';
-$title = '活動購物車列表';
+$title = '購物車列表';
 require './parts/connect_db.php';
 
 $rows = [];
 $sids = [];
-
-// 如果不是空的，才做拿商品動作
 if (!empty($_SESSION['cart'])) {
 
     $sids = array_keys($_SESSION['cart']);
 
-    // implode 相當於是JS Array的JOIN功能
-    $sql = sprintf("SELECT * FROM npo_act WHERE sid IN (%s)", implode(',', $sids));
+    $sql = sprintf("SELECT * FROM( (`npo_act` JOIN `npo_act_type` ON `npo_act`.`type_sid` = `npo_act_type`.`typesid`) INNER JOIN `npo_name` ON `npo_act`.`npo_name_sid` = `npo_name`.`npo_sid`) INNER JOIN `city_type` ON `npo_act`.`place_city`= `city_type`.`city_sid`  WHERE sid IN (%s)" , implode(',', $sids));
+
 
     $stmt = $pdo->query($sql);
 
-
-    // 只知道這一段的結果是讓每個結果後面都新增"數量"; 原理不清楚QQ
     while ($r = $stmt->fetch()) {
         $r['quantity'] = $_SESSION['cart'][$r['sid']];
         $rows[$r['sid']] = $r;
     }
 }
 
-// echo json_encode($rows);
-
-// 下面這段測試用，順序不一樣
 /*
 echo json_encode([
-    'rows' => $rows,  //資料庫排列順序
-    'sids' => $sids,  //加入購物車順序
+    'rows' => $rows,
+    'sids' => $sids,
 ]);
 */
 ?>
-<?php include __DIR__ . './parts/html-head.php' ?>
-<?php include __DIR__ . './parts/nav-bar.php' ?>
-<div class="container">
+<?php include __DIR__ . '/parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/nav-bar.php' ?>
+<div class="container mt-5" style="text-align:center">
     <div class="row">
         <div class="col">
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">商品圖</th>
-                        <th scope="col">商品名稱</th>
-                        <th scope="col">陰德值</th>
+                        <th scope="col">活動圖</th>
+                        <th scope="col">活動名稱</th>
+                        <th scope="col">活動時間</th>
+                        <th scope="col">活動地點</th>
                         <th scope="col">報名費</th>
-                        <th scope="col">數量</th>
-                        <th scope="col">小計</th>
+                        <!-- <th scope="col">數量</th> -->
+                        <!-- <th scope="col">小計</th> -->
                     </tr>
                 </thead>
                 <tbody>
-                    
-                    
                     <?php
                     $total = 0;
                     foreach ($sids as $sid) :
                         $item = $rows[$sid];
                         $total += $item['price'] * $item['quantity'];
                     ?>
-
-
                     <tr data-sid="<?= $sid ?>">
-
-                        <!-- 垃圾桶功能 -->
                         <td><a href="#" onclick="removeItem(event); event.preventDefault()">
                                 <i class="fa-solid fa-trash-can"></i>
                             </a>
                         </td>
-                    
+                        
                         <!-- 活動圖 -->
                         <td>
-                            <img src="imgs/small/<?= $item['book_id'] ?>.jpg" alt="">
+                            <img src="<?= $item['img'] ?>" alt="" style="width:80px">
                         </td>
-
+                        
                         <!-- 活動名稱 -->
                         <td><?= $item['act_title'] ?></td>
-                        <td><?= $item['value'] ?></td>
 
+                        <!-- 活動時間 -->
+                        <td><?= $item['start'] ?></td>
+                        
+                        <!-- 活動地點 -->
+                        <td><?= $item['city'] ?></td>
+
+                        <!-- 陰德值 -->
+                        <td class="price-2" data-price-2="<?= $item['value'] ?>"></td>
+                        
                         <!-- 活動報名費 -->
                         <td class="price" data-price="<?= $item['price'] ?>"></td>
-
-                        <!-- 活動數量選擇 -->
-                        <td>
+                        
+                        <!-- 陰德值數量 -->
+                        <td style="display:none">
                             <select class="form-select form-select-sm quantity"
                                 style="display:inline-block; width:auto">
                                 <?php for ($i = 1; $i <= 20; $i++) : ?>
@@ -94,8 +90,22 @@ echo json_encode([
                             </select>
                         </td>
 
-                        <!--總金額 -->
-                        <td class="sub-total"></td>
+                        <!-- 活動數量 -->
+                        <td style="display:none">
+                            <select class="form-select form-select-sm quantity"
+                                style="display:inline-block; width:auto">
+                                <?php for ($i = 1; $i <= 20; $i++) : ?>
+                                <option value="<?= $i ?>" <?= $item['quantity'] == $i ? 'selected' : '' ?>><?= $i ?>
+                                </option>
+                                <?php endfor; ?>
+                            </select>
+                        </td>
+
+                        <!-- 金額小計 -->
+                        <td class="sub-total" style="display:none"></td>
+            
+                        <!-- 陰德值小計 -->
+                        <td class="sub-total-2" style="display:none"></td>
 
                     </tr>
                     <?php endforeach; ?>
@@ -106,33 +116,47 @@ echo json_encode([
 
         </div>
     </div>
-    <div class="row">
+
+    <!-- 報名費總計 -->
+    <div class="row mt-5 " style="width:15%; text-align:left; margin-left:auto; padding:5px " >
         <div class="col">
-            <div class="alert alert-primary" role="alert">
-                總計: <span id="total-price"></span>
+            <div class="alert " role="alert" style="border-bottom:2px solid black;border-radius: 0px; padding:5px">
+                <h3>總計</h3>
             </div>
-            <div class="alert alert-warning" role="alert">
-                陰德值預計增加: <span id="total-price"></span>
+            <div class="alert " role="alert" style="text-align:right; font-size:16px; padding:5px">
+                <span>報名費總金額</span> &nbsp  <span id="total-price"></span>
             </div>
+            <div class="alert mt-1" role="alert" style="text-align:right; font-size:16px ;padding:5px">
+                <span>陰德值總回饋</span> &nbsp  <span id="total-price-2"></span>
+            </div>
+
+            <a class="btn btn-warning text-white" href="npo-list.php" role="button" style="margin-left:10px">繼續選購</a>
+            <a class="btn btn-primary" href="#" role="button" style="margin-left:10px">前往結帳</a>
+
+
         </div>
     </div>
 
-    <div class="row">
+
+
+    <!-- 登入會員後結帳 -->
+    <div class="row" style="width:15%">
         <div class="col">
             <?php if (isset($_SESSION['admin'])) : ?>
-            <a class="btn btn-success" href="buy.php">結帳</a>
+            <a class="btn btn-danger" href="#">結帳</a> 
+                                <!-- //這邊記得要放連結 -->
+
             <?php else : ?>
             <div class="alert alert-danger" role="alert">
                 請登入會員後再結帳
             </div>
 
             <?php endif; ?>
-
-
-
         </div>
     </div>
 </div>
+
+
 <?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
 const dallorCommas = function(n) {
@@ -153,6 +177,18 @@ const calcPrices = () => {
     });
 
     $('#total-price').text('$ ' + dallorCommas(totalPrice));
+
+    let totalPrice2 = 0;
+    trs.each(function() {
+        const tr = $(this);
+        const price2 = +tr.find('.price-2').attr('data-price-2');
+        tr.find('.price-2').text('$ ' + dallorCommas(price2)); // 顯示單價
+        const quantity = +tr.find('select').val();
+        tr.find('.sub-total-2').text('$ ' + dallorCommas(price2 * quantity)); // 顯示小計
+        totalPrice2 += (price2) * quantity;
+    });
+
+    $('#total-price-2').text('$ ' + dallorCommas(totalPrice2));
 
 };
 calcPrices();
@@ -191,4 +227,4 @@ const removeItem = event => {
 
 }
 </script>
-<?php include __DIR__ . '/parts/html-foot.php' ?>  
+<?php include __DIR__ . '/parts/html-foot.php' ?>

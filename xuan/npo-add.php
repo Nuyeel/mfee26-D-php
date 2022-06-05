@@ -107,11 +107,9 @@ $title = '上架NPO';
 </style>
 
 <!-- 進度bar條 -->
-<div class="container w-25 mt-5">
-    <div class="progress">
-    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 33%"></div>
-    </div>
-</div> 
+<div class="progress w-25 mt-5" style="text-align:center; margin:auto; height:20px">
+    <div class="progress-bar" role="progressbar" style="width: 33%; height:20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">33%</div>
+</div>
 
 
 <!-- 表格一 基本資料 -->

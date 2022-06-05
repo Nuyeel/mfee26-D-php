@@ -6,7 +6,7 @@ $pageName = 'npo-manage';
 $title = '活動申請列表';
 
 
-$perPage = 12;  //每一頁有幾筆
+$perPage = 8;  //每一頁有幾筆
 
 // $_GET['page']裡面變數要打啥都OK，只要跟到時在網址列上打的相同即可
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1 ;
@@ -18,7 +18,7 @@ if($page<1){
 }
 
 // 計算總共有幾筆，以建立頁籤 
-$t_sql = "SELECT COUNT(1) FROM npo_act";
+$t_sql = "SELECT COUNT(*) FROM( (`npo_act` JOIN `npo_act_type` ON `npo_act`.`type_sid` = `npo_act_type`.`typesid`) INNER JOIN `npo_name` ON `npo_act`.`npo_name_sid` = `npo_name`.`npo_sid`) INNER JOIN `city_type` ON `npo_act`.`place_city`= `city_type`.`city_sid` ";
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0]; 
 //結果為索引式陣列，因為只有一個，所以取第一個[0]
 
@@ -39,7 +39,7 @@ if($totalRows > 0){
 
 // echo $totalRows; exit;  //這行是用來測試$totalRows是否有成功取值
 
-$sql = sprintf("SELECT * FROM  `npo_act` ORDER BY sid DESC LIMIT %s, %s", ($page-1)*$perPage ,$perPage );
+$sql = sprintf("SELECT * FROM( (`npo_act` JOIN `npo_act_type` ON `npo_act`.`type_sid` = `npo_act_type`.`typesid`) INNER JOIN `npo_name` ON `npo_act`.`npo_name_sid` = `npo_name`.`npo_sid`) INNER JOIN `city_type` ON `npo_act`.`place_city`= `city_type`.`city_sid` LIMIT %s, %s", ($page-1)*$perPage ,$perPage );
 
 $rows = $pdo->query($sql)->fetchAll();
 ?> 
@@ -91,13 +91,16 @@ $rows = $pdo->query($sql)->fetchAll();
     <table class="table table-borderless" style="text-align:center" >
         <thead class="bg-danger text-white"  >
         <tr>
-            <th scope="col">活動編號</th>
+            <th scope="col">活動圖片</th>
             <th scope="col">類別代號</th>
             <th scope="col">活動名稱</th>
+            <th scope="col">主辦單位</th>
             <th scope="col">活動縣市</th>
-            <th scope="col">活動地點</th>
-            <th scope="col">活動時間</th>
+            <!-- <th scope="col">活動地點</th> -->
+            <th scope="col">開始時間</th>
+            <th scope="col">結束時間</th>
             <th scope="col">人數需求</th>
+            <!-- <th scope="col">表單填送時間</th> -->
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
         </tr>
@@ -106,13 +109,16 @@ $rows = $pdo->query($sql)->fetchAll();
         <tbody>
             <?php foreach ($rows as $r) : ?>
                 <tr>
-                        <td><?= $r['sid'] ?></td>
-                        <td><?= $r['type_sid'] ?></td>
+                        <td> <img src="<?= $r['img'] ?>" alt="" style="width:60px"> </td>
+                        <td><?= $r['name'] ?></td>
                         <td><?= htmlentities($r['act_title']) ?></td>
-                        <td><?= htmlentities($r['place_city']) ?></td>
-                        <td><?= htmlentities($r['place_other']) ?></td>
+                        <td><?= htmlentities($r['npo_name']) ?></td>
+                        <td><?= htmlentities($r['city']) ?></td>
+                        <!-- <td><?= htmlentities($r['place_other']) ?></td> -->
                         <td><?= $r['start'] ?></td>
+                        <td><?= $r['end'] ?></td>
                         <td><?= $r['limit_num'] ?></td>
+                        <!-- <td><?= $r['create_at'] ?></td> -->
                         
                         <td>
                             <a href="member-edit.php?sid=<?= $r['sid'] ?>">

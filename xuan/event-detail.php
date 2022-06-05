@@ -93,9 +93,18 @@ $rows = $pdo->query($sql)->fetchAll();
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
 
         <!-- 不會進結帳頁面，跳已加入的通知 -->
-        <a class="btn btn-danger " style="margin-right:10px; font-size:16px" href="#" role="button">加入購物車</a>  
+        <button class="btn btn-danger add-to-cart-btn" data-sid="<?= $r['sid']?>"  style="margin-right:10px; font-size:16px" href="#" role="button">
+        <i class="fa-solid fa-cart-shopping"></i>&nbsp 加入購物車 
+        </button>  
+
         <!-- 直接跳進結帳頁面 -->
-        <a class="btn btn-warning mt-4" href="#" role="button" style="margin-right:10px; font-size:16px">直接結帳</a>
+        <a class="btn btn-warning add-to-cart-btn mt-3" data-sid="<?= $r['sid']?>"  style="margin-right:10px; font-size:16px" href="cart-list.php" role="button">
+        <i class="fa-solid fa-money-bill-1"> </i>&nbsp 直接結帳
+        </a>  
+
+        
+        <!-- 直接跳進結帳頁面 -->
+        <!-- <a class="btn btn-warning mt-4" href="cart-list.php" role="button" style="margin-right:10px; font-size:16px"><i class="fa-solid fa-money-bill-1"></i> &nbsp 直接結帳</a> -->
 
 
     </div>
@@ -110,6 +119,35 @@ $rows = $pdo->query($sql)->fetchAll();
 
 <script>
 
+// 這邊是跟購物車有關的JS
+
+$('.add-to-cart-btn').on('click', event => {
+    // 用箭頭函式這邊不用要this
+    const btn = $(event.currentTarget);
+    const sid = btn.attr('data-sid');
+    const quantity = '1';
+
+    // 下面這行是老師原本可選數量的版本code
+    // 此版本使用者可以選數量
+    // const quantity = btn.closest('.card').find('select').val();
+
+
+    console.log({
+        sid,
+        quantity
+    });
+
+    // Jquery GET寫法
+    $.get('cart-api.php', {
+        sid,
+        quantity
+    }, function(data) {
+        console.log(data);
+        showCount(data);
+    }, 'json');
+
+
+});
 
 
 </script> 
