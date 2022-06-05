@@ -9,7 +9,11 @@ $page = isset($_GET['page']) ? intval($_GET['page']) : 1 ;
 $cate = isset($_GET['cate']) ? intval($_GET['cate']) : 0; //預設值為: 查看所有商品
 $city_area = isset($_GET['area']) ? intval($_GET['area']) : 0; //預設值為: 查看所有商品
 
+$event_detail = isset($_GET['event']) ? intval($_GET['event']) : 0; 
+
+
 $params = []; 
+
 
 $where = ' WHERE 1 '; // 1代表 true
 // $where_a = ' WHERE 1 ';
@@ -20,11 +24,12 @@ if (!empty($cate)) {
 }else if(!empty($city_area)){
     $where .= " AND area_sid=$city_area ";
     $params['area'] = $city_area;
-} else {
+} else if (!empty($event_detail)) {
+    $where .= " AND sid=$event_detail ";
+    $params['event'] = $event_detail;
+}else {
     $where = ' WHERE 1 ';
 }
-
-
 
 
 // 此行用來避免page總和小於0的bug，讓頁面能跳轉回自身
@@ -35,7 +40,7 @@ if($page<1){
 }
 
 
-$t_sql = "SELECT COUNT(*) FROM( (`npo_act` JOIN `npo_act_type` ON `npo_act`.`type_sid` = `npo_act_type`.`sid`) INNER JOIN `npo_name` ON `npo_act`.`npo_name_sid` = `npo_name`.`sid`) INNER JOIN `city_type` ON `npo_act`.`place_city`= `city_type`.`city_sid`  $where " ;
+$t_sql = "SELECT COUNT(*) FROM( (`npo_act` JOIN `npo_act_type` ON `npo_act`.`type_sid` = `npo_act_type`.`typesid`) INNER JOIN `npo_name` ON `npo_act`.`npo_name_sid` = `npo_name`.`npo_sid`) INNER JOIN `city_type` ON `npo_act`.`place_city`= `city_type`.`city_sid`  $where " ;
 
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0]; 
 //結果為索引式陣列，因為只有一個，所以取第一個[0]
@@ -57,14 +62,14 @@ if($totalRows > 0){
 
 // 照活動類型分類
 $sql = sprintf(
-"SELECT * FROM( (`npo_act` JOIN `npo_act_type` ON `npo_act`.`type_sid` = `npo_act_type`.`sid`) INNER JOIN `npo_name` ON `npo_act`.`npo_name_sid` = `npo_name`.`sid`) INNER JOIN `city_type` ON `npo_act`.`place_city`= `city_type`.`city_sid` $where LIMIT %s, %s", ($page-1)*$perPage ,$perPage );
+"SELECT * FROM( (`npo_act` JOIN `npo_act_type` ON `npo_act`.`type_sid` = `npo_act_type`.`typesid`) INNER JOIN `npo_name` ON `npo_act`.`npo_name_sid` = `npo_name`.`npo_sid`) INNER JOIN `city_type` ON `npo_act`.`place_city`= `city_type`.`city_sid` $where LIMIT %s, %s", ($page-1)*$perPage ,$perPage );
 
 // $sql = sprintf("SELECT * FROM npo_act $where LIMIT %s, %s", ($page-1)*$perPage ,$perPage );
 $rows = $pdo->query($sql)->fetchAll();
 
 
 $npo_name = sprintf(
-"SELECT * FROM `npo_act` JOIN `npo_name` ON `npo_act`.`npo_name_sid` = `npo_name`.`sid`");
+"SELECT * FROM `npo_act` JOIN `npo_name` ON `npo_act`.`npo_name_sid` = `npo_name`.`npo_sid`");
 $npo_n = $pdo->query($npo_name)->fetchAll();
 
 
@@ -232,10 +237,10 @@ $area = $pdo->query($area_type)->fetchAll();
 
     // 分類資料
     // $c_sql = "SELECT * FROM `npo_act_type` ";
-    $c_sql = "SELECT `npo_act_type`.`sid`, `npo_act_type`.`name` ,COUNT(*) 
+    $c_sql = "SELECT `npo_act_type`.`typesid`, `npo_act_type`.`name` ,COUNT(*) 
     FROM `npo_act_type`,`npo_act` 
-    WHERE `npo_act_type`.`sid`=`npo_act`.`type_sid`
-    GROUP BY `npo_act_type`.`sid`,`npo_act_type`.`name`; ";
+    WHERE `npo_act_type`.`typesid`=`npo_act`.`type_sid`
+    GROUP BY `npo_act_type`.`typesid`,`npo_act_type`.`name`; ";
 
     $cates = $pdo->query($c_sql)->fetchAll();
 
@@ -266,7 +271,7 @@ $area = $pdo->query($area_type)->fetchAll();
                 <!-- 把活動分類用迴圈下去跑 -->                
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">                
                     <?php foreach ($cates as $c) : ?>
-                        <li><a class="dropdown-item" href="?cate=<?= $c['sid'] ?>">
+                        <li><a class="dropdown-item" href="?cate=<?= $c['typesid'] ?>">
                         
                         <?= $c['name'] ?>  ( <?= $c['COUNT(*)'] ?> )</a>
                     
@@ -322,7 +327,8 @@ $area = $pdo->query($area_type)->fetchAll();
 
 
     <?php foreach($rows as $r): ?>
-        <div onclick="location.href='event-detail.php';" class="card m-2 mt-3 card-f" style="width: 23rem; border-radius:10px">
+
+        <div onclick="location.href='event-detail.php?event=<?= $r['sid'] ?>' " ; class="card m-2 mt-3 card-f" style="width: 23rem; border-radius:10px">
 
             <a href="event-detail.php"></a>
             <div class="d-flex justify-content-between" style="padding:10px 15px">
