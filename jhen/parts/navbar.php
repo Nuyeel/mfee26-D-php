@@ -26,24 +26,20 @@ if (!isset($pageName)) {
 
 
     <?php
-        // 現在分頁的 navbar 顏色
-        // 一般來說可以不用設定 不需要 active 變色
-        // 記得下面的 active 也都可以不用設置
-    ?>
-
-
-
-    .navbar .navbar-nav .nav-link.active {
+    // 現在分頁的 navbar 顏色
+    // 一般來說可以不用設定 不需要 active 變色
+    // 記得下面的 active 也都可以不用設置
+    ?>.navbar .navbar-nav .nav-link.active {
         background-color: #33A5DB;
         color: white;
         border-radius: 5px;
     }
 
-    .navbar-icon > a + a {
+    .navbar-icon>a+a {
         padding-left: 10px;
     }
-    
-    .navbar-icon > a > i {
+
+    .navbar-icon>a>i {
         color: #33A5DB;
     }
 </style>
@@ -53,9 +49,9 @@ if (!isset($pageName)) {
 
 
 
-        <?php 
-            // a.navbar-brand 中一般都是放商標圖片
-            // 目前使用文字是權宜之計
+        <?php
+        // a.navbar-brand 中一般都是放商標圖片
+        // 目前使用文字是權宜之計
         ?>
 
 
@@ -85,10 +81,14 @@ if (!isset($pageName)) {
                     <a class="nav-link <?= $pageName == 'social' ? 'active' : '' ?>" href="social.php">Social</a>
                 </li>
             </ul>
-            <div class="d-flex navbar-icon">
-                <a href="cart.php"><i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="member.php"><i class="fa-solid fa-house"></i></i></a>
-            </div>
+            <ul class="navbar-nav navbar-icon mb-2 mb-lg-0">
+                <a href="cart.php">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+                <a href="member.php">
+                    <i class="fa-solid fa-house"></i>
+                </a>
+            </ul>
         </div>
     </div>
 </nav>

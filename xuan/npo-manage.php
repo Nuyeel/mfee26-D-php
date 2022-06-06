@@ -3,7 +3,7 @@
 <?php require __DIR__ .  '/parts/connect_db.php';
 
 $pageName = 'npo-manage';
-$title = '活動申請列表';
+$title = 'NPO申請列表';
 
 
 $perPage = 12;  //每一頁有幾筆
@@ -39,7 +39,7 @@ if($totalRows > 0){
 
 // echo $totalRows; exit;  //這行是用來測試$totalRows是否有成功取值
 
-$sql = sprintf("SELECT * FROM  `npo_name` ORDER BY sid DESC LIMIT %s, %s", ($page-1)*$perPage ,$perPage );
+$sql = sprintf("SELECT * FROM( (`npo_act` JOIN `npo_act_type` ON `npo_act`.`type_sid` = `npo_act_type`.`typesid`) INNER JOIN `npo_name` ON `npo_act`.`npo_name_sid` = `npo_name`.`npo_sid`) INNER JOIN `city_type` ON `npo_act`.`place_city`= `city_type`.`city_sid` LIMIT %s, %s", ($page-1)*$perPage ,$perPage);
 
 $rows = $pdo->query($sql)->fetchAll();
 ?> 
@@ -106,7 +106,7 @@ $rows = $pdo->query($sql)->fetchAll();
             <?php foreach ($rows as $r) : ?>
                 <tr>
                         <td><?= $r['sid'] ?></td>
-                        <td><?= htmlentities($r['name']) ?></td>
+                        <td><?= htmlentities($r['npo_name']) ?></td>
                         <td><?= $r['email'] ?></td>
                         <td><?= $r['mobile'] ?></td>
                         <td><?= $r['create_at'] ?></td>

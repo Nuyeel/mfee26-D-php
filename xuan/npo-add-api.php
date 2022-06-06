@@ -45,6 +45,7 @@ if (empty($_POST['email'])) {
 // }
 
 
+
     // 先檢查再進prepare/execute系統
     $name = $_POST['name'];
     $email = $_POST['email'] ;

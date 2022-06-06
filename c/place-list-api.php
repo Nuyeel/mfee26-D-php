@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 
 
 $perPage = 10;
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 if ($page < 1) {
     header('Location: ?page=1');
@@ -13,7 +13,7 @@ if ($page < 1) {
 };
 
 
-$t_sql = "SELECT COUNT(1) FROM `place2`";
+$t_sql = "SELECT COUNT(1) FROM `place`";
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 // echo $totalRows;
 // exit;
@@ -29,7 +29,7 @@ if ($totalRows > 0) {
         exit;
     };
 
-    $sql = sprintf("SELECT * FROM `place2` ORDER BY `sid` LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+    $sql = sprintf("SELECT * FROM `place` ORDER BY `sid` LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
 
     $rows = $pdo->query($sql)->fetchAll();
 };
