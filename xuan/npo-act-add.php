@@ -1,6 +1,6 @@
 <?php require __DIR__ .  '/parts/connect_db.php' ;
 
-$pageName = 'npo-add';
+$pageName = 'npo-act-add';
 $title = '上架活動';
 
 ?>
@@ -94,6 +94,7 @@ $title = '上架活動';
                         onsubmit="return false;"
                         method="post"
                         enctype="multipart/form-data"
+                        class="image_upload";
                 >
 
                     <h5 class="card-title text-center" >開始建立活動資訊！</h5>
@@ -124,7 +125,7 @@ $title = '上架活動';
 
                         <div class="mb-4">
                             <label for="name" class="form-label ">活動名稱 <i class="fa-solid fa-asterisk ml-4" style="font-size:11px ; color:red"></i></label>
-                            <input type="text" class="form-control-lg form-control  "  id="name" name="name" placeholder="請填寫活動名稱" required>
+                            <input type="text" class="form-control-lg form-control  "  id="name" name="name" placeholder="請填寫活動名稱" >
                             <!-- 下面是錯誤時跳出的提示通知 -->
                             <div class="form-text "></div>
                         </div>
@@ -203,7 +204,7 @@ $title = '上架活動';
                         <div class="mb-4">
                             <label for="ammount" class="form-label">活動名額 <i class="fa-solid fa-asterisk ml-4" style="font-size:11px ; color:red"> </i></label>
                             <div class="form-text text-secondary"></div>
-                            <input type="text" class=" form-control w-25" id="ammount" name="ammount" pattern="09\d{8}" placeholder="請填寫招募人數" required>
+                            <input type="text" class=" form-control w-25" id="ammount" name="ammount" pattern="09\d{8}" placeholder="請填寫招募人數" >
                             <div class="form-text"></div>
 
                         </div>
@@ -211,7 +212,28 @@ $title = '上架活動';
                         <!-- 活動類型 -->
                         <?php
                             $act_address = [
-                                '基隆市','台北市','新北市','桃園市','新竹縣','新竹市','苗栗縣','台中市','彰化縣','南投縣','雲林縣','嘉義縣','嘉義市','台南市','高雄市','屏東縣','花蓮縣','台東縣','宜蘭縣','澎湖縣','金門縣','連江縣'
+                                '1' => '基隆市',
+                                '2' => '台北市',
+                                '3' => '新北市',
+                                '4' => '桃園市',
+                                '5' => '新竹縣',
+                                '6' => '新竹市',
+                                '7' => '苗栗縣',
+                                '8' => '台中市',
+                                '9' => '彰化縣',
+                                '10' => '南投縣',
+                                '11' => '雲林縣',
+                                '12' => '嘉義縣',
+                                '13' => '嘉義市',
+                                '14' => '台南市',
+                                '15' => '高雄市',
+                                '16' => '屏東縣',
+                                '17' => '花蓮縣',
+                                '18' => '台東縣',
+                                '19' => '宜蘭縣',
+                                '20' => '澎湖縣',
+                                '21' => '金門縣',
+                                '22' => '連江縣'
                             ];
                         ?>
 
@@ -230,8 +252,8 @@ $title = '上架活動';
                                     
                                     <option selected disabled style="font-size:11px">請選擇</option>
 
-                                    <?php foreach ($act_address as $v): ?>
-                                    <option><?= $v ?></option>
+                                    <?php foreach ($act_address as $k => $v): ?>
+                                    <option id="type-<? $k ?>" value="<?= $k ?>" ><?= $v ?></option>
                                     <?php endforeach; ?>
                                 </select>
 
@@ -245,7 +267,7 @@ $title = '上架活動';
                                 <div class="form-group col-md-8 mt-1 ">
                                 <div class="act_address_2 form-text text-secondary mt-1 ">詳細地址</div>   
                                 
-                                <input type="text" class="form-control-lg form-control address_2"  id="act_address_2" name="act_address_2"  required placeholder="ex: 中華路一段">
+                                <input type="text" class="form-control-lg form-control address_2"  id="act_address_2" name="act_address_2"  placeholder="ex: 中華路一段">
 
                                 <div class="form-text address2 w-100" >
                                 </div>
@@ -400,15 +422,20 @@ async function sendData(){
     const r = await fetch('npo-act-add-api.php', {
         method: 'POST',
         body: fd,
+        // body: JSON.parse(fd),
     });
+
+        
     const result = await r.json();
+    // const result = await r;
+    // const result = await r.test;
     console.log(result);
 
-    if (result.success) {
-        setTimeout(() => {
-                location.href = 'npo-list.php'; // 跳轉到活動一覽頁
-            }, 2000);
-        };
+    // if (result.success) {
+    //     setTimeout(() => {
+    //             location.href = 'event-manage.php'; // 跳轉到活動一覽頁
+    //         }, 2000);
+    //     };
 
 }
 
