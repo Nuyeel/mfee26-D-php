@@ -90,19 +90,22 @@ $title = '上架活動';
                     
                 <form
                         name="form1"
-                        action=""
-                        onsubmit="return false;"
+                        action="npo-act-add-api.php"
+
                         method="post"
                         enctype="multipart/form-data"
-                        class="image_upload";
-                >
+                        class="image_upload"
+                        style="height: 250px; display:none";
+                    >
 
-                    <h5 class="card-title text-center" >開始建立活動資訊！</h5>
-                    <!-- 上傳活動照片 -->
+
+                
+                    <!-- <h5 class="card-title text-center" >開始建立活動資訊！</h5>
+                    //上傳活動照片
 
                     <div class="pic-load mt-4" style="text-align:center;position:relative" > 
                         <p style="margin-top:110px">就缺一張好看的活動照！請上傳【1080x540】pixel且小於【4MB】</p>
-                        <!-- <button type="button" class="btn btn-lg bg-danger text-white" style="margin-top:10px">上傳圖片</button> -->
+                        //<button type="button" class="btn btn-lg bg-danger text-white" style="margin-top:10px">上傳圖片</button> 
 
                         <label for="file-input">
                         <div class="btn btn-lg bg-danger text-white" style="margin-top:10px;z-index:10;position:absolute;top:150px;left:210px;z-index:10">上傳圖片</div>
@@ -112,16 +115,32 @@ $title = '上架活動';
                         
                         <div class="upload_img" style="width:100%;height:100%;position:absolute;top:0px;"><img src="" alt="" id="myimg" style="width:100%;"  /></div>
 
-                    </div>
+                    </div> -->
+                    
+
+
+                    <input  type="file" name="myfile" accept="image/png,image/jpeg"  />
 
 
                 </form>
+
+                <button id="btn" onclick="uploadAvatar()">上傳活動照片</button>
+                <br>
+
+                <img id="myimg" src="" alt="" />
 
 
                 <!-- 表格內容放這邊 表單名:form_npo_act-->
                 <div class="card-body mt-4">
 
                     <form name="form_npo_act" onsubmit="sendData();return false;" novalidate>
+
+                        <div class="mb-4">
+                            <label for="npo_name" class="form-label ">主辦單位 <i class="fa-solid fa-asterisk ml-4" style="font-size:11px ; color:red"></i></label>
+                            <input type="text" class="form-control-lg form-control  "  id="npo_name" name="npo_name" placeholder="請填寫主辦單位" >
+                            <!-- 下面是錯誤時跳出的提示通知 -->
+                            <div class="form-text "></div>
+                        </div>
 
                         <div class="mb-4">
                             <label for="name" class="form-label ">活動名稱 <i class="fa-solid fa-asterisk ml-4" style="font-size:11px ; color:red"></i></label>
@@ -201,11 +220,30 @@ $title = '上架活動';
 
                         </div>
 
-                        <div class="mb-4">
-                            <label for="ammount" class="form-label">活動名額 <i class="fa-solid fa-asterisk ml-4" style="font-size:11px ; color:red"> </i></label>
+                        <div class="mb-4 d-flex">
+
+                            <div style="margin-right:20px"> 
+                            <label for="ammount" class="form-label ">活動名額 <i class="fa-solid fa-asterisk ml-4" style="font-size:11px ; color:red"> </i></label>
                             <div class="form-text text-secondary"></div>
-                            <input type="text" class=" form-control w-25" id="ammount" name="ammount" pattern="09\d{8}" placeholder="請填寫招募人數" >
+                            <input type="text" class=" form-control" id="ammount" name="ammount" pattern="09\d{8}" placeholder="請填寫招募人數" >
                             <div class="form-text"></div>
+                            </div>
+
+                            <div style="margin-right:20px"> 
+                            <label for="price" class="form-label ">報名費用 <i class="fa-solid fa-asterisk ml-4" style="font-size:11px ; color:red"> </i></label>
+                            <div class="form-text text-secondary"></div>
+                            <input type="text" class=" form-control " id="price" name="price"  placeholder="請填寫報名費用" >
+                            <div class="form-text"></div>
+                            </div>
+
+                            <div> 
+                            <label for="value" class="form-label ">陰德值回饋 <i class="fa-solid fa-asterisk ml-4" style="font-size:11px ; color:red"> </i></label>
+                            <div class="form-text text-secondary"></div>
+                            <input type="text" class=" form-control " id="value" name="value" placeholder="請填寫陰德值回饋" >
+                            <div class="form-text"></div>
+                            </div>
+
+
 
                         </div>
 
@@ -279,11 +317,14 @@ $title = '上架活動';
 
                         </div>
 
+                        <input type="avatar" class="form-control-lg form-control " id="avatar" name="avatar" placeholder="這是隱藏欄位" value="" style="display:none">
+
                         <div class="d-flex justify-content-between align-items-center mt-5">
-                            <div class=""><i class="fa-solid fa-arrow-left-long "></i>
-                            <a href="npo-add.php" style="color:black;text-decoration:none;padding-left:5px">返回上一頁</a>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-50 mt-3">下一步</button>                        
+                            <!-- <div class="">
+                                <i class="fa-solid fa-arrow-left-long "></i> -->
+                            <!-- <a href="npo-add.php" style="color:black;text-decoration:none;padding-left:5px">返回上一頁</a> 
+                            </div> -->
+                            <button type="submit" class="btn btn-primary w-100 mt-3">送出</button>                        
                         </div>
 
                     </form>     
@@ -431,28 +472,28 @@ async function sendData(){
     // const result = await r.test;
     console.log(result);
 
-    // if (result.success) {
-    //     setTimeout(() => {
-    //             location.href = 'event-manage.php'; // 跳轉到活動一覽頁
-    //         }, 2000);
-    //     };
+    if (result.success) {
+        setTimeout(() => {
+                location.href = 'event-manage.php'; // 跳轉到活動一覽頁
+            }, 1000);
+        };
 
 }
 
 
 // 上傳活動背景區
-    function changeImg() {
-                const file = event.currentTarget.files[0];
-                console.log(file);
-                const reader = new FileReader();
+    // function changeImg() {
+    //             const file = event.currentTarget.files[0];
+    //             console.log(file);
+    //             const reader = new FileReader();
 
-                // 資料載入後 (讀取完成後)
-                reader.onload = function () {
-                    console.log(reader.result);
-                    document.querySelector("#myimg").src = reader.result;
-                };
-                reader.readAsDataURL(file);
-            }
+    //             // 資料載入後 (讀取完成後)
+    //             reader.onload = function () {
+    //                 console.log(reader.result);
+    //                 document.querySelector("#myimg").src = reader.result;
+    //             };
+    //             reader.readAsDataURL(file);
+    //         }
 
 
 // 日期(不能選今天以前，不能選小於開始時間)
@@ -482,6 +523,39 @@ async function sendData(){
         if (end.value)
             start.max = end.value;
         }, false);
+
+
+ // 更新版上傳活動照片
+    const btn = document.querySelector("#btn");
+    const myimg = document.querySelector("#myimg");
+    const myfile = document.form1.myfile;
+    
+    
+    const avatar = document.querySelector("#avatar");
+
+            myfile.addEventListener("change", async function () {
+                // 上傳表單
+                const fd = new FormData(document.form1);
+                const r = await fetch("act-upload-avatar-api.php", {
+                    method: "POST",
+                    body: fd,
+                });
+                const obj = await r.json();
+                console.log(obj);
+                myimg.src = "./list-img/" + obj.filename;
+                avatar.value = "./list-img/" + obj.filename;  
+            });
+
+            function uploadAvatar() {
+                myfile.click(); // 模擬點擊
+
+            }
+
+
+
+
+
+
 
 
 </script>

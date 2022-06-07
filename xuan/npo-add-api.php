@@ -15,6 +15,11 @@ $output = [
 ];
 
 
+// $ext = $extMap[$_FILES['myfile']['type']]; // 副檔名
+
+// $filename = md5($_FILES['myfile']['name'] . rand()) . $ext;
+// $output['filename'] = $filename;
+
 // TODO: 欄位檢查, 後端的檢查(原則上後端的檢查是比較重要的)
 // 前端檢查主要是UX的部分(給使用者回饋) 在還沒按送出前就先提示
 
@@ -52,6 +57,7 @@ if (empty($_POST['email'])) {
     $mobile = $_POST['mobile'] ;
     // $birthday = empty($_POST['birthday']) ? NULL : $_POST['birthday'];
     $intro = $_POST['intro'] ?? ''; //沒有填值的話，預設是空字串
+    $avatar = $_POST['avatar'] ?? ''; //沒有填值的話，預設是空字串
     
 
 // STEP2 (篩選2): 如果有填入值，是否有符合標準
@@ -69,11 +75,11 @@ if (!empty($email) and filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
 // 輸入資料的時候Primary key不用變，所以可刪掉
 // 用NOW()取得當下時間
 $sql = "INSERT INTO `npo_name`(
-        `name`, `email`, `mobile`, 
-        `intro`, `create_at`
+        `npo_name`, `email`, `mobile`, 
+        `npo_intro`, `create_at`, `npo_img`
         ) VALUES (
             ?, ?, ?,
-            ?, NOW()
+            ?, NOW(), ?
         )";
     
     // $stmt意義是: 建立一個代理物件去檢查SQL語法
@@ -86,6 +92,7 @@ $sql = "INSERT INTO `npo_name`(
             $email,
             $mobile,
             $intro,
+            $avatar
     ]);
     
     // 資料是否處理成功，顯示特定結果在console

@@ -19,6 +19,12 @@ $output = [
     $ammount = $_POST['ammount'] ;
     $start = $_POST['start'] ;
     $end = $_POST['end'] ;
+    $avatar = $_POST['avatar'] ?? ''; //沒有填值的話，預設是空字串
+
+
+    $nponame = $_POST['npo_name'] ; //主辦單位名稱
+    $price = $_POST['price']?? '' ; //報名費用
+    $value = $_POST['value']?? '' ; //陰德值回饋
     
 
 // STEP2 (篩選2): 如果有填入值，是否有符合標準
@@ -26,9 +32,12 @@ $output = [
 
 
 $sql = "INSERT INTO `npo_act`(
-        `act_title`, `type_sid`,`place_city`,`place_other`,`limit_num`,`start`,`end`
+        `act_title`, `type_sid`,`place_city`,`place_other`,`limit_num`,`start`,`end`,`img`, `npo_name`, `price`, `value`
         ) VALUES (
-            ?,?,?,?,?,?,?
+            ?,?,?,
+            ?,?,?,
+            ?,?,?,
+            ?,?
         )";
     
 $stmt = $pdo->prepare($sql);
@@ -41,7 +50,11 @@ $stmt->execute([
         $address2,
         $ammount,
         $start,
-        $end
+        $end,
+        $avatar,
+        $nponame,
+        $price,
+        $value
 ]);
     
 

@@ -96,20 +96,24 @@ $title = '上架NPO';
         
     }
 
+    /*
+
     #myimg{
         object-fit:cover;
-        /* object-position:-40px 0px; */
+        // object-position:-40px 0px; 
         object-position:center center;
         width: 100%;
         height: 100%;
     }
 
+    */
+
 </style>
 
 <!-- 進度bar條 -->
-<div class="progress w-25 mt-5" style="text-align:center; margin:auto; height:20px">
+<!-- <div class="progress w-25 mt-5" style="text-align:center; margin:auto; height:20px">
     <div class="progress-bar" role="progressbar" style="width: 33%; height:20px" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">33%</div>
-</div>
+</div> -->
 
 
 <!-- 表格一 基本資料 -->
@@ -124,16 +128,22 @@ $title = '上架NPO';
                     <!-- 上傳大頭測試區 -->
                     <form
                         name="form1"
-                        action=""
-                        onsubmit="return false;"
+                        action="npo-add-api.php"
+
                         method="post"
                         enctype="multipart/form-data"
                         class="image_upload"
-                        style="height: 250px";
+                        style="height: 250px; display:none";
                     >
 
+                    <!-- onsubmit="return false;" -->
+
+                    <!-- <input id="file-input" type="file" name="myfile" accept="image/png,image/jpeg"  /> -->
+                    <input  type="file" name="myfile" accept="image/png,image/jpeg"  />
+                        
+
                     <!-- 這邊放點按後可上傳的圖片 -->
-                    <div class="image-upload d-flex justify-content-center align-items-center">
+                    <!-- <div class="image-upload d-flex justify-content-center align-items-center">
                         
                         <label for="file-input">
                         
@@ -149,9 +159,13 @@ $title = '上架NPO';
                         </div>
 
 
-                    </div>
-
+                    </div> -->
                     </form>
+
+                    <button id="btn" onclick="uploadAvatar()">上傳大頭貼</button>
+                    <br>
+
+                    <img id="myimg" src="" alt="" />
 
 
                     <!-- 表格內容放這邊 -->
@@ -194,7 +208,9 @@ $title = '上架NPO';
                             <div class="form-text"></div>
                         </div>  
 
-                        <button type="submit" class="btn btn-primary w-100 mt-3">下一步</button>
+                        <input type="avatar" class="form-control-lg form-control " id="avatar" name="avatar" placeholder="這是隱藏欄位" value="" style="display:none">
+
+                        <button type="submit" class="btn btn-primary w-100 mt-3">送出</button>
                         
                     </form>     
 
@@ -325,27 +341,55 @@ async function sendData(){
     const result = await r.json();
     console.log(result);
 
-    // if (result.success) {
-    //     setTimeout(() => {
-    //             location.href = 'npo-act-add.php'; // 跳轉到建立活動頁
-    //         }, 2000);
-    //     };
+    if (result.success) {
+        setTimeout(() => {
+                location.href = 'npo-manage.php'; // 跳轉到建立活動頁
+            }, 1000);
+        };
 
     }
 
 
     // 上傳大頭測試區
-    function changeImg() {
-                const file = event.currentTarget.files[0];
-                console.log(file);
-                const reader = new FileReader();
+    // function changeImg() {
+    //             const file = event.currentTarget.files[0];
+    //             console.log(file);
+    //             const reader = new FileReader();
 
-                // 資料載入後 (讀取完成後)
-                reader.onload = function () {
-                    console.log(reader.result);
-                    document.querySelector("#myimg").src = reader.result;
-                };
-                reader.readAsDataURL(file);
+    //             // 資料載入後 (讀取完成後)
+    //             reader.onload = function () {
+    //                 console.log(reader.result);
+    //                 document.querySelector("#myimg").src = reader.result;
+    //             };
+    //             reader.readAsDataURL(file);
+    //         }
+
+
+
+    // 更新版上傳大頭貼
+    const btn = document.querySelector("#btn");
+    const myimg = document.querySelector("#myimg");
+    const myfile = document.form1.myfile;
+    
+    
+    const avatar = document.querySelector("#avatar");
+
+            myfile.addEventListener("change", async function () {
+                // 上傳表單
+                const fd = new FormData(document.form1);
+                const r = await fetch("upload-avatar-api.php", {
+                    method: "POST",
+                    body: fd,
+                });
+                const obj = await r.json();
+                console.log(obj);
+                myimg.src = "./uploaded/" + obj.filename;
+                avatar.value = obj.filename;  
+            });
+
+            function uploadAvatar() {
+                myfile.click(); // 模擬點擊
+
             }
 
 
