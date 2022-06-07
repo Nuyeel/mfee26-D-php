@@ -20,12 +20,20 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
 
 ?>
 
+<?php
+
+
+
+?>
+
 <?php 
     // header('Location: intro.php'); 
     // 沒有 ['member'] 就不會有 ['deathdate']
     // 登入後才檢查 沒登入不檢查 兩個都要 check
 ?>
+
 <?php if ( $_SESSION['member'] and $_SESSION['member']['deathdate'] ) { ?>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -98,6 +106,24 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
     <div class="dead-popup-check">
         <p>看樣子您走完了一生...</p>
         <br />
+        <form 
+            name="formReincarnation" 
+            action="paycheck-api.php"
+            method="post"
+            style="display: none"    
+        >
+            <?php
+                // 只傳 sid 太不安全了
+                // 隨便就會被破解的
+                // 多傳一個欄位
+                // 現在還不知道會員資料長怎樣
+                // 先假設送的是帳號
+                // 兩個都要配到就沒有那麼容易破解了
+            ?>
+            <input type="hidden" name="check[]" value="<?= $_SESSION['member']['sid'] ?>"/>
+            <input type="hidden" name="check[]" value="<?= $_SESSION['member']['account'] ?>"/>
+            <button type="submit" id="checkBtn" style="display:none">送出</button>
+        </form>
         <button type="button" class="btn btn-primary" onclick="reincarnationStart()">開始轉生之旅</button>
     </div>
     <div class="dpup">
@@ -111,7 +137,9 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
 <script>
     const dpu = document.querySelector('.dead-popup');
     const dpuc = document.querySelector('.dead-popup-check');
-    const dpup = document.querySelector('.dead-popup-pay');
+    const chbtn = document.querySelector('#checkBtn');
+    
+    const dpup = document.querySelector('.dead-popup-check');
 
 
     setTimeout(()=>{
@@ -125,10 +153,13 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
         dpuc.classList.add('is-hidden');
         await setTimeout(() => {
             // dpuc.remove();
+            chbtn.click();
             dpuc.remove();
         }, 500);
         // dpu.remove();
 
+        await fetch('paycheck-api.php')
+            .then()
 
         // await setTimeout(() => {
         //     ms.classList.add()
