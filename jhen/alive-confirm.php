@@ -22,8 +22,10 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
 
 <?php 
     // header('Location: intro.php'); 
+    // 沒有 ['member'] 就不會有 ['deathdate']
+    // 登入後才檢查 沒登入不檢查 兩個都要 check
 ?>
-<?php if ( $_SESSION['member']['deathdate'] ) { ?>
+<?php if ( $_SESSION['member'] and $_SESSION['member']['deathdate'] ) { ?>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -140,13 +142,16 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
 
 <?php 
 
-// 還沒往生就回去來的地方 預設為首頁
+// 有登入卻沒有往生 甚麼事都不用做
 
-} else {
-    $comeFrom = 'intro.php';
-    if (! empty($_SERVER['HTTP_REFERER'])) {
-        $comeFrom = $_SERVER['HTTP_REFERER'];
-    }
-    header("Location: $comeFrom");
+// 以下只是單純的註解 沒有功能也不需要這樣
+// 因為這樣會無限跳轉回首頁
+// 還沒往生就回去來的地方 預設為首頁
+// } else {
+//     $comeFrom = 'intro.php';
+//     if (! empty($_SERVER['HTTP_REFERER'])) {
+//         $comeFrom = $_SERVER['HTTP_REFERER'];
+//     }
+//     header("Location: $comeFrom");
 
 } ?>
