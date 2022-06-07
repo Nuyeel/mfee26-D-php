@@ -36,7 +36,13 @@ if (!isset($pageName)) {
     }
 
     .navbar-icon>a+a {
-        padding-left: 10px;
+        padding-left: 1px;
+    }
+
+    @media screen and (min-width: 992px) {
+        .navbar-icon>a+a {
+            padding-left: 10px;
+        }
     }
 
     .navbar-icon>a>i {
