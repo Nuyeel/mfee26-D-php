@@ -1,4 +1,7 @@
-<?php require __DIR__ . '/parts/connect_db.php';
+<?php require __DIR__ . '/parts/connect_db.php'; ?>
+<?php include __DIR__ . '/alive-confirm.php' ?>
+
+<?php
 
 $pageName= 'intro';
 

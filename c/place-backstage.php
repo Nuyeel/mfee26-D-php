@@ -1,37 +1,6 @@
-<?php
-require __DIR__ . "./parts/test_connect_db.php";
-
-
-$perPage = 10;
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-
-if ($page < 1) {
-    header('Location: ?page=1');
-    exit;
-};
-
-
-$t_sql = "SELECT COUNT(1) FROM `place`";
-$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
-$totalPages = ceil($totalRows / $perPage);
-
-$rows = [];
-
-if ($totalRows > 0) {
-    if ($page > $totalPages) {
-        header("Location: ?page=$totalPages");
-        exit;
-    };
-
-    $sql = sprintf("SELECT * FROM `place` ORDER BY `sid` LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
-
-    $rows = $pdo->query($sql)->fetchAll();
-    // print_r($rows);
-};
-?>
-
-<!-- 處理資料在 html 出現之前 -->
+<?php require __DIR__ . "./parts/test_connect_db.php" ?>
 <?php include __DIR__ . "./parts/html-head.php" ?>
+
 
 <div class="container mt-5">
     <div class="top-area d-flex">
@@ -79,17 +48,10 @@ if ($totalRows > 0) {
             </form>
             <div class="d-flex">
                 <div class="col-md-10">
-                    <!--
-                                        <input
-                                        type="text"
-                                        name="datefilter"
-                                        value="08/24/2022 - 09/24-2022"
-                                    />
-                                    -->
-                    <form name="searchDateForm" action="">
+                    <form name="searchDateForm" action="" onsubmit="filtDate(); return false">
                         <div class="input-group pe-2">
                             <label class="input-group-text"><i class="fa-solid fa-calendar-days"></i></label>
-                            <input type="month" id="start_month" name="start_month" min="2022-09" max="2122-08" value="2022-09" class="form-control" onchange="endateCheck()" />
+                            <input type="month" id="start_month" name="start_month" min="2022-09" max="2122-08" value="2022-09" class="form-control" onchange="endDateCheck()" />
                             <label class="input-group-text">至</label>
                             <input type="month" id="end_month" name="end_month" min="2022-09" max="2122-08" value="2022-09" class="form-control" />
                             <button type="submit" class="btn btn-secondary" id="searchDateBtn">
@@ -147,7 +109,8 @@ if ($totalRows > 0) {
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <!-- 
+                <tbody>                    
                     <?php foreach ($rows as $r) : ?>
                         <tr>
                             <td scope="col">
@@ -169,7 +132,8 @@ if ($totalRows > 0) {
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
-                <!-- <tbody></tbody> -->
+                -->
+                <tbody></tbody>
             </table>
 
         </form>
@@ -178,37 +142,18 @@ if ($totalRows > 0) {
 
     <!-- 頁碼/頁數轉換 -->
     <div class="row">
-        <div class="col d-flex justify-content-center">
-            <!-- 頁數轉換 -->
+        <div class="col">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item <?= $page == 1 ? 'disabled' : "" ?>">
-                        <a class="page-link" href="?page=1"><i class="fa-solid fa-angles-left"></i></a>
-                    </li>
-                    <li class="page-item <?= $page == 1 ? 'disabled' : "" ?>">
-                        <a class="page-link" href="?page=<?= $page - 1 ?>"><i class="fa-solid fa-angle-left"></i></a>
-                    </li>
-
-
-                    <!-- 前後最多顯示5個頁碼 -->
-                    <?php for ($i = $page - 5; $i < $page + 5; $i++) :
-                        if ($i >= 1 and $i <= $totalPages) :
-                    ?>
-                            <li class="page-item <?= $page == $i ? 'active' : "" ?>">
-                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                    <!--
+                            <li class="page-item active">
+                                <a class="page-link" href="?page=1">1</a>
                             </li>
-                    <?php endif;
-                    endfor; ?>
-
-                    <li class="page-item <?= $page == $totalPages ? 'disabled' : "" ?>">
-                        <a class="page-link" href="?page=<?= $page + 1 ?>"><i class="fa-solid fa-angle-right"></i></a>
-                    </li>
-                    <li class="page-item <?= $page == $totalPages ? 'disabled' : "" ?>">
-                        <a class="page-link" href="?page=<?= $totalPages ?>"><i class="fa-solid fa-angles-right"></i></a>
-                    </li>
+                            -->
                 </ul>
             </nav>
         </div>
+
     </div>
 
 </div>
@@ -216,22 +161,169 @@ if ($totalRows > 0) {
 
 <?php include __DIR__ . "./parts/scripts.php" ?>
 <script>
-    // 篩選資料
+    let data;
+    let page = +location.search.slice(6);
+
+    // 頁數頁碼
+    const renderPageBtn = (pageNum) => {
+        return `
+            <li class="page-item">
+                <a class="page-link" onclick="pageChange(event); return false;" href="?page=${pageNum}">${pageNum}</a>
+            </li>
+            `;
+    };
+
+    const renderPagination = (page, totalPages = data.totalPages, prevPagesNum = 5) => {
+        pNumOutput = paginationNum(page, totalPages, prevPagesNum);
+
+        let beginPage = pNumOutput[0];
+        let endPage = pNumOutput[1];
+
+        let str = '';
+
+        for (let i = beginPage; i <= endPage; i++) {
+            str += renderPageBtn(i);
+        }
+        document.querySelector('.pagination').innerHTML = str;
+    };
+
+    const paginationNum = (page, totalPages, prevPagesNum) => {
+        // 只是預設值
+        let beginPage, endPage;
+        if (totalPages <= prevPagesNum * 2 + 1) {
+            beginPage = 1;
+            endPage = totalPages;
+        } else if (page - 1 < prevPagesNum) {
+            beginPage = 1;
+            endPage = prevPagesNum * 2 + 1;
+        } else if (totalPages - page < prevPagesNum) {
+            beginPage = totalPages - prevPagesNum * 2;
+            endPage = totalPages;
+        } else {
+            beginPage = page - prevPagesNum;
+            endPage = page + prevPagesNum;
+        }
+
+        let pNumOutput = [];
+        pNumOutput.push(beginPage);
+        pNumOutput.push(endPage);
+
+        return pNumOutput;
+    };
+
+
+    // 資料
+    const renderRow = ({
+        sid,
+        year,
+        month,
+        country,
+        city,
+        dist,
+        quota,
+        booked,
+        balance,
+    }) => {
+        // let y = year.slice(0, 4);
+        // let m = year.slice(5, 7);
+        let b = quota - booked;
+        return `
+            <tr>
+                <td>
+                    <a href="javascript: delete_it()">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </a>
+                </td>
+                <td>${sid}</td>
+                <td>${year}</td>
+                <td>${month}</td>
+                <td>${country}</td>
+                <td>${city}</td>
+                <td>${dist}</td>
+                <td>${quota}</td>
+                <td>${booked}</td>
+                <td>${b}</td>
+                <td>
+                    <a href="place-edit.php?sid=${sid}"><i class="fa-solid fa-pen-to-square"></i></a>
+                </td>
+            </tr>
+            `;
+    };
+
+    function renderTable() {
+        const tbody = document.querySelector("tbody");
+        let html = "";
+        if (data.rows && data.rows.length) {
+            html = data.rows.map((r) => renderRow(r)).join("");
+        }
+        tbody.innerHTML = html;
+    }
+
+    // 換頁render
+    // console.log(page);
+    if (!page) {
+        fetch("place-list-api.php?page=1")
+            .then((response) => response.json())
+            .then((obj) => {
+                data = obj;
+                renderTable();
+                renderPagination(1);
+                history.pushState(page, "", "?page=" + 1);
+            });
+    } else {
+        fetch(`place-list-api.php?page=${page}`)
+            .then((response) => response.json())
+            .then((obj) => {
+                data = obj;
+                renderTable();
+                renderPagination(page);
+                history.pushState(page, "", "?page=" + page);
+            });
+    }
+
+    const pageChange = (e) => {
+        // 轉換成數字
+        const page = +e.target.innerHTML;
+
+        fetch(`place-list-api.php?page=${page}`)
+            .then((r) => r.json())
+            .then((obj) => {
+                data = obj;
+                renderTable();
+                renderPagination(page);
+                history.pushState(page, '', '?page=' + page);
+            });
+    }
+
+    // 篩選資料 filter
     async function filtData() {
         const fd = new FormData(document.filterForm);
         const r = await fetch('filter-api.php', {
             method: 'POST',
             body: fd
         });
-        const result = r.json();
-        console.log(result);
+        const result = await r.json();
+        data = result;
+        console.log(data.rows);
 
-        setTimeout(() => {
-            console.log(1);
-            // location.href = 'place-backstage.php';
-        }, 1000)
-
+        renderTable();
     }
+
+    // 時間區間篩選 filter
+    async function filtDate() {
+        const fd = new FormData(document.searchDateForm);
+        const r = await fetch('time-filter-api.php', {
+            method: 'POST',
+            body: fd
+        });
+        const result = await r.json();
+        data = result;
+        console.log(data.rows);
+
+        renderTable();
+    }
+
+
     // 篩選器
     // 國家城市兩層選單
     let renderData;
@@ -286,7 +378,16 @@ if ($totalRows > 0) {
     };
     renderDate();
 
+    // 結束月曆在起始日之後
+    const startMonth = document.querySelector("#start_month");
+    const endMonth = document.querySelector("#end_month");
+    const endDateCheck = () => {
+        const start = startMonth.value;
+        endMonth.value = endMonth.min = start;
+    };
 
+
+    // 刪除資料
     const deleteAll = document.form2.deleteAll;
     const deleteData = document.form2.deleteData; // RadioNodeList
 

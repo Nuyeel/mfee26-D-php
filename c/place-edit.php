@@ -2,7 +2,7 @@
 require __DIR__ . "./parts/test_connect_db.php";
 
 
-$sid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
+$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 
 if (empty($sid)) {
     header('Location: place-backstage.php');
