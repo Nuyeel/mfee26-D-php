@@ -378,7 +378,13 @@
     };
     renderDate();
 
-    // 結束日在開始日之後
+    // 結束月曆在起始日之後
+    const startMonth = document.querySelector("#start_month");
+    const endMonth = document.querySelector("#end_month");
+    const endDateCheck = () => {
+        const start = startMonth.value;
+        endMonth.value = endMonth.min = start;
+    };
 
 
     // 刪除資料

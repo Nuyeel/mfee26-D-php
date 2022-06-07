@@ -1,32 +1,5 @@
 <?php
 require __DIR__ . "./parts/test_connect_db.php";
-
-
-$perPage = 10;
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-
-if ($page < 1) {
-    header('Location: ?page=1');
-    exit;
-};
-
-$t_sql = "SELECT COUNT(1) FROM `place`";
-$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
-$totalPages = ceil($totalRows / $perPage);
-
-$rows = [];
-
-if ($totalRows > 0) {
-    if ($page > $totalPages) {
-        header("Location: ?page=$totalPages");
-        exit;
-    };
-
-    $sql = sprintf("SELECT * FROM `place` ORDER BY `sid` LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
-
-    $rows = $pdo->query($sql)->fetchAll();
-};
-
 ?>
 
 <!-- 處理資料在 html 出現之前 -->
@@ -49,18 +22,18 @@ if ($totalRows > 0) {
         <div class="main col-md-9 px-2">
             <!-- 篩選搜尋 -->
             <div class="filter-section px-4 py-4">
-                <form name="filterForm" action="" onsubmit="filterData(); return false">
+                <form name="filterForm" action="" onsubmit="filtData(); return false">
                     <div class="d-flex mb-3">
                         <div class="col-md-6">
                             <div class="input-group pe-2">
                                 <label class="input-group-text"><i class="fa-solid fa-filter"></i></label>
                                 <select class="form-select" id="country" name="country" onchange="changeCity(value)">
-                                    <option selected>
+                                    <option selected value="">
                                         選擇國家...
                                     </option>
                                 </select>
                                 <select class="form-select" id="city" name="city">
-                                    <option selected>
+                                    <option selected value="">
                                         選擇城市...
                                     </option>
                                 </select>
@@ -70,13 +43,13 @@ if ($totalRows > 0) {
                             <div class="input-group pe-2">
                                 <label class="input-group-text"><i class="fa-solid fa-filter"></i></label>
                                 <select class="form-select" id="year" name="year">
-                                    <option selected>
+                                    <option selected value="">
                                         選擇年份...
                                     </option>
                                     <!-- <option value="1">One</option> -->
                                 </select>
                                 <select class="form-select" id="month" name="month">
-                                    <option selected>
+                                    <option selected value="">
                                         選擇月份...
                                     </option>
                                 </select>
@@ -91,17 +64,10 @@ if ($totalRows > 0) {
                 </form>
                 <div class="d-flex">
                     <div class="col-md-10">
-                        <!-- 
-                                    <input
-                                    type="text"
-                                    name="datefilter"
-                                    value="08/24/2022 - 09/24-2022"
-                                />
-                                -->
-                        <form name="searchDateForm" action="">
+                        <form name="searchDateForm" action="" onsubmit="filtDate(); return false">
                             <div class="input-group pe-2">
                                 <label class="input-group-text"><i class="fa-solid fa-calendar-days"></i></label>
-                                <input type="month" id="start_month" name="start_month" min="2022-09" max="2122-08" value="2022-09" class="form-control" onchange="endateCheck()" />
+                                <input type="month" id="start_month" name="start_month" min="2022-09" max="2122-08" value="2022-09" class="form-control" onchange="endDateCheck()" />
                                 <label class="input-group-text">至</label>
                                 <input type="month" id="end_month" name="end_month" min="2022-09" max="2122-08" value="2022-09" class="form-control" />
                                 <button type="submit" class="btn btn-secondary" id="searchDateBtn">
@@ -122,9 +88,9 @@ if ($totalRows > 0) {
             </div>
             <!-- 列表區 -->
             <div class="list-section px-1">
-                <div class="d-flex flex-wrap">
-                    <?php foreach ($rows as $r) : ?>
-                        <div class="place-card-wrap col-4 p-2">
+                <div id="placeArea" class="d-flex flex-wrap">
+                    <!--
+                    <div class="place-card-wrap col-4 p-2">
                             <div class="place-card m-3">
                                 <div class="card-icons d-flex justify-content-around">
                                     <i class="fa-solid fa-clock"></i>
@@ -155,7 +121,6 @@ if ($totalRows > 0) {
                                         <p class="remain col">剩餘名額：<?= $r['quota'] - $r['booked'] ?></p>
                                     </div>
                                 </div>
-
                                 <div class="bottom py-2">
                                     <div class="placeCardBtn d-flex justify-content-end">
                                         <button class="saveBtn btn btn-warning p-2 me-2"><i class="fa-brands fa-gratipay"></i> 收藏</button>
@@ -163,8 +128,8 @@ if ($totalRows > 0) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                    </div>
+                    -->
                 </div>
             </div>
             <!-- 頁碼/頁數轉換 -->
@@ -211,17 +176,185 @@ if ($totalRows > 0) {
 
 
 <script>
-    // 篩選 filter
-    // async function filterData() {
-    //     const fd = new FormData(document.filterForm);
+    let data;
+    let page = +location.search.slice(6);
 
-    //     const r = await fetch('filter-api.php', {
-    //         method: 'POST',
-    //         body: fd
-    //     });
-    //     const result = r.json();
-    //     console.log(result);
-    // }
+    // 頁數頁碼
+    const renderPageBtn = (pageNum) => {
+        return `
+            <li class="page-item">
+                <a class="page-link" onclick="pageChange(event); return false;" href="?page=${pageNum}">${pageNum}</a>
+            </li>
+            `;
+    };
+
+    const renderPagination = (page, totalPages = data.totalPages, prevPagesNum = 5) => {
+        pNumOutput = paginationNum(page, totalPages, prevPagesNum);
+
+        let beginPage = pNumOutput[0];
+        let endPage = pNumOutput[1];
+
+        let str = '';
+
+        for (let i = beginPage; i <= endPage; i++) {
+            str += renderPageBtn(i);
+        }
+        document.querySelector('.pagination').innerHTML = str;
+    };
+
+    const paginationNum = (page, totalPages, prevPagesNum) => {
+        // 只是預設值
+        let beginPage, endPage;
+        if (totalPages <= prevPagesNum * 2 + 1) {
+            beginPage = 1;
+            endPage = totalPages;
+        } else if (page - 1 < prevPagesNum) {
+            beginPage = 1;
+            endPage = prevPagesNum * 2 + 1;
+        } else if (totalPages - page < prevPagesNum) {
+            beginPage = totalPages - prevPagesNum * 2;
+            endPage = totalPages;
+        } else {
+            beginPage = page - prevPagesNum;
+            endPage = page + prevPagesNum;
+        }
+
+        let pNumOutput = [];
+        pNumOutput.push(beginPage);
+        pNumOutput.push(endPage);
+
+        return pNumOutput;
+    };
+
+
+    // 資料
+    const renderRow = ({
+        sid,
+        year,
+        month,
+        country,
+        city,
+        dist,
+        quota,
+        booked,
+        balance,
+    }) => {
+        let b = quota - booked;
+        return `
+        <div class="place-card-wrap col-4 p-2">
+            <div class="place-card m-3">
+                <div class="card-icons d-flex justify-content-around">
+                    <i class="fa-solid fa-clock"></i>
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="top mb-1 shadow">
+                    <div class="d-flex mb-3">
+                        <input type="hidden" value="${sid}">
+                        <div class="top-time col d-flex flex-column justify-content-between">
+                            <div class="title mb-3">
+                                <h4>良辰</h4>
+                            </div>
+                            <div class="d-flex flex-column align-items-center justify-content-center py-3">
+                                <p class="year fs-4">${year}</p>
+                                <p class="month">${month}月</p>
+                            </div>
+                        </div>
+                        <div class="top-place col d-flex flex-column justify-content-between">
+                            <div class="title mb-3">
+                                <h4>吉地</h4>
+                            </div>
+                            <p class="country ">${country}</p>
+                            <p class="city">${city}<br>${dist}</p>
+                        </div>
+                    </div>
+                    <div class="place-info d-flex align-items-center">
+                        <p class="quota col">轉生限額：${quota}</p>
+                        <p class="remain col">剩餘名額：${b}</p>
+                    </div>
+                </div>
+                <div class="bottom py-2">
+                    <div class="placeCardBtn d-flex justify-content-end">
+                        <button class="chooseBtn btn btn-success p-2 me-2"><i class="fa-solid fa-cart-arrow-down"></i> 加入</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+    };
+
+    function renderTable() {
+        const placeArea = document.querySelector("#placeArea");
+        let html = "";
+        if (data.rows && data.rows.length) {
+            html = data.rows.map((r) => renderRow(r)).join("");
+        }
+        placeArea.innerHTML = html;
+    }
+
+    // 換頁render
+    // console.log(page);
+    if (!page) {
+        fetch("place-list-api.php?page=1")
+            .then((response) => response.json())
+            .then((obj) => {
+                data = obj;
+                renderTable();
+                renderPagination(1);
+                history.pushState(page, "", "?page=" + 1);
+            });
+    } else {
+        fetch(`place-list-api.php?page=${page}`)
+            .then((response) => response.json())
+            .then((obj) => {
+                data = obj;
+                renderTable();
+                renderPagination(page);
+                history.pushState(page, "", "?page=" + page);
+            });
+    }
+
+    const pageChange = (e) => {
+        // 轉換成數字
+        const page = +e.target.innerHTML;
+
+        fetch(`place-list-api.php?page=${page}`)
+            .then((r) => r.json())
+            .then((obj) => {
+                data = obj;
+                renderTable();
+                renderPagination(page);
+                history.pushState(page, '', '?page=' + page);
+            });
+    }
+
+    // 篩選資料 filter
+    async function filtData() {
+        const fd = new FormData(document.filterForm);
+        const r = await fetch('filter-api.php', {
+            method: 'POST',
+            body: fd
+        });
+        const result = await r.json();
+        data = result;
+        console.log(data.rows);
+
+        renderTable();
+    }
+
+    // 時間區間篩選 filter
+    async function filtDate() {
+        const fd = new FormData(document.searchDateForm);
+        const r = await fetch('time-filter-api.php', {
+            method: 'POST',
+            body: fd
+        });
+        const result = await r.json();
+        data = result;
+        console.log(data.rows);
+
+        renderTable();
+    }
+
 
     // 現在時間
     const nowDate = () => {
@@ -293,7 +426,7 @@ if ($totalRows > 0) {
     // 結束月曆在起始日之後
     const startMonth = document.querySelector("#start_month");
     const endMonth = document.querySelector("#end_month");
-    const endateCheck = () => {
+    const endDateCheck = () => {
         const start = startMonth.value;
         endMonth.value = endMonth.min = start;
     };
