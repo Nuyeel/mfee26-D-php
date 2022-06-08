@@ -79,13 +79,13 @@ if (!isset($pageName)) {
                     <a class="nav-link <?= $pageName == 'news' ? 'active' : '' ?>" href="news.php">最新消息</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'reborn' ? 'active' : '' ?>" href="/../avatar/avatar.php">轉生形象</a>
+                    <a class="nav-link <?= $pageName == 'reborn' ? 'active' : '' ?>" href="/mfee26-D-php/proj/avatar/avatar.php">轉生形象</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="/../place/place.php">良辰吉地</a>
+                    <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="/mfee26-D-php/proj/place/place.php">良辰吉地</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'activity' ? 'active' : '' ?>" href="/../xuan-event-list/npo-list.php">Activity</a>
+                    <a class="nav-link <?= $pageName == 'activity' ? 'active' : '' ?>" href="/mfee26-D-php/proj/xuan-event-list/npo-list.php">Activity</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= $pageName == 'social' ? 'active' : '' ?>" href="social.php">Social</a>
@@ -96,9 +96,9 @@ if (!isset($pageName)) {
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="news-admin.php">最新消息</a></li>
                         <li><a class="dropdown-item" href="reborn-admin.php">轉生形象</a></li>
-                        <li><a class="dropdown-item" href="/../place/place-admin.php">良辰吉地</a></li>
-                        <li><a class="dropdown-item" href="/../xuan-event-manage/event-manage.php">活動管理</a></li>
-                        <li><a class="dropdown-item" href="/../xuan-npo-manage/npo-manage.php">主辦單位管理</a></li>
+                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/place/place-admin.php">良辰吉地</a></li>
+                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/event-manage.php">活動管理</a></li>
+                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-manage.php">主辦單位管理</a></li>
                         <li><a class="dropdown-item" href="member-admin.php">會員管理</a></li>
                     </ul>
                 </li>

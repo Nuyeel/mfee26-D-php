@@ -9,15 +9,17 @@ $title = '濟善救世公司-轉生形象-衣櫥';
 
 <?php include __DIR__ . "/../parts/navbar.php" ?>
 
-<div class="container mt-4">
-    <div class="d-flex">
-        <a class="btn btn-secondary mx-2" aria-current="page" href="./avatar.php" role="button">捏製轉生形象</a>
-        <a class="btn btn-secondary mx-2" aria-current="page" href="./showcase.php" role="button">Showcase</a>
+<div class="avartar-bg">
+    <div class="container mt-4">
+        <div class="d-flex">
+            <a class="btn btn-secondary mx-2" aria-current="page" href="./avatar.php" role="button">捏製轉生形象</a>
+            <a class="btn btn-secondary mx-2" aria-current="page" href="./showcase.php" role="button">Showcase</a>
+        </div>
     </div>
-</div>
-<div class="container mt-4">
-    <div class="row" id="showcase"></div>
-    <div id="showcases"></div>
+    <div class="container mt-4">
+        <div class="row" id="showcase"></div>
+        <div id="showcases"></div>
+    </div>
 </div>
 
 <?php include __DIR__ . "/../parts/scripts.php" ?>
