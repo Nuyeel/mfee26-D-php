@@ -2,6 +2,7 @@
 if (!isset($pageName)) {
     $pageName = '';
 }
+
 ?>
 <style>
     .navbar .navbar-nav .nav-link.active {
@@ -28,8 +29,9 @@ if (!isset($pageName)) {
                     </li>
                 </ul>
                 <ul class="navbar-nav ">
-                    <li class="nav-item">會員登出
-                        <!-- <a class="nav-link <?= $pageName == 'ab-register' ? 'active' : '' ?>" href="ab-register.php">會員登出</a> -->
+                    <li class="nav-item">
+                        <a class="nav-link" <?= $pageName == 'ab-logout' ? 'active' : '' ?> href="ab-logout.php">會員登出</a>
+                        <!-- <a class="nav-link" onclick="logout(); return false;" <?= $pageName == 'ab-logout' ? 'active' : '' ?> href="ab-logout.php">會員登出</a> -->
                     </li>
                 </ul>
             </div>

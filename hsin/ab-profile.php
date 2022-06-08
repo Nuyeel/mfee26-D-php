@@ -2,9 +2,15 @@
 $pageName = 'ab-profile';
 $title = '會員中心 - 靈魂轉生平台';
 
-$result = $pdo->query('SELECT * FROM `member` ORDER BY `sid` DESC LIMIT 1;');
-$row = $result->fetch();
-// print_r($row);
+if (!$_SESSION['member']['account']) {
+    header('location:ab-login.php');
+    // exit;
+}
+
+// $sql = "SELECT * FROM `member`";
+// $row = $pdo->query($sql)->fetch();
+
+// $_SESSION['member']['account'];
 
 ?>
 <?php include __DIR__ . '/parts-2/html-head-2.php' ?>
@@ -29,11 +35,12 @@ $row = $result->fetch();
                     <div class="card" style="width: 36rem;">
                         <div class="card-body d-flex align-items-center">
                             <div class="col-md-9 mb-md-0 p-md-4">
-                                <h5 class="card-title">歡迎回來，<?php if (!empty(($row['name']))) {
-                                                                echo htmlentities($row['name']);
-                                                            } else {
-                                                                echo htmlentities($row['account']);
-                                                            } ?></h5>
+                                <h5 class="card-title">歡迎回來，
+                                    <?php if (!empty($_SESSION['member']['name'])) {
+                                        echo htmlentities($_SESSION['member']['name']);
+                                    } else {
+                                        echo htmlentities($_SESSION['member']['account']);
+                                    } ?></h5>
                                 <p class="card-text" style="font-size: 1rem; color: #707070;">請點擊下方按鈕瀏覽您的資料</p>
 
                             </div>

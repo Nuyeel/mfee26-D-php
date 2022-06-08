@@ -2,20 +2,10 @@
 $pageName = 'ab-edit-profile';
 $title = '修改會員資料 - 靈魂管理中心';
 
-$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
-// if (empty($sid)) {
-//     header('Location: ab-list.php');
-//     exit;
-// }
-
-$result = $pdo->query('SELECT * FROM `member` ORDER BY `sid` DESC LIMIT 1;');
-$row = $result->fetch();
-
-// $row = $pdo->query("SELECT * FROM member WHERE sid=$sid")->fetch();
-// if (empty($row)) {
-//     header('Location: ab-list.php');
-//     exit;
-// }
+if (!$_SESSION['member']['account']) {
+    header('location:ab-login.php');
+    // exit;
+}
 
 ?>
 <?php include __DIR__ . '/parts-2/html-head-2.php' ?>
@@ -28,7 +18,6 @@ $row = $result->fetch();
     .form-text.red {
         color: red;
     }
-
 </style>
 <br>
 <div class="container">
@@ -54,31 +43,31 @@ $row = $result->fetch();
                             <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
                             <div class="mb-3">
                                 <label for="account" class="form-label">使用者帳戶</label>
-                                <input type="text" class="form-control" id="account" name="account" value="<?= htmlentities($row['account']) ?>" readonly>
+                                <input type="text" class="form-control" id="account" name="account" value="<?= htmlentities($_SESSION['member']['account']) ?>" readonly>
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">會員名稱</label>
-                                <input type="text" class="form-control" id="name" name="name" required value="<?= htmlentities($row['name']) ?>">
+                                <input type="text" class="form-control" id="name" name="name" required value="<?= htmlentities($_SESSION['member']['name']) ?>">
                                 <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="birthdate" class="form-label">出生日</label>
-                                <input type="date" class="form-control" id="birthdate" name="birthdate" value="<?= $row['birthdate'] ?>">
+                                <input type="date" class="form-control" id="birthdate" name="birthdate" value="<?= htmlentities($_SESSION['member']['birthdate']) ?>">
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="deathdate" class="form-label">死亡日</label>
-                                <input type="date" class="form-control" id="deathdate" name="deathdate" value="<?= $row['deathdate'] ?>">
+                                <input type="date" class="form-control" id="deathdate" name="deathdate" value="<?= $_SESSION['member']['deathdate'] ?>">
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="mobile" class="form-label">手機號碼</label>
-                                <input type="text" class="form-control" id="mobile" name="mobile" pattern="09\d{8}" value="<?= $row['mobile'] ?>">
+                                <input type="text" class="form-control" id="mobile" name="mobile" pattern="09\d{8}" value="<?= $_SESSION['member']['mobile'] ?>">
                                 <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">電子信箱</label>
-                                <input type="email" class="form-control" id="email" name="email" value="<?= $row['email'] ?>">
+                                <input type="email" class="form-control" id="email" name="email" value="<?= $_SESSION['member']['email'] ?>">
                                 <div class="form-text red"></div>
                             </div>
                             <button type="submit" class="btn btn-outline-primary" style="margin-left: 40%; margin-top: 3%">確定修改</button>
@@ -97,7 +86,7 @@ $row = $result->fetch();
 <?php include __DIR__ . '/parts-2/scripts-2.php' ?>
 <script>
     const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE); ?>;
-    const name_re =  /^[a-zA-Z0-9_\u4e00-\u9fa5\s]*$/;
+    const name_re = /^[a-zA-Z0-9_\u4e00-\u9fa5\s]*$/;
     const email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zAZ]{2,}))$/;
     const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
 
