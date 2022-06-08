@@ -1,12 +1,12 @@
-<?php require __DIR__ .  '/parts/connect_db.php' ;
+<?php require __DIR__ .  '/../parts/connect_db.php' ;
 
 $pageName = 'npo-add';
 $title = '上架NPO';
 
 ?>
 <!-- php以前是樣板語言，用來生HTML內容。現在都改用框架了 -->
-<?php include __DIR__ . '/parts/html-head.php' ?> 
-<?php include __DIR__ . '/parts/nav-bar.php' ?> 
+<?php include __DIR__ . '/../parts/html-head.php' ?> 
+<?php include __DIR__ . '/../parts/navbar.php' ?> 
 
 <style>
     .form-control{
@@ -222,7 +222,7 @@ $title = '上架NPO';
     </div>
 </div>
 
-<?php include __DIR__ . '/parts/scripts.php' ?> 
+<?php include __DIR__ . '/../parts/scripts.php' ?> 
 
 <script>
 
@@ -396,4 +396,4 @@ async function sendData(){
 </script>
 
 
-<?php include __DIR__ . '/parts/html-foot.php' ?> 
+<?php include __DIR__ . '/../parts/html-foot.php' ?> 
