@@ -1,0 +1,84 @@
+.time-area,
+.news-area {
+    outline: 1px solid #aaa;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.time-area .time-title,
+.place-left .news-title {
+    background-color: rgb(57, 89, 114);
+    color: rgb(255, 255, 255);
+}
+
+.filter-section {
+    background-color: rgb(203, 207, 212);
+    border-radius: 10px;
+}
+
+#searchBtn {
+    background-color: #e9ecef;
+    border-color: #c3c6c8;
+}
+
+.place-row p,
+.place-row h4 {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.place-row {
+    border: 2px solid #aaa;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+.place-time,
+.place-location,
+.place-quota {
+    padding: 0 10px 0;
+    line-height: 36px;
+    border-right: 1px solid #ccc;
+}
+
+.title {
+    text-align: center;
+}
+
+.title h4,
+.title i {
+    font-weight: bold;
+    font-size: 26px;
+    color: rgb(57, 89, 114);
+}
+
+p.year,
+p.month,
+p.country {
+    font-weight: bold;
+    font-size: 22px;
+}
+
+p.city {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+p.remain {
+    color: darkred;
+    font-weight: bold;
+}
+
+.place-buttoms .chooseBtn {
+    height: 40px;
+    background-color: rgb(57, 89, 114);
+    border: none;
+}
+
+.place-buttoms .chooseBtn:hover {
+    background-color: #1f3763;
+}
+
+.place-quota {
+    border-right: 0;
+}
