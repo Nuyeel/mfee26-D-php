@@ -71,7 +71,6 @@ $stmt->execute([
         $address,
         $address2,
         $ammount,
-        
         $type,
 ]);
     

@@ -1,8 +1,17 @@
 <?php
-session_start();
+// session_start();
+// $pageName = 'cart';
+// $title = '購物車列表';
+// require '/../parts/connect_db.php';
+
+
+require __DIR__ .  '/../parts/connect_db.php' ;
+
 $pageName = 'cart';
 $title = '購物車列表';
-require '/../parts/connect_db.php';
+
+
+
 
 $rows = [];
 $sids = [];
