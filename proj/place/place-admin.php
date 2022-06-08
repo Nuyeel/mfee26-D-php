@@ -1,8 +1,8 @@
 <?php require __DIR__ . "/../parts/connect_db.php" ?>
 
 <?php
-$pageName = 'place';
-$title = '濟善救世公司-良辰吉地';
+$pageName = 'place-admin';
+$title = '良辰吉地';
 ?>
 
 <?php include __DIR__ . "/../parts/html-head.php" ?>
