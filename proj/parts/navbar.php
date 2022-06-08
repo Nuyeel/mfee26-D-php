@@ -48,10 +48,14 @@ if (!isset($pageName)) {
     .navbar-icon>a>i {
         color: #33A5DB;
     }
+
+    #adminTitle {
+        color: red;
+    }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
+    <div class="container-fluid py-2">
 
 
 
@@ -86,13 +90,24 @@ if (!isset($pageName)) {
                 <li class="nav-item">
                     <a class="nav-link <?= $pageName == 'social' ? 'active' : '' ?>" href="social.php">Social</a>
                 </li>
+                <!-- 設定管理者登入才會出現? -->
+                <li class="nav-item dropdown admin-menu">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="adminTitle">管理頁面</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="news-admin.php">最新消息</a></li>
+                        <li><a class="dropdown-item" href="reborn-admin.php">轉生形象</a></li>
+                        <li><a class="dropdown-item" href="place-admin.php">良辰吉地</a></li>
+                        <li><a class="dropdown-item" href="activity-admin.php">Activity</a></li>
+                        <li><a class="dropdown-item" href="member-admin.php">會員管理</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="navbar-nav navbar-icon mb-2 mb-lg-0">
                 <a href="cart.php">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </a>
                 <a href="member.php">
-                    <i class="fa-solid fa-house"></i>
+                    <i class="fa-solid fa-circle-user"></i>
                 </a>
             </ul>
         </div>
