@@ -85,7 +85,7 @@ if (!isset($pageName)) {
                     <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="place.php">良辰吉地</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'activity' ? 'active' : '' ?>" href="activity.php">Activity</a>
+                    <a class="nav-link <?= $pageName == 'activity' ? 'active' : '' ?>" href="/../xuan-event-list/npo-list.php">Activity</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= $pageName == 'social' ? 'active' : '' ?>" href="social.php">Social</a>
