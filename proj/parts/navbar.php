@@ -97,7 +97,8 @@ if (!isset($pageName)) {
                         <li><a class="dropdown-item" href="news-admin.php">最新消息</a></li>
                         <li><a class="dropdown-item" href="reborn-admin.php">轉生形象</a></li>
                         <li><a class="dropdown-item" href="place-admin.php">良辰吉地</a></li>
-                        <li><a class="dropdown-item" href="activity-admin.php">Activity</a></li>
+                        <li><a class="dropdown-item" href="/../xuan-event-manage/event-manage.php">活動管理</a></li>
+                        <li><a class="dropdown-item" href="/../xuan-npo-manage/npo-manage.php">主辦單位管理</a></li>
                         <li><a class="dropdown-item" href="member-admin.php">會員管理</a></li>
                     </ul>
                 </li>
