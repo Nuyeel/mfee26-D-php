@@ -25,7 +25,7 @@ if ($totalRows > 0) {
     exit;
   }
 
-  $sql = sprintf("SELECT * FROM address_book ORDER BY sid DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+  $sql = sprintf("SELECT * FROM good_deed_test_record ORDER BY sid ASC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
   $rows = $pdo->query($sql)->fetchAll();
 }
 
@@ -78,7 +78,6 @@ if ($totalRows > 0) {
     <thead>
       <tr>
         <th scope="col"><i class="fa-solid fa-trash-can"></i></th>
-        <th scope="col">#</th>
         <th scope="col">會員編號</th>
         <th scope="col">會員帳號</th>
 
@@ -90,9 +89,6 @@ if ($totalRows > 0) {
         <th scope="col">Q3</th>
         <th scope="col">Q4</th>
         <th scope="col">Q5</th>
-        <th scope="col">Q6</th>
-        <th scope="col">Q7</th>
-        <th scope="col">Q8</th>
         <th scope="col">總分</th>
 
 
@@ -104,10 +100,6 @@ if ($totalRows > 0) {
       <?php foreach ($rows as $r) : ?>
         <tr>
           <td>
-            <?php /*
-                        <a href="ab-delete.php?sid=<?= $r['sid'] ?>" onclick="return confirm('確定要刪除編號為 <?= $r['sid'] ?> 的資料嗎?')">
-                        */ ?>
-
             <a href="javascript: delete_it(<?= $r['sid'] ?>)">
               <i class="fa-solid fa-trash-can"></i>
             </a>
@@ -122,13 +114,10 @@ if ($totalRows > 0) {
           <td><?= $r['test_Q3'] ?></td>
           <td><?= $r['test_Q4'] ?></td>
           <td><?= $r['test_Q5'] ?></td>
-          <td><?= $r['test_Q6'] ?></td>
-          <td><?= $r['test_Q7'] ?></td>
-          <td><?= $r['test_Q8'] ?></td>
-          <td><?= $r['sum_testscore'] ?></td>
+          <td><?= $r['test_score'] ?></td>
 
           <td>
-            <a href="ab-edit.php?sid=<?= $r['sid'] ?>">
+            <a href="test-edit.php?sid=<?= $r['sid'] ?>">
               <i class="fa-solid fa-pen-to-square"></i>
             </a>
           </td>
@@ -147,7 +136,7 @@ if ($totalRows > 0) {
 <script>
   function delete_it(member_sid) {
     if (confirm(`確定要刪除編號為 ${member_sid} 的資料嗎?`)) {
-      location.href = `ab-delete.php?sid=${member_sid}`;
+      location.href = `test-delete.php?sid=${member_sid}`;
     }
   }
 </script>

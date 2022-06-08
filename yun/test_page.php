@@ -2,138 +2,219 @@
 $pageName = 'test_page';
 $title = '陰德值測驗';
 
+
+
+$perPage = 1; // 每一頁有幾筆
+
+// 用戶要看第幾頁
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+if ($page < 1) {
+    header('Location: ?page=1');
+    exit;
+}
+
+$t_sql = "SELECT COUNT(1) FROM good_deed_test";
+$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+$totalPages = ceil($totalRows / $perPage); // 總共有幾頁
+
+$rows = [];
+
+if ($totalRows > 0) {
+    // 頁碼若超過總頁數
+    if ($page > $totalPages) {
+        header("Location: ?page=$totalPages");
+        exit;
+    }
+
+    $sql = sprintf("SELECT * FROM good_deed_test ORDER BY sid ASC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+    $rows = $pdo->query($sql)->fetchAll();
+}
+
+
+
 ?>
 <?php include __DIR__ . '/test-parts/test-head.php' ?>
-<?php // include __DIR__ . '/test-parts/navbar.php' ?>
+<?php include __DIR__ . '/test-parts/test-nav.php' ?>
 <style>
-    .form-control.red {
-        border: 1px solid red;
-    }
+  
 
-    .form-text.red {
-        color: red;
-    }
 </style>
 <div class="container">
+
+
     <div class="row">
-        <div class="col-md-6">
+        <div class="col">
+            <h4>陰德值小測驗</h4>
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">新增資料</h5>
-                    <form name="form1" onsubmit="sendData();return false;" novalidate>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">* name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                            <div class="form-text red"></div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">email</label>
-                            <input type="email" class="form-control" id="email" name="email">
-                            <div class="form-text red"></div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="mobile" class="form-label">mobile</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile" pattern="09\d{8}">
-                            <div class="form-text red"></div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="birthday" class="form-label">birthday</label>
-                            <input type="date" class="form-control" id="birthday" name="birthday">
-                            <div class="form-text"></div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="address" class="form-label">address</label>
-                            <textarea class="form-control" name="address" id="address" cols="30" rows="3"></textarea>
-                            <div class="form-text"></div>
-                        </div>
+                    <?php foreach ($rows as $q) : ?>
+                        <h5 class="card-title"> Q<?= $q['sid'] ?></h5>
+                        <form name="form1" onsubmit="sendData();return false;" novalidate>
+                            <label for="Q<?= $q['sid'] ?>" class="form-label">
+                                <?= $q['test_content'] ?>
+                            </label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Q<?= $q['sid'] ?>" id="Q<?= $q['sid'] ?>-1" value="<?= $q['op1_score']  ?>">
+                                <label class="form-check-label" for="Q<?= $q['sid'] ?>-1">
+                                    <?= $q['op1_content'] ?>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Q<?= $q['sid'] ?>" id="Q<?= $q['sid'] ?>-2" value="<?= $q['op1_score']  ?>">
+                                <label class="form-check-label" for="Q<?= $q['sid'] ?>-2">
+                                    <?= $q['op2_content'] ?>
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Q<?= $q['sid'] ?>" id="Q<?= $q['sid'] ?>-3" value="<?= $q['op1_score']  ?>">
+                                <label class="form-check-label" for="Q<?= $q['sid'] ?>-3">
+                                    <?= $q['op3_content'] ?>
+                                </label>
+                            </div>
 
-                        <button type="submit" class="btn btn-primary">新增</button>
-                    </form>
-                    <div id="info-bar" class="alert alert-success" role="alert" style="display:none;">
-                        資料新增成功
-                    </div>
+                            <p id="output"></p>
+                        
+                        </form>
+
+                    <?php endforeach; ?>
                 </div>
+            </div>
+            <div id="info-bar" class="alert alert-success" role="alert" style="display:none;">
+                資料新增成功
             </div>
         </div>
     </div>
 
+    <div class="row">
+        <div class="col">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=1">
+                            <!-- <i class="fa-solid fa-angles-left"></i> -->
+                            Start
+                        </a>
+                    </li>
+                    <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $page - 1 ?>">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </a>
+                    </li>
+                    <?php for ($i = $page - 1; $i <= $page + 1; $i++) :
+                        if ($i >= 1 and $i <= $totalPages) :
+                    ?>
+                            <li class="page-item <?= $page == $i ? 'active' : '' ?>">
+                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                            </li>
+                    <?php endif;
+                    endfor; ?>
+                    <li class="page-item <?= $page == $totalPages ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $page + 1 ?>">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item <?= $page == $totalPages ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $totalPages ?>">
+                            <!-- <i class="fa-solid fa-angles-right"></i> -->
+                            End
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
 </div>
 <?php include __DIR__ . '/test-parts/test-scripts.php' ?>
 <script>
-    const email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zAZ]{2,}))$/;
-    const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
+   
+    
+    const q1_f = document.form1.Q1;
+    const q1_btn = document.querySelectorAll('input[name="Q1"]');
+    
+    const q2_f = document.form1.Q2;
+    const q2_btn = document.querySelectorAll('input[name="Q2"]');
 
-    const info_bar = document.querySelector('#info-bar');
-    const name_f = document.form1.name;
-    const email_f = document.form1.email;
-    const mobile_f = document.form1.mobile;
+    const q3_f = document.form1.Q3;
+    const q3_btn = document.querySelectorAll('input[name="Q3"]');
 
-    const fields = [name_f, email_f, mobile_f];
-    const fieldTexts = [];
-    for (let f of fields) {
-        fieldTexts.push(f.nextElementSibling);
-    }
+    const q4_f = document.form1.Q4;
+    const q4_btn = document.querySelectorAll('input[name="Q4"]');
 
+    const q5_f = document.form1.Q5;
+    const q5_btn = document.querySelectorAll('input[name="Q5"]');
+
+
+    // const fields = [q1_f,q2_f,q3_f,q4_f,q5_f];
+    
 
 
     async function sendData() {
-        // 讓欄位的外觀回復原來的狀態
-        for (let i in fields) {
-            fields[i].classList.remove('red');
-            fieldTexts[i].innerText = '';
-        }
-        info_bar.style.display = 'none'; // 隱藏訊息列
+        
+        let isPass = false; // 預設是通過檢查的
 
-        // TODO: 欄位檢查, 前端的檢查
-        let isPass = true; // 預設是通過檢查的
-
-        if (name_f.value.length < 2) {
-            // alert('姓名至少兩個字');
-            // name_f.classList.add('red');
-            // name_f.nextElementSibling.classList.add('red');
-            // name_f.closest('.mb-3').querySelector('.form-text').classList.add('red');
-            fields[0].classList.add('red');
-            fieldTexts[0].innerText = '姓名至少兩個字';
-            isPass = false;
-        }
-        if (email_f.value && !email_re.test(email_f.value)) {
-            // alert('email 格式錯誤');
-            fields[1].classList.add('red');
-            fieldTexts[1].innerText = 'email 格式錯誤';
-            isPass = false;
-        }
-        if (mobile_f.value && !mobile_re.test(mobile_f.value)) {
-            // alert('手機號碼格式錯誤');
-            fields[2].classList.add('red');
-            fieldTexts[2].innerText = '手機號碼格式錯誤';
-            isPass = false;
-        }
+        q1_f.addEventListener("click",() =>{
+            let selectValue;
+            for (let answer of q1_btn ) {
+                if(answer.checked){
+                    selectValue = q1_btn.value;
+                    isPass = true;
+                    break;
+                }
+            }
+        })
+        q2_f.addEventListener("click",() =>{
+            let selectValue;
+            for (let answer of q2_btn ) {
+                if(answer.checked){
+                    selectValue = q2_btn.value;
+                    isPass = true;
+                    break;
+                }
+            }
+        })
+        q3_f.addEventListener("click",() =>{
+            let selectValue;
+            for (let answer of q3_btn ) {
+                if(answer.checked){
+                    selectValue = q3_btn.value;
+                    isPass = true;
+                    break;
+                }
+            }
+        })
+        q4_f.addEventListener("click",() =>{
+            let selectValue;
+            for (let answer of q4_btn ) {
+                if(answer.checked){
+                    selectValue = q4_btn.value;
+                    isPass = true;
+                    break;
+                }
+            }
+        })
+        q5_f.addEventListener("click",() =>{
+            let selectValue;
+            for (let answer of q5_btn ) {
+                if(answer.checked){
+                    selectValue = q5_btn.value;
+                    isPass = true;
+                    break;
+                }
+            }
+        })
 
         if (!isPass) {
             return; // 結束函式
         }
 
         const fd = new FormData(document.form1);
-        const r = await fetch('ab-add-api.php', {
+        const r = await fetch('test-api.php', {
             method: 'POST',
             body: fd,
         });
         const result = await r.json();
         console.log(result);
-        info_bar.style.display = 'block'; // 顯示訊息列
-        if (result.success) {
-            info_bar.classList.remove('alert-danger');
-            info_bar.classList.add('alert-success');
-            info_bar.innerText = '新增成功';
-
-            setTimeout(() => {
-                // location.href = 'ab-list.php'; // 跳轉到列表頁
-            }, 2000);
-        } else {
-            info_bar.classList.remove('alert-success');
-            info_bar.classList.add('alert-danger');
-            info_bar.innerText = result.error || '資料無法新增';
-        }
 
     }
 </script>
