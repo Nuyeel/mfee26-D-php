@@ -13,6 +13,7 @@
 // 葉宥廷
 $_SESSION['member']['sid'] = 11;
 $_SESSION['member']['deathdate'] = '2022-06-06';
+// $_SESSION['member']['account'] = 'HappyCat03';
 
 // 陳怡雯
 // $_SESSION['member']['sid'] = 12; 
@@ -44,7 +45,7 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
             width: 100%;
             top: 0px;
             height: 100%;
-            z-index: -10;
+            z-index: 10;
         }
 
         #myCanvas {
@@ -55,6 +56,11 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
             /* right: 0; */
             /* bottom: 0; */
             margin: auto;
+        }
+
+        /* 之後要整合進 navbar.php.裡面 */
+        .navbar {
+            z-index: 500;
         }
 
         .curtain {
@@ -244,19 +250,72 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
 
         .cubetext {
             position: absolute;
-            width: 980px;
+            width: 100%;
+            max-width: 980px;
             height: 600px;
             /* background-color: #f00; */
-            top: 56px;
-            bottom: 0;
+            /* border-radius: 20px; */
+            top: 200px;
             left: 0;
             right: 0;
-            margin: auto;
-            /* border-radius: 20px; */
+            margin-left: auto;
+            margin-right: auto;
             font-family: 'NOTO sans TC';
             display: flex;
             flex-direction: column;
-            z-index: 800;
+            /* z-index: 800; */
+            transition: 2s;
+            user-select: none;
+            -webkit-user-drag: none;
+            /* z-index: 10000 !important; */
+            /* opacity: 1 !important; */
+        }
+
+        .cubetext p:first-of-type {
+            margin-bottom: 0;
+        }
+
+        .cubetext p:last-of-type {
+            margin-bottom: 24px;
+        }
+
+        /* ::selection 是反選文字的底色 */
+        /* 留心其影響範圍為整個頁面 */
+
+        ::selection {
+            background-color: #78787880;
+            /*color: #fff;*/
+        }
+
+        ::-moz-selection {
+            background-color: #00000033;
+            /*color: #fff;*/
+        }
+
+        .cubetext p {
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* textarea 好像不能用 pseudo-element */
+        .cubetext p:first-of-type::before,
+        .cubetext p:first-of-type::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: #000;
+            position: absolute;
+            z-index: 1000;
+            left: 0;
+        }
+
+        .cubetext p:first-of-type::before {
+            top: 123px;
+        }
+
+        .cubetext p:first-of-type::after {
+            top: 227px;
         }
 
         #cubeMessage {
@@ -276,9 +335,71 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
             /* 去除 textarea 外框 */
             /* outline: 0px solid transparent !important; */
             /* -webkit-appearance:none; */
+            box-shadow: none;
             -webkit-box-shadow: none;
+            /* margin-bottom: 24px; */
         }
 
+        .cubetext-btn-area {
+            width: max-content;
+            height: max-content;
+            position: absolute;
+            top: 220px;
+            bottom: 0;
+            left: 0;
+            right: 845px;
+            margin: auto;
+            transition: 2s;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .cubetext-btn-area button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        
+        .cubetext-btn-area button + button {
+            margin-left: 6px;
+            /* margin-right: 12px; */
+        }
+
+        /* .btn-secondary {
+            pointer-events: none;
+        } */
+
+        .cp-slidezi {
+            z-index: 100;
+        }
+
+        .ct-anim-up {
+            /* animation: pmsShown 0.5s ease-in 0.5s forwards; */
+            animation: ctAnimUp 2s ease-in-out 0s forwards;
+        } 
+
+        @keyframes ctAnimUp {
+            0% {
+                top: 200px;
+            }
+            100% {
+                top: -400px;
+            }
+        }
+
+        .ct-anim-down{
+            /* animation: pmsShown 0.5s ease-in 0.5s forwards; */
+            animation: ctAnimDown 2s ease-in-out 0s forwards;
+        }
+
+        @keyframes ctAnimDown {
+            0% {
+                top: -400px;
+            }
+            100% {
+                top: 200px;
+            }
+        }
     </style>
 
     <canvas id="myCanvas"></canvas>
@@ -336,17 +457,28 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
         </div>
     </div>
 
-    <div class="cubetext">
+    <div class="cubetext cpvanish cphidden">
         <p>請問您今生的感想是...？</p>
         <form name="formCubeText" action="cube-text-create-api.php" method="post" style="display: none" onsubmit="return false;">
-            <!-- <input id="cubeText" type="hidden" name="cubeText" value="" /> -->
-            <!-- <button type="submit" id="cubeTextBtn" style="display:none"></button> -->
+            <input id="cubeText" type="hidden" name="cubeText" value="" />
+            <button type="submit" id="cubeTextBtn" style="display:none"></button>
 
-            <label for="cubeText" class="form-label"></label>
-            <textarea class="form-control" name="cubeText" id="cubeText" cols="30" rows="3"></textarea>
+            <!-- <label for="cubeText" class="form-label"></label>
+            <textarea class="form-control" name="cubeText" id="cubeText" cols="30" rows="3"></textarea> -->
+            <!-- 加上 maxlength -->
         </form>
-        <textarea class="form-control" name="cubeMessage" id="cubeMessage" cols="30" rows="3" placeholder="敢不敢打一點字"></textarea>
-        <p>最多可以輸入30個字，也可以選擇留白。</p>
+        <textarea class="form-control" name="cubeMessage" id="cubeMessage" cols="30" rows="2" placeholder="將心情書寫於此" maxlength="30"></textarea>
+        <p>最多可以輸入30個字元，最少請輸入一個字元。</p>
+        <p>如果真的沒有想說的話，請輸入空白字元。</p>
+    </div>
+
+    <div class="cubetext-btn-area cpvanish cphidden">
+        <button type="button" class="btn btn-light disabled cube-btn-up">
+            <i class="fa-solid fa-angle-up"></i>
+        </button>
+        <button type="button" class="btn btn-secondary disabled cube-btn-down">
+            <i class="fa-solid fa-angle-down"></i>
+        </button>
     </div>
 
     <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
@@ -736,6 +868,10 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
 
             const ginie = document.querySelector('.ginie');
 
+            // 對 setTimeout await 沒有意義
+            // 一樣是被傳進去 Task Queue
+            // 這裡只是怕出問題這樣寫
+
             await setTimeout(() => {
                 ginie.classList.remove('cpvanish');
                 ginie.classList.remove('cphidden');
@@ -762,7 +898,8 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
 
             let musicPlaying = false;
 
-            // 重複 等一下換掉
+            // 重複 id name 等一下換掉
+            // 現在沒有播放暫停按鈕 也註解了 addEventListener
             // const music = document.querySelector("#music");
 
             // console.log("start");
@@ -822,6 +959,18 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
             await shinderShrink();
             // await shinderTransparent();
 
+            const ctc = document.querySelector('.cubetext');
+            ctc.classList.remove('cpvanish');
+            ctc.classList.remove('cphidden');
+            ctc.classList.add('cpemerge');
+            ctc.classList.add('cpshown');
+
+            const cbr = document.querySelector('.cubetext-btn-area');
+            cbr.classList.remove('cpvanish');
+            cbr.classList.remove('cphidden');
+            cbr.classList.add('cpemerge');
+            cbr.classList.add('cpshown');
+
             // await
         }
 
@@ -847,6 +996,101 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
         // }
 
         const cm = document.querySelector('#cubeMessage');
+        
+        const cbr = document.querySelector('.cube-btn-area');
+        const cbu = document.querySelector('.cube-btn-up');
+        const cbd = document.querySelector('.cube-btn-down');
+        
+        const ct = document.querySelector('#cubeText');
+        const ctbtn = document.querySelector('#cubeTextBtn');
+        
+
+        // 用來代表方塊事件進程的變數
+        let cubeStage = 0;
+        
+        // 超過 30 字時用來鎖定的字串
+        // let fixText;
+        
+        const cbdAbilityCheck = (e) => {
+            e.preventDefault();
+
+            // 加上 maxlength 屬性會自動幫忙去除 \n
+            // 不過就先留著吧
+            const checkText = cm.value.replace(/\n+/g, "");
+            
+            // 改用 maxlength 解決
+            // if (checkText.length === 30) {
+            //     fixText = checkText;
+            //     console.log(fixText);
+            // } else if (checkText.length > 30) {
+            //     cm.value = fixText;
+            //     console.log('NONONO');
+            // }
+
+            if (checkText.length === 0) {
+                if (! cm.getAttribute('disabled'))
+                cbd.classList.add('disabled');
+            } else if (checkText.length >= 1) {
+                cbd.classList.remove('disabled');
+            }
+        }
+
+        const transClickC = () => {
+            ct.value = cm.value.replace(/\n+/g, "");
+            ctbtn.click();
+        }
+
+        const backToCubeText = () => {
+            const ctc = document.querySelector('.cubetext');
+
+            ctc.classList.remove('ct-anim-up');   
+            ctc.classList.add('ct-anim-down');   
+            cbu.classList.add('disabled');
+            cbu.removeEventListener('click', backToCubeText, false);
+            setTimeout(() => {
+                ctc.classList.remove('cp-slidezi');
+                cbd.classList.remove('disabled');
+            }
+            ,2000);
+            
+        }
+        
+        const sendCubeText = async () => {
+            const fd = new FormData(document.formCubeText);
+            const fetchURL = 'cube-api.php';
+            const r = await fetch(fetchURL, {
+                method: 'post',
+                body: fd
+            });
+
+            const result = await r.json();
+            console.log(result);
+            // console.log(result.musicname['cube_music_name']);
+
+            const ctc = document.querySelector('.cubetext');
+
+
+            ctc.classList.add('cp-slidezi');
+            if (ctc.classList.contains('ct-anim-down')) {
+                ctc.classList.remove('ct-anim-down');
+            }
+            ctc.classList.add('ct-anim-up');   
+            cbd.classList.add('disabled');
+            cubeStage++;
+            setTimeout(() => {
+                cbu.classList.remove('disabled');
+                cbu.addEventListener('click', backToCubeText, false);
+            }
+            ,2000);
+        }
+
+        // onkeyup 按鍵離手時觸發
+        cm.addEventListener('keyup', cbdAbilityCheck, false);
+
+        // 要根據 cubeStage 來決定要給這個按鈕什麼 function
+        cbd.addEventListener('click', transClickC, false);
+        ctbtn.addEventListener('click', sendCubeText, false);
+
     </script>
 
     <script>
