@@ -1,6 +1,6 @@
 <?php require __DIR__ . '/parts/connect_db.php';
 $pageName = 'add';
-$title = '新增消息';
+$title = '修改消息';
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 
@@ -102,10 +102,10 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
                 <div class="row mb-3">
                     <label for="" class="col-sm-2">圖片</label>
                     <div class="col-sm-10">
-                        <input type="hidden" name="old_img" value="<?=$row['img']?>">
+                        <input type="hidden" name="oldimg" >
                         <input type="file" id="img" class="form-control" name="img" accept="image/*" onchange="changeImg()">
                         <div id="imgwrap" class="imgwrap mt-3">
-                            <img class="img" id="selectedimg" src="./uploaded/<?= $row['img'] ?>" alt="">
+                            <img class="img" name="simg" src="./uploaded/<?= $row['img'] ?>" alt="">
                         </div>
                     </div>
                 </div>
@@ -114,7 +114,6 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
                     <label for="" class="col-sm-2 col-form-label">地點</label>
                     <div class="col-sm-10">
                         <select class="form-select" name="location_sid">
-                            <!-- <option value="" selected disabled>請選擇</option> -->
                             <?php foreach ($loc as $l) : ?>
                                 <option value="<?= $l['l_sid'] ?>" <?= $row['location_sid'] == $l['l_sid'] ? 'selected' : '' ?>><?= $l['location'] ?></option>
                             <?php endforeach; ?>
@@ -161,9 +160,9 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
 
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">新增</button>
+                <button type="submit" class="btn btn-primary">修改</button>
                 <div id="info_bar" class="alert alert-success" role="alert" style="display:none;">
-                    消息新增成功！
+                    消息修改成功！
                 </div>
             </form>
         </div>
@@ -196,7 +195,6 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
         const imgwrap = document.querySelector('#imgwrap');
 
         imgwrap.innerHTML = '<img class="img" id="newsimg" src="" alt="">';
-        // img.nextElementSibling.classList.add('imgwrap', 'mt-3');
 
         const file = event.currentTarget.files[0];
         console.log(file);
@@ -233,8 +231,6 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
         }
 
         let isPass = true;
-
-        // info_bar.style.display = 'none';
 
 
         if (topic_f.value == '') {
@@ -306,11 +302,5 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
             });
     }
 
-    // function addTag() {
-    //     const tagGroup = document.querySelector('#tag_group');
-    //     const tagDiv = document.querySelector('#tag_div');
-
-    //     tagDiv.appendChild(tagGroup.cloneNode(true));
-    // }
 </script>
 <?php include __DIR__ . '/parts/html-foot.php' ?>
