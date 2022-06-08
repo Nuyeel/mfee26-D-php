@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost
--- 產生時間： 2022 年 05 月 31 日 08:19
+-- 產生時間： 2022 年 06 月 07 日 10:24
 -- 伺服器版本： 10.4.21-MariaDB
 -- PHP 版本： 7.4.29
 
@@ -34,6 +34,14 @@ CREATE TABLE `good_deed_games` (
   `game_detail` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- 傾印資料表的資料 `good_deed_games`
+--
+
+INSERT INTO `good_deed_games` (`sid`, `game_id`, `game_name`, `game_detail`) VALUES
+(1, 1, '扶老奶奶過馬路遊戲', '在可怕的車流中 帶領老奶奶過馬路 實在是功德一件'),
+(2, 2, '消業障遊戲', '透過小球碎掉業障');
+
 -- --------------------------------------------------------
 
 --
@@ -49,17 +57,16 @@ CREATE TABLE `good_deed_games_record` (
   `member_death` date DEFAULT NULL,
   `play_date` datetime NOT NULL,
   `game_id` int(11) NOT NULL,
-  `game_score` int(11) NOT NULL,
-  `game_total_score` int(11) NOT NULL
+  `game_score` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 傾印資料表的資料 `good_deed_games_record`
 --
 
-INSERT INTO `good_deed_games_record` (`sid`, `member_sid`, `member_account`, `member_name`, `member_birth`, `member_death`, `play_date`, `game_id`, `game_score`, `game_total_score`) VALUES
-(1, 1, 'snowvalley28', '蔣阿水', '1891-02-08', '1931-08-25', '2019-02-23 00:00:00', 1, 55, 234),
-(2, 2, 'showgi1103', '李秀枝', '1923-11-03', NULL, '2020-05-02 00:00:00', 1, 23, 881);
+INSERT INTO `good_deed_games_record` (`sid`, `member_sid`, `member_account`, `member_name`, `member_birth`, `member_death`, `play_date`, `game_id`, `game_score`) VALUES
+(1, 1, 'snowvalley28', '蔣阿水', '1891-02-08', '1931-08-25', '2019-02-23 00:00:00', 1, 55),
+(2, 2, 'showgi1103', '李秀枝', '1923-11-03', NULL, '2020-05-02 00:00:00', 1, 23);
 
 -- --------------------------------------------------------
 
@@ -76,9 +83,9 @@ CREATE TABLE `good_deed_score` (
   `member_birth` date NOT NULL,
   `member_death` date DEFAULT NULL,
   `test_score` int(11) DEFAULT NULL,
-  `event_adj_score` int(11) DEFAULT NULL,
-  `charity_adj_score` int(11) DEFAULT NULL,
-  `game_total_score` int(11) DEFAULT NULL,
+  `event_score` int(11) DEFAULT NULL,
+  `charity_score` int(11) DEFAULT NULL,
+  `game_score` int(11) DEFAULT NULL,
   `sum_score` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -106,16 +113,18 @@ CREATE TABLE `good_deed_test` (
 
 INSERT INTO `good_deed_test` (`sid`, `test_sid`, `test_content`, `op1_content`, `op1_score`, `op2_content`, `op2_score`, `op3_content`, `op3_score`) VALUES
 (1, 'test_Q1', '你認為人性...?', '人性本善', 3, '人性本惡', 5, '有錢才會善良', 2),
-(2, 'test_Q2', '你覺得人與人之間?', '銀貨兩訖', 3, '不求回報', 5, '自私自利', 2),
-(3, 'test_Q3', '你午餐吃什麼?', '葷食', 3, '素食', 5, ' 沒有吃', 4);
+(2, 'test_Q2', '你覺得人與人之間的相處應該?', '銀貨兩訖', 3, '不求回報', 5, '自私自利', 2),
+(3, 'test_Q3', '你小時候最常玩什麼遊戲?', '閃電布丁', 3, '鬼抓人', 5, ' 躲貓貓', 4),
+(4, 'test_Q4', '傷心的時候聽?', '哀傷的歌', 3, '佛經', 5, '歡樂的歌', 2),
+(5, 'test_Q5', '你覺得人生像...?', '一場旅行', 5, '一場災難', 3, '一盒巧克力', 4);
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `good_deed_test_calc`
+-- 資料表結構 `good_deed_test_record`
 --
 
-CREATE TABLE `good_deed_test_calc` (
+CREATE TABLE `good_deed_test_record` (
   `sid` int(11) NOT NULL,
   `member_sid` int(11) NOT NULL,
   `member_account` varchar(255) NOT NULL,
@@ -128,11 +137,7 @@ CREATE TABLE `good_deed_test_calc` (
   `test_Q3` int(11) DEFAULT NULL,
   `test_Q4` int(11) DEFAULT NULL,
   `test_Q5` int(11) DEFAULT NULL,
-  `test_Q6` int(11) DEFAULT NULL,
-  `test_Q7` int(11) DEFAULT NULL,
-  `test_Q8` int(11) DEFAULT NULL,
-  `ori_testscore` int(11) DEFAULT NULL,
-  `sum_testscore` int(11) DEFAULT NULL
+  `test_score` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -164,9 +169,9 @@ ALTER TABLE `good_deed_test`
   ADD PRIMARY KEY (`sid`);
 
 --
--- 資料表索引 `good_deed_test_calc`
+-- 資料表索引 `good_deed_test_record`
 --
-ALTER TABLE `good_deed_test_calc`
+ALTER TABLE `good_deed_test_record`
   ADD PRIMARY KEY (`sid`);
 
 --
@@ -177,7 +182,7 @@ ALTER TABLE `good_deed_test_calc`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `good_deed_games`
 --
 ALTER TABLE `good_deed_games`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `good_deed_games_record`
@@ -195,12 +200,12 @@ ALTER TABLE `good_deed_score`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `good_deed_test`
 --
 ALTER TABLE `good_deed_test`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `good_deed_test_calc`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `good_deed_test_record`
 --
-ALTER TABLE `good_deed_test_calc`
+ALTER TABLE `good_deed_test_record`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
