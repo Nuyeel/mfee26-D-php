@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="../fontawesome-free-6.1.1-web/css/all.min.css">
 
     <!-- cm-css -->
-    <link rel="stylesheet" href="cm-style.css">
+    <link rel="stylesheet" href="./css/cm-style.css">
 </head>
 
 <body>

@@ -1,7 +1,7 @@
 <?php require __DIR__ . "/../parts/connect_db.php" ?>
 
 <?php
-$pageName = 'place';
+$pageName = 'place-add';
 $title = '新增良辰吉地';
 ?>
 

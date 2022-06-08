@@ -79,10 +79,10 @@ if (!isset($pageName)) {
                     <a class="nav-link <?= $pageName == 'news' ? 'active' : '' ?>" href="news.php">最新消息</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'reborn' ? 'active' : '' ?>" href="reborn.php">轉生形象</a>
+                    <a class="nav-link <?= $pageName == 'reborn' ? 'active' : '' ?>" href="/../avatar/avatar.php">轉生形象</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="/../place/place-admin.php">良辰吉地</a>
+                    <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="/../place/place.php">良辰吉地</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= $pageName == 'activity' ? 'active' : '' ?>" href="/../xuan-event-list/npo-list.php">Activity</a>
