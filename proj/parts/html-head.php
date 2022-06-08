@@ -19,10 +19,10 @@
     <link rel="stylesheet" href="../fontawesome-free-6.1.1-web/css/all.min.css">
 
     <!-- place css -->
-    <link rel="stylesheet" href="./css/place-style.css">
+    <link rel="stylesheet" href="../parts/css/place-style.css">
 
     <!-- avatar css -->
-    <link rel="stylesheet" href="./css/avatar.css">
+    <link rel="stylesheet" href="../parts/css/avatar.css">
 </head>
 
 <body>
