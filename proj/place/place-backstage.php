@@ -1,12 +1,12 @@
-<?php require __DIR__ . "./parts/connect_db.php" ?>
+<?php require __DIR__ . "/../parts/connect_db.php" ?>
 
 <?php
 $pageName = 'place';
 $title = '濟善救世公司-良辰吉地';
 ?>
 
-<?php include __DIR__ . "./parts/html-head.php" ?>
-<?php include __DIR__ . "./parts/navbar.php" ?>
+<?php include __DIR__ . "/../parts/html-head.php" ?>
+<?php include __DIR__ . "/../parts/navbar.php" ?>
 
 
 <div class="container mt-5">
@@ -170,7 +170,7 @@ $title = '濟善救世公司-良辰吉地';
 </div>
 
 
-<?php include __DIR__ . "./parts/scripts.php" ?>
+<?php include __DIR__ . "/../parts/scripts.php" ?>
 <script>
     let data;
     let page = +location.search.slice(6);
@@ -495,4 +495,4 @@ $title = '濟善救世公司-良辰吉地';
 </script>
 
 
-<?php include __DIR__ . "./parts/html-foot.php" ?>
+<?php include __DIR__ . "/../parts/html-foot.php" ?>
