@@ -30,10 +30,12 @@ $ext = $extMap[$_FILES['img']['type']];
 $oldName=$row['img'];
 
 if($_FILES['img']['error']==0 and !empty($extMap[$_FILES['img']['type']])){
+
 $filename = $_FILES['img']['name'];
 $filename = md5($_FILES['img']['name'] . rand()) . $ext;
 $folder = __DIR__ . '/uploaded/';
 move_uploaded_file($_FILES['img']['tmp_name'], $folder . $filename);
+
 }else{
     $filename=$oldName;
 }
