@@ -2,6 +2,11 @@
 $pageName = 'ab-edit-profile';
 $title = '修改會員資料 - 靈魂管理中心';
 
+if (!$_SESSION['member']['account']) {
+    header('location:ab-login.php');
+    // exit;
+}
+
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 // if (empty($sid)) {
 //     header('Location: ab-list.php');
@@ -28,7 +33,6 @@ $row = $result->fetch();
     .form-text.red {
         color: red;
     }
-
 </style>
 <br>
 <div class="container">
@@ -97,7 +101,7 @@ $row = $result->fetch();
 <?php include __DIR__ . '/parts-2/scripts-2.php' ?>
 <script>
     const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE); ?>;
-    const name_re =  /^[a-zA-Z0-9_\u4e00-\u9fa5\s]*$/;
+    const name_re = /^[a-zA-Z0-9_\u4e00-\u9fa5\s]*$/;
     const email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zAZ]{2,}))$/;
     const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
 

@@ -72,7 +72,9 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([
     $account,
     $email,
-    md5($password), //用MD5加密
+    $password,
+    // md5($password), 
+    //用MD5加密
 ]);
 
 if ($stmt->rowCount() == 1) {

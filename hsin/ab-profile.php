@@ -2,9 +2,15 @@
 $pageName = 'ab-profile';
 $title = '會員中心 - 靈魂轉生平台';
 
+if (! $_SESSION['member']['account']) {
+    header('location:ab-login.php');
+    // exit;
+}
+
 $result = $pdo->query('SELECT * FROM `member` ORDER BY `sid` DESC LIMIT 1;');
 $row = $result->fetch();
-// print_r($row);
+
+// $_SESSION['member']['account'];
 
 ?>
 <?php include __DIR__ . '/parts-2/html-head-2.php' ?>

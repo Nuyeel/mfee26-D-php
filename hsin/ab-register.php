@@ -23,10 +23,10 @@ $title = '註冊會員 - 靈魂轉生平台';
                         <div style="width: 26rem;">
                             <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="false">登入</a>
+                                    <a class="nav-link" id="tab-login" data-mdb-toggle="pill" href="ab-login.php" role="tab" aria-controls="pills-login" aria-selected="false">登入</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link active" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab" aria-controls="pills-register" aria-selected="true">註冊</a>
+                                    <a class="nav-link active" id="tab-register" data-mdb-toggle="pill" href="ab-register.php" role="tab" aria-controls="pills-register" aria-selected="true">註冊</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -76,7 +76,7 @@ $title = '註冊會員 - 靈魂轉生平台';
                                         </div> -->
                                         <!-- Submit button -->
                                         <div class="d-grid gap-2">
-                                            <button type="submit" class="btn btn-outline-primary" type="button">確認送出</button>
+                                            <button type="submit" class="btn btn-outline-primary" type="button">確認註冊</button>
                                         </div>
                                         <br>
                                     </form>
@@ -154,9 +154,9 @@ $title = '註冊會員 - 靈魂轉生平台';
         if (result.success) {
             info_bar.classList.remove('alert-danger');
             info_bar.classList.add('alert-success');
-            info_bar.innerText = '您的資料已成功新增';
+            info_bar.innerText = '您已成功完成註冊，請重新登入';
             setTimeout(() => {
-                location.href = 'ab-profile.php';
+                location.href = 'ab-login.php';
             }, 2000);
         } else {
             info_bar.classList.remove('alert-success');
