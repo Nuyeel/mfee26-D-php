@@ -7,6 +7,7 @@ if (!$_SESSION['member']['account']) {
     // exit;
 }
 
+<<<<<<< HEAD
 $sid = isset($_SESSION['member']['sid']) ? intval($_SESSION['member']['sid']) : 0;
 $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
 
@@ -14,6 +15,23 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
 // $row = $pdo->query($sql)->fetch();
 // echo json_encode($_SESSION, JSON_UNESCAPED_UNICODE);
 // exit;
+=======
+$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
+// if (empty($sid)) {
+//     header('Location: ab-list.php');
+//     exit;
+// }
+
+$result = $pdo->query('SELECT * FROM `member` ORDER BY `sid` DESC LIMIT 1;');
+$row = $result->fetch();
+
+// $row = $pdo->query("SELECT * FROM member WHERE sid=$sid")->fetch();
+// if (empty($row)) {
+//     header('Location: ab-list.php');
+//     exit;
+// }
+
+>>>>>>> 970e3217017620593ad040be40e5f8f30c85198a
 ?>
 <?php include __DIR__ . '/parts-2/html-head-2.php' ?>
 <?php include __DIR__ . '/parts-2/navbar-3.php' ?>
@@ -36,8 +54,8 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                         <li class="list-group-item"><a href="ab-profile.php" style="text-decoration: none; color: #212529">會員中心總覽 </a></li>
                         <li class="list-group-item" style="background-color: #f0f0f0;"><a href="ab-edit-profile.php" style="text-decoration: none; color: #0d6efd;">會員資料</a></li>
                         <li class="list-group-item">訂單總覽</li>
-                        <li class="list-group-item">電子錢包</li>
-                        <li class="list-group-item">陰德值</li>
+                        <li class="list-group-item">活動紀錄</li>
+                        <li class="list-group-item">衣櫥間</li>
                         <li class="list-group-item">常見問題</li>
                         <li class="list-group-item">我有問題</li>
                     </ul>
@@ -92,7 +110,11 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
 </div>
 <?php include __DIR__ . '/parts-2/scripts-2.php' ?>
 <script>
+<<<<<<< HEAD
     const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE) ?>;
+=======
+    const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE); ?>;
+>>>>>>> 970e3217017620593ad040be40e5f8f30c85198a
     const name_re = /^[a-zA-Z0-9_\u4e00-\u9fa5\s]*$/;
     const email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zAZ]{2,}))$/;
     const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;

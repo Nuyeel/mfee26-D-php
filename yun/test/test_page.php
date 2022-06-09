@@ -2,217 +2,211 @@
 $pageName = 'test_page';
 $title = '陰德值測驗';
 
-
-
-$perPage = 1; // 每一頁有幾筆
-
-// 用戶要看第幾頁
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-if ($page < 1) {
-    header('Location: ?page=1');
-    exit;
-}
-
+$rows = [];
 $t_sql = "SELECT COUNT(1) FROM good_deed_test";
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
-$totalPages = ceil($totalRows / $perPage); // 總共有幾頁
-
-$rows = [];
-
-if ($totalRows > 0) {
-    // 頁碼若超過總頁數
-    if ($page > $totalPages) {
-        header("Location: ?page=$totalPages");
-        exit;
-    }
-
-    $sql = sprintf("SELECT * FROM good_deed_test ORDER BY sid ASC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
-    $rows = $pdo->query($sql)->fetchAll();
-}
+$sql = sprintf("SELECT * FROM good_deed_test ORDER BY sid ASC");
+$rows = $pdo->query($sql)->fetchAll();
 
 
 
 ?>
 <?php include __DIR__ . '/test-parts/test-head.php' ?>
 <?php include __DIR__ . '/test-parts/test-nav.php' ?>
+
 <style>
+    .form-control.red {
+        border: 1px solid red;
+    }
 
+    .form-text.red {
+        color: red;
+    }
 
+    .form-login {
+        display: none;
+    }
 </style>
 <div class="container">
-
-
-    <div class="row">
-        <div class="col">
-            <h4>陰德值小測驗</h4>
+    <div class="row ">
+        <div class="col-md-6">
             <div class="card">
-                <div class="card-body">
-                    <?php foreach ($rows as $q) : ?>
-                        <h5 class="card-title"> Q<?= $q['sid'] ?></h5>
-                        <form name="form1" onsubmit="sendData();return false;" novalidate>
-                            <label for="Q<?= $q['sid'] ?>" class="form-label">
-                                <?= $q['test_content'] ?>
-                            </label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="Q<?= $q['sid'] ?>" id="Q<?= $q['sid'] ?>-1" value="<?= $q['op1_score']  ?>">
-                                <label class="form-check-label" for="Q<?= $q['sid'] ?>-1">
-                                    <?= $q['op1_content'] ?>
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="Q<?= $q['sid'] ?>" id="Q<?= $q['sid'] ?>-2" value="<?= $q['op1_score']  ?>">
-                                <label class="form-check-label" for="Q<?= $q['sid'] ?>-2">
-                                    <?= $q['op2_content'] ?>
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="Q<?= $q['sid'] ?>" id="Q<?= $q['sid'] ?>-3" value="<?= $q['op1_score']  ?>">
-                                <label class="form-check-label" for="Q<?= $q['sid'] ?>-3">
-                                    <?= $q['op3_content'] ?>
-                                </label>
-                            </div>
+                <div class="card-body form-login">
+                    <form name="form-login" onsubmit="sendData();return false;" novalidate>
 
-                            <p id="output"></p>
+                        <div class="mb-3">
+                            <label for="account" class="form-label">account</label>
+                            <input type="text" class="form-control" id="account" name="account">
+                            <div class="form-text red"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">password</label>
+                            <input type="text" class="form-control" id="password" name="password" pattern="09\d{8}">
+                            <div class="form-text red"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">name </label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                            <div class="form-text red"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="birth" class="form-label">birth</label>
+                            <input type="date" class="form-control" id="birth" name="birth">
+                            <div class="form-text"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="death" class="form-label">death</label>
+                            <input type="date" class="form-control" id="death" name="death">
+                            <div class="form-text"></div>
+                        </div>
+                    </form>
 
-                        </form>
-
-                    <?php endforeach; ?>
                 </div>
-            </div>
-            <div id="info-bar" class="alert alert-success" role="alert" style="display:none;">
-                資料新增成功
+                <div id="info-bar" class="alert alert-success" role="alert" style="display:none;">
+                    登入成功！
+                </div>
             </div>
         </div>
     </div>
-
     <div class="row">
-        <div class="col">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=1">
-                            <!-- <i class="fa-solid fa-angles-left"></i> -->
-                            Start
-                        </a>
-                    </li>
-                    <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page - 1 ?>">
-                            <i class="fa-solid fa-angle-left"></i>
-                        </a>
-                    </li>
-                    <?php for ($i = $page - 1; $i <= $page + 1; $i++) :
-                        if ($i >= 1 and $i <= $totalPages) :
-                    ?>
-                            <li class="page-item <?= $page == $i ? 'active' : '' ?>">
-                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                            </li>
-                    <?php endif;
-                    endfor; ?>
-                    <li class="page-item <?= $page == $totalPages ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page + 1 ?>">
-                            <i class="fa-solid fa-angle-right"></i>
-                        </a>
-                    </li>
-                    <li class="page-item <?= $page == $totalPages ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $totalPages ?>">
-                            <!-- <i class="fa-solid fa-angles-right"></i> -->
-                            End
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">陰德值測驗</h5>
+                    <form name="form-test" onsubmit="sendData();return false;" novalidate>
+                        <div class="mb-3">
+                            <?php foreach ($rows as $q) : ?>
+                                <br>
+                                <label for="Q<?= $q['sid'] ?>" class="form-label">
+                                    Q<?= $q['sid'] . ' .' . $q['test_content'] ?>
+                                </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Q<?= $q['sid'] ?>" id="Q<?= $q['sid'] ?>-1" value="<?= $q['op1_score']  ?>">
+                                    <label class="form-check-label" for="Q<?= $q['sid'] ?>-1">
+                                        <?= $q['op1_content'] ?>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Q<?= $q['sid'] ?>" id="Q<?= $q['sid'] ?>-2" value="<?= $q['op1_score']  ?>">
+                                    <label class="form-check-label" for="Q<?= $q['sid'] ?>-2">
+                                        <?= $q['op2_content'] ?>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Q<?= $q['sid'] ?>" id="Q<?= $q['sid'] ?>-3" value="<?= $q['op1_score']  ?>">
+                                    <label class="form-check-label" for="Q<?= $q['sid'] ?>-3">
+                                        <?= $q['op3_content'] ?>
+                                    </label>
 
+                                </div>
+                                <div class="form-text form-text-radio"></div>
+
+                            <?php endforeach; ?>
+                            <br>
+                            <button type="submit" class="btn btn-primary">送出結果</button>
+                    </form>
+                    <div id="info-bar" class="alert alert-success" role="alert" style="display:none;">
+                        收到結果
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <?php include __DIR__ . '/test-parts/test-scripts.php' ?>
 <script>
-    const q1_f = document.form1.Q1;
-    const q1_btn = document.querySelectorAll('input[name="Q1"]');
+    const info_bar = document.querySelector('#info-bar');
 
-    const q2_f = document.form1.Q2;
-    const q2_btn = document.querySelectorAll('input[name="Q2"]');
-
-    const q3_f = document.form1.Q3;
-    const q3_btn = document.querySelectorAll('input[name="Q3"]');
-
-    const q4_f = document.form1.Q4;
-    const q4_btn = document.querySelectorAll('input[name="Q4"]');
-
-    const q5_f = document.form1.Q5;
-    const q5_btn = document.querySelectorAll('input[name="Q5"]');
+    const account_f = document.form - login.account;
+    const password_f = document.form - login.account;
+    const name_f = document.form - login.name;
 
 
-    // const fields = [q1_f,q2_f,q3_f,q4_f,q5_f];
+    const fields = [account_f, password_f, name_f];
+    const fieldTexts = [];
+    for (let f of fields) {
+        fieldTexts.push(f.nextElementSibling);
+    }
+
+    const q1_f = document.form - test.Q1;
+    const q2_f = document.form - test.Q2;
+    // const q2_btn = document.querySelectorAll('input[name="Q2"]');
+    const q3_f = document.form - test.Q3;
+    const q4_f = document.form - test.Q4;
+    const q5_f = document.form - test.Q5;
+
 
 
 
     async function sendData() {
+        // 讓欄位的外觀回復原來的狀態
 
-        let isPass = false; // 預設是通過檢查的
+        info_bar.style.display = 'none'; // 隱藏訊息列
 
-        q1_f.addEventListener("click", () => {
-            let selectValue;
-            for (let answer of q1_btn) {
-                if (answer.checked) {
-                    selectValue = q1_btn.value;
-                    isPass = true;
-                    break;
-                }
-            }
-        })
-        q2_f.addEventListener("click", () => {
-            let selectValue;
-            for (let answer of q2_btn) {
-                if (answer.checked) {
-                    selectValue = q2_btn.value;
-                    isPass = true;
-                    break;
-                }
-            }
-        })
-        q3_f.addEventListener("click", () => {
-            let selectValue;
-            for (let answer of q3_btn) {
-                if (answer.checked) {
-                    selectValue = q3_btn.value;
-                    isPass = true;
-                    break;
-                }
-            }
-        })
-        q4_f.addEventListener("click", () => {
-            let selectValue;
-            for (let answer of q4_btn) {
-                if (answer.checked) {
-                    selectValue = q4_btn.value;
-                    isPass = true;
-                    break;
-                }
-            }
-        })
-        q5_f.addEventListener("click", () => {
-            let selectValue;
-            for (let answer of q5_btn) {
-                if (answer.checked) {
-                    selectValue = q5_btn.value;
-                    isPass = true;
-                    break;
-                }
-            }
-        })
+        // TODO: 欄位檢查, 前端的檢查
+        let isPass = true; // 預設是通過檢查的
+        if (name_f.value.length < 2) {
+            info_bar.style.display = 'block'; // 顯示訊息列
+            info_bar.classList.add('alert-danger');
+            info_bar.innerText = '沒有登入！需登入才能進行測驗！';
+            isPass = false;
+        }
+        if (q1_f.value == '') {
+            document.querySelector(".form-text-radio").innerText = '請選擇最符合你想法的選項';
+            document.querySelector(".form-text-radio").classList.add('red');
+            // document.querySelector("#myimg").src = reader.result;
+            isPass = false;
+        }
+        if (q2_f.value == '') {
+            document.querySelector(".form-text-radio").innerText = '請選擇最符合你想法的選項';
+            document.querySelector(".form-text-radio").classList.add('red');
+            // document.querySelector("#myimg").src = reader.result;
+            isPass = false;
+        }
+        if (q3_f.value == '') {
+            document.querySelector(".form-text-radio").innerText = '請選擇最符合你想法的選項';
+            document.querySelector(".form-text-radio").classList.add('red');
+            // document.querySelector("#myimg").src = reader.result;
+            isPass = false;
+        }
+        if (q4_f.value == '') {
+            document.querySelector(".form-text-radio").innerText = '請選擇最符合你想法的選項';
+            document.querySelector(".form-text-radio").classList.add('red');
+            // document.querySelector("#myimg").src = reader.result;
+            isPass = false;
+        }
+        if (q5_f.value == '') {
+            document.querySelector(".form-text-radio").innerText = '請選擇最符合你想法的選項';
+            document.querySelector(".form-text-radio").classList.add('red');
+            // document.querySelector("#myimg").src = reader.result;
+            isPass = false;
+        }
 
         if (!isPass) {
             return; // 結束函式
         }
 
-        const fd = new FormData(document.form1);
+        const fd = new FormData(document.form - test);
         const r = await fetch('test-api.php', {
             method: 'POST',
             body: fd,
         });
         const result = await r.json();
         console.log(result);
+        info_bar.style.display = 'block'; // 顯示訊息列
+        if (result.success) {
+            info_bar.classList.remove('alert-danger');
+            info_bar.classList.add('alert-success');
+            info_bar.innerText = '測驗完成！';
+
+            setTimeout(() => {
+                location.href = 'mainpage.php'; // 跳轉到列表頁
+            }, 2000);
+        } else {
+            info_bar.classList.remove('alert-success');
+            info_bar.classList.add('alert-danger');
+            info_bar.innerText = result.error || '資料無法新增';
+        }
 
     }
 </script>
