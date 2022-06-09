@@ -11,8 +11,8 @@ $extMap = [
 
 $output = [
     'success' => false,
-    'postData' => $_POST,
-    'filename' => '',
+    // 'postData' => $_POST,
+    // 'filename' => '',
     'error' => '',
 ];
 

@@ -122,7 +122,7 @@ if (empty($row)) {
                 <button id="btn" onclick="uploadAvatar()">上傳活動照片</button>
                 <br>
 
-                <img id="myimg" src="<?= $row['img'] ?>" alt="" />
+                <img id="myimg" src="../list-img/<?= $row['img'] ?>" alt="" />
 
 
                 <!-- 表格內容放這邊 表單名:form_npo_act-->

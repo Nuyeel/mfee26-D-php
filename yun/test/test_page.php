@@ -28,10 +28,10 @@ $rows = $pdo->query($sql)->fetchAll();
     }
 </style>
 <div class="container">
-    <div class="row ">
+    <!-- <div class="row ">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-body form-login">
+                <div class="card-body formLogin">
                     <form name="form-login" onsubmit="sendData();return false;" novalidate>
 
                         <div class="mb-3">
@@ -67,7 +67,7 @@ $rows = $pdo->query($sql)->fetchAll();
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="row">
         <div class="col-md-6">
             <div class="card">
@@ -117,23 +117,23 @@ $rows = $pdo->query($sql)->fetchAll();
 <script>
     const info_bar = document.querySelector('#info-bar');
 
-    const account_f = document.form - login.account;
-    const password_f = document.form - login.account;
-    const name_f = document.form - login.name;
+    // const account_f = document.formLogin.account;
+    // const password_f = document.formLogin.account;
+    // const name_f = document.formLogin.name;
 
 
-    const fields = [account_f, password_f, name_f];
-    const fieldTexts = [];
-    for (let f of fields) {
-        fieldTexts.push(f.nextElementSibling);
-    }
+    // const fields = [account_f, password_f, name_f];
+    // const fieldTexts = [];
+    // for (let f of fields) {
+    //     fieldTexts.push(f.nextElementSibling);
+    // }
 
-    const q1_f = document.form - test.Q1;
-    const q2_f = document.form - test.Q2;
+    const q1_f = document.formTest.Q1;
+    const q2_f = document.formTest.Q2;
     // const q2_btn = document.querySelectorAll('input[name="Q2"]');
-    const q3_f = document.form - test.Q3;
-    const q4_f = document.form - test.Q4;
-    const q5_f = document.form - test.Q5;
+    const q3_f = document.formTest.Q3;
+    const q4_f = document.formTest.Q4;
+    const q5_f = document.formTest.Q5;
 
 
 
@@ -186,7 +186,7 @@ $rows = $pdo->query($sql)->fetchAll();
             return; // 結束函式
         }
 
-        const fd = new FormData(document.form - test);
+        const fd = new FormData(document.formTest);
         const r = await fetch('test-api.php', {
             method: 'POST',
             body: fd,

@@ -52,6 +52,9 @@
       </form>
     </div>
   </nav>
+
+  <?php if 
+  ?>
   <div class="container">
     <div class="col">
       <div class="card" style="width: 18rem;">
@@ -70,8 +73,10 @@
         </div>
       </div>
     </div>
-
   </div>
+
+
+
   <div class="container">
     <div class="col">
       <div class="card" style="width: 18rem;">
