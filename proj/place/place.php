@@ -5,6 +5,174 @@ $pageName = 'place';
 $title = '濟善救世公司-良辰吉地';
 ?>
 
+<?php
+
+// 先塞資料驗證
+
+// $_SESSION = [
+//     'member' => [
+//         'sid' => 605,
+//         'name' => '獨行俠',
+//         'deathdate' => NULL
+//     ], 
+// ];
+
+// 葉宥廷
+$_SESSION['member']['sid'] = 11;
+$_SESSION['member']['deathdate'] = '2022-06-06';
+// $_SESSION['member']['account'] = 'HappyCat03';
+
+// 陳怡雯
+// $_SESSION['member']['sid'] = 12; 
+// $_SESSION['member']['deathdate'] = NULL; 
+
+?>
+
+<link rel="stylesheet" href="../fontawesome-free-6.1.1-web/css/all.min.css">
+
+<style>
+    body {
+        background: linear-gradient(to right, rgb(40, 92, 199), rgb(174, 61, 209));
+    }
+
+    .time-area,
+    .news-area {
+        /* outline: 1px solid #aaa; */
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: rgba(255, 255, 255, .8);
+    }
+
+    .time-area .time-title,
+    .place-left .news-title {
+        background-color: #37508c;
+        /* background-color: #407672; */
+        color: rgb(255, 255, 255);
+    }
+
+    .filter-section {
+        /* background-color: rgb(203, 207, 212); */
+        background-color: rgba(255, 255, 255, .6);
+        border-radius: 10px;
+    }
+
+    #searchBtn {
+        background-color: #e9ecef;
+        border-color: #c3c6c8;
+    }
+
+    .place-row p,
+    .place-row h4 {
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    .place-row {
+        /* border: 2px solid #aaa; */
+        border-radius: 20px;
+        padding: 15px;
+        transform: translate(0);
+        transition: .5s;
+        background-color: rgba(255, 255, 255, .8);
+    }
+
+    .place-time,
+    .place-location,
+    .place-quota {
+        padding: 0 10px 0;
+        line-height: 28px;
+        border-right: 1px solid #ccc;
+    }
+
+    .title {
+        text-align: center;
+    }
+
+    .title h4,
+    .title i {
+        font-weight: bold;
+        font-size: 22px;
+        color: rgb(57, 89, 114);
+        transition: 1s;
+    }
+
+    .place-row:hover .float-icon {
+        transform: translateY(-8px);
+    }
+
+    .place-row-wrap:hover .place-row {
+        transform: translate(-2px, -1px);
+        background-color: rgba(255, 255, 255, 1);
+    }
+
+    p.year,
+    p.month,
+    p.country {
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    p.city {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    p.remain {
+        color: #f45e35;
+        font-weight: bold;
+    }
+
+    .place-buttoms .chooseBtn {
+        height: 34px;
+        background-color: #37508c;
+        border: none;
+        transition: .2s;
+        font-size: 14px;
+    }
+
+
+    .chooseBtn:hover {
+        background-color: #0b3863;
+    }
+
+    .place-quota {
+        border-right: 0;
+    }
+
+    .place-price {
+        font-size: 14px;
+        font-weight: bolder;
+        color: #aa0138;
+    }
+
+    .place-price>span {
+        font-size: 18px;
+        font-weight: bolder;
+        color: #ce0138;
+    }
+
+    .map-area {
+        /* background-color: rgba(255, 255, 255, .3); */
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        z-index: 9;
+    }
+
+    .mapBtn {
+        border-radius: 50px;
+        border: none;
+        width: 150px;
+        height: 50px;
+        transition: .5s;
+    }
+
+    .mapBtn:hover {
+        background-color: #c63333;
+    }
+</style>
+
+
 <?php include __DIR__ . "/../parts/html-head.php" ?>
 <?php include __DIR__ . "/../parts/navbar.php" ?>
 
@@ -14,8 +182,8 @@ $title = '濟善救世公司-良辰吉地';
         <div class="place-left col-md-2 px-2">
             <div id="timeArea" class="time-area text-center mb-4">
                 <div class="time-title fs-5 fw-bold py-1">現在時間</div>
-                <div id="nowYM" class="fs-3 fw-bolder border-bottom py-2 mx-2 my-2"></div>
-                <div id="nowTime" class="fs-3 p-1 my-1"></div>
+                <div id="nowYM" class="fs-4 fw-bolder border-bottom py-2 mx-2 my-2"></div>
+                <div id="nowTime" class="fs-4 p-1 my-1"></div>
             </div>
             <!-- <div id="newsArea" class="news-area text-center">
                 <div class="news-title fs-5 fw-bold py-1">最新消息</div>
@@ -157,6 +325,7 @@ $title = '濟善救世公司-良辰吉地';
 <script>
     let data;
     let page = +location.search.slice(6);
+    let sort = 0; // 預設
 
     // 頁數頁碼
     const renderPageBtn = (pageNum) => {
@@ -216,6 +385,7 @@ $title = '濟善救世公司-良辰吉地';
         dist,
         quota,
         booked,
+        place_price,
         balance,
     }) => {
         let b = quota - booked;
@@ -249,8 +419,9 @@ $title = '濟善救世公司-良辰吉地';
                     <p class="quota col">轉生限額：${quota}</p>
                     <p class="remain col">剩餘名額：${b}</p>
                 </div>
-                <div class="place-buttoms col-2 d-flex justify-content-center align-items-center">
-                    <button class="chooseBtn btn btn-success p-2"><i class="fa-solid fa-cart-arrow-down"></i>加入轉生訂單</button>
+                <div class="place-buttoms col-3 d-flex flex-column justify-content-center align-items-center">
+                    <p class="place-price">所需陰德值：<span>${place_price}</span></p>
+                    <button class="chooseBtn btn btn-success p-2 mt-2" onclick="AddPlaceToCart(${sid},${b},0); return false;"><i class="fa-solid fa-cart-arrow-down"></i>加入轉生訂單</button>
                 </div>
             </div>
         </div>
@@ -268,23 +439,25 @@ $title = '濟善救世公司-良辰吉地';
 
     // 換頁render
     // console.log(page);
-    if (!page) {
-        fetch("place-list-api.php?page=1")
+    if (!page && !sort) {
+        fetch("place-list-api.php?page=1&sort=0")
             .then((response) => response.json())
             .then((obj) => {
                 data = obj;
                 renderTable();
                 renderPagination(1);
                 history.pushState(page, "", "?page=" + 1);
+                window.scrollTo(0, 0);
             });
     } else {
-        fetch(`place-list-api.php?page=${page}`)
+        fetch(`place-list-api.php?page=${page}&sort=${sort}`)
             .then((response) => response.json())
             .then((obj) => {
                 data = obj;
                 renderTable();
                 renderPagination(page);
                 history.pushState(page, "", "?page=" + page);
+                window.scrollTo(0, 0);
             });
     }
 
@@ -293,15 +466,48 @@ $title = '濟善救世公司-良辰吉地';
         // 轉換成數字
         const page = +e.target.innerHTML;
 
-        fetch(`place-list-api.php?page=${page}`)
+        fetch(`place-list-api.php?page=${page}&sort=${sort}`)
             .then((r) => r.json())
             .then((obj) => {
                 data = obj;
                 renderTable();
                 renderPagination(page);
-                history.pushState(page, '', '?page=' + page);
+
+                const state = {
+                    'page': page,
+                    'sort': sort
+                };
+                history.pushState(state, '', '?page=' + page + '&sort=' + sort);
+                window.scrollTo(0, 0);
             });
     }
+
+
+
+    // 加入轉生訂單
+    async function AddPlaceToCart(sid, b, replace) {
+        if (b == 0) {
+            alert(`已無轉生名額，請另選良辰吉地`);
+        } else {
+            await fetch(`place-order-api.php?sid=${sid}&replace=${replace}`)
+                .then((r) => r.json())
+                .then(result => {
+                    console.log(result);
+                    if (result['success'] == true) {
+                        alert(`已成功加入訂單，請至會員中心查看`);
+                        location.assign('place.php?page=1');
+                    } else if (result['errorType'] == "repeat") {
+                        alert(`已有此筆良辰吉日訂單，無法重複加入`);
+                    } else if (result['errorType'] == "dif") {
+                        if (confirm(`已有別筆訂單資料，是否修改訂單為此筆良辰吉日？`)) {
+                            AddPlaceToCart(sid, b, 1);
+                        } else {
+                            alert(`訂單沒有更改`);
+                        }
+                    }
+                })
+        }
+    };
 
 
     // 篩選資料 filter
@@ -342,6 +548,38 @@ $title = '濟善救世公司-良辰吉地';
         renderTable();
         renderPagination();
     }
+
+
+    // 資料排序
+    async function sortByYear(e) {
+        const sortASC = document.querySelector('#sortASC');
+        const sortDESC = document.querySelector('#sortDESC');
+        let t = e.target;
+        console.log(t);
+
+        if (t == sortASC) {
+            sort = 1;
+            fetch('place-list-api.php?sort=1')
+                .then((response) => response.json())
+                .then((obj) => {
+                    data = obj;
+                    renderTable();
+                    renderPagination(page);
+                    history.pushState(page, "", "?page=" + 1);
+                });
+        } else if (t == sortDESC) {
+            sort = 2;
+            fetch('place-list-api.php?sort=2')
+                .then((response) => response.json())
+                .then((obj) => {
+                    data = obj;
+                    renderTable();
+                    renderPagination(page);
+                    history.pushState(page, "", "?page=" + 1);
+                });
+        }
+
+    };
 
 
     // 現在時間

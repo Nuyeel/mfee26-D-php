@@ -12,8 +12,8 @@ $title = '良辰吉地';
 <div class="container mt-5">
     <div class="top-area d-flex">
         <!-- 篩選搜尋 -->
-        <div class="filter-section px-4 py-4 mb-4 col-10">
-            <form name="filterForm" action="" onsubmit="filtData(); return false">
+        <div class="filter-section px-2 py-2 mb-2 d-flex col-12">
+            <form name="filterForm" action="" onsubmit="filtData(); return false" class="col-8 me-3">
                 <div class="d-flex mb-3">
                     <div class="col-md-6">
                         <div class="input-group pe-2">
@@ -53,7 +53,7 @@ $title = '良辰吉地';
                     </div>
                 </div>
             </form>
-            <div class="d-flex">
+            <div class="d-flex col-4">
                 <div class="col-md-12">
                     <form name="searchDateForm" action="" onsubmit="filtDate(); return false">
                         <div class="input-group pe-2">
@@ -79,18 +79,24 @@ $title = '良辰吉地';
                 -->
             </div>
         </div>
-        <!-- 新增資料 -->
+        <!-- 
         <div class="col-2 p-4">
             <div class="addBtn">
                 <a class="btn btn-secondary" href="place-add.php">新增資料</a>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <!-- 列表區 -->
     <div class="list-section mt-1">
         <form action="" name="form2" onsubmit="delData()" method="POST">
-            <button type="submit" class="btn btn-primary mb-3">刪除勾選的資料</button>
+            <div class="d-flex">
+                <button type="submit" class="btn btn-primary mb-3 me-3">刪除勾選的資料</button>
+                <!-- 新增資料 -->
+                <div class="addBtn">
+                    <a class="addBtn btn btn-secondary" href="place-add.php">新增資料</a>
+                </div>
+            </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
