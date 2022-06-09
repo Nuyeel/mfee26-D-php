@@ -186,7 +186,7 @@ $rows = $pdo->query($sql)->fetchAll();
             return; // 結束函式
         }
 
-        const fd = new FormData(document.form - test);
+        const fd = new FormData(document.form-test);
         const r = await fetch('test-api.php', {
             method: 'POST',
             body: fd,
