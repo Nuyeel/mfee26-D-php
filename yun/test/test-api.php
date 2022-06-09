@@ -30,6 +30,7 @@ $q2 = empty($_POST['Q2']) ? NULL : $_POST['Q2'];
 $q3 = empty($_POST['Q3']) ? NULL : $_POST['Q3'];
 $q4 = empty($_POST['Q4']) ? NULL : $_POST['Q4'];
 $q5 = empty($_POST['Q5']) ? NULL : $_POST['Q5'];
+$test_score = $q1 * rand(1,100) + $q2 * rand(1,100) + $q3 * rand(1,100) + $q4 * rand(1,100) + $q5 * rand(1,100);
 
 
 // TODO: 其他欄位檢查
@@ -40,16 +41,12 @@ $sql = "UPDATE `good_deed_test_record` SET `test_Q1`=?,`test_Q2`=?,`test_Q3`=?,`
 $stmt = $pdo->prepare($sql);
 
 $stmt->execute([
-    $account,
-    $password,
-    $name,
-    $birth,
-    $death,
     $q1,
     $q2,
     $q3,
     $q4,
     $q5,
+    $test_score,
 ]);
 
 

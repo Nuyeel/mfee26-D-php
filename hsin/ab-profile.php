@@ -2,16 +2,11 @@
 $pageName = 'ab-profile';
 $title = '會員中心 - 靈魂轉生平台';
 
-<<<<<<< HEAD
 if (!$_SESSION['member']['account']) {
-=======
-if (! $_SESSION['member']['account']) {
->>>>>>> 970e3217017620593ad040be40e5f8f30c85198a
     header('location:ab-login.php');
     // exit;
 }
 
-<<<<<<< HEAD
 if (!$_SESSION['member']['account']) {
     header('location:ab-login.php');
     // exit;
@@ -24,12 +19,6 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
 // $row = $pdo->query($sql)->fetch();
 // echo json_encode($_SESSION, JSON_UNESCAPED_UNICODE);
 // exit;
-=======
-$result = $pdo->query('SELECT * FROM `member` ORDER BY `sid` DESC LIMIT 1;');
-$row = $result->fetch();
-
-// $_SESSION['member']['account'];
->>>>>>> 970e3217017620593ad040be40e5f8f30c85198a
 
 ?>
 <?php include __DIR__ . '/parts-2/html-head-2.php' ?>
