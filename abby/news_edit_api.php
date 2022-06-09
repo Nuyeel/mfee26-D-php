@@ -2,8 +2,8 @@
 
 $output = [
     'success' => false,
-    // 'postData' => $_POST,
-    // 'filename' => '',
+    'postData' => $_POST,
+    'filename' => '',
     'error' => ''
 ];
 
@@ -21,18 +21,19 @@ if (empty($_POST['sid']) or empty($_POST['topic'])) {
     exit;
 }
 
-$extMap = [
-    'image/jpeg' => '.jpg',
-    'image/png' => '.png',
-    'image/gif' => '.gif',
-];
-$ext = $extMap[$_FILES['img']['type']];
+
 
 $oldName=$row['img'];
 
 if($_FILES['img']['error']==0 and !empty($extMap[$_FILES['img']['type']])){
 
-$filename = $_FILES['img']['name'];
+$extMap = [
+    'image/jpeg' => '.jpg',
+    'image/png' => '.png',
+    'image/gif' => '.gif',
+];
+
+$ext = $extMap[$_FILES['img']['type']];
 $filename = md5($_FILES['img']['name'] . rand()) . $ext;
 $folder = __DIR__ . '/uploaded/';
 move_uploaded_file($_FILES['img']['tmp_name'], $folder . $filename);
@@ -48,7 +49,7 @@ WHERE sid = $sid";
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute([
-    $_POST['topic']??'',
+    $_POST['topic'],
     $_POST['event_time'],
     $_POST['type_sid'],
     $filename,
@@ -56,6 +57,13 @@ $stmt->execute([
     $_POST['content'],
     $_POST['publish_date'],
 ]);
+
+
+if ($stmt->rowCount() == 1) {
+    $output['success'] = true;
+} else {
+    $output['error'] = '資料沒有修改';
+}
 
 
 $tag = $pdo->query("SELECT*FROM `news_tag` WHERE news_tag.news_sid = $sid")->fetch();
@@ -98,13 +106,7 @@ if (!empty($_POST['tag_add'])) {
         ]);
 }
 
-if ($stmt->rowCount() == 1) {
-    $output['success'] = true;
-} else {
-    $output['error'] = '資料沒有修改';
-}
 
-//$output['tg_sid'] = $_POST['tg_sid'];
 
 $json = json_encode($output, JSON_UNESCAPED_UNICODE);
 
