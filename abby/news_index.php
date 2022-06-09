@@ -71,7 +71,7 @@ foreach ($rows as $r) {
     <div class="row">
         <?php foreach ($newsList as $n) : ?>
             <div class="col-3 d-flex flex-wrap mb-3 mt-3">
-                <div class="card mb-3">
+                <div class="card mt-3">
                     <div class="imgwrap">
                         <img src="./uploaded/<?= $n->img ?>" class="card-img-top imgsize">
                     </div>
@@ -97,7 +97,7 @@ foreach ($rows as $r) {
     </div>
 </div>
 <nav>
-    <ul class="pagination justify-content-center">
+    <ul class="pagination justify-content-center my-3">
         <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
             <a class="page-link" href="?page=1">
                 <i class="fa-solid fa-angles-left"></i>
