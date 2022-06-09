@@ -7,6 +7,13 @@ if (!$_SESSION['member']['account']) {
     // exit;
 }
 
+$sql = "SELECT * FROM `member`";
+// $sql = "SELECT * FROM `member` WHERE `member`.`account` = '$account'";
+$row = $pdo->query($sql)->fetch();
+
+// $sql = "SELECT * FROM `member` WHERE `member`.`account` = '$account'";
+// $row = $pdo->query($sql)->fetch();
+
 ?>
 <?php include __DIR__ . '/parts-2/html-head-2.php' ?>
 <?php include __DIR__ . '/parts-2/navbar-3.php' ?>
@@ -40,7 +47,7 @@ if (!$_SESSION['member']['account']) {
                         <h5 class="card-title">修改會員資料</h5>
                         <br>
                         <form name="form1" onsubmit="sendData();return false;" novalidate>
-                            <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
+                            <input type="hidden" name="sid" value="<?= $_SESSION['member']['sid'] ?>">
                             <div class="mb-3">
                                 <label for="account" class="form-label">使用者帳戶</label>
                                 <input type="text" class="form-control" id="account" name="account" value="<?= htmlentities($_SESSION['member']['account']) ?>" readonly>
@@ -85,7 +92,7 @@ if (!$_SESSION['member']['account']) {
 </div>
 <?php include __DIR__ . '/parts-2/scripts-2.php' ?>
 <script>
-    const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE); ?>;
+    const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE) ?>;
     const name_re = /^[a-zA-Z0-9_\u4e00-\u9fa5\s]*$/;
     const email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zAZ]{2,}))$/;
     const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
@@ -117,13 +124,11 @@ if (!$_SESSION['member']['account']) {
             isPass = false;
         }
         if (email_f.value && !email_re.test(email_f.value)) {
-            // alert('email 格式錯誤');
             fields[1].classList.add('red');
             fieldTexts[1].innerText = '您輸入的電子信箱格式有誤';
             isPass = false;
         }
         if (mobile_f.value && !mobile_re.test(mobile_f.value)) {
-            // alert('手機號碼格式錯誤');
             fields[2].classList.add('red');
             fieldTexts[2].innerText = '您輸入的手機號碼格式有誤';
             isPass = false;
@@ -146,9 +151,9 @@ if (!$_SESSION['member']['account']) {
             info_bar.classList.add('alert-success');
             info_bar.innerText = '您的資料已完成修改';
 
-            // setTimeout(() => {
-            //     location.href = 'ab-profile.php'; // 跳轉到列表頁
-            // }, 1000);
+            setTimeout(() => {
+                location.href = 'ab-profile.php'; // 跳轉到列表頁
+            }, 2000);
 
         } else {
             info_bar.classList.remove('alert-success');

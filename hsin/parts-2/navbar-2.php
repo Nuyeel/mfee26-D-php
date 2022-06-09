@@ -20,18 +20,18 @@ if (!isset($pageName)) {
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link <?= $pageName == 'index' ? 'active' : '' ?>" href="index_2.php">首頁</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link <?= $pageName == 'ab-profile' ? 'active' : '' ?>" href="ab-profile.php">會員中心</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ">
-                <li class="nav-item">
-                        <a class="nav-link <?= $pageName == 'ab-register' ? 'active' : '' ?>" href="ab-register.php">登入｜註冊</a>
+                    <li class="nav-item">
+                        <a class="nav-link <?= $pageName == 'ab-login' ? 'active' : '' ?>" href="ab-login.php">登入｜註冊</a>
                     </li>
-                    </ul>
+                </ul>
             </div>
         </div>
     </nav>
