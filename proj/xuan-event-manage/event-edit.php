@@ -12,6 +12,16 @@ if (empty($sid)) {
 }
 
 $row = $pdo->query("SELECT * FROM npo_act WHERE sid=$sid")->fetch();
+
+// 處理日期問題
+$startSubStr = substr($row['start'], 0, -3);
+$startStrReplace = str_replace(' ', 'T', $startSubStr);
+$row['start'] = $startStrReplace;
+
+$endSubStr = substr($row['end'], 0, -3);
+$endStrReplace = str_replace(' ', 'T', $endSubStr);
+$row['end'] = $endStrReplace;
+
 if (empty($row)) {
     header('Location: event-manage.php');
     exit;
@@ -95,19 +105,12 @@ if (empty($row)) {
 
 <!-- 活動資訊 -->
 <div class="container  mt-5">   
-
-
     <div class="row d-flex justify-content-center" >
-    
-    
         <div class="col-6"> 
         <div class="card" style=" padding:30px 60px">      
-                    
-                    
                 <form
                         name="form1"
-                        action="event-api.php"
-
+                        action="event-edit-api.php"
                         method="post"
                         enctype="multipart/form-data"
                         class="image_upload"
@@ -118,11 +121,13 @@ if (empty($row)) {
 
 
                 </form>
-
+                
                 <button id="btn" onclick="uploadAvatar()">上傳活動照片</button>
                 <br>
 
-                <img id="myimg" src="../list-img/<?= $row['img'] ?>" alt="" />
+
+                <!-- <img id="myimg" src="../list-img/<?= $row['img'] ?>" alt="" /> -->
+                <!-- <img id="myimg" src="../list-img/npo-04.jpg" alt="" /> -->
 
 
                 <!-- 表格內容放這邊 表單名:form_npo_act-->
@@ -168,7 +173,7 @@ if (empty($row)) {
                                 <!-- 這樣回傳value時，才會選到什麼傳什麼value -->
                                 <input class="form-check-input" type="radio" name="act_type" id="type-<? $k ?>" value="<?= $k ?>" style="color:red">
                                 
-                                <label class="form-check-label" for="type-<? $k ?>"><?= $v ?></label>
+                                <label class="form-check-label" for="type-<?= $k ?>"><?= $v ?></label>
                             </div>
                             <?php endforeach; ?>
 
@@ -485,11 +490,11 @@ async function sendData(){
 
 
 
-    if (result.success) {
-        setTimeout(() => {
-                location.href = 'event-manage.php'; // 跳轉到活動一覽頁
-            }, 1000);
-        };
+    // if (result.success) {
+    //     setTimeout(() => {
+    //             location.href = 'event-manage.php'; // 跳轉到活動一覽頁
+    //         }, 1000);
+    //     };
 
 }
 
@@ -546,7 +551,7 @@ async function sendData(){
     
     const avatar = document.querySelector("#avatar");
 
-            myfile.addEventListener("change", async function () {
+    myfile.addEventListener("change", async function () {
                 // 上傳表單
                 const fd = new FormData(document.form1);
                 const r = await fetch("act-upload-avatar-api.php", {
@@ -555,8 +560,8 @@ async function sendData(){
                 });
                 const obj = await r.json();
                 console.log(obj);
-                myimg.src = "./list-img/" + obj.filename;
-                avatar.value = "./list-img/" + obj.filename;  
+                myimg.src = "../list-img/" + obj.filename;
+                avatar.value = obj.filename;  
             });
 
             function uploadAvatar() {

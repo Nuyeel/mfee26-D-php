@@ -1,5 +1,5 @@
 <?php 
-require __DIR__ .  '/parts/connect_db.php'; 
+require __DIR__ .  '/../parts/connect_db.php'; 
 
 header('Content-Type: application/json');
 
@@ -31,7 +31,14 @@ if (empty($sid)) {
     $ammount = $_POST['ammount'] ;
     $start = $_POST['start'] ;
     $end = $_POST['end'] ;
-    $avatar = $_POST['avatar'] ?? ''; //沒有填值的話，預設是空字串
+    // $avatar = $_POST['avatar'] ?? ''; //沒有填值的話，預設是空字串
+
+    if ($_POST['avatar'] == "") {
+        $row = $pdo->query("SELECT * FROM npo_act WHERE sid=$sid")->fetch();
+        $avatar =  $row['img'];   
+    } else {
+        $avatar = $_POST['avatar'];
+    }
 
 
     $nponame = $_POST['npo_name'] ; //主辦單位名稱

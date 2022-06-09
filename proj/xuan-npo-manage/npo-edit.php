@@ -12,6 +12,7 @@ if (empty($sid)) {
 }
 
 $row = $pdo->query("SELECT * FROM npo_name WHERE npo_sid=$sid")->fetch();
+
 if (empty($row)) {
     header('Location: npo-manage.php');
     exit;

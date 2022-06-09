@@ -143,14 +143,14 @@ $area = $pdo->query($area_type)->fetchAll();
         </div>
         <div class="carousel-inner" style=" width:100%; height:300px;">  
         <div class="carousel-item active">
-            <img src="./list-img/dog02.jpg" class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover ">
+            <img src="./list-img/dog03.jpg" class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover ">
             <div class="carousel-caption d-none d-md-block ">
             <h5 >拉拉拉</h5>
             <p>Some representative placeholder content for the first slide.</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="./list-img/dog04.jpg" style="object-fit:center "class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover " >
+            <img src="./list-img/dog03.jpg" style="object-fit:center "class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover " >
             <div class="carousel-caption d-none d-md-block">
             <h5>Second slide label</h5>
             <p>Some representative placeholder content for the second slide.</p>
@@ -336,7 +336,9 @@ $area = $pdo->query($area_type)->fetchAll();
             </div>
 
             <div style=" width:100%;height:150px;overflow:hidden">
-            <img src="<?= $r['img'] ?>" class="card-img-top" alt="..." style="width:100%;hight:100%;">
+
+            <img src="../list-img/<?= $r['img'] ?>" class="card-img-top" alt="..." style="width:100%;hight:100%;">
+            
             </div>
     
 
@@ -366,11 +368,7 @@ $area = $pdo->query($area_type)->fetchAll();
 
 
 
-
-
 <?php include __DIR__ . '/../parts/scripts.php' ?> 
-
-
 
 
 <script>

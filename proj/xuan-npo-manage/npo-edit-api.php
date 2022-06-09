@@ -18,6 +18,7 @@ $output = [
 
 $sid = isset($_POST['npo_sid']) ? intval($_POST['npo_sid']) : 0;
 
+
 // $ext = $extMap[$_FILES['myfile']['type']]; // 副檔名
 
 // $filename = md5($_FILES['myfile']['name'] . rand()) . $ext;

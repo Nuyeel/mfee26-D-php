@@ -52,7 +52,7 @@ $rows = $pdo->query($sql)->fetchAll();
     <div class="w-75 mt-5" style="padding:0px 50px;">
 
     <div class="container w-100" style="width:100%; height:300px; overflow:none" >
-        <img src="<?= $r['img'] ?>" alt="" 
+        <img src="../list-img/<?= $r['img'] ?>" alt="" 
         style="width:100%;height:100%;object-fit:cover; object-position:center;box-shadow: 0 0 7px rgb(0,0,0,0.3) " >
     </div>
         
