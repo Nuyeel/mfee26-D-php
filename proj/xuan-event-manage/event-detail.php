@@ -35,7 +35,8 @@ $rows = $pdo->query($sql)->fetchAll();
 
 
 <!-- 從這邊開始是HTML內容(=V =呈現) -->
-<?php include __DIR__ . '/../parts/html-head.php' ?> 
+<?php include __DIR__ . '/../parts/html-head.php' ?>
+
 <?php include __DIR__ . '/../parts/navbar.php' ?> 
 
 
@@ -52,7 +53,7 @@ $rows = $pdo->query($sql)->fetchAll();
     <div class="w-75 mt-5" style="padding:0px 50px;">
 
     <div class="container w-100" style="width:100%; height:300px; overflow:none" >
-        <img src="../list-img/<?= $r['img'] ?>" alt="" 
+        <img src="./list-img/<?= $r['img'] ?>" alt="" 
         style="width:100%;height:100%;object-fit:cover; object-position:center;box-shadow: 0 0 7px rgb(0,0,0,0.3) " >
     </div>
         
@@ -98,7 +99,7 @@ $rows = $pdo->query($sql)->fetchAll();
         </button>  
 
         <!-- 直接跳進結帳頁面 -->
-        <a class="btn btn-warning add-to-cart-btn mt-3" data-sid="<?= $r['sid']?>"  style="margin-right:10px; font-size:16px" href="../xuan-event-cart/cart-list.php" role="button">
+        <a class="btn btn-warning add-to-cart-btn mt-3" data-sid="<?= $r['sid']?>"  style="margin-right:10px; font-size:16px" href="cart-list.php" role="button">
         <i class="fa-solid fa-money-bill-1"> </i>&nbsp 直接結帳
         </a>  
 
@@ -117,7 +118,9 @@ $rows = $pdo->query($sql)->fetchAll();
 
 <?php include __DIR__ . '/../parts/scripts.php' ?> 
 
+
 <script>
+
 
 // 這邊是跟購物車有關的JS
 
@@ -138,7 +141,7 @@ $('.add-to-cart-btn').on('click', event => {
     });
 
     // Jquery GET寫法
-    $.get('../xuan-event-cart/cart-api.php', {
+    $.get('cart-api.php', {
         sid,
         quantity
     }, function(data) {

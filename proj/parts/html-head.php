@@ -23,6 +23,9 @@
 
     <!-- avatar css -->
     <link rel="stylesheet" href="../parts/css/avatar.css">
+
+    <!-- 活動購物車 JQuery -->
+    <script src='//code.jquery.com/jquery-3.6.0.min.js'></script> 
 </head>
 
 <body>
