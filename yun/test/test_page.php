@@ -28,7 +28,7 @@ $rows = $pdo->query($sql)->fetchAll();
     }
 </style>
 <div class="container">
-    <div class="row ">
+    <!-- <div class="row ">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body form-login">
@@ -67,7 +67,7 @@ $rows = $pdo->query($sql)->fetchAll();
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="row">
         <div class="col-md-6">
             <div class="card">
