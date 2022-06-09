@@ -383,11 +383,11 @@ async function sendData(){
 
 
 
-    // if (result.success) {
-    //     setTimeout(() => {
-    //             location.href = 'npo-manage.php'; // 跳轉到建立活動頁
-    //         }, 1000);
-    //     };
+    if (result.success) {
+        setTimeout(() => {
+                location.href = 'npo-manage.php'; // 跳轉到建立活動頁
+            }, 1000);
+        };
 
     }
 

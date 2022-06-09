@@ -147,8 +147,9 @@ $rows = $pdo->query($sql)->fetchAll();
 
 <script>
     function delete_it(sid) {
-        if (confirm(`確定要刪除編號為 ${npo_sid} 的資料嗎?`)) {
-            location.href = `npo-delete.php?sid=${sid}`;
+        // if (confirm(`確定要刪除編號為 ${npo_sid} 的資料嗎?`)) {
+        if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)) {
+            location.href = `npo-delete.php?npo_sid=${sid}`;
         }
     }
 
