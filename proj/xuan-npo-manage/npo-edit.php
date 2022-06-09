@@ -181,7 +181,7 @@ if (empty($row)) {
                     <button id="btn" onclick="uploadAvatar()">上傳大頭貼</button>
                     <br>
 
-                    <img id="myimg" src="./uploaded/<?= $row['npo_img'] ?>" alt="" />
+                    <img id="myimg" src="/../uploaded/<?= $row['npo_img'] ?>" alt="" />
 
 
                     <!-- 表格內容放這邊 -->
@@ -425,7 +425,7 @@ async function sendData(){
                 });
                 const obj = await r.json();
                 console.log(obj);
-                myimg.src = "./uploaded/" + obj.filename;
+                myimg.src = "/../uploaded/" + obj.filename;
                 avatar.value = obj.filename;  
             });
 
