@@ -48,11 +48,14 @@ if ($row['account'] == $account and $row['password'] == $password) {
     $output['success'] = true;
     $output['code'] = 200;
     $_SESSION['member']['account'] = $account;
+<<<<<<< HEAD
     $_SESSION['member']['name'] = $row['name'];
     $_SESSION['member']['birthdate'] = $row['birthdate'];
     $_SESSION['member']['deathdate'] = $row['deathdate'];
     $_SESSION['member']['mobile'] = $row['mobile'];
     $_SESSION['member']['email'] = $row['email'];
+=======
+>>>>>>> 970e3217017620593ad040be40e5f8f30c85198a
     $_SESSION['member']['sid'] = $row['sid'];
     // $output['postData'] = $_SESSION['member']['account'];
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
