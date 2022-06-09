@@ -79,7 +79,7 @@ if (!isset($pageName)) {
                     <a class="nav-link <?= $pageName == 'news' ? 'active' : '' ?>" href="news.php">最新消息</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'reborn' ? 'active' : '' ?>" href="/mfee26-D-php/proj/avatar/avatar.php">轉生形象</a>
+                    <a class="nav-link <?= $pageName == 'reborn' ? 'active' : '' ?>" href="/mfee26-D-php/proj/avatar.php">轉生形象</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="/mfee26-D-php/proj/place/place.php">良辰吉地</a>
