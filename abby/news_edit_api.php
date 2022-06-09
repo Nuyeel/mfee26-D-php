@@ -2,8 +2,8 @@
 
 $output = [
     'success' => false,
-    'postData' => $_POST,
-    'filename' => '',
+    // 'postData' => $_POST,
+    // 'filename' => '',
     'error' => ''
 ];
 
@@ -13,6 +13,7 @@ $sid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
 
 $row = $pdo->query("SELECT*FROM `news` 
 WHERE news.sid = $sid")->fetch();
+
 
 if (empty($_POST['sid']) or empty($_POST['topic'])) {
     $output['error'] = '沒有標題名稱';
@@ -56,51 +57,54 @@ $stmt->execute([
     $_POST['publish_date'],
 ]);
 
+
+$tag = $pdo->query("SELECT*FROM `news_tag` WHERE news_tag.news_sid = $sid")->fetch();
+
+
+if($_POST['tg_sid'] != $tag['tag_sid'] and !empty($_POST['tg_sid'])){
+
+    $stmt = $pdo->query("DELETE FROM `news_tag` WHERE news_tag.news_sid = $sid")->fetch();
+
+    $t_sql = "INSERT INTO `news_tag`(`news_sid`, `tag_sid`) VALUES (?,?)";
+
+    $checkbox = $_POST['tg_sid'];
+foreach ($checkbox as $c) {
+    $stmt = $pdo->prepare($t_sql)
+    ->execute([
+            $sid,
+            $c
+        ]);
+}}else if(empty($_POST['tg_sid'])){
+    
+    $stmt = $pdo->query("DELETE FROM `news_tag` WHERE news_tag.news_sid = $sid")->fetch();
+
+}
+
+if (!empty($_POST['tag_add'])) {
+    $sql = "INSERT INTO `tag`(
+    `tag_name`) VALUES(?)";
+
+    $stmt = $pdo->prepare($sql)
+        ->execute([
+            $_POST['tag_add'],
+        ]);
+
+    $tagId = $pdo->lastInsertId();
+
+    $stmt = $pdo->prepare($t_sql)
+        ->execute([
+            $sid,
+            $tagId
+        ]);
+}
+
 if ($stmt->rowCount() == 1) {
     $output['success'] = true;
 } else {
     $output['error'] = '資料沒有修改';
 }
 
-// $newsId = $pdo->lastInsertId();
-
-// $t_sql = "INSERT INTO `news_tag`(`news_sid`, `tag_sid`) 
-//     VALUES (?,?)";
-
-// $update = "UPDATE `news_tag`SET`tag_sid`=? WHERE `news_tag`.news_sid = $sid";
-
-
-
-// if (!empty($_POST['tag_add'])) {
-//     $sql = "INSERT INTO `tag`(
-//     `tag_name`) VALUES(?)";
-
-//     $stmt = $pdo->prepare($sql)
-//         ->execute([
-//             $_POST['tag_add'],
-//         ]);
-
-//     $tagId = $pdo->lastInsertId();
-
-
-//     $stmt = $pdo->prepare($t_sql)
-//         ->execute([
-//             $sid,
-//             $tagId
-//         ]);
-// }
-
-// $output['tg_sid'] = $_POST['tg_sid'];
-
-// $checkbox = $_POST['tg_sid'];
-// foreach ($checkbox as $c) {
-//     $stmt = $pdo->prepare($update)
-//         ->execute([
-//             $sid,
-//             $c
-//         ]);
-// }
-
+//$output['tg_sid'] = $_POST['tg_sid'];
 
 $json = json_encode($output, JSON_UNESCAPED_UNICODE);
 
