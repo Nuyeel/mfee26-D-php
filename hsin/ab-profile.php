@@ -44,8 +44,8 @@ $row = $result->fetch();
                         <li class="list-group-item" style="background-color: #f0f0f0;"><a href="ab-profile.php" style="text-decoration: none; color: #0d6efd">會員中心總覽 </a></li>
                         <li class="list-group-item"><a href="ab-edit-profile.php" style="text-decoration: none; color: #212529">會員資料</a></li>
                         <li class="list-group-item">訂單總覽</li>
-                        <li class="list-group-item">電子錢包</li>
-                        <li class="list-group-item">陰德值</li>
+                        <li class="list-group-item">活動紀錄</li>
+                        <li class="list-group-item">衣櫥間</li>
                         <li class="list-group-item">常見問題</li>
                         <li class="list-group-item">我有問題</li>
                     </ul>
