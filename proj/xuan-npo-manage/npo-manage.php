@@ -119,7 +119,7 @@ $rows = $pdo->query($sql)->fetchAll();
             <?php foreach ($rows as $r) : ?>
                 <tr>
                         <td><?= $r['npo_sid'] ?></td>
-                        <td><img src="./uploaded/<?= $r['npo_img'] ?>" alt="" style="width:100px"></td>
+                        <td><img src="/../uploaded/<?= $r['npo_img'] ?>" alt="" style="width:100px"></td>
                         <td><?= htmlentities($r['npo_name']) ?></td>
                         <td><?= $r['email'] ?></td>
                         <td><?= $r['mobile'] ?></td>
