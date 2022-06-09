@@ -211,11 +211,12 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
         dist,
         quota,
         booked,
+        place_price,
         balance,
     }) => {
         let b = quota - booked;
         return `
-        <<div class="place-row-wrap col-12 p-2">
+        <div class="place-row-wrap col-12 p-2">
             <div class="place-row mt-2 d-flex justify-content-center align-items-center shadow">
                 <input type="hidden" value="${sid}">
                 <div class="place-info d-flex col-7">
