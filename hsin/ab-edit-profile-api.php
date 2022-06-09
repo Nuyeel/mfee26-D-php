@@ -24,16 +24,21 @@ if (!empty($email) and filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
 }
 
 $sql = "UPDATE `member` SET `name`=?, `birthdate`=?, `deathdate`=?, `mobile`=?, `email`=? WHERE `sid`=$sid ";
-
 $stmt = $pdo->prepare($sql);
 
 $stmt->execute([
-    $_SESSION['member']['name'] = $name,
-    $_SESSION['member']['birthdate'] = $birthdate,
-    $_SESSION['member']['deathdate'] = $deathdate,
-    $_SESSION['member']['mobile'] = $mobile,
-    $_SESSION['member']['email'] = $email,
+    $name,
+    $birthdate,
+    $deathdate,
+    $mobile,
+    $email,
 ]);
+
+$_SESSION['member']['name'] = $name;
+$_SESSION['member']['birthdate'] = $birthdate;
+$_SESSION['member']['deathdate'] = $deathdate;
+$_SESSION['member']['mobile'] = $mobile;
+$_SESSION['member']['email'] = $email;
 
 // $stmt->execute([
 //     $name,
@@ -49,4 +54,5 @@ if ($stmt->rowCount() == 1) {
     $output['error'] = '您的會員資料未經修改';
 }
 
+$output['aaa'] = $_SESSION;
 echo json_encode($output, JSON_UNESCAPED_UNICODE);
