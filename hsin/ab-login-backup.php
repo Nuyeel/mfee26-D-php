@@ -108,40 +108,40 @@ $title = '註冊會員 - 靈魂轉生平台';
 <script>
     const info_bar = document.querySelector('#info-bar');
 
-    // const account_re = /^[a-zA-Z0-9_]\w*$/;
-    // const password_re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    const account_re = /^[a-zA-Z0-9_]\w*$/;
+    const password_re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
-    // const account_f = document.form1.account;
-    // const password_f = document.form1.password;
-    // // const mobile_f = document.form1.mobile;
+    const account_f = document.form1.account;
+    const password_f = document.form1.password;
+    // const mobile_f = document.form1.mobile;
 
-    // const fields = [account_f, password_f];
-    // const fieldTexts = [];
-    // for (let f of fields) {
-    //     fieldTexts.push(f.nextElementSibling);
-    // }
+    const fields = [account_f, password_f];
+    const fieldTexts = [];
+    for (let f of fields) {
+        fieldTexts.push(f.nextElementSibling);
+    }
 
     async function sendData() {
-        // for (let i in fields) {
-        //     fields[i].classList.remove('red');
-        //     fieldTexts[i].innerText = '';
-        // }
-        // info_bar.style.display = 'none';
-        // let isPass = true;
-        // if (account_f.value && !account_re.test(account_f.value)) {
-        //     fields[0].classList.add('red');
-        //     fieldTexts[0].innerText = '您輸入的帳戶不可含有空白格或特殊字元';
-        //     isPass = false;
-        // }
-        // if (password_f.value && !password_re.test(password_f.value)) {
-        //     fields[1].classList.add('red');
-        //     fieldTexts[1].innerText = '請輸入至少八個數字及英文大小寫';
-        //     isPass = false;
-        // }
+        for (let i in fields) {
+            fields[i].classList.remove('red');
+            fieldTexts[i].innerText = '';
+        }
+        info_bar.style.display = 'none';
+        let isPass = true;
+        if (account_f.value && !account_re.test(account_f.value)) {
+            fields[0].classList.add('red');
+            fieldTexts[0].innerText = '您輸入的帳戶不可含有空白格或特殊字元';
+            isPass = false;
+        }
+        if (password_f.value && !password_re.test(password_f.value)) {
+            fields[1].classList.add('red');
+            fieldTexts[1].innerText = '請輸入至少八個數字及英文大小寫';
+            isPass = false;
+        }
 
-        // if (!isPass) {
-        //     return;
-        // }
+        if (!isPass) {
+            return;
+        }
         const fd = new FormData(document.form1);
         const r = await fetch('ab-login-api.php', {
             method: 'POST',

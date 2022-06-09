@@ -66,7 +66,7 @@ if (!isset($pageName)) {
 
 
 
-        <a class="navbar-brand" href="#">濟善救世公司</a>
+        <a class="navbar-brand" href="/mfee26-D-php/proj/index/mapdrag.html">濟善救世公司</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

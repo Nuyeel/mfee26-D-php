@@ -21,13 +21,13 @@ if (!isset($pageName)) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName == 'index' ? 'active' : '' ?>" href="index_.php">Home</a>
+                        <a class="nav-link <?= $pageName == 'index' ? 'active' : '' ?>" href="mainpage.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName == 'ab-list' ? 'active' : '' ?>" href="ab-list.php">陰德值小測驗</a>
+                        <a class="nav-link <?= $pageName == 'ab-list' ? 'active' : '' ?>" href="test_page.php">陰德值小測驗</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName == 'ab-add' ? 'active' : '' ?>" href="ab-add.php">積陰德小遊戲</a>
+                        <a class="nav-link <?= $pageName == 'ab-add' ? 'active' : '' ?>" href="gamespage.html">積陰德小遊戲</a>
                     </li>
                 </ul>
 

@@ -1,0 +1,23 @@
+<svg id="圖層_1" data-name="圖層 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 294 57.85">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        font-size: 55.78px;
+        fill: #fff;
+        font-family: KFhimaji-90ms-RKSJ-H, KFhimaji;
+      }
+
+      .cls-1 {
+        letter-spacing: -0.02em;
+      }
+
+      .cls-2 {
+        letter-spacing: 0.08em;
+      }
+    </style>
+  </defs>
+  <g>
+    <text class="cls-1" transform="translate(0 49.09)">來生</text>
+    <text class="cls-2" transform="translate(113.27 49.09)">避難所</text>
+  </g>
+</svg>

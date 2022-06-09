@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <style>
+
+    *{
+        margin: 0;
+    }
+
+
+    /* 背景漸層色 */
+    html{
+        background-color: #69d0ff;
+        background-image: linear-gradient(0deg, #69d0ff 0%, #ffa4e9 100%);
+    }
+
+    body {
+    position: relative;
+    }
+
+    .parent{
+        width:100%;
+        height: 100vh;
+        /* outline:5px solid red; */
+        overflow-x: hidden; 
+        overflow-y: hidden;
+        float:left;
+        position: relative;
+    }
+
+    .child{
+        width:200%;
+        height: 300%;
+        float:left;
+        font-size:15px;
+        font-family:arial;
+        padding:10px;
+        cursor: pointer;
+        position: relative;
+}
+
+.box{
+    /* background-color: rgb(255, 255, 100); */
+    border-radius: 15px;
+    /* outline: 5px solid black; */
+    width: 300px;
+    height: 400px;
+    margin: 20px;
+    z-index: -1;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Home鍵 = LOGO鍵 */
+.btn-center{
+    user-select: none; 
+    -webkit-user-drag: none;
+    /* background-color: red; */
+    /* border-radius: 50%; */
+    width: 200px;
+    /* height: 100px; */
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 3;
+    cursor: pointer;
+} 
+
+
+/* 中心位置 */
+.child_center{
+    border-radius: 15px;
+    /* outline: 5px solid black; */
+    width: 400px;
+    height: 450px;
+    background-color: rgba(255,255,255,.7);
+    /* opacity: 0; */
+    /* width: 50px;
+    height: 50px; */
+    /* border-radius: 50%; */
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -25px;
+    margin-top: -25px;
+}
+
+
+.navMenu{
+    background-color: #fff;
+    border-radius: 10px;
+    border: 3px solid black;
+    box-shadow: 2px 2px black;
+    width: 110px;
+    height: 40px;
+    position: fixed;
+    right: 40px;
+    top: 40px;
+    z-index: 10;
+    font-size: 24px;
+    font-weight: 900;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    /* padding-top: 10px; */
+    padding-bottom: 10px;
+    padding-left:5px;
+    /* padding-right:5px; */
+    letter-spacing: 0.2rem;
+    user-select: none; 
+    -webkit-user-drag: none;
+    
+}
+
+.robotmother{
+    position: fixed;
+    width: 130px;
+    height: 130px;
+    right: 25px;
+    bottom: 55px;
+    /* outline: 1px solid blue;  */
+}
+
+
+.robot{
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    /* outline: 1px solid red;  */
+    background: url(./map.img/robot.svg) no-repeat ;
+    animation: Updown .8s infinite alternate;
+    
+}
+
+
+@keyframes Updown {
+    from {
+    margin-top: 25px;
+    }
+    to {
+    margin-top: 10px;
+    }
+    }
+
+.navMenu:hover{
+    cursor: pointer;
+}
+
+.menulist{
+    position: fixed;
+    right: 40px;
+    top: 120px;
+    z-index: 10;
+    opacity: 0;
+
+}
+
+.nav-item{
+    user-select: none; 
+    -webkit-user-drag: none;
+    list-style-type:none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.nav-item>a{
+    color: white;
+}
+
+
+.box{
+    /* 禁止元素被反藍選取 */
+    user-select: none; 
+    /* 禁止元素被拖拉 */
+    -webkit-user-drag: none;
+}
+
+.box1{
+    border-radius: 15px;
+    /* outline: 5px solid black; */
+    width: 300px;
+    height: 180px;
+    background-color: rgba(252, 164, 233, 1);
+    /* opacity: 0; */
+    /* width: 50px;
+    height: 50px; */
+    /* border-radius: 50%; */
+    position:absolute;
+    top: 62.5%;
+    left: 39%;
+    margin-left: -25px;
+    margin-top: -25px;
+}
+
+/* 最新消息 */
+.box1>img:nth-child(1){
+    position:absolute;
+    top: 70px;
+    left: 75px;
+    /* margin-left: -25px; */
+    /* margin-top: -25px; */
+}
+.box1>img:nth-child(2){
+    position:absolute;
+    top: 127px;
+    left: 75px;
+    /* margin-left: -25px; */
+    /* margin-top: -25px; */
+}
+
+
+
+.box2{
+    border-radius: 15px;
+    /* outline: 5px solid black; */
+    width: 300px;
+    height: 400px;
+    background-color: rgba(255,255,255,.7);
+    /* opacity: 0; */
+    /* width: 50px;
+    height: 50px; */
+    /* border-radius: 50%; */
+    position:absolute;
+    top: 62.5%;
+    left: 64.5%;
+    margin-left: -25px;
+    margin-top: -25px;
+}
+
+
+
+
+.child_center>span:nth-child(1){
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 4px solid rgb(112,206,254);
+    position:absolute;
+    top: 15px;
+    left: 15px;
+}
+.child_center>span:nth-child(2){
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 4px solid rgb(112,206,254);
+    position:absolute;
+    top: 15px;
+    right: 15px;
+}
+.child_center>span:nth-child(3){
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 4px solid rgb(112,206,254);
+    position:absolute;
+    bottom: 15px;
+    left: 15px;
+}
+.child_center>span:nth-child(4){
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 4px solid rgb(112,206,254);
+    position:absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- MENU開合式 -->
+    <div class="navMenu"  onclick="toggleMenu()">MENU</div>
+
+    <div class=" menulist">
+        <ul class="">
+            <li class="nav-item mb-1">
+                <a class="nav-link <?= $pageName == 'intro' ? 'active' : '' ?>" href="intro.php">Intro</a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link <?= $pageName == 'news' ? 'active' : '' ?>" href="news.php">最新消息</a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link <?= $pageName == 'reborn' ? 'active' : '' ?>" href="/mfee26-D-php/proj/avatar/avatar.php">轉生形象</a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="/mfee26-D-php/proj/place/place.php">良辰吉地</a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link <?= $pageName == 'activity' ? 'active' : '' ?>" href="/mfee26-D-php/proj/xuan-event-list/npo-list.php">Activity</a>
+            </li>
+            <li class="nav-item mb-1">
+                <a class="nav-link <?= $pageName == 'social' ? 'active' : '' ?>" href="social.php">Social</a>
+            </li>
+            <!-- 設定管理者登入才會出現? -->
+            <li class="nav-item dropdown admin-menu">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="adminTitle">管理頁面</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="news-admin.php">最新消息</a></li>
+                    <li><a class="dropdown-item" href="reborn-admin.php">轉生形象</a></li>
+                    <li><a class="dropdown-item" href="/mfee26-D-php/proj/place/place-admin.php">良辰吉地</a></li>
+                    <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/event-manage.php">活動管理</a></li>
+                    <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-manage.php">主辦單位管理</a></li>
+                    <li><a class="dropdown-item" href="member-admin.php">會員管理</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 聊天機器人 -->
+    <div class="robotmother">
+        <div class="robot">
+            <!-- <img src="./map.img/robot.svg" alt="" style="width:120px" class="robotimg"> -->
+        </div>
+    </div>
+
+
+
+    <div class="parent">
+        <div class="btn-center" id="center" style="text-align:center" >
+            <img src="./map.img/LOGO.svg" alt="" style="width:180px">
+            <img src="./map.img/TITLE2.svg" alt="" style="width:120px;padding-left:15px">
+        </div>
+    
+        <!-- 中心方塊 -->
+        <div class="child">  
+            <div class="child_center"  id="btn">
+                <span ></span>
+                <span ></span>
+                <span ></span>
+                <span ></span>
+            </div>
+
+        <!-- 其他方塊 -->
+                <div class="box box1">
+                    <!-- 最新消息 -->
+                    <img src="./map.img/word-news.svg" alt="" style="width:150px"> 
+                    <img src="./map.img/news.svg" alt="" style="width:80px">
+                    <span></span> 
+                </div>
+
+                <div class="box box2" ></div>
+                <div class="box"></div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <script>
+
+    // 表格清零
+    function ResetForm() {
+        document.getElementById("FORM1").reset();
+    }
+
+    // <!-- 關係輸入表單 -->
+
+    // 收合功能
+    const openlightbox = () => {
+        const lightbox = document.querySelector(".menulist");
+        lightbox.style.opacity = '1';
+        lightbox.style.visibility="visible";
+        lightbox.style.transition = '.1s linear';
+        lightbox.style.zIndex = "1";
+
+    }
+
+    const closelightbox = () => {
+        const lightbox = document.querySelector(".menulist");
+        lightbox.style.opacity = '0';
+        lightbox.style.visibility="hidden";
+        lightbox.style.transition = '.3s';
+        lightbox.style.zIndex = "-10";
+    }
+
+    let menuOpened = false;
+    const toggleMenu = () => {
+                menuOpened = !menuOpened;
+                if (menuOpened) {
+                    openlightbox();
+                } else {
+                    closelightbox();
+                }
+            };
+
+
+    // 背景地圖拖拉功能
+    const slider = document.querySelector('.parent');
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    // 下面這個自己多加
+    let startY, scrollTop;
+
+    // 拖拉 function
+    let startDragging = function (e) {
+    mouseDown = true;
+    startX = e.pageX - slider.offsetLeft;
+    // 下面這個多加
+    startY = e.pageY - slider.offsetTop;
+    scrollLeft = slider.scrollLeft;
+    // 下面這個多加
+    scrollTop = slider.scrollTop;
+    };
+
+    // 停掉function 
+    let stopDragging = function (event) {
+    mouseDown = false;
+    };
+
+    slider.addEventListener('mousemove', (e) => {
+    e.preventDefault();
+    if(!mouseDown) { return; }
+    const x = e.pageX - slider.offsetLeft;
+    const scroll = x - startX;
+    slider.scrollLeft = scrollLeft - scroll;
+
+    const y = e.pageY - slider.offsetLeft;
+    const scrolly = y -startY;
+    slider.scrollTop = scrollTop - scrolly;
+    });
+
+// Add the event listeners
+slider.addEventListener('mousedown', startDragging, false);
+slider.addEventListener('mouseup', stopDragging, false);
+slider.addEventListener('mouseleave', stopDragging, false);
+    </script>
+
+
+<!-- 回到中心點 -->
+<script>
+        const btncenter = document.getElementById("center");
+        const element = document.getElementById("btn");
+        btncenter.addEventListener("click", function () {
+        element.scrollIntoView({
+            behavior:"smooth",
+            block:"center",
+            inline:"center",
+        });
+        });
+</script>
+
+<script>
+// 起始畫面定位在中間
+window.onload = function () {
+    element.scrollIntoView({
+    behavior: "instant",
+    block:"center",
+    inline:"center",
+        });
+}
+
+
+
+</script>
+
+
+</body>
+</html>

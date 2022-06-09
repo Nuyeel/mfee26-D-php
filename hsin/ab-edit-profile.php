@@ -7,6 +7,13 @@ if (!$_SESSION['member']['account']) {
     // exit;
 }
 
+$sid = isset($_SESSION['member']['sid']) ? intval($_SESSION['member']['sid']) : 0;
+$row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
+
+// $sql = "SELECT * FROM `member` WHERE `member`.`account` = '$account'";
+// $row = $pdo->query($sql)->fetch();
+// echo json_encode($_SESSION, JSON_UNESCAPED_UNICODE);
+// exit;
 ?>
 <?php include __DIR__ . '/parts-2/html-head-2.php' ?>
 <?php include __DIR__ . '/parts-2/navbar-3.php' ?>
@@ -29,8 +36,8 @@ if (!$_SESSION['member']['account']) {
                         <li class="list-group-item"><a href="ab-profile.php" style="text-decoration: none; color: #212529">會員中心總覽 </a></li>
                         <li class="list-group-item" style="background-color: #f0f0f0;"><a href="ab-edit-profile.php" style="text-decoration: none; color: #0d6efd;">會員資料</a></li>
                         <li class="list-group-item">訂單總覽</li>
-                        <li class="list-group-item">電子錢包</li>
-                        <li class="list-group-item">陰德值</li>
+                        <li class="list-group-item">活動紀錄</li>
+                        <li class="list-group-item">衣櫥間</li>
                         <li class="list-group-item">常見問題</li>
                         <li class="list-group-item">我有問題</li>
                     </ul>
@@ -43,31 +50,31 @@ if (!$_SESSION['member']['account']) {
                             <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
                             <div class="mb-3">
                                 <label for="account" class="form-label">使用者帳戶</label>
-                                <input type="text" class="form-control" id="account" name="account" value="<?= htmlentities($_SESSION['member']['account']) ?>" readonly>
+                                <input type="text" class="form-control" id="account" name="account" value="<?= htmlentities($row['account']) ?>" readonly>
                             </div>
                             <div class="mb-3">
                                 <label for="name" class="form-label">會員名稱</label>
-                                <input type="text" class="form-control" id="name" name="name" required value="<?= htmlentities($_SESSION['member']['name']) ?>">
+                                <input type="text" class="form-control" id="name" name="name" required value="<?= htmlentities($row['name']) ?>">
                                 <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="birthdate" class="form-label">出生日</label>
-                                <input type="date" class="form-control" id="birthdate" name="birthdate" value="<?= htmlentities($_SESSION['member']['birthdate']) ?>">
+                                <input type="date" class="form-control" id="birthdate" name="birthdate" value="<?= htmlentities($row['birthdate']) ?>">
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="deathdate" class="form-label">死亡日</label>
-                                <input type="date" class="form-control" id="deathdate" name="deathdate" value="<?= $_SESSION['member']['deathdate'] ?>">
+                                <input type="date" class="form-control" id="deathdate" name="deathdate" value="<?= htmlentities($row['deathdate']) ?>">
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="mobile" class="form-label">手機號碼</label>
-                                <input type="text" class="form-control" id="mobile" name="mobile" pattern="09\d{8}" value="<?= $_SESSION['member']['mobile'] ?>">
+                                <input type="text" class="form-control" id="mobile" name="mobile" pattern="09\d{8}" value="<?= htmlentities($row['mobile']) ?>">
                                 <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">電子信箱</label>
-                                <input type="email" class="form-control" id="email" name="email" value="<?= $_SESSION['member']['email'] ?>">
+                                <input type="email" class="form-control" id="email" name="email" value="<?= htmlentities($row['email']) ?>">
                                 <div class="form-text red"></div>
                             </div>
                             <button type="submit" class="btn btn-outline-primary" style="margin-left: 40%; margin-top: 3%">確定修改</button>
@@ -85,7 +92,7 @@ if (!$_SESSION['member']['account']) {
 </div>
 <?php include __DIR__ . '/parts-2/scripts-2.php' ?>
 <script>
-    const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE); ?>;
+    const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE) ?>;
     const name_re = /^[a-zA-Z0-9_\u4e00-\u9fa5\s]*$/;
     const email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zAZ]{2,}))$/;
     const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
@@ -117,13 +124,11 @@ if (!$_SESSION['member']['account']) {
             isPass = false;
         }
         if (email_f.value && !email_re.test(email_f.value)) {
-            // alert('email 格式錯誤');
             fields[1].classList.add('red');
             fieldTexts[1].innerText = '您輸入的電子信箱格式有誤';
             isPass = false;
         }
         if (mobile_f.value && !mobile_re.test(mobile_f.value)) {
-            // alert('手機號碼格式錯誤');
             fields[2].classList.add('red');
             fieldTexts[2].innerText = '您輸入的手機號碼格式有誤';
             isPass = false;
@@ -146,9 +151,9 @@ if (!$_SESSION['member']['account']) {
             info_bar.classList.add('alert-success');
             info_bar.innerText = '您的資料已完成修改';
 
-            // setTimeout(() => {
-            //     location.href = 'ab-profile.php'; // 跳轉到列表頁
-            // }, 1000);
+            setTimeout(() => {
+                location.href = 'ab-profile.php'; // 跳轉到列表頁
+            }, 2000);
 
         } else {
             info_bar.classList.remove('alert-success');

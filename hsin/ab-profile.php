@@ -7,10 +7,18 @@ if (!$_SESSION['member']['account']) {
     // exit;
 }
 
-// $sql = "SELECT * FROM `member`";
-// $row = $pdo->query($sql)->fetch();
+if (!$_SESSION['member']['account']) {
+    header('location:ab-login.php');
+    // exit;
+}
 
-// $_SESSION['member']['account'];
+$sid = isset($_SESSION['member']['sid']) ? intval($_SESSION['member']['sid']) : 0;
+$row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
+
+// $sql = "SELECT * FROM `member` WHERE `member`.`account` = '$account'";
+// $row = $pdo->query($sql)->fetch();
+// echo json_encode($_SESSION, JSON_UNESCAPED_UNICODE);
+// exit;
 
 ?>
 <?php include __DIR__ . '/parts-2/html-head-2.php' ?>
@@ -25,8 +33,8 @@ if (!$_SESSION['member']['account']) {
                         <li class="list-group-item" style="background-color: #f0f0f0;"><a href="ab-profile.php" style="text-decoration: none; color: #0d6efd">會員中心總覽 </a></li>
                         <li class="list-group-item"><a href="ab-edit-profile.php" style="text-decoration: none; color: #212529">會員資料</a></li>
                         <li class="list-group-item">訂單總覽</li>
-                        <li class="list-group-item">電子錢包</li>
-                        <li class="list-group-item">陰德值</li>
+                        <li class="list-group-item">活動紀錄</li>
+                        <li class="list-group-item">衣櫥間</li>
                         <li class="list-group-item">常見問題</li>
                         <li class="list-group-item">我有問題</li>
                     </ul>
@@ -36,10 +44,10 @@ if (!$_SESSION['member']['account']) {
                         <div class="card-body d-flex align-items-center">
                             <div class="col-md-9 mb-md-0 p-md-4">
                                 <h5 class="card-title">歡迎回來，
-                                    <?php if (!empty($_SESSION['member']['name'])) {
-                                        echo htmlentities($_SESSION['member']['name']);
+                                    <?php if (!empty($row['name'])) {
+                                        echo htmlentities($row['name']);
                                     } else {
-                                        echo htmlentities($_SESSION['member']['account']);
+                                        echo htmlentities($row['account']);
                                     } ?></h5>
                                 <p class="card-text" style="font-size: 1rem; color: #707070;">請點擊下方按鈕瀏覽您的資料</p>
 
