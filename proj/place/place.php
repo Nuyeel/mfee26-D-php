@@ -5,17 +5,57 @@ $pageName = 'place';
 $title = '濟善救世公司-良辰吉地';
 ?>
 
+<?php
+
+// 先塞資料驗證
+
+// $_SESSION = [
+//     'member' => [
+//         'sid' => 605,
+//         'name' => '獨行俠',
+//         'deathdate' => NULL
+//     ], 
+// ];
+
+// 葉宥廷
+$_SESSION['member']['sid'] = 20;
+$_SESSION['member']['deathdate'] = '2022-06-06';
+
+// 陳怡雯
+// $_SESSION['member']['sid'] = 12; 
+// $_SESSION['member']['deathdate'] = NULL; 
+
+
+?>
+
+<style>
+    body {
+        /* background: linear-gradient(to right, rgb(119, 196, 162), rgb(136, 13, 250)); */
+        /* background: linear-gradient(to right, #b5e3ca, #f79a93); */
+        background: linear-gradient(to right, rgb(226, 128, 222), rgb(52, 83, 164));
+    }
+</style>
+
+
 <?php include __DIR__ . "/../parts/html-head.php" ?>
 <?php include __DIR__ . "/../parts/navbar.php" ?>
 
 <div class="container">
     <div class="row mt-5">
         <!-- 左側欄 -->
-        <div class="place-left col-md-2 px-2">
+        <div class="place-left col-md-2 px-2 mx-4">
             <div id="timeArea" class="time-area text-center mb-4">
                 <div class="time-title fs-5 fw-bold py-1">現在時間</div>
                 <div id="nowYM" class="fs-3 fw-bolder border-bottom py-2 mx-2 my-2"></div>
                 <div id="nowTime" class="fs-3 p-1 my-1"></div>
+            </div>
+            <div class="sort-area px-3">
+                <h6 style="font-weight: bold;">資料排序：</h6>
+                <input id="sortASC" name="sort" type="radio" value="1" onchange="sortByYear(event); return false;">
+                <label class="form-check-label" for="sortASC">依年份遞增</label>
+                <br>
+                <input id="sortDESC" name="sort" type="radio" value="2" onchange="sortByYear(event); return false;">
+                <label class="form-check-label" for="sortDESC">依年份遞減</label>
             </div>
             <!-- <div id="newsArea" class="news-area text-center">
                 <div class="news-title fs-5 fw-bold py-1">最新消息</div>
@@ -24,7 +64,7 @@ $title = '濟善救世公司-良辰吉地';
         <!-- 主區塊 -->
         <div class="main col-md-9 px-2">
             <!-- 篩選搜尋 -->
-            <div class="filter-section px-4 py-4">
+            <div class="filter-section px-4 pt-4 pb-2">
                 <form name="filterForm" action="" onsubmit="filtData(); return false">
                     <div class="d-flex mb-3">
                         <div class="col-md-6">
@@ -79,56 +119,11 @@ $title = '濟善救世公司-良辰吉地';
                             </div>
                         </form>
                     </div>
-                    <!--
-                    <div class="col-md-2">
-                        <div class="input-group d-flex">
-                            <input type="search" name="search" id="search" placeholder="搜尋" aria-label="search" class="form-control" aria-describedby="button-addon2" />
-                            <button class="btn btn-outline-secondary" type="button" id="searchBtn">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <!-- 列表區 -->
             <div class="list-section px-1 py-2">
                 <div id="placeArea">
-                    <!--
-                    <div class="place-row-wrap col-12 p-2">
-                        <div class="place-row m-1 d-flex justify-content-center align-items-center">
-                            <input type="hidden" value="1">
-                            <div class="place-info d-flex col-8">
-                                <div class="place-time col-6 d-flex align-item-center">
-                                    <div class="title col-4">
-                                        <i class="fa-solid fa-clock"></i>
-                                        <h4>良辰</h4>
-                                    </div>
-                                    <div class="col-8 d-flex align-items-center justify-content-center">
-                                        <p class="year">2023年 2月</p>
-                                    </div>
-                                </div>
-                                <div class="place-location col-6 d-flex">
-                                    <div class="title col-4">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <h4>吉地</h4>
-                                    </div>
-                                    <div class="col-8">
-                                        <p class="country">台灣</p>
-                                        <p class="city">台北市 信義區</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="place-quota col-2">
-                                <p class="quota col">轉生限額：3</p>
-                                <p class="remain col">剩餘名額：1</p>
-                            </div>
-                            <div class="place-buttoms col-2 d-flex justify-content-center align-items-center">
-                                <button class="saveBtn btn btn-warning p-2 me-2"><i class="fa-brands fa-gratipay"></i> 收藏</button>
-                                <button class="chooseBtn btn btn-success p-2"><i class="fa-solid fa-cart-arrow-down"></i>加入轉生訂單</button>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
                 <h6 id="nodata" style="text-align: center; color: #888;"></h6>
             </div>
@@ -220,13 +215,13 @@ $title = '濟善救世公司-良辰吉地';
     }) => {
         let b = quota - booked;
         return `
-        <div class="place-row-wrap col-12 p-2">
-            <div class="place-row mt-2 d-flex justify-content-center align-items-center">
+        <<div class="place-row-wrap col-12 p-2">
+            <div class="place-row mt-2 d-flex justify-content-center align-items-center shadow">
                 <input type="hidden" value="${sid}">
-                <div class="place-info d-flex col-8">
+                <div class="place-info d-flex col-7">
                     <div class="place-time col-6 d-flex align-item-center">
                         <div class="title col-4">
-                            <i class="fa-solid fa-clock"></i>
+                            <i class="fa-solid fa-clock float-icon"></i>
                             <h4>良辰</h4>
                         </div>
                         <div class="col-8 d-flex align-items-center justify-content-center">
@@ -235,7 +230,7 @@ $title = '濟善救世公司-良辰吉地';
                     </div>
                     <div class="place-location col-6 d-flex">
                         <div class="title col-4">
-                            <i class="fa-solid fa-location-dot"></i>
+                            <i class="fa-solid fa-location-dot float-icon"></i>
                             <h4>吉地</h4>
                         </div>
                         <div class="col-8">
@@ -249,8 +244,9 @@ $title = '濟善救世公司-良辰吉地';
                     <p class="quota col">轉生限額：${quota}</p>
                     <p class="remain col">剩餘名額：${b}</p>
                 </div>
-                <div class="place-buttoms col-2 d-flex justify-content-center align-items-center">
-                    <button class="chooseBtn btn btn-success p-2"><i class="fa-solid fa-cart-arrow-down"></i>加入轉生訂單</button>
+                <div class="place-buttoms col-3 d-flex flex-column justify-content-center align-items-center">
+                    <p class="place-price">所需陰德值：<span>${place_price}</span></p>
+                    <button class="chooseBtn btn btn-success p-2 mt-2" onclick="AddPlaceToCart(${sid}); return false;"><i class="fa-solid fa-cart-arrow-down"></i>加入轉生訂單</button>
                 </div>
             </div>
         </div>
@@ -304,6 +300,24 @@ $title = '濟善救世公司-良辰吉地';
     }
 
 
+
+    // 加入轉生訂單
+    async function AddPlaceToCart(sid) {
+        const member =
+            await fetch(`place-order-api.php?sid=${sid}`)
+            .then((r) => r.json())
+            .then(result => {
+                console.log(result);
+                if (result['success'] == true) {
+                    alert(`已成功加入訂單，請至會員中心查看`);
+                    location.assign('place.php?page=1');
+                } else {
+                    alert(`已有良辰吉日訂單，無法再次加入`);
+                }
+            })
+    };
+
+
     // 篩選資料 filter
     async function filtData() {
         const fd = new FormData(document.filterForm);
@@ -341,7 +355,46 @@ $title = '濟善救世公司-良辰吉地';
 
         renderTable();
         renderPagination();
+
+        if (data.success == false) {
+            const nodata = document.querySelector("#nodata");
+            nodata.innerHTML = "篩選區間沒有可顯示資料";
+        } else {
+            nodata.innerHTML = "";
+        }
     }
+
+    // 資料排序
+    async function sortByYear(e) {
+        const sortASC = document.querySelector('#sortASC');
+        const sortDESC = document.querySelector('#sortDESC');
+        let t = e.target;
+        console.log(t);
+
+        let sort = 0; // 預設
+        if (t == sortASC) {
+            sort = 1;
+            fetch('place-list-api.php?sort=1')
+                .then((response) => response.json())
+                .then((obj) => {
+                    data = obj;
+                    renderTable();
+                    renderPagination(page);
+                    history.pushState(page, "", "?page=" + 1);
+                });
+        } else if (t == sortDESC) {
+            sort = 2;
+            fetch('place-list-api.php?sort=2')
+                .then((response) => response.json())
+                .then((obj) => {
+                    data = obj;
+                    renderTable();
+                    renderPagination(page);
+                    history.pushState(page, "", "?page=" + 1);
+                });
+        }
+
+    };
 
 
     // 現在時間

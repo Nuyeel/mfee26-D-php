@@ -1,21 +1,18 @@
 .time-area,
 .news-area {
-    /* outline: 1px solid #aaa; */
+    outline: 1px solid #aaa;
     border-radius: 10px;
     overflow: hidden;
-    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .time-area .time-title,
 .place-left .news-title {
     background-color: rgb(57, 89, 114);
-    /* background-color: #407672; */
     color: rgb(255, 255, 255);
 }
 
 .filter-section {
-    /* background-color: rgb(203, 207, 212); */
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgb(203, 207, 212);
     border-radius: 10px;
 }
 
@@ -31,12 +28,10 @@
 }
 
 .place-row {
-    /* border: 2px solid #aaa; */
+    border: 2px solid #aaa;
     border-radius: 20px;
     padding: 15px;
-    transform: translate(0);
-    transition: 0.5s;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #fff;
 }
 
 .place-time,
@@ -59,13 +54,8 @@
     transition: 1s;
 }
 
-.place-row:hover .float-icon {
-    transform: translateY(-8px);
-}
-
-.place-row-wrap:hover .place-row {
-    transform: translate(-2px, -1px);
-    background-color: rgba(255, 255, 255, 1);
+.place-row:hover .title i {
+    transform: translateY(2px);
 }
 
 p.year,
@@ -81,33 +71,20 @@ p.city {
 }
 
 p.remain {
-    color: #f45e35;
+    color: darkred;
     font-weight: bold;
 }
 
 .place-buttoms .chooseBtn {
     height: 40px;
-    background-color: #37508c;
+    background-color: rgb(57, 89, 114);
     border: none;
-    transition: 0.2s;
 }
 
-.chooseBtn:hover {
-    background-color: #0b3863;
+.place-buttoms .chooseBtn:hover {
+    background-color: #1f3763;
 }
 
 .place-quota {
     border-right: 0;
-}
-
-.place-price {
-    font-size: 16px;
-    font-weight: bolder;
-    color: #aa0138;
-}
-
-.place-price > span {
-    font-size: 20px;
-    font-weight: bolder;
-    color: #ce0138;
 }
