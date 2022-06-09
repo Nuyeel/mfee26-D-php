@@ -127,7 +127,7 @@ if (empty($row)) {
 
 
                 <img id="myimg" src="./list-img/<?= $row['img'] ?>" alt="" />
-                <!-- <img id="myimg" src="../list-img/npo-04.jpg" alt="" /> -->
+            
 
 
                 <!-- 表格內容放這邊 表單名:form_npo_act-->
@@ -171,12 +171,11 @@ if (empty($row)) {
                             <div class="form-check form-check-inline">
                                 <!-- 多選1 name要相同(才會是相同group)，但id要不同 -->
                                 <!-- 這樣回傳value時，才會選到什麼傳什麼value -->
-                                <input class="form-check-input" type="radio" name="act_type" id="type-<? $k ?>" value="<?= $k ?>" style="color:red">
+                                <input class="form-check-input test" type="radio" name="act_type" id="radio type-<? $k ?>" value="<?= $k ?>" style="color:red"  >
                                 
                                 <label class="form-check-label" for="type-<?= $k ?>"><?= $v ?></label>
                             </div>
                             <?php endforeach; ?>
-
                             
                             <div class="form-text form-text-radio"></div>
                         </div>
@@ -293,7 +292,7 @@ if (empty($row)) {
                                     <option selected disabled style="font-size:11px">請選擇</option>
 
                                     <?php foreach ($act_address as $k => $v): ?>
-                                    <option id="type-<? $k ?>" value="<?= $k ?>" ><?= $v ?></option>
+                                    <option name="city" id="type-<? $k ?>" value="<?= $k ?>" ><?= $v ?></option>
                                     <?php endforeach; ?>
                                 </select>
 
@@ -353,6 +352,7 @@ const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE); ?>;
 
 
 // 先取得各個值得參照(不要直接拿)
+const info_bar = document.querySelector('#info-bar');
 const name_f = document.form_npo_act.name;
 const type_f = document.form_npo_act.act_type;
 const ammount_f = document.form_npo_act.ammount;
@@ -360,6 +360,22 @@ const address_f = document.form_npo_act.act_address;
 const address2_f = document.form_npo_act.act_address_2;
 const starttime_f = document.form_npo_act.start;
 const endtime_f = document.form_npo_act.end;
+
+
+// const city_f = document.form_npo_act.city;
+
+if(type_f.value==''){
+        type_f.value =  <?=$row['type_sid'] ?>;
+        // type_f.checked = true;
+        console.log(type_f.value);
+    }
+
+if(address_f.value=='請選擇'){
+        address_f.value =  <?=$row['place_city'] ?>;
+        // type_f.checked = true;
+        // console.log(city_f.value);
+    }
+
 
 
 // 將三項列成陣列，改用索引取值
@@ -397,6 +413,10 @@ async function sendData(){
         fieldTexts[0].innerText = '必填';
         isPass = false;
     }
+
+    
+
+
 
     // 檢查活動類型是否有選
     if(type_f.value==''){
@@ -490,11 +510,11 @@ async function sendData(){
 
 
 
-    // if (result.success) {
-    //     setTimeout(() => {
-    //             location.href = 'event-manage.php'; // 跳轉到活動一覽頁
-    //         }, 1000);
-    //     };
+    if (result.success) {
+        setTimeout(() => {
+                location.href = 'event-manage.php'; // 跳轉到活動一覽頁
+            }, 1000);
+        };
 
 }
 
