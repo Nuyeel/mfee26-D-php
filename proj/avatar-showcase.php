@@ -32,15 +32,15 @@ $title = '濟善救世公司-轉生形象-衣櫥';
     const parts = ['eyes', 'nose', 'mouth', 'ear', 'hair']
 
     //眼睛元件
-    const eyesimgs = ["./img/avatar_img/eyes/0.png", "./img/avatar_img/eyes/1.png", "./img/avatar_img/eyes/2.png"]; //之後要改為由資料庫引入
+    const eyesimgs = ["./img/avatar_img/eyes/0.png", "./img/avatar_img/eyes/1.png", "./img/avatar_img/eyes/2.png", "./img/avatar_img/eyes/3.png"]; //之後要改為由資料庫引入
     //鼻子元件
     const noseimgs = ["./img/avatar_img/nose/0.png"]; //之後要改為由資料庫引入
     //嘴巴元件
     const mouthimgs = ["./img/avatar_img/mouth/0.png"]; //之後要改為由資料庫引入
     //耳朵元件
-    const earimgs = ["./img/avatar_img/ear/0.png"]; //之後要改為由資料庫引入
+    const earimgs = ["./img/avatar_img/ear/0.png", "./img/avatar_img/ear/1.png", "./img/avatar_img/ear/2.png"]; //之後要改為由資料庫引入
     //頭髮元件
-    const hairimgs = ["./img/avatar_img/hair/0.png"]; //之後要改為由資料庫引入
+    const hairimgs = ["./img/avatar_img/hair/0.png", "./img/avatar_img/hair/1.png", "./img/avatar_img/hair/2.png"]; //之後要改為由資料庫引入
 
     const avatarBox = (f, g) => {
         return `
@@ -61,10 +61,14 @@ $title = '濟善救世公司-轉生形象-衣櫥';
         });
         const result = await r.json();
         console.log(result);
-        for (i = 0; i < 5; i++) {
+        let l = result.length;
+        if (result.length>5){
+            l=5;
+        };
+        for (i = 0; i < l; i++) {
             showcase.innerHTML += avatarBox(result[i].avatar_created_at, result[i].avatar_id);
         }
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < l; i++) {
             const a = JSON.parse(result[i]['combination']);
             console.log(a);
             const avatarBoxes = document.querySelectorAll('.avatarBox');
