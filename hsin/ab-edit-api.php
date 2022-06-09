@@ -11,12 +11,12 @@ $output = [
 
 $sid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
 // TODO: 欄位檢查, 後端的檢查
-// if (empty($sid) or empty($_POST['name'])) {
-//     $output['error'] = '您尚未輸入姓名資料';
-//     $output['code'] = 400;
-//     echo json_encode($output, JSON_UNESCAPED_UNICODE);
-//     exit;
-// }
+if (empty($sid) or empty($_POST['name'])) {
+    $output['error'] = '您尚未輸入姓名資料';
+    $output['code'] = 400;
+    echo json_encode($output, JSON_UNESCAPED_UNICODE);
+    exit;
+}
 
 $name = $_POST['name'];
 $birthdate = empty($_POST['birthdate']) ? NULL : $_POST['birthdate'];
@@ -39,7 +39,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([
     $name,
     $birthdate,
-    $deathdate,
+    $deathdate,    
     $mobile,
     $email,
 ]);

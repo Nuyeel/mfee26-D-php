@@ -48,7 +48,7 @@ if ($row['account'] == $account and $row['password'] == $password) {
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit;
 } else {
-    $output['error'] = '您輸入的使用者帳戶或密碼有誤';
+    $output['error'] = '登入失敗！！！';
     $output['code'] = 404;
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit;

@@ -12,9 +12,7 @@ if (empty($sid)) {
 $row = $pdo->query("SELECT*FROM `news` 
 JOIN `type` 
 JOIN `tag` 
-JOIN `location` 
-JOIN `news_tag` 
-ON news.sid = news_tag.news_sid
+JOIN `location`
 WHERE news.sid = $sid")->fetch();
 
 $tagselected = $pdo->query("SELECT*FROM `news` 
@@ -25,10 +23,10 @@ WHERE news.sid = $sid")->fetchAll();
 
 //print_r($tagselected);`
 
-if (empty($row)) {
-    header('Location:news_list.php');
-    exit;
-}
+// if (empty($row)) {
+//     header('Location:news_list.php');
+//     exit;
+// }
 
 $opt = $pdo->query('SELECT * FROM `type`')->fetchAll();
 $loc = $pdo->query('SELECT * FROM `location`')->fetchAll();
