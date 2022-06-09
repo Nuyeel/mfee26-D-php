@@ -279,9 +279,8 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
             })
             .then(result => {
                 console.log(result);
-
                 info_bar.style.display = 'block';
-
+            
                 if (result.success) {
                     info_bar.classList.add('alert-success');
                     info_bar.innerText = '已修改消息內容';
@@ -293,6 +292,7 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
                     info_bar.classList.add('alert-danger');
                     info_bar.innerText = result.error || '資料沒有修改';
                 }
+
 
             }).catch(r => {
 
