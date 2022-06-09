@@ -152,6 +152,7 @@ $rows = $pdo->query($sql)->fetchAll();
         //     info_bar.innerText = '沒有登入！需登入才能進行測驗！';
         //     isPass = false;
         // }
+
         if (q1_f.value == '') {
             document.querySelector(".form-text-radio").innerText = '請選擇最符合你想法的選項';
             document.querySelector(".form-text-radio").classList.add('red');
