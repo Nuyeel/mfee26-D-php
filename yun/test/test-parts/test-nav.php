@@ -27,7 +27,7 @@ if (!isset($pageName)) {
                         <a class="nav-link <?= $pageName == 'ab-list' ? 'active' : '' ?>" href="test_page.php">陰德值小測驗</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName == 'ab-add' ? 'active' : '' ?>" href="gamespage.html">積陰德小遊戲</a>
+                        <a class="nav-link <?= $pageName == 'ab-add' ? 'active' : '' ?>" href="gamespage.php">積陰德小遊戲</a>
                     </li>
                 </ul>
 
