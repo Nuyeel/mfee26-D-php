@@ -121,7 +121,7 @@ $rows = $pdo->query($sql)->fetchAll();
             <?php foreach ($rows as $r) : ?>
                 <tr>
                         <!-- <td> <img src="<?= $r['img'] ?>" alt="" style="width:60px"> </td> -->
-                        <td> <img src="../list-img/<?= $r['img'] ?>" alt="" style="width:60px"> </td>
+                        <td> <img src="./list-img/<?= $r['img'] ?>" alt="" style="width:60px"> </td>
                         <td><?= $r['name'] ?></td>
                         <td><?= htmlentities($r['act_title']) ?></td>
                         <td><?= htmlentities($r['npo_name']) ?></td>

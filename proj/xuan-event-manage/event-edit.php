@@ -126,7 +126,7 @@ if (empty($row)) {
                 <br>
 
 
-                <!-- <img id="myimg" src="../list-img/<?= $row['img'] ?>" alt="" /> -->
+                <img id="myimg" src="./list-img/<?= $row['img'] ?>" alt="" />
                 <!-- <img id="myimg" src="../list-img/npo-04.jpg" alt="" /> -->
 
 
@@ -560,7 +560,7 @@ async function sendData(){
                 });
                 const obj = await r.json();
                 console.log(obj);
-                myimg.src = "../list-img/" + obj.filename;
+                myimg.src = "./list-img/" + obj.filename;
                 avatar.value = obj.filename;  
             });
 
