@@ -99,7 +99,7 @@ if (!isset($pageName)) {
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/place/place-admin.php">良辰吉地</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-add/npo-act-add.php">活動-新增</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/event-manage.php">活動-管理</a></li>
-                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-add/npo-add.php">NPO-新增</a></li>
+                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-add.php">NPO-新增</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-manage.php">NPO-管理</a></li>
                         <li><a class="dropdown-item" href="member-admin.php">會員管理</a></li>
                     </ul>

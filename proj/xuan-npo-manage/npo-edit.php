@@ -181,6 +181,7 @@ if (empty($row)) {
                     <button id="btn" onclick="uploadAvatar()">上傳大頭貼</button>
                     <br>
 
+                    <!-- <img id="myimg" src="../uploaded/<?= $row['npo_img'] ?>" alt="" /> -->
                     <img id="myimg" src="./uploaded/<?= $row['npo_img'] ?>" alt="" />
 
 
@@ -383,11 +384,11 @@ async function sendData(){
 
 
 
-    if (result.success) {
-        setTimeout(() => {
-                location.href = 'npo-manage.php'; // 跳轉到建立活動頁
-            }, 1000);
-        };
+    // if (result.success) {
+    //     setTimeout(() => {
+    //             location.href = 'npo-manage.php'; // 跳轉到建立活動頁
+    //         }, 1000);
+    //     };
 
     }
 
@@ -426,7 +427,10 @@ async function sendData(){
                 const obj = await r.json();
                 console.log(obj);
                 myimg.src = "./uploaded/" + obj.filename;
+                
+                // avatar.value = $row['npo_img'];
                 avatar.value = obj.filename;  
+
             });
 
             function uploadAvatar() {

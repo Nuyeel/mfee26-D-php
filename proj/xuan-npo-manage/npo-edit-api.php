@@ -68,8 +68,12 @@ if (empty($_POST['email'])) {
     $phone = $_POST['phone'] ;
     // $birthday = empty($_POST['birthday']) ? NULL : $_POST['birthday'];
     $intro = $_POST['intro'] ?? ''; //沒有填值的話，預設是空字串
-    $avatar = $_POST['avatar'] ?? ''; //沒有填值的話，預設是空字串
-    
+    if ($_POST['avatar'] == "") {
+        $row = $pdo->query("SELECT * FROM npo_name WHERE npo_sid=$sid")->fetch();
+        $avatar =  $row['npo_img'];   
+    } else {
+        $avatar = $_POST['avatar'];
+    }
 
 // STEP2 (篩選2): 如果有填入值，是否有符合標準
 

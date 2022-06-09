@@ -129,7 +129,6 @@ $title = '上架NPO';
                     <form
                         name="form1"
                         action="npo-add-api.php"
-
                         method="post"
                         enctype="multipart/form-data"
                         class="image_upload"
@@ -165,6 +164,7 @@ $title = '上架NPO';
                     <button id="btn" onclick="uploadAvatar()">上傳大頭貼</button>
                     <br>
 
+                    <!-- <img id="myimg" src="../uploaded/8d7d6930d6ddd402b2a8faec9660d321.jpg" alt="" /> -->
                     <img id="myimg" src="" alt="" />
 
 
@@ -389,7 +389,6 @@ async function sendData(){
 
             function uploadAvatar() {
                 myfile.click(); // 模擬點擊
-
             }
 
 

@@ -1,5 +1,5 @@
 <?php 
-require __DIR__ .  '/parts/connect_db.php'; 
+require __DIR__ .  '/../parts/connect_db.php'; 
 
 // 從php回傳值的指令，且指定內容是json格式
 header('Content-Type: application/json');
@@ -48,7 +48,6 @@ if (empty($_POST['email'])) {
 //     echo json_encode($output, JSON_UNESCAPED_UNICODE);
 //     exit;
 // }
-
 
 
     // 先檢查再進prepare/execute系統
