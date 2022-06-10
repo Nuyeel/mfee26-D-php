@@ -10,6 +10,12 @@ require __DIR__ .  '/../parts/connect_db.php' ;
 // $title = '購物車列表';
 
 
+// 葉宥廷
+// $_SESSION['member']['sid'] = 11;
+// // $_SESSION['member']['deathdate'] = '2022-06-06';
+$_SESSION['member']['account'] = 'HappyCat03';
+
+
 $rows = [];
 $sids = [];
 if (!empty($_SESSION['cart'])) {
@@ -134,7 +140,7 @@ if (!empty($_SESSION['cart'])) {
             </div>
 
             <a class="btn btn-warning text-white mt-2" href="npo-list.php" role="button" style="margin-left:10px">繼續選購</a>
-            <a class="btn btn-primary mt-2" href="javascript: buyit" role="button" style="margin-left:10px">前往結帳</a>
+            <!-- <a class="btn btn-primary mt-2" href="javascript: buyit" role="button" style="margin-left:10px" onclick="login()">前往結帳</a> -->
 
 
         </div>
@@ -143,15 +149,22 @@ if (!empty($_SESSION['cart'])) {
 
     <!-- 這邊是登入會員判斷 -->
     <!-- 登入會員後結帳 -->
-    <div class="row mt-5" style="width:15%; margin-left:auto">
+
+    <div class="row mt-2" style="width:21%; margin-left:auto">
         <div class="col">
             <?php if (isset($_SESSION['member']['account'])) : ?>
-            <!-- <a class="btn btn-danger" href="#">結帳</a>  -->
-                                <!-- //這邊記得要放連結 -->
+
+            <a class="btn btn-danger" href="#">前往結帳</a>  
+                                 <!-- //這邊記得要放連結 -->
+                                
+                <div class="alert alert-warning thanks" role="alert" style="display:none">
+                    感謝您的購買！
+                </div>
 
             <?php else : ?>
-            <div class="alert alert-danger " role="alert">
-                請登入會員後再結帳
+
+            <div class="alert alert-danger notice" role="alert" style="display:none">
+                請登入會員後再結帳 
             </div>
 
             <?php endif; ?>
@@ -170,6 +183,19 @@ if (!empty($_SESSION['cart'])) {
 //             location.href = `event-manage.php`;
 //         }
 //     }
+
+// function login(){
+//     <?php if (isset($_SESSION['member']['account'])) : ?>{
+        
+//     }<?php else : ?> {
+
+//     }
+
+// }
+
+<?php endif; ?>
+
+
 
 
 

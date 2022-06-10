@@ -157,8 +157,10 @@ if (!isset($pageName)) {
                     <!-- 應該釋放會員中心連結, profile頁面加驗證, 如果沒登入就導登入頁? -->
                     <i class="fa-solid fa-circle-user navbar-lefticons <?= $pageName == 'ab-profile' ? 'active' : '' ?>"></i>
                 </a>
+
                 <a href="<?= (isset($_SESSION['member']['account'])) ? "ab-logout.php" : "ab-login.php" ?>" class="<?= (isset($_SESSION['member']['account'])) ? "logInOut" : "logInOut" ?> <?= $pageName == 'ab-login' ? 'active' : '' ?>">
                     <?= (isset($_SESSION['member']['account'])) ? "登出" : "登入|註冊" ?>
+
                 </a>
             </ul>
         </div>
