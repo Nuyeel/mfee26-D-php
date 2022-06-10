@@ -85,7 +85,7 @@ foreach ($rows as $r) {
 
                             <?php foreach ($n->tag as $t) : ?>
                                 <span class="card-text me-2"><?= "#" . $t['tag_name'] ?></span>
-                            <? endforeach; ?>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -93,7 +93,7 @@ foreach ($rows as $r) {
                     </div>
                 </div>
             </div>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </div>
 </div>
 <nav>

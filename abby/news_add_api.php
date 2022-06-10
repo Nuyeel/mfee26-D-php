@@ -91,6 +91,7 @@ if (!empty($_POST['tag_add'])) {
         ]);
 }
 
+if(!empty($_POST['tg_sid'])){
 $output['tg_sid'] = $_POST['tg_sid'];
 
 $checkbox = $_POST['tg_sid'];
@@ -100,7 +101,7 @@ foreach ($checkbox as $c) {
             $newsId,
             $c
         ]);
-}
+}}
 
 $json = json_encode($output, JSON_UNESCAPED_UNICODE);
 echo $json;

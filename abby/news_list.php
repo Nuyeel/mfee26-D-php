@@ -101,7 +101,7 @@ foreach ($rows as $r) {
                         <td>
                             <?php foreach ($n->tag as $t) : ?>
                                 <?= htmlentities($t['tag_name']) ?>
-                            <? endforeach; ?>
+                            <?php endforeach; ?>
                         </td>
 
                         <td>
@@ -110,7 +110,7 @@ foreach ($rows as $r) {
                             </a>
                         </td>
                     </tr>
-                <? endforeach; ?>
+                <?php endforeach; ?>
             </tbody>
 
         </table>
