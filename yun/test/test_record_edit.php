@@ -8,7 +8,8 @@ if (empty($member_sid)) {
     exit;
 }
 
-$row = $pdo->query("SELECT * FROM good_deed_test_record WHERE member_sid=$member_sid")->fetch();
+$row = $pdo->query("SELECT * FROM good_deed_test_record WHERE member_sid = $member_sid")->fetch();
+
 if (empty($row)) {
     header('Location: test_record_list.php');
     exit;
@@ -100,7 +101,7 @@ if (empty($row)) {
 </div>
 <?php include __DIR__ . '/test-parts/test-scripts.php' ?>
 <script>
-    const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE); ?>;
+    // const row = json_encode($row, JSON_UNESCAPED_UNICODE); ;
 
     const q1_re = /^\d$/;
     const q2_re = /^\d$/;
@@ -139,9 +140,10 @@ if (empty($row)) {
 
         // TODO: 欄位檢查, 前端的檢查
         let isPass = true; // 預設是通過檢查的
-        if (account_f.value.length < 6) {
+        
+        if (account_f.value.length < 4) {
             fields[0].classList.add('red');
-            fieldTexts[0].innerText = '帳號至少六個字元以上';
+            fieldTexts[0].innerText = '帳號至少四個字元以上';
             isPass = false;
         }
         if (name_f.value.length < 2) {
@@ -190,16 +192,18 @@ if (empty($row)) {
             method: 'POST',
             body: fd,
         });
+        
         const result = await r.json();
         console.log(result);
-        info_bar.style.display = 'block'; // 顯示訊息列
+        info_bar.style.display = 'block'; 
+        // 顯示訊息列
         if (result.success) {
             info_bar.classList.remove('alert-danger');
             info_bar.classList.add('alert-success');
             info_bar.innerText = '修改成功';
 
             setTimeout(() => {
-                // location.href = 'ab-list.php'; // 跳轉到列表頁
+                location.href = 'test_record_list.php'; // 跳轉到列表頁
             }, 2000);
         } else {
             info_bar.classList.remove('alert-success');

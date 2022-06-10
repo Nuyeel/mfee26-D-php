@@ -2,6 +2,12 @@
 $pageName = 'games_page';
 $title = '積陰德小遊戲';
 
+$rows = [];
+$t_sql = "SELECT COUNT(*) FROM good_deed_games";
+$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+$sql = sprintf("SELECT * FROM good_deed_games ORDER BY sid ASC");
+$rows = $pdo->query($sql)->fetchAll();
+
 ?>
 <?php include __DIR__ . '/test-parts/test-head.php' ?>
 <?php include __DIR__ . '/test-parts/test-nav.php' ?>
