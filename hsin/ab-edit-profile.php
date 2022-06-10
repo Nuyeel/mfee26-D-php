@@ -71,8 +71,8 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
         background-color: rgb(38, 106, 170);
     }
 
-    .col {
-        margin-left: 20%;
+    .row {
+        margin-left: 15%;
         /* margin-right: 50%; */
     }
 </style>
