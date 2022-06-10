@@ -84,11 +84,11 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                     <ul class="list-group list-group-flush format">
                         <li class="list-group-item"><a href="ab-profile.php" style="text-decoration: none; color: #212529">會員中心總覽 </a></li>
                         <li class="list-group-item" style="background-color: #f0f0f0;"><a href="ab-edit-profile.php" style="text-decoration: none; color: rgb(38, 106, 170);">會員資料</a></li>
-                        <li class="list-group-item">訂單總覽</li>
+                        <!-- <li class="list-group-item">訂單總覽</li>
                         <li class="list-group-item">活動紀錄</li>
                         <li class="list-group-item">衣櫥間</li>
                         <li class="list-group-item">常見問題</li>
-                        <li class="list-group-item">我有問題</li>
+                        <li class="list-group-item">我有問題</li> -->
                     </ul>
                 </div>
                 <!-- <div class="card" style="width: 20rem;font-size: 1.2rem;">

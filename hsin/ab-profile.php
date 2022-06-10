@@ -76,6 +76,18 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
         margin-left: 15%;
         /* margin-right: 50%; */
     }
+
+    .icon {
+        text-decoration: none;
+        font-size: 2.6rem;
+        transition: .3s;
+        color: rgb(38, 106, 170);
+        color: rgb(38, 106, 170);
+    }
+
+    .icon:hover {
+        color: #ebd367;
+    }
 </style>
 <div class="container">
     <div class="row">
@@ -85,11 +97,11 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                     <ul class="list-group list-group-flush format">
                         <li class="list-group-item" style="background-color: #f0f0f0;"><a href="ab-profile.php" style="text-decoration: none; color: rgb(38, 106, 170);">會員中心總覽 </a></li>
                         <li class="list-group-item"><a href="ab-edit-profile.php" style="text-decoration: none; color: #212529">會員資料</a></li>
-                        <li class="list-group-item">訂單總覽</li>
+                        <!-- <li class="list-group-item">訂單總覽</li>
                         <li class="list-group-item">活動紀錄</li>
                         <li class="list-group-item">衣櫥間</li>
                         <li class="list-group-item">常見問題</li>
-                        <li class="list-group-item">我有問題</li>
+                        <li class="list-group-item">我有問題</li> -->
                     </ul>
                 </div>
                 <div class="cards_out">
@@ -116,23 +128,23 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                         <div class="cards-2 d-flex justify-content-evenly align-items-center">
                             <div class="card d-flex justify-content-evenly align-items-center" style="width: 18rem;">
                                 <div class="col-md-9 mb-md-0 p-md-4 d-flex flex-row justify-content-center">
-                                    <a href="#" i class="fa-solid fa-earth-asia" style="font-size: 2.5rem; color: rgb(38, 106, 170);"></a>
+                                    <a href="place.php" i class="fa-solid fa-earth-asia icon"></a>
                                 </div>
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title format" style="text-align: center;">立即預訂下一份來生</h5>
                                     <p class="card-text" style="font-size: 1rem; color: #707070;">點擊查看當前熱門轉生地點 ...</p>
-                                    <a href="#" class="btn btn-primary format">開始預約</a>
+                                    <a href="place.php" class="btn btn-primary format">開始預約</a>
                                 </div>
                             </div>
                             <div class="card d-flex justify-content-evenly align-items-center" style="width: 18rem;">
                                 <div class="col-md-9 mb-md-0 p-md-4 d-flex flex-row justify-content-center">
-                                    <a href="#" i class="fa-solid fa-wand-magic-sparkles" style="font-size: 2.5rem; color: rgb(38, 106, 170);"></a>
+                                    <a href="avatar.php" i class="fa-solid fa-wand-magic-sparkles icon"></a>
                                 </div>
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title format" style="text-align: center;">打造您的下一份來生</h5>
                                     </h5>
                                     <p class="card-text" style="font-size: 1rem; color: #707070;">即刻為您的來生打造全新樣貌 ...</p>
-                                    <a href="#" class="btn btn-primary format">開始創建</a>
+                                    <a href="avatar.php" class="btn btn-primary format">開始創建</a>
                                 </div>
                             </div>
                         </div>
