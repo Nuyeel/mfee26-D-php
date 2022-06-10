@@ -1,316 +1,464 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>來生投放所</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <!-- Bootstrap -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous"
+        />
 
-    <style>
+        <!-- google font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+        href="https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap&family=M+PLUS+Rounded+1c:wght@400;700&family=Potta+One&display=swap""
+        rel="stylesheet" />
 
-    *{
-        margin: 0;
-    }
+        <!-- fontawesome -->
+        <link
+            rel="stylesheet"
+            href="../fontawesome-free-6.1.1-web/css/all.min.css"
+        />
 
+        <style>
+            * {
+                margin: 0;
+            }
 
-    /* 背景漸層色 */
-    html{
-        background-color: #69d0ff;
-        background-image: linear-gradient(0deg, #69d0ff 0%, #ffa4e9 100%);
-    }
+            /* 背景漸層色 */
+            html {
+                background-color: #69d0ff;
+                background-image: linear-gradient(
+                    0deg,
+                    #69d0ff 0%,
+                    #ffa4e9 100%
+                );
+            }
 
-    body {
-    position: relative;
-    }
+            body {
+                position: relative;
+            }
 
-    .parent{
-        width:100%;
-        height: 100vh;
-        /* outline:5px solid red; */
-        overflow-x: hidden; 
-        overflow-y: hidden;
-        float:left;
-        position: relative;
-    }
+            .parent {
+                width: 100%;
+                height: 100vh;
+                /* outline:5px solid red; */
+                overflow-x: hidden;
+                overflow-y: hidden;
+                float: left;
+                position: relative;
+            }
 
-    .child{
-        width:200%;
-        height: 300%;
-        float:left;
-        font-size:15px;
-        font-family:arial;
-        padding:10px;
-        cursor: pointer;
-        position: relative;
-}
+            .child {
+                width: 200%;
+                height: 300%;
+                float: left;
+                font-size: 15px;
+                font-family: arial;
+                padding: 10px;
+                cursor: pointer;
+                position: relative;
+            }
 
-.box{
-    /* background-color: rgb(255, 255, 100); */
-    border-radius: 15px;
-    /* outline: 5px solid black; */
-    width: 300px;
-    height: 400px;
-    margin: 20px;
-    z-index: -1;
-}
+            .box {
+                /* background-color: rgb(255, 255, 100); */
+                border-radius: 15px;
+                /* outline: 5px solid black; */
+                width: 300px;
+                height: 400px;
+                margin: 20px;
+                z-index: -1;
+            }
 
-.row{
-    display: flex;
-    flex-wrap: wrap;
-}
+            .row {
+                display: flex;
+                flex-wrap: wrap;
+            }
 
-/* Home鍵 = LOGO鍵 */
-.btn-center{
-    user-select: none; 
-    -webkit-user-drag: none;
-    /* background-color: red; */
-    /* border-radius: 50%; */
-    width: 200px;
-    /* height: 100px; */
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 3;
-    cursor: pointer;
-} 
+            /* Home鍵 = LOGO鍵 */
+            .btn-center {
+                user-select: none;
+                -webkit-user-drag: none;
+                /* background-color: red; */
+                /* border-radius: 50%; */
+                width: 200px;
+                /* height: 100px; */
+                position: fixed;
+                top: 15px;
+                left: 15px;
+                z-index: 3;
+                cursor: pointer;
+            }
 
-
-/* 中心位置 */
-.child_center{
-    border-radius: 15px;
-    /* outline: 5px solid black; */
-    width: 400px;
-    height: 450px;
-    background-color: rgba(255,255,255,.7);
-    /* opacity: 0; */
-    /* width: 50px;
+            /* 中心位置 */
+            .child_center {
+                border-radius: 15px;
+                /* outline: 5px solid black; */
+                width: 400px;
+                height: 450px;
+                background-color: rgba(255, 255, 255, 0.7);
+                /* opacity: 0; */
+                /* width: 50px;
     height: 50px; */
-    /* border-radius: 50%; */
-    position:absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -25px;
-    margin-top: -25px;
-}
+                /* border-radius: 50%; */
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-left: -25px;
+                margin-top: -25px;
+            }
 
+            .navMenu {
+                background-color: #fff;
+                border-radius: 10px;
+                border: 3px solid black;
+                box-shadow: 2px 2px black;
+                width: 110px;
+                height: 40px;
+                position: fixed;
+                right: 40px;
+                top: 40px;
+                z-index: 10;
+                font-size: 24px;
+                font-weight: 900;
+                font-family: "Courier New", Courier, monospace;
+                text-align: center;
+                /* padding-top: 10px; */
+                padding-bottom: 10px;
+                padding-left: 5px;
+                /* padding-right:5px; */
+                letter-spacing: 0.2rem;
+                user-select: none;
+                -webkit-user-drag: none;
+            }
 
-.navMenu{
-    background-color: #fff;
-    border-radius: 10px;
-    border: 3px solid black;
-    box-shadow: 2px 2px black;
-    width: 110px;
-    height: 40px;
-    position: fixed;
-    right: 40px;
-    top: 40px;
-    z-index: 10;
-    font-size: 24px;
-    font-weight: 900;
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center;
-    /* padding-top: 10px; */
-    padding-bottom: 10px;
-    padding-left:5px;
-    /* padding-right:5px; */
-    letter-spacing: 0.2rem;
-    user-select: none; 
-    -webkit-user-drag: none;
-    
-}
+            .robotmother {
+                position: fixed;
+                width: 130px;
+                height: 130px;
+                right: 25px;
+                bottom: 55px;
+                /* outline: 1px solid blue;  */
+            }
 
-.robotmother{
-    position: fixed;
-    width: 130px;
-    height: 130px;
-    right: 25px;
-    bottom: 55px;
-    /* outline: 1px solid blue;  */
-}
+            .robot {
+                position: absolute;
+                width: 130px;
+                height: 130px;
+                /* outline: 1px solid red;  */
+                background: url(./map.img/robot.svg) no-repeat;
+                animation: Updown 0.8s infinite alternate;
+            }
 
+            @keyframes Updown {
+                from {
+                    margin-top: 25px;
+                }
+                to {
+                    margin-top: 10px;
+                }
+            }
 
-.robot{
-    position: absolute;
-    width: 130px;
-    height: 130px;
-    /* outline: 1px solid red;  */
-    background: url(./map.img/robot.svg) no-repeat ;
-    animation: Updown .8s infinite alternate;
-    
-}
+            .navMenu:hover {
+                cursor: pointer;
+            }
 
+            .menulist {
+                position: fixed;
+                right: 40px;
+                top: 120px;
+                z-index: 10;
+                opacity: 0;
+            }
 
-@keyframes Updown {
-    from {
-    margin-top: 25px;
-    }
-    to {
-    margin-top: 10px;
-    }
-    }
+            .nav-item {
+                user-select: none;
+                -webkit-user-drag: none;
+                list-style-type: none;
+                font-weight: bold;
+                font-size: 16px;
+            }
 
-.navMenu:hover{
-    cursor: pointer;
-}
+            .nav-item > a {
+                color: white;
+            }
 
-.menulist{
-    position: fixed;
-    right: 40px;
-    top: 120px;
-    z-index: 10;
-    opacity: 0;
+            .box {
+                /* 禁止元素被反藍選取 */
+                user-select: none;
+                /* 禁止元素被拖拉 */
+                -webkit-user-drag: none;
+            }
 
-}
+            /* 小靈魂們 */
+            .soul-box {
+                width: 480px;
+                height: 170px;
+                /* background-color: rgba(250, 244, 249, 0.434); */
+                position: absolute;
+                top: 52.9%;
+                left: 32%;
+                padding: 20px;
+            }
+            .soul-box > img {
+                opacity: 90%;
+                margin: 2px;
+            }
 
-.nav-item{
-    user-select: none; 
-    -webkit-user-drag: none;
-    list-style-type:none;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.nav-item>a{
-    color: white;
-}
-
-
-.box{
-    /* 禁止元素被反藍選取 */
-    user-select: none; 
-    /* 禁止元素被拖拉 */
-    -webkit-user-drag: none;
-}
-
-.box1{
-    border-radius: 15px;
-    /* outline: 5px solid black; */
-    width: 300px;
-    height: 180px;
-    background-color: rgba(252, 164, 233, 1);
-    /* opacity: 0; */
-    /* width: 50px;
+            /* 最新消息 */
+            .box1 {
+                border-radius: 15px;
+                /* outline: 5px solid black; */
+                width: 300px;
+                height: 180px;
+                background-color: rgba(252, 164, 233, 1);
+                /* opacity: 0; */
+                /* width: 50px;
     height: 50px; */
-    /* border-radius: 50%; */
-    position:absolute;
-    top: 62.5%;
-    left: 39%;
-    margin-left: -25px;
-    margin-top: -25px;
-}
+                /* border-radius: 50%; */
+                position: absolute;
+                top: 62%;
+                left: 39%;
+                margin-left: -25px;
+                margin-top: -25px;
+            }
 
-/* 最新消息 */
-.box1>img:nth-child(1){
-    position:absolute;
-    top: 70px;
-    left: 75px;
-    /* margin-left: -25px; */
-    /* margin-top: -25px; */
-}
-.box1>img:nth-child(2){
-    position:absolute;
-    top: 127px;
-    left: 75px;
-    /* margin-left: -25px; */
-    /* margin-top: -25px; */
-}
+            .box1 > img:nth-child(1) {
+                position: absolute;
+                top: 70px;
+                left: 75px;
+                /* margin-left: -25px; */
+                /* margin-top: -25px; */
+            }
+            .box1 > img:nth-child(2) {
+                position: absolute;
+                top: 127px;
+                left: 75px;
+                /* margin-left: -25px; */
+                /* margin-top: -25px; */
+            }
 
-
-
-.box2{
-    border-radius: 15px;
-    /* outline: 5px solid black; */
-    width: 300px;
-    height: 400px;
-    background-color: rgba(255,255,255,.7);
-    /* opacity: 0; */
-    /* width: 50px;
+            /* 轉生形象 */
+            .box2 {
+                border-radius: 15px;
+                /* outline: 5px solid black; */
+                width: 300px;
+                height: 400px;
+                background-color: rgba(255, 255, 255, 0.7);
+                /* opacity: 0; */
+                /* width: 50px;
     height: 50px; */
-    /* border-radius: 50%; */
-    position:absolute;
-    top: 62.5%;
-    left: 64.5%;
-    margin-left: -25px;
-    margin-top: -25px;
-}
+                /* border-radius: 50%; */
+                position: absolute;
+                top: 62.5%;
+                left: 64.5%;
+                margin-left: -25px;
+                margin-top: -25px;
+                overflow: hidden;
+            }
 
+            .box2 > div.m-title {
+                width: 100%;
+                padding: 10px 30px;
+                text-align: right;
+                font-size: 30px;
+                background-color: rgb(219, 79, 118);
+                color: #fff;
+                font-family: "M PLUS Rounded 1c", sans-serif;
+            }
 
+            .box2 .avatar-p {
+                padding: 20px;
+                text-align: center;
+                color: rgb(183, 99, 123);
+                font-size: 26px;
+                font-family: "M PLUS Rounded 1c", sans-serif;
+            }
+            .box2 > .soul-wrap {
+                position: absolute;
+                bottom: 20px;
+                left: 45px;
+            }
 
+            .child_center > span:nth-child(1) {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                border: 4px solid rgb(112, 206, 254);
+                position: absolute;
+                top: 15px;
+                left: 15px;
+            }
+            .child_center > span:nth-child(2) {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                border: 4px solid rgb(112, 206, 254);
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
+            .child_center > span:nth-child(3) {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                border: 4px solid rgb(112, 206, 254);
+                position: absolute;
+                bottom: 15px;
+                left: 15px;
+            }
+            .child_center > span:nth-child(4) {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                border: 4px solid rgb(112, 206, 254);
+                position: absolute;
+                bottom: 15px;
+                right: 15px;
+            }
 
-.child_center>span:nth-child(1){
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    border: 4px solid rgb(112,206,254);
-    position:absolute;
-    top: 15px;
-    left: 15px;
-}
-.child_center>span:nth-child(2){
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    border: 4px solid rgb(112,206,254);
-    position:absolute;
-    top: 15px;
-    right: 15px;
-}
-.child_center>span:nth-child(3){
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    border: 4px solid rgb(112,206,254);
-    position:absolute;
-    bottom: 15px;
-    left: 15px;
-}
-.child_center>span:nth-child(4){
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    border: 4px solid rgb(112,206,254);
-    position:absolute;
-    bottom: 15px;
-    right: 15px;
-}
+            .child_center > .sep-line {
+                width: 95%;
+                height: 1px;
+                position: absolute;
+                top: -30px;
+                left: 10px;
+                border-bottom: 12px dotted rgba(255, 255, 255, 0.8);
+            }
 
+            /* 中間標題 */
+            .center-title {
+                position: absolute;
+                top: 120px;
+                left: 80px;
+                width: 250px;
+                padding: 20px 0;
+                border-bottom: 6px solid #ebd367;
+                border-top: 6px solid #ebd367;
+            }
 
+            .center-s-title {
+                font-family: "Caveat Brush", cursive;
+                color: rgba(80, 188, 174, 0.8);
+                font-size: 40px;
+            }
 
-    </style>
+            .s-title-top {
+                position: absolute;
+                top: 60px;
+                left: 110px;
+            }
 
-</head>
+            .s-title-bottom {
+                position: absolute;
+                top: 340px;
+                left: 120px;
+            }
 
-<body>
+            /* ufo圖 */
+            .center-ufo {
+                position: absolute;
+                bottom: 60px;
+                right: -140px;
+            }
 
+            /* 良辰吉日 */
+            .box3 {
+                border-radius: 15px;
+                /* outline: 2px solid rgb(255, 255, 255); */
+                width: 320px;
+                height: 220px;
+                background: url("./map.img/place-map.JPG") no-repeat center
+                    center;
+                background-size: 470px 300px;
+                position: absolute;
+                top: 51%;
+                right: 24%;
+                margin-left: -25px;
+                margin-top: -25px;
+            }
 
-    <!-- MENU開合式 -->
-    <div class="navMenu"  onclick="toggleMenu()">MENU</div>
+            .box3 > div.m-title {
+                padding: 4px 20px;
+                width: 320px;
+                text-align: center;
+                background-color: #1f7da9;
+                /* outline: 2px solid rgb(255, 255, 255); */
+                border-radius: 15px;
+                position: absolute;
+                top: -62px;
+                font-size: 30px;
+                color: #fff;
+                font-family: "M PLUS Rounded 1c", sans-serif;
+            }
+            .box3 > div.m-title > i {
+                font-size: 25px;
+            }
 
-    <div class=" menulist">
-        <ul class="">
-            <li class="nav-item mb-1">
-                <a class="nav-link <?= $pageName == 'intro' ? 'active' : '' ?>" href="intro.php">Intro</a>
-            </li>
-            <li class="nav-item mb-1">
-                <a class="nav-link <?= $pageName == 'news' ? 'active' : '' ?>" href="news.php">最新消息</a>
-            </li>
-            <li class="nav-item mb-1">
-                <a class="nav-link <?= $pageName == 'reborn' ? 'active' : '' ?>" href="/mfee26-D-php/proj/avatar.php">轉生形象</a>
-            </li>
-            <li class="nav-item mb-1">
-                <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="/mfee26-D-php/proj/place.php">良辰吉地</a>
-            </li>
-            <li class="nav-item mb-1">
-                <a class="nav-link <?= $pageName == 'activity' ? 'active' : '' ?>" href="/mfee26-D-php/proj/xuan-event-list/npo-list.php">Activity</a>
-            </li>
-            <li class="nav-item mb-1">
-                <a class="nav-link <?= $pageName == 'social' ? 'active' : '' ?>" href="social.php">Social</a>
-            </li>
-            <!-- 設定管理者登入才會出現? -->
-            <li class="nav-item dropdown admin-menu">
+            /* 活動 */
+            .box4 {
+                border-radius: 15px;
+                width: 700px;
+                height: 120px;
+                background-color: rgb(168, 230, 76);
+                position: absolute;
+                top: 72.3%;
+                left: 35%;
+                margin-left: -25px;
+                margin-top: -25px;
+            }
+
+            .box4 > .sep-line {
+                width: 57%;
+                height: 1px;
+                position: absolute;
+                top: -20px;
+                left: 10px;
+                border-bottom: 8px dotted rgba(255, 255, 255, 0.8);
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- MENU開合式 -->
+        <div class="navMenu" onclick="toggleMenu()">MENU</div>
+
+        <div class="menulist">
+            <ul class="">
+                <li class="nav-item mb-1">
+                    <a class="nav-link" href="/mfee26-D-php/proj/news_index.php"
+                        >最新消息</a
+                    >
+                </li>
+                <li class="nav-item mb-1">
+                    <a class="nav-link" href="/mfee26-D-php/proj/avatar.php"
+                        >轉生形象</a
+                    >
+                </li>
+                <li class="nav-item mb-1">
+                    <a class="nav-link" href="/mfee26-D-php/proj/place.php"
+                        >良辰吉地</a
+                    >
+                </li>
+                <li class="nav-item mb-1">
+                    <a
+                        class="nav-link"
+                        href="/mfee26-D-php/proj/xuan-event-manage/npo-list.php"
+                        >Activity</a
+                    >
+                </li>
+
+                <!-- 因為在 html 無法用 php 判定是否為管理員或會員, 管理選單直接先拿掉! -->
+
+                <!-- 設定管理者登入才會出現? -->
+                <!-- <li class="nav-item dropdown admin-menu">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="adminTitle">管理頁面</a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="news-admin.php">最新消息</a></li>
@@ -320,82 +468,170 @@
                     <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-manage.php">主辦單位管理</a></li>
                     <li><a class="dropdown-item" href="member-admin.php">會員管理</a></li>
                 </ul>
-            </li>
-        </ul>
-    </div>
-
-    <!-- 聊天機器人 -->
-    <div class="robotmother">
-        <div class="robot">
-            <!-- <img src="./map.img/robot.svg" alt="" style="width:120px" class="robotimg"> -->
+            </li> -->
+            </ul>
         </div>
-    </div>
 
-
-
-    <div class="parent">
-        <div class="btn-center" id="center" style="text-align:center" >
-            <img src="./map.img/LOGO.svg" alt="" style="width:180px">
-            <img src="./map.img/TITLE2.svg" alt="" style="width:120px;padding-left:15px">
+        <!-- 聊天機器人 -->
+        <div class="robotmother">
+            <div class="robot">
+                <!-- <img src="./map.img/robot.svg" alt="" style="width:120px" class="robotimg"> -->
+            </div>
         </div>
-    
-        <!-- 中心方塊 -->
-        <div class="child">  
-            <div class="child_center"  id="btn">
-                <span ></span>
-                <span ></span>
-                <span ></span>
-                <span ></span>
+
+        <div class="parent">
+            <div class="btn-center" id="center" style="text-align: center">
+                <img src="./map.img/LOGO.svg" alt="" style="width: 180px" />
+                <img
+                    src="./map.img/TITLE2.svg"
+                    alt=""
+                    style="width: 120px; padding-left: 15px"
+                />
             </div>
 
-        <!-- 其他方塊 -->
-                <div class="box box1">
-                    <!-- 最新消息 -->
-                    <img src="./map.img/word-news.svg" alt="" style="width:150px"> 
-                    <img src="./map.img/news.svg" alt="" style="width:80px">
-                    <span></span> 
+            <!-- 中心方塊 -->
+            <div class="child">
+                <div class="child_center" id="btn">
+                    <div class="sep-line"></div>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <h5 class="center-s-title s-title-top">GOODBYE OLD</h5>
+                    <div class="center-title">
+                        <img
+                            src="./map.img/TITLE-mid.svg"
+                            alt=""
+                            style="height: 80px"
+                        />
+                        <img
+                            src="./map.img/TITLE-mid2.svg"
+                            alt=""
+                            style="height: 80px"
+                        />
+                    </div>
+                    <h5 class="center-s-title s-title-bottom">HELLO NEW</h5>
+                    <img
+                        class="center-ufo"
+                        src="./map.img/UFO.svg"
+                        alt=""
+                        style="width: 200px"
+                    />
                 </div>
 
-                <div class="box box2" ></div>
-                <div class="box"></div>
+                <!-- 其他方塊 -->
+                <div class="box box1">
+                    <!-- 最新消息 -->
+                    <img
+                        src="./map.img/word-news.svg"
+                        alt=""
+                        style="width: 150px"
+                    />
+                    <img src="./map.img/news.svg" alt="" style="width: 80px" />
+                    <span></span>
+                </div>
 
+                <!-- small souls -->
+                <div class="box soul-box">
+                    <img src="./map.img/ghost.svg" alt="" style="width: 40px" />
+                    <img src="./map.img/ghost.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-g.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-r.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-b.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-b.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-g.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-r.svg" style="width: 40px" />
+                    <img src="./map.img/ghost.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-b.svg" style="width: 40px" />
+                    <img src="./map.img/ghost.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-p.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-r.svg" style="width: 40px" />
+                    <img src="./map.img/ghost.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-b.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-g.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-p.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-r.svg" style="width: 40px" />
+                    <img src="./map.img/ghost.svg" style="width: 40px" />
+                    <img src="./map.img/ghost.svg" style="width: 40px" />
+                    <img src="./map.img/ghost-p.svg" style="width: 40px" />
+                </div>
+
+                <!-- 形象 -->
+                <div class="box box2">
+                    <div class="m-title">轉生形象</div>
+                    <div class="avatar-p">選擇來世形象<br />迎接美好未來</div>
+                    <div class="soul-wrap">
+                        <img
+                            src="./map.img/soul02.svg"
+                            alt=""
+                            style="width: 50px"
+                        />
+                        <img
+                            src="./map.img/soul01.svg"
+                            alt=""
+                            style="width: 50px"
+                        />
+                        <img
+                            src="./map.img/soul05.svg"
+                            alt=""
+                            style="width: 50px"
+                        />
+                        <img
+                            src="./map.img/soul03.svg"
+                            alt=""
+                            style="width: 50px"
+                        />
+                    </div>
+                </div>
+                <!-- 良辰吉地 -->
+                <div class="box box3">
+                    <div class="m-title">
+                        <i class="fa-solid fa-location-dot"></i> 良辰吉地
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                </div>
+
+                <!-- 活動 -->
+                <div class="box box4">
+                    <div class="sep-line"></div>
+                    <div class="m-title">Activity</div>
+                </div>
+            </div>
         </div>
-    </div>
 
+        <script>
+            // 表格清零
+            function ResetForm() {
+                document.getElementById("FORM1").reset();
+            }
 
+            // <!-- 關係輸入表單 -->
 
+            // 收合功能
+            const openlightbox = () => {
+                const lightbox = document.querySelector(".menulist");
+                lightbox.style.opacity = "1";
+                lightbox.style.visibility = "visible";
+                lightbox.style.transition = ".1s linear";
+                lightbox.style.zIndex = "1";
+            };
 
+            const closelightbox = () => {
+                const lightbox = document.querySelector(".menulist");
+                lightbox.style.opacity = "0";
+                lightbox.style.visibility = "hidden";
+                lightbox.style.transition = ".3s";
+                lightbox.style.zIndex = "-10";
+            };
 
-
-    <script>
-
-    // 表格清零
-    function ResetForm() {
-        document.getElementById("FORM1").reset();
-    }
-
-    // <!-- 關係輸入表單 -->
-
-    // 收合功能
-    const openlightbox = () => {
-        const lightbox = document.querySelector(".menulist");
-        lightbox.style.opacity = '1';
-        lightbox.style.visibility="visible";
-        lightbox.style.transition = '.1s linear';
-        lightbox.style.zIndex = "1";
-
-    }
-
-    const closelightbox = () => {
-        const lightbox = document.querySelector(".menulist");
-        lightbox.style.opacity = '0';
-        lightbox.style.visibility="hidden";
-        lightbox.style.transition = '.3s';
-        lightbox.style.zIndex = "-10";
-    }
-
-    let menuOpened = false;
-    const toggleMenu = () => {
+            let menuOpened = false;
+            const toggleMenu = () => {
                 menuOpened = !menuOpened;
                 if (menuOpened) {
                     openlightbox();
@@ -404,77 +640,72 @@
                 }
             };
 
+            // 背景地圖拖拉功能
+            const slider = document.querySelector(".parent");
+            let mouseDown = false;
+            let startX, scrollLeft;
 
-    // 背景地圖拖拉功能
-    const slider = document.querySelector('.parent');
-    let mouseDown = false;
-    let startX, scrollLeft;
+            // 下面這個自己多加
+            let startY, scrollTop;
 
-    // 下面這個自己多加
-    let startY, scrollTop;
+            // 拖拉 function
+            let startDragging = function (e) {
+                mouseDown = true;
+                startX = e.pageX - slider.offsetLeft;
+                // 下面這個多加
+                startY = e.pageY - slider.offsetTop;
+                scrollLeft = slider.scrollLeft;
+                // 下面這個多加
+                scrollTop = slider.scrollTop;
+            };
 
-    // 拖拉 function
-    let startDragging = function (e) {
-    mouseDown = true;
-    startX = e.pageX - slider.offsetLeft;
-    // 下面這個多加
-    startY = e.pageY - slider.offsetTop;
-    scrollLeft = slider.scrollLeft;
-    // 下面這個多加
-    scrollTop = slider.scrollTop;
-    };
+            // 停掉function
+            let stopDragging = function (event) {
+                mouseDown = false;
+            };
 
-    // 停掉function 
-    let stopDragging = function (event) {
-    mouseDown = false;
-    };
+            slider.addEventListener("mousemove", (e) => {
+                e.preventDefault();
+                if (!mouseDown) {
+                    return;
+                }
+                const x = e.pageX - slider.offsetLeft;
+                const scroll = x - startX;
+                slider.scrollLeft = scrollLeft - scroll;
 
-    slider.addEventListener('mousemove', (e) => {
-    e.preventDefault();
-    if(!mouseDown) { return; }
-    const x = e.pageX - slider.offsetLeft;
-    const scroll = x - startX;
-    slider.scrollLeft = scrollLeft - scroll;
+                const y = e.pageY - slider.offsetLeft;
+                const scrolly = y - startY;
+                slider.scrollTop = scrollTop - scrolly;
+            });
 
-    const y = e.pageY - slider.offsetLeft;
-    const scrolly = y -startY;
-    slider.scrollTop = scrollTop - scrolly;
-    });
+            // Add the event listeners
+            slider.addEventListener("mousedown", startDragging, false);
+            slider.addEventListener("mouseup", stopDragging, false);
+            slider.addEventListener("mouseleave", stopDragging, false);
+        </script>
 
-// Add the event listeners
-slider.addEventListener('mousedown', startDragging, false);
-slider.addEventListener('mouseup', stopDragging, false);
-slider.addEventListener('mouseleave', stopDragging, false);
-    </script>
+        <!-- 回到中心點 -->
+        <script>
+            const btncenter = document.getElementById("center");
+            const element = document.getElementById("btn");
+            btncenter.addEventListener("click", function () {
+                element.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                    inline: "center",
+                });
+            });
+        </script>
 
-
-<!-- 回到中心點 -->
-<script>
-        const btncenter = document.getElementById("center");
-        const element = document.getElementById("btn");
-        btncenter.addEventListener("click", function () {
-        element.scrollIntoView({
-            behavior:"smooth",
-            block:"center",
-            inline:"center",
-        });
-        });
-</script>
-
-<script>
-// 起始畫面定位在中間
-window.onload = function () {
-    element.scrollIntoView({
-    behavior: "instant",
-    block:"center",
-    inline:"center",
-        });
-}
-
-
-
-</script>
-
-
-</body>
+        <script>
+            // 起始畫面定位在中間
+            window.onload = function () {
+                element.scrollIntoView({
+                    behavior: "instant",
+                    block: "center",
+                    inline: "center",
+                });
+            };
+        </script>
+    </body>
 </html>
