@@ -287,7 +287,7 @@ $title = '濟善救世公司-良辰吉地';
 <?php include __DIR__ . "./parts/scripts.php" ?>
 
 <script>
-    let data;
+    let place_data;
     let page = +location.search.slice(6);
     let sort = 0; // 預設
 
@@ -300,7 +300,7 @@ $title = '濟善救世公司-良辰吉地';
                 `;
     };
 
-    const renderPagination = (page, totalPages = data.totalPages, prevPagesNum = 5) => {
+    const renderPagination = (page, totalPages = place_data.totalPages, prevPagesNum = 5) => {
         pNumOutput = paginationNum(page, totalPages, prevPagesNum);
 
         let beginPage = pNumOutput[0];
@@ -395,8 +395,8 @@ $title = '濟善救世公司-良辰吉地';
     function renderTable() {
         const placeArea = document.querySelector("#placeArea");
         let html = "";
-        if (data.rows && data.rows.length) {
-            html = data.rows.map((r) => renderRow(r)).join("");
+        if (place_data.rows && place_data.rows.length) {
+            html = place_data.rows.map((r) => renderRow(r)).join("");
         }
         placeArea.innerHTML = html;
     }
@@ -407,7 +407,7 @@ $title = '濟善救世公司-良辰吉地';
         fetch("place-list-api.php?page=1&sort=0")
             .then((response) => response.json())
             .then((obj) => {
-                data = obj;
+                place_data = obj;
                 renderTable();
                 renderPagination(1);
                 history.pushState(page, "", "?page=" + 1);
@@ -417,7 +417,7 @@ $title = '濟善救世公司-良辰吉地';
         fetch(`place-list-api.php?page=${page}&sort=${sort}`)
             .then((response) => response.json())
             .then((obj) => {
-                data = obj;
+                place_data = obj;
                 renderTable();
                 renderPagination(page);
                 history.pushState(page, "", "?page=" + page);
@@ -433,7 +433,7 @@ $title = '濟善救世公司-良辰吉地';
         fetch(`place-list-api.php?page=${page}&sort=${sort}`)
             .then((r) => r.json())
             .then((obj) => {
-                data = obj;
+                place_data = obj;
                 renderTable();
                 renderPagination(page);
 
@@ -483,14 +483,14 @@ $title = '濟善救世公司-良辰吉地';
             body: fd
         });
         const result = await r.json();
-        data = result;
+        place_data = result;
         page = 1;
-        console.log(data);
+        console.log(place_data);
 
         renderTable();
         renderPagination();
 
-        if (data.success == false) {
+        if (place_data.success == false) {
             const nodata = document.querySelector("#nodata");
             nodata.innerHTML = "篩選區間沒有可顯示資料";
         } else {
@@ -506,9 +506,9 @@ $title = '濟善救世公司-良辰吉地';
             body: fd
         });
         const result = await r.json();
-        data = result;
+        place_data = result;
         page = 1;
-        console.log(data.rows);
+        console.log(place_data.rows);
 
         renderTable();
         renderPagination();
@@ -526,7 +526,7 @@ $title = '濟善救世公司-良辰吉地';
             fetch('place-list-api.php?sort=1')
                 .then((response) => response.json())
                 .then((obj) => {
-                    data = obj;
+                    place_data = obj;
                     renderTable();
                     renderPagination(page);
                     history.pushState(page, "", "?page=" + 1);
@@ -536,7 +536,7 @@ $title = '濟善救世公司-良辰吉地';
             fetch('place-list-api.php?sort=2')
                 .then((response) => response.json())
                 .then((obj) => {
-                    data = obj;
+                    place_data = obj;
                     renderTable();
                     renderPagination(page);
                     history.pushState(page, "", "?page=" + 1);
