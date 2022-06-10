@@ -18,20 +18,80 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
 <?php include __DIR__ . '/parts-2/html-head-2.php' ?>
 <?php include __DIR__ . '/parts-2/navbar-3.php' ?>
 <style>
-    .form-control.red {
-        border: 1px solid red;
+    body {
+        background-color: #69d0ff;
+        background-image: linear-gradient(0deg, #69d0ff 0%, #ffa4e9 100%);
+        background-position: 100%;
+        background-repeat: no-repeat;
     }
 
-    .form-text.red {
-        color: red;
+    .format {
+        font-size: 18px;
+        font-weight: 600;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+    .format2 {
+        font-size: 18px;
+        font-weight: 600;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        color: rgb(38, 106, 170);
+    }
+
+    .format3 {
+        font-size: 20px;
+        font-weight: 600;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        color: rgb(38, 106, 170);
+    }
+
+    .pb-4 {
+        background-color: rgba(255, 255, 255, 0.6);
+        background-position: 100%;
+        background-repeat: no-repeat;
+    }
+
+    .btn-primary {
+        background-color: rgb(38, 106, 170);
+    }
+
+    .btn-primary:hover {
+        background-color: #fff;
+        color: rgb(38, 106, 170);
+    }
+
+    .btn-outline-primary {
+        border-color: rgb(38, 106, 170);
+        ;
+        color: rgb(38, 106, 170);
+    }
+
+    .btn-outline-primary:hover {
+        color: #fff;
+        background-color: rgb(38, 106, 170);
+    }
+
+    .row {
+        margin-left: 15%;
+        /* margin-right: 50%; */
     }
 </style>
-<br>
 <div class="container">
     <div class="row">
         <div class="col">
             <div class="card_2 d-flex">
-                <div class="card" style="width: 20rem;font-size: 1.2rem;">
+                <div class="card" style="width: 20rem; font-size: 1.2rem;">
+                    <ul class="list-group list-group-flush format">
+                        <li class="list-group-item"><a href="ab-profile.php" style="text-decoration: none; color: #212529">會員中心總覽 </a></li>
+                        <li class="list-group-item" style="background-color: #f0f0f0;"><a href="ab-edit-profile.php" style="text-decoration: none; color: rgb(38, 106, 170);">會員資料</a></li>
+                        <!-- <li class="list-group-item">訂單總覽</li>
+                        <li class="list-group-item">活動紀錄</li>
+                        <li class="list-group-item">衣櫥間</li>
+                        <li class="list-group-item">常見問題</li>
+                        <li class="list-group-item">我有問題</li> -->
+                    </ul>
+                </div>
+                <!-- <div class="card" style="width: 20rem;font-size: 1.2rem;">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><a href="ab-profile.php" style="text-decoration: none; color: #212529">會員中心總覽 </a></li>
                         <li class="list-group-item" style="background-color: #f0f0f0;"><a href="ab-edit-profile.php" style="text-decoration: none; color: #0d6efd;">會員資料</a></li>
@@ -41,43 +101,43 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                         <li class="list-group-item">常見問題</li>
                         <li class="list-group-item">我有問題</li>
                     </ul>
-                </div>
+                </div> -->
                 <div class="card" style="width: 28rem;">
                     <div class="card-body ">
-                        <h5 class="card-title">修改會員資料</h5>
+                        <h5 class="card-title format3">修改會員資料</h5>
                         <br>
                         <form name="form1" onsubmit="sendData();return false;" novalidate>
                             <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
                             <div class="mb-3">
-                                <label for="account" class="form-label">使用者帳戶</label>
+                                <label for="account" class="form-label format">使用者帳戶</label>
                                 <input type="text" class="form-control" id="account" name="account" value="<?= htmlentities($row['account']) ?>" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">會員名稱</label>
+                                <label for="name" class="form-label format">會員名稱</label>
                                 <input type="text" class="form-control" id="name" name="name" required value="<?= htmlentities($row['name']) ?>">
                                 <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="birthdate" class="form-label">出生日</label>
+                                <label for="birthdate" class="form-label format">出生日</label>
                                 <input type="date" class="form-control" id="birthdate" name="birthdate" value="<?= htmlentities($row['birthdate']) ?>">
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="deathdate" class="form-label">死亡日</label>
+                                <label for="deathdate" class="form-label format">死亡日</label>
                                 <input type="date" class="form-control" id="deathdate" name="deathdate" value="<?= htmlentities($row['deathdate']) ?>">
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="mobile" class="form-label">手機號碼</label>
+                                <label for="mobile" class="form-label format">手機號碼</label>
                                 <input type="text" class="form-control" id="mobile" name="mobile" pattern="09\d{8}" value="<?= htmlentities($row['mobile']) ?>">
                                 <div class="form-text red"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">電子信箱</label>
+                                <label for="email" class="form-label format">電子信箱</label>
                                 <input type="email" class="form-control" id="email" name="email" value="<?= htmlentities($row['email']) ?>">
                                 <div class="form-text red"></div>
                             </div>
-                            <button type="submit" class="btn btn-outline-primary" style="margin-left: 40%; margin-top: 3%">確定修改</button>
+                            <button type="submit" class="btn btn-outline-primary format2" style="margin-left: 40%; margin-top: 3%">確定修改</button>
                         </form>
                         <br>
                         <div id="info-bar" class="alert alert-success" role="alert" style="display:none;">

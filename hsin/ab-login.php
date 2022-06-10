@@ -6,7 +6,7 @@ $title = '註冊會員 - 靈魂轉生平台';
 <?php include __DIR__ . '/parts-2/html-head-2.php' ?>
 <?php include __DIR__ . '/parts-2/navbar-2.php' ?>
 <style>
-    body {
+    /* body {
         background-color: #69d0ff;
         background-image: linear-gradient(0deg, #69d0ff 0%, #ffa4e9 100%);
         background-position: 100%;
@@ -17,6 +17,26 @@ $title = '註冊會員 - 靈魂轉生平台';
         background-color: rgba(255, 255, 255, 0.6);
         background-position: 100%;
         background-repeat: no-repeat;
+    } */
+
+    /* background-color: rgb(38, 106, 170); */
+
+    .format {
+        font-size: 18px;
+        font-weight: 600;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+    .format2 {
+        font-size: 18px;
+        font-weight: 600;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        color: rgb(38, 106, 170);
+    }
+
+    .area {
+        font-size: 18px;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     }
 
     .form-control.red {
@@ -26,34 +46,44 @@ $title = '註冊會員 - 靈魂轉生平台';
     .form-text.red {
         color: red;
     }
+
+    .login {
+        color: rgb(38, 106, 170);
+        border-color: rgb(38, 106, 170);
+    }
+
+    .login:hover {
+        background-color: rgb(38, 106, 170);
+        color: #fff;
+    }
 </style>
 <div class="container">
     <div class="row">
         <div class="col">
             <!-- <section class="pb-4"> -->
             <div class="border rounded-5">
-                <section class="w-100 p-4 d-flex justify-content-center pb-4">
+                <section class="w-100 p-4 d-flex justify-content-center pb-4 area">
                     <div style="width: 26rem;">
                         <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="ab-login.php" role="tab" aria-controls="pills-login" aria-selected="true">登入</a>
+                                <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="ab-login.php" role="tab" aria-controls="pills-login" aria-selected="true" style="background-color: rgb(38, 106, 170);">登入</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="tab-register" data-mdb-toggle="pill" href="ab-register.php" role="tab" aria-controls="pills-register" aria-selected="false">註冊</a>
+                                <a class="nav-link format" id="tab-register" data-mdb-toggle="pill" href="ab-register.php" role="tab" aria-controls="pills-register" aria-selected="false" style="color: rgb(38, 106, 170);">註冊</a>
                             </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade active show"" id=" pills-login" role="tabpanel" aria-labelledby="tab-login">
                                 <form name="form1" onsubmit="sendData();return false;" novalidate>
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="loginName">使用者帳戶</label>
+                                        <label class="form-label format2" for="loginName">使用者帳戶</label>
                                         <input type="text" id="loginName" class="form-control" name="account" required />
                                         <div class="form-text red"></div>
                                     </div>
 
                                     <!-- Password input -->
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="loginPassword">密碼</label>
+                                        <label class="form-label format2" for="loginPassword">密碼</label>
                                         <input type="password" id="loginPassword" class="form-control" name="password" required />
                                         <div class="form-text red"></div>
                                     </div>
@@ -63,31 +93,31 @@ $title = '註冊會員 - 靈魂轉生平台';
                                         <div class="col-md-6 d-flex justify-content-center">
                                             <!-- Checkbox -->
                                             <div class="form-check mb-3 mb-md-0">
-                                                <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
+                                                <input class="form-check-input" type="checkbox" value="" id="loginCheck" style="background-color: rgb(38, 106, 170);" checked />
                                                 <label class="form-check-label" for="loginCheck"> 記得我 </label>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6 d-flex justify-content-center">
                                             <!-- Simple link -->
-                                            <a href="#!">忘記密碼</a>
+                                            <a href="#!" style="color: rgb(38, 106, 170);">忘記密碼</a>
                                         </div>
                                     </div>
                                     <div class="d-grid gap-2">
-                                        <button type="submit" class="btn btn-outline-primary" type="button">登入</button>
+                                        <button type="submit" class="btn btn-outline-primary login format2" type="button">登入</button>
                                     </div>
                                     <br>
                                 </form>
                             </div>
                             <div class="text-center mb-3">
                                 <p>以其他方式登入：</p>
-                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                <button type="button" class="btn btn-link btn-floating mx-1" style="color: rgb(38, 106, 170);">
                                     <i class="fab fa-facebook-f"></i>
                                 </button>
-                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                <button type="button" class="btn btn-link btn-floating mx-1" style="color: rgb(38, 106, 170);">
                                     <i class="fab fa-google"></i>
                                 </button>
-                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                <button type="button" class="btn btn-link btn-floating mx-1" style="color: rgb(38, 106, 170);">
                                     <i class="fab fa-twitter"></i>
                                 </button>
                             </div>
@@ -102,7 +132,7 @@ $title = '註冊會員 - 靈魂轉生平台';
                             <br>
                             <!-- Register buttons -->
                             <div class="text-center">
-                                <p>還不是會員？<a href="ab-register.php">點我註冊</a></p>
+                                <p>還不是會員？<a href="ab-register.php" style="color: rgb(38, 106, 170);">點我註冊</a></p>
                             </div>
 
                             <br>

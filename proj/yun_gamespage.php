@@ -1,4 +1,6 @@
-<?php require __DIR__ . '/test-parts/connect_data.php';
+<?php require __DIR__ . "./parts/connect_db.php"; ?>
+
+<?php
 $pageName = 'games_page';
 $title = '積陰德小遊戲';
 
@@ -9,9 +11,8 @@ $sql = sprintf("SELECT * FROM good_deed_games ORDER BY sid ASC");
 $rows = $pdo->query($sql)->fetchAll();
 
 ?>
-<?php include __DIR__ . '/test-parts/test-head.php' ?>
-<?php include __DIR__ . '/test-parts/test-nav.php' ?>
-
+<?php include __DIR__ . './parts/html-head.php' ?>
+<?php include __DIR__ . './parts/navbar.php' ?>
 
 <style>
     .container{
@@ -77,6 +78,6 @@ $rows = $pdo->query($sql)->fetchAll();
 
     </div>
 
-    <?php include __DIR__ . '/test-parts/test-scripts.php' ?>
+    <?php include __DIR__ . './parts/scripts.php' ?>
 <script>
-<?php include __DIR__ . '/test-parts/test-foot.php' ?>
+<?php include __DIR__ . './parts/html-foot.php' ?>

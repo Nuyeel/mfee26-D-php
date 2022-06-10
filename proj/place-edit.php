@@ -23,9 +23,8 @@ if (empty($row)) {
 ?>
 
 
-<?php include __DIR__ . "/../parts/html-head.php" ?>
-<link rel="stylesheet" href="/../fontawesome-free-6.1.1-web/css/all.min.css">
-<?php include __DIR__ . "/../parts/navbar.php" ?>
+<?php include __DIR__ . "./parts/html-head.php" ?>
+<?php include __DIR__ . "./parts/navbar.php" ?>
 
 
 <div class="container">
@@ -86,7 +85,7 @@ if (empty($row)) {
 </div>
 
 
-<?php include __DIR__ . "/../parts/scripts.php" ?>
+<?php include __DIR__ . "./parts/scripts.php" ?>
 <script>
     const infoBar = document.querySelector('#infoBar');
 
@@ -173,4 +172,4 @@ if (empty($row)) {
     }
 </script>
 
-<?php include __DIR__ . "/../parts/html-foot.php" ?>
+<?php include __DIR__ . "./parts/html-foot.php" ?>

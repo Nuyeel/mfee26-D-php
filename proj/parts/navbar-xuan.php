@@ -152,24 +152,30 @@ if (!isset($pageName)) {
                             <li><a class="dropdown-item" href="/mfee26-D-php/proj/place-admin.php">良辰吉地-管理</a></li>
                             <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/npo-act-add.php">活動-新增</a></li>
                             <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/event-manage.php">活動-管理</a></li>
-                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/npo-act-add.php">NPO-新增</a></li>
+                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-add.php">NPO-新增</a></li>
                             <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-manage.php">NPO-管理</a></li>
                             <li><a class="dropdown-item" href="/mfee26-D-php/proj/ab-list.php">會員-管理</a></li>
+                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/test_record_list.php">陰德值測驗-管理</a></li>
                         </ul>
                     </li>
                 <?php } ?>
             </ul>
             <ul class="navbar-nav navbar-icon mb-2 mb-lg-0">
-                <a href="/mfee26-D-php/proj/xuan-event-manage/cart-list.php">
+
+                <!-- 購物車數量 -->
+                <!-- <div id="cart_amount" style="width:20px;height:20px;border-radius:50%;background-color:white;margin-right:10px;text-align:center;font-weight:bold"></div> -->
+
+                <a href="/mfee26-D-php/proj/xuan-event-manage/cart-list.php" class="zx-cart-parent">
                     <i class="fa-solid fa-cart-shopping navbar-lefticons"></i>
                 </a>
-                <a href="ab-profile.php" title="會員中心">
+                
+                <a href="../ab-profile.php" title="會員中心">
                     <!-- 要放登入頁面還是會員中心? -->
                     <!-- 應該釋放會員中心連結, profile頁面加驗證, 如果沒登入就導登入頁? -->
                     <i class="fa-solid fa-circle-user navbar-lefticons <?= $pageName == 'ab-profile' ? 'active' : '' ?>"></i>
                 </a>
 
-                <a href="<?= (isset($_SESSION['member']['account'])) ? "ab-logout.php" : "ab-login.php" ?>" class="logInOut <?= $pageName == 'ab-login' ? 'active' : '' ?>">
+                <a href="<?= (isset($_SESSION['member']['account'])) ? "../ab-logout.php" : "../ab-login.php" ?>" class="logInOut <?= $pageName == 'ab-login' ? 'active' : '' ?>">
                     <?= (isset($_SESSION['member']['account'])) ? "登出" : "登入|註冊" ?>
 
                 </a>

@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/test-parts/connect_data.php';
+require __DIR__ . "./parts/connect_db.php";
 header('Content-Type: application/json');
 
 $output = [
@@ -36,12 +36,12 @@ $sql = "UPDATE `good_deed_test_record` SET `test_Q1`=?,`test_Q2`=?,`test_Q3`=?,`
 $stmt = $pdo->prepare($sql);
 
 $stmt->execute([
-  $q1,
-  $q2,
-  $q3,
-  $q4,
-  $q5,
-  $score
+    $q1,
+    $q2,
+    $q3,
+    $q4,
+    $q5,
+    $score
 ]);
 
 
@@ -54,4 +54,4 @@ if ($stmt->rowCount() == 1) {
 
 echo json_encode($output, JSON_UNESCAPED_UNICODE);
 
-
+?>

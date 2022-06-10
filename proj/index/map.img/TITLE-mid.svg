@@ -1,0 +1,22 @@
+<svg id="圖層_1" data-name="圖層 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 529.52 104.19">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        font-size: 100.47px;
+        fill: #50bcae;
+        font-family: KFhimaji-90ms-RKSJ-H, KFhimaji;
+      }
+
+      .cls-1 {
+        letter-spacing: -0.02em;
+      }
+
+      .cls-2 {
+        letter-spacing: 0.08em;
+      }
+    </style>
+  </defs>
+  <g>
+    <text class="cls-1" transform="translate(55 88.41)">來生</text>
+  </g>
+</svg>

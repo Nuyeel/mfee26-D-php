@@ -1,14 +1,15 @@
-<?php require __DIR__ . '/test-parts/connect_data.php';
+<?php require __DIR__ . "./parts/connect_db.php";
 $pageName = 'record-edit';
 $title = '編輯會員資料';
 
-$member_sid = isset($_GET['member_sid']) ? intval($_GET['member_sid']) : 0;
+$member_sid = isset($_SESSION['member']['sid']) ? intval($_SESSION['member']['sid']) : 0;
+
 if (empty($member_sid)) {
     header('Location: test_record_list.php');
     exit;
 }
 
-$row = $pdo->query("SELECT * FROM good_deed_test_record WHERE member_sid = $member_sid")->fetch();
+$row = $pdo->query("SELECT * FROM `good_deed_test_record` WHERE `member_sid` = $member_sid")->fetch();
 
 if (empty($row)) {
     header('Location: test_record_list.php');
@@ -18,8 +19,8 @@ if (empty($row)) {
 
 
 ?>
-<?php include __DIR__ . '/test-parts/test-head.php' ?>
-<?php include __DIR__ . '/test-parts/test-nav.php' ?>
+<?php include __DIR__ . './parts/html-head.php' ?>
+<?php include __DIR__ . './parts/navbar.php' ?>
 <style>
     .form-control.red {
         border: 1px solid red;
@@ -100,7 +101,7 @@ if (empty($row)) {
     </div>
 
 </div>
-<?php include __DIR__ . '/test-parts/test-scripts.php' ?>
+<?php include __DIR__ . './parts/scripts.php' ?>
 <script>
     // const row = json_encode($row, JSON_UNESCAPED_UNICODE); ;
 
@@ -218,4 +219,4 @@ if (empty($row)) {
 
     }
 </script>
-<?php include __DIR__ . '/test-parts/test-foot.php' ?>
+<?php include __DIR__ . './parts/html-foot.php' ?>

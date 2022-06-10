@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 $pageName = 'cart';
 $title = '購物車列表';
 // require '/../parts/connect_db.php';
@@ -36,7 +36,8 @@ if (!empty($_SESSION['cart'])) {
 
 ?>
 <?php include __DIR__ . '/../parts/html-head.php' ?>
-<?php include __DIR__ . '/../parts/navbar.php' ?>
+<?php include __DIR__ . '/../parts/navbar-xuan.php' ?>
+
 <div class="container mt-5" style="text-align:center">
     <div class="row">
         <div class="col">
@@ -140,7 +141,7 @@ if (!empty($_SESSION['cart'])) {
             </div>
 
             <a class="btn btn-warning text-white mt-2" href="npo-list.php" role="button" style="margin-left:10px">繼續選購</a>
-            <a class="btn btn-primary mt-2" href="javascript: buyit" role="button" style="margin-left:10px" onclick="login()">前往結帳</a>
+            <a class="btn btn-primary" id="zxCartBtn" href="#" role="button" style="margin-left:10px">前往結帳</a>
 
 
         </div>
@@ -273,5 +274,22 @@ const removeItem = event => {
     }, 'json');
 
 }
+
+// coolpillow's part starts here.
+
+const zxCartBtn = document.querySelector('#zxCartBtn');
+
+const zxActCart = async () => {
+    const fetchUrl = 'cart-order.php';
+    const r = await fetch(fetchUrl);
+    
+    const result = await r.json();
+    console.log(result);
+}
+
+zxCartBtn.addEventListener('click', zxActCart, false);
+
+// coolpillow's part ends.
+
 </script>
 <?php include __DIR__ . '/../parts/html-foot.php' ?>
