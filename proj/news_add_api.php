@@ -91,15 +91,17 @@ if (!empty($_POST['tag_add'])) {
         ]);
 }
 
-$output['tg_sid'] = $_POST['tg_sid'];
+if (!empty($_POST['tg_sid'])) {
+    $output['tg_sid'] = $_POST['tg_sid'];
 
-$checkbox = $_POST['tg_sid'];
-foreach ($checkbox as $c) {
-    $stmt = $pdo->prepare($t_sql)
-        ->execute([
-            $newsId,
-            $c
-        ]);
+    $checkbox = $_POST['tg_sid'];
+    foreach ($checkbox as $c) {
+        $stmt = $pdo->prepare($t_sql)
+            ->execute([
+                $newsId,
+                $c
+            ]);
+    }
 }
 
 $json = json_encode($output, JSON_UNESCAPED_UNICODE);

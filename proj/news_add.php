@@ -67,9 +67,9 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
                                 <label class="form-check-label" for="">
                                     <?= $o['type_name'] ?>
                                 </label>
-                                <div class="form-text red"></div>
                             </div>
                         <?php endforeach; ?>
+                        <div id="type" class="form-text red"></div>
                     </div>
                 </div>
 
@@ -79,6 +79,7 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
                         <input type="file" id="img" class="form-control" name="img" accept="image/*" onchange="changeImg()">
                         <div id="imgwrap" class="">
                         </div>
+                        <div id="imgtext" class="form-text red"></div>
                     </div>
                 </div>
 
@@ -144,6 +145,7 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
     const topic_f = document.form1.topic;
     const eventtime_f = document.form1.event_time;
     const type_f = document.form1.type_sid;
+    const img_f = document.form1.img;
     const location_f = document.form1.location_sid;
     const content_f = document.form1.content;
     const publishdate_f = document.form1.publish_date;
@@ -177,12 +179,6 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
         reader.readAsDataURL(file);
     }
 
-
-
-    //echo json_encode($_FILES);
-
-
-
     async function checkData() {
 
         for (let i in fields) {
@@ -200,6 +196,10 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
             }
         }
 
+        //console.log(img_f.value)
+
+        type.innerText = '';
+
         let isPass = true;
 
 
@@ -216,11 +216,23 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
             isPass = false;
         }
 
-        // if (eventtype_f.value == 0) {
-        //     fields[2].classList.add('red');
-        //     fieldTexts[2].innerText = '請選擇類型';
-        //     isPass = false;
-        // }
+        if (type_f.value == '') {
+            const type = document.querySelector('#type');
+            type.innerText = '請選擇類型';
+            isPass = false;
+        }
+
+        if (img_f.file == undefined) {
+            const imgtext = document.querySelector('#imgtext');
+            imgtext.innerText = '請上傳圖片';
+            isPass = false;
+        }
+
+        if (img_f.value) {
+            const imgtext = document.querySelector('#imgtext');
+            imgtext.innerText = '';
+            isPass = true;
+        }
 
         if (location_f.value == '') {
             fields[3].classList.add('red');
@@ -238,6 +250,7 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
             fieldTexts[5].innerText = '請選擇發佈時間';
             isPass = false;
         }
+
         if (!isPass) {
             return;
         }
@@ -251,7 +264,6 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
             })
             .then(result => {
                 console.log(result);
-
                 info_bar.style.display = 'block';
 
                 if (result.success) {
@@ -261,7 +273,7 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
                         location.href = 'news_index.php';
                     }, 1000);
                 } else {
-                    nfo_bar.classList.remove('alert-success');
+                    info_bar.classList.remove('alert-success');
                     info_bar.classList.add('alert-danger');
                     info_bar.innerText = result.error || '資料沒有修改';
                 }
@@ -271,12 +283,5 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
                 console.log(r)
             });
     }
-
-    // function addTag() {
-    //     const tagGroup = document.querySelector('#tag_group');
-    //     const tagDiv = document.querySelector('#tag_div');
-
-    //     tagDiv.appendChild(tagGroup.cloneNode(true));
-    // }
 </script>
 <?php include __DIR__ . '/parts/html-foot.php' ?>

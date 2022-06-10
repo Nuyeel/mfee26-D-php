@@ -25,10 +25,10 @@ WHERE news.sid = $sid")->fetchAll();
 
 //print_r($tagselected);`
 
-// if (empty($row)) {
-//     header('Location:news_list.php');
-//     exit;
-// }
+if (empty($row)) {
+    header('Location:news_list.php');
+    exit;
+}
 
 $opt = $pdo->query('SELECT * FROM `type`')->fetchAll();
 $loc = $pdo->query('SELECT * FROM `location`')->fetchAll();
@@ -62,10 +62,11 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
 
     }
 </style>
+
 <div class="container">
     <div class="card" style="width: 50rem; margin:30px auto 0 auto;">
         <div class="card-body">
-            <h5 class="card-title">編輯最新消息</h5>
+            <h5 class="card-title">新增最新消息</h5>
             <form name="form1" onsubmit="checkData();return false;" novalidate>
                 <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
                 <div class="row mb-3">
@@ -93,9 +94,9 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
                                 <label class="form-check-label" for="">
                                     <?= $o['type_name'] ?>
                                 </label>
-                                <div class="form-text red"></div>
                             </div>
                         <?php endforeach; ?>
+                        <div id="type" class="form-text red"></div>
                     </div>
                 </div>
 
@@ -105,7 +106,7 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
                         <input type="hidden" name="oldimg">
                         <input type="file" id="img" class="form-control" name="img" accept="image/*" onchange="changeImg()">
                         <div id="imgwrap" class="imgwrap mt-3">
-                            <img class="img" name="simg" src="/img/uploaded/<?= $row['img'] ?>" alt="">
+                            <img class="img" name="simg" src="./uploaded/<?= $row['img'] ?>" alt="">
                         </div>
                     </div>
                 </div>
@@ -177,6 +178,7 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
     const topic_f = document.form1.topic;
     const eventtime_f = document.form1.event_time;
     const type_f = document.form1.type_sid;
+    const img_f = document.form1.img;
     const location_f = document.form1.location_sid;
     const content_f = document.form1.content;
     const publishdate_f = document.form1.publish_date;
@@ -209,12 +211,6 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
         reader.readAsDataURL(file);
     }
 
-
-
-    //echo json_encode($_FILES);
-
-
-
     async function checkData() {
 
         for (let i in fields) {
@@ -232,6 +228,8 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
             }
         }
 
+        const type = document.querySelector('#type');
+        type.innerText = '';
         let isPass = true;
 
 
@@ -248,11 +246,12 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
             isPass = false;
         }
 
-        // if (eventtype_f.value == 0) {
-        //     fields[2].classList.add('red');
-        //     fieldTexts[2].innerText = '請選擇類型';
-        //     isPass = false;
-        // }
+        if (type_f.value == '') {
+            type.innerText = '請選擇類型';
+            isPass = false;
+        }
+
+
 
         if (location_f.value == '') {
             fields[3].classList.add('red');
@@ -292,11 +291,10 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
                         location.href = 'news_index.php';
                     }, 1000);
                 } else {
-                    nfo_bar.classList.remove('alert-success');
+                    info_bar.classList.remove('alert-success');
                     info_bar.classList.add('alert-danger');
                     info_bar.innerText = result.error || '資料沒有修改';
                 }
-
 
             }).catch(r => {
 
@@ -304,4 +302,5 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
             });
     }
 </script>
+
 <?php include __DIR__ . '/parts/html-foot.php' ?>

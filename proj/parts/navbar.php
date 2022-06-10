@@ -40,15 +40,15 @@ if (!isset($pageName)) {
     }
 
 
-    a.nav-link {
+    a.main-nav-link {
         color: #fff;
         font-size: 18px;
         margin-left: 10px;
         transition: .2s;
     }
 
-    a.nav-link:hover,
-    .navbar .navbar-nav .nav-link.active {
+    a.main-nav-link:hover,
+    .navbar .navbar-nav .main-nav-link.active {
         color: #ebd367;
         background-color: rgba(0, 0, 0, 0);
     }
@@ -76,8 +76,19 @@ if (!isset($pageName)) {
         color: #ebd367;
     }
 
+    .admin-menu {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 2px;
+        margin: 0 18px;
+    }
+
+    .admin-menu:hover {
+        background-color: #ccc;
+    }
+
     #adminTitle {
-        color: red;
+        color: #266aaa;
     }
 
     .logInOut {
@@ -93,7 +104,7 @@ if (!isset($pageName)) {
     }
 </style>
 
-<nav class="navbar navbar-expand-lg -navbar-light -bg-light nav-bg py-0 px-5">
+<nav class="navbar navbar-expand-lg -navbar-light -bg-light nav-bg py-0 px-5" style="height: 85px;">
     <div class="container-fluid">
 
 
@@ -110,7 +121,7 @@ if (!isset($pageName)) {
             <div class="d-flex align-items-center justify-content-center">
                 <img src="/mfee26-D-php/proj/index/map.img/LOGO.svg" alt="" style="height: 75px" />
                 <img src="/mfee26-D-php/proj/index/map.img/TITLE2.svg" alt="" style="height: 30px;" />
-            
+
             </div>
         </a>
 
@@ -120,16 +131,16 @@ if (!isset($pageName)) {
         <div class="collapse navbar-collapse align-items-end" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link pb-0 <?= $pageName == 'news_index' ? 'active' : '' ?>" href="/mfee26-D-php/proj/news_index.php">最新消息</a>
+                    <a class="nav-link main-nav-link pb-0 <?= $pageName == 'news_index' ? 'active' : '' ?>" href="/mfee26-D-php/proj/news_index.php">最新消息</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link pb-0 <?= $pageName == 'avatar' ? 'active' : '' ?>" href="/mfee26-D-php/proj/avatar.php">轉生形象</a>
+                    <a class="nav-link main-nav-link pb-0 <?= $pageName == 'avatar' ? 'active' : '' ?>" href="/mfee26-D-php/proj/avatar.php">轉生形象</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link pb-0 <?= $pageName == 'place' ? 'active' : '' ?>" href="/mfee26-D-php/proj/place.php">良辰吉地</a>
+                    <a class="nav-link main-nav-link pb-0 <?= $pageName == 'place' ? 'active' : '' ?>" href="/mfee26-D-php/proj/place.php">良辰吉地</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link pb-0 <?= $pageName == 'npo-list' ? 'active' : '' ?>" href="/mfee26-D-php/proj/xuan-event-manage/npo-list.php">Activity</a>
+                    <a class="nav-link main-nav-link pb-0 <?= $pageName == 'npo-list' ? 'active' : '' ?>" href="/mfee26-D-php/proj/xuan-event-manage/npo-list.php">Activity</a>
                 </li>
                 <!-- 設定管理者登入才會出現? -->
                 <?php if (isset($_SESSION['member']['account']) and $_SESSION['member']['account'] == 'Admin') { ?>
@@ -142,7 +153,7 @@ if (!isset($pageName)) {
                             <li><a class="dropdown-item" href="place-admin.php">良辰吉地-管理</a></li>
                             <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/npo-act-add.php">活動-新增</a></li>
                             <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/event-manage.php">活動-管理</a></li>
-                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-add.php">NPO-新增</a></li>
+                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-act-add.php">NPO-新增</a></li>
                             <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-manage.php">NPO-管理</a></li>
                             <li><a class="dropdown-item" href="ab-list.php">會員-管理</a></li>
                         </ul>
@@ -159,7 +170,7 @@ if (!isset($pageName)) {
                     <i class="fa-solid fa-circle-user navbar-lefticons <?= $pageName == 'ab-profile' ? 'active' : '' ?>"></i>
                 </a>
 
-                <a href="<?= (isset($_SESSION['member']['account'])) ? "ab-logout.php" : "ab-login.php" ?>" class="<?= (isset($_SESSION['member']['account'])) ? "logInOut" : "logInOut" ?> <?= $pageName == 'ab-login' ? 'active' : '' ?>">
+                <a href="<?= (isset($_SESSION['member']['account'])) ? "ab-logout.php" : "ab-login.php" ?>" class="logInOut <?= $pageName == 'ab-login' ? 'active' : '' ?>">
                     <?= (isset($_SESSION['member']['account'])) ? "登出" : "登入|註冊" ?>
 
                 </a>
