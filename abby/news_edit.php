@@ -91,9 +91,9 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
                                 <label class="form-check-label" for="">
                                     <?= $o['type_name'] ?>
                                 </label>
-                                <div class="form-text red"></div>
                             </div>
-                        <?php endforeach; ?>
+                            <?php endforeach; ?>
+                            <div id="type" class="form-text red"></div>
                     </div>
                 </div>
 
@@ -173,6 +173,7 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
     const topic_f = document.form1.topic;
     const eventtime_f = document.form1.event_time;
     const type_f = document.form1.type_sid;
+    const img_f = document.form1.img;
     const location_f = document.form1.location_sid;
     const content_f = document.form1.content;
     const publishdate_f = document.form1.publish_date;
@@ -222,6 +223,7 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
             }
         }
 
+        const type = document.querySelector('#type');
         type.innerText = '';
         let isPass = true;
 
@@ -240,22 +242,11 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
         }
 
         if (type_f.value == '') {
-            const type = document.querySelector('#type');
             type.innerText = '請選擇類型';
             isPass = false;
         }
 
-        if (img_f.file == undefined ) {
-            const imgtext = document.querySelector('#imgtext');
-            imgtext.innerText = '請上傳圖片';
-            isPass = false;
-        }
-
-        if (img_f.value) {
-            const imgtext = document.querySelector('#imgtext');
-            imgtext.innerText = '';
-            isPass = true;
-        }
+    
 
         if (location_f.value == '') {
             fields[3].classList.add('red');
