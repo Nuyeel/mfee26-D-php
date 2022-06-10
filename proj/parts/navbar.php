@@ -45,8 +45,16 @@ if (!isset($pageName)) {
         }
     }
 
-    .navbar-icon>a>i {
+
+    .navbar-lefticons {
         color: #33A5DB;
+        font-size: 20px;
+        margin-right: 5px;
+        transition: .5s;
+    }
+
+    .navbar-lefticons:hover {
+        color: #226787;
     }
 
     #adminTitle {
@@ -101,16 +109,21 @@ if (!isset($pageName)) {
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/event-manage.php">活動-管理</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-add.php">NPO-新增</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-manage.php">NPO-管理</a></li>
-                        <li><a class="dropdown-item" href="member-admin.php">會員管理</a></li>
+                        <li><a class="dropdown-item" href="ab-list.php">會員管理</a></li>
                     </ul>
                 </li>
             </ul>
             <ul class="navbar-nav navbar-icon mb-2 mb-lg-0">
                 <a href="cart.php">
-                    <i class="fa-solid fa-cart-shopping"></i>
+                    <i class="fa-solid fa-cart-shopping navbar-lefticons"></i>
                 </a>
-                <a href="member.php">
-                    <i class="fa-solid fa-circle-user"></i>
+                <a href="ab-profile.php" title="會員中心">
+                    <!-- 要放登入頁面還是會員中心? -->
+                    <!-- 應該釋放會員中心連結, profile頁面加驗證, 如果沒登入就導登入頁? -->
+                    <i class="fa-solid fa-circle-user navbar-lefticons"></i>
+                </a>
+                <a href="ab-logout.php" title="會員登出">
+                    <i class="fa-solid fa-right-from-bracket navbar-lefticons"></i>
                 </a>
             </ul>
         </div>
