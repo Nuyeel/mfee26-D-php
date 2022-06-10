@@ -6,8 +6,10 @@ $title = '會員中心 - 來生投放所';
 
 
 
-
-if (!$_SESSION['member']['account']) {
+if ($_SESSION['member']['account'] == 'Admin') {
+    header('location:ab-list.php');
+    // exit;
+} else if (!$_SESSION['member']['account']) {
     header('location:ab-login.php');
     // exit;
 }
@@ -69,7 +71,7 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title" style="text-align: center;">立即預訂下一份來生</h5>
                                 <p class="card-text" style="font-size: 1rem; color: #707070;">點擊查看當前熱門轉生地點 ...</p>
-                                <a href="#" class="btn btn-primary">開始預約</a>
+                                <a href="place.php" class="btn btn-primary">開始預約</a>
                             </div>
                         </div>
                         <div class="card d-flex justify-content-evenly align-items-center" style="width: 18rem;">
@@ -80,7 +82,7 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                                 <h5 class="card-title" style="text-align: center;">打造您的下一份來生</h5>
                                 </h5>
                                 <p class="card-text" style="font-size: 1rem; color: #707070;">即刻為您的來生打造全新樣貌 ...</p>
-                                <a href="#" class="btn btn-primary">開始創建</a>
+                                <a href="avatar.php" class="btn btn-primary">開始創建</a>
                             </div>
                         </div>
                     </div>

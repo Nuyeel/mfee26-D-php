@@ -110,6 +110,7 @@ if (!isset($pageName)) {
                     <a class="nav-link <?= $pageName == 'social' ? 'active' : '' ?>" href="social.php">Social</a>
                 </li>
                 <!-- 設定管理者登入才會出現? -->
+                <?php if (isset($_SESSION['member']['account']) and $_SESSION['member']['account'] == 'Admin') { ?>
                 <li class="nav-item dropdown admin-menu">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="adminTitle">管理頁面</a>
                     <ul class="dropdown-menu">
@@ -124,6 +125,7 @@ if (!isset($pageName)) {
                         <li><a class="dropdown-item" href="ab-list.php">會員管理</a></li>
                     </ul>
                 </li>
+                <?php } ?>
             </ul>
             <ul class="navbar-nav navbar-icon mb-2 mb-lg-0">
                 <a href="/mfee26-D-php/proj/xuan-event-manage/cart-list.php">
@@ -134,11 +136,16 @@ if (!isset($pageName)) {
                     <!-- 應該釋放會員中心連結, profile頁面加驗證, 如果沒登入就導登入頁? -->
                     <i class="fa-solid fa-circle-user navbar-lefticons"></i>
                 </a>
+<<<<<<< HEAD
                 <a href="/mfee26-D-php/proj/ab-logout.php" class="logInOut">
                     登入|註冊
                 </a>
                 <a href="/mfee26-D-php/proj/ab-logout.php" class="logInOut">
                     登出
+=======
+                <a href=<?= (isset($_SESSION['member']['account'])) ? "ab-logout.php" : "ab-login.php"?> class=<?= (isset($_SESSION['member']['account'])) ? "logInOut" : "logInOut"?>>
+                <?= (isset($_SESSION['member']['account'])) ? "登出" : "登入|註冊"?>
+>>>>>>> 07011d9b90ef299bac5b3d09f062290c1898930e
                 </a>
             </ul>
         </div>
