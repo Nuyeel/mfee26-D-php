@@ -6,8 +6,10 @@ $title = '會員中心 - 來生投放所';
 
 
 
-
-if (!$_SESSION['member']['account']) {
+if ($_SESSION['member']['account'] == 'Admin') {
+    header('location:ab-list.php');
+    // exit;
+} else if (!$_SESSION['member']['account']) {
     header('location:ab-login.php');
     // exit;
 }

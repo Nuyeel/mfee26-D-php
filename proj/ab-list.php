@@ -97,19 +97,19 @@ if ($totalRows > 0) {
                         */ ?>
 
                         <a href="javascript: delete_it(<?= $r['sid'] ?>)">
-                            <i class="fa-solid fa-trash-can" style="color: #5E5E5E"></i>
+                            <i class="fa-solid fa-trash-can text-primary" style="color: #5E5E5E"></i>
                         </a>
                     </td>
                     <td><?= $r['sid'] ?></td>
                     <td><?= htmlentities($r['name']) ?></td>
-                    <td style="color: #00f"><?= $r['account'] ?></td>
+                    <td class="text-primary"><?= $r['account'] ?></td>
                     <td><?= $r['email'] ?></td>
                     <td><?= $r['mobile'] ?></td>
                     <td><?= $r['birthdate'] ?></td>
                     <td><?= $r['deathdate'] ?></td>
                     <td>
                         <a href="ab-edit.php?sid=<?= $r['sid'] ?>">
-                            <i class="fa-solid fa-pen-to-square" style="color: #5E5E5E"></i>
+                            <i class="fa-solid fa-pen-to-square text-primary" style="color: #5E5E5E"></i>
                         </a>
                     </td>
                 </tr>
@@ -122,7 +122,7 @@ if ($totalRows > 0) {
 <?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
     function delete_it(sid) {
-        if (confirm(`< 刪除警示 > 確定要刪除第 ${sid} 欄的資料嗎？`)) {
+        if (confirm(`< 刪除警示 > 確定要刪除會員編號 #${sid} 的資料嗎？`)) {
             location.href = `ab-delete.php?sid=${sid}`;
         }
     }
