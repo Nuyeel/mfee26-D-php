@@ -153,9 +153,10 @@ if (!isset($pageName)) {
                             <li><a class="dropdown-item" href="place-admin.php">良辰吉地-管理</a></li>
                             <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/npo-act-add.php">活動-新增</a></li>
                             <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/event-manage.php">活動-管理</a></li>
-                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/npo-act-add.php">NPO-新增</a></li>
+                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-add.php">NPO-新增</a></li>
                             <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-manage.php">NPO-管理</a></li>
                             <li><a class="dropdown-item" href="ab-list.php">會員-管理</a></li>
+                            <li><a class="dropdown-item" href="test_record_list.php">陰德值測驗-管理</a></li>
                         </ul>
                     </li>
                 <?php } ?>
