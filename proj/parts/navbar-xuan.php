@@ -146,15 +146,15 @@ if (!isset($pageName)) {
                     <li class="nav-item dropdown admin-menu">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="adminTitle">管理頁面</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="news_add.php">最新消息-新增</a></li>
-                            <li><a class="dropdown-item" href="news_list.php">最新消息-管理</a></li>
-                            <li><a class="dropdown-item" href="reborn-admin.php">轉生形象</a></li>
-                            <li><a class="dropdown-item" href="place-admin.php">良辰吉地-管理</a></li>
+                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/news_add.php">最新消息-新增</a></li>
+                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/news_list.php">最新消息-管理</a></li>
+                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/reborn-admin.php">轉生形象</a></li>
+                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/place-admin.php">良辰吉地-管理</a></li>
                             <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/npo-act-add.php">活動-新增</a></li>
                             <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/event-manage.php">活動-管理</a></li>
-                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-act-add.php">NPO-新增</a></li>
+                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/npo-act-add.php">NPO-新增</a></li>
                             <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-manage.php">NPO-管理</a></li>
-                            <li><a class="dropdown-item" href="ab-list.php">會員-管理</a></li>
+                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/ab-list.php">會員-管理</a></li>
                         </ul>
                     </li>
                 <?php } ?>
