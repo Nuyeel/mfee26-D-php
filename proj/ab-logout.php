@@ -9,6 +9,11 @@ unset($_SESSION['member']['birthdate']);
 unset($_SESSION['member']['deathdate']);
 unset($_SESSION['member']['mobile']);
 unset($_SESSION['member']['email']);
+
+unset($_SESSION['cart']);
+
+// session_abort();
+
 header('location:ab-login.php');
 
 // if (isset($_POST['logout']) && $_POST['logout'] == "true") {
