@@ -108,8 +108,9 @@ if (!isset($pageName)) {
         <!-- <a class="navbar-brand" href="/mfee26-D-php/proj/index/mapdrag.html">濟善救世公司</a> -->
         <a class="navbar-brand" href="/mfee26-D-php/proj/index/mapdrag.html">
             <div class="d-flex align-items-center justify-content-center">
-                <img src="./index/map.img/LOGO.svg" alt="" style="height: 75px" />
-                <img src="./index/map.img/TITLE2.svg" alt="" style="height: 30px;" />
+                <img src="/mfee26-D-php/proj/index/map.img/LOGO.svg" alt="" style="height: 75px" />
+                <img src="/mfee26-D-php/proj/index/map.img/TITLE2.svg" alt="" style="height: 30px;" />
+            
             </div>
         </a>
 
