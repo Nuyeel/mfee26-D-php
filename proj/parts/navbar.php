@@ -60,6 +60,17 @@ if (!isset($pageName)) {
     #adminTitle {
         color: red;
     }
+
+    .logInOut {
+        color: #777;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .logInOut:hover {
+        color: #226787;
+    }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -84,7 +95,7 @@ if (!isset($pageName)) {
                     <a class="nav-link <?= $pageName == 'intro' ? 'active' : '' ?>" href="intro.php">Intro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'news' ? 'active' : '' ?>" href="news.php">最新消息</a>
+                    <a class="nav-link <?= $pageName == 'news' ? 'active' : '' ?>" href="news_index.php">最新消息</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= $pageName == 'reborn' ? 'active' : '' ?>" href="/mfee26-D-php/proj/avatar.php">轉生形象</a>
@@ -99,12 +110,14 @@ if (!isset($pageName)) {
                     <a class="nav-link <?= $pageName == 'social' ? 'active' : '' ?>" href="social.php">Social</a>
                 </li>
                 <!-- 設定管理者登入才會出現? -->
+                <?php if (isset($_SESSION['member']['account']) and $_SESSION['member']['account'] == 'Admin') { ?>
                 <li class="nav-item dropdown admin-menu">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="adminTitle">管理頁面</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="news-admin.php">最新消息</a></li>
+                        <li><a class="dropdown-item" href="news_list.php">管理最新消息</a></li>
+                        <li><a class="dropdown-item" href="news_add.php">新增最新消息</a></li>
                         <li><a class="dropdown-item" href="reborn-admin.php">轉生形象</a></li>
-                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/place-admin.php">良辰吉地</a></li>
+                        <li><a class="dropdown-item" href="place-admin.php">良辰吉地</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/npo-act-add.php">活動-新增</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/event-manage.php">活動-管理</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-add.php">NPO-新增</a></li>
@@ -112,9 +125,10 @@ if (!isset($pageName)) {
                         <li><a class="dropdown-item" href="ab-list.php">會員管理</a></li>
                     </ul>
                 </li>
+                <?php } ?>
             </ul>
             <ul class="navbar-nav navbar-icon mb-2 mb-lg-0">
-                <a href="cart.php">
+                <a href="/mfee26-D-php/proj/xuan-event-manage/cart-list.php">
                     <i class="fa-solid fa-cart-shopping navbar-lefticons"></i>
                 </a>
                 <a href="ab-profile.php" title="會員中心">
@@ -122,8 +136,8 @@ if (!isset($pageName)) {
                     <!-- 應該釋放會員中心連結, profile頁面加驗證, 如果沒登入就導登入頁? -->
                     <i class="fa-solid fa-circle-user navbar-lefticons"></i>
                 </a>
-                <a href="ab-logout.php" title="會員登出">
-                    <i class="fa-solid fa-right-from-bracket navbar-lefticons"></i>
+                <a href=<?= (isset($_SESSION['member']['account'])) ? "ab-logout.php" : "ab-login.php"?> class=<?= (isset($_SESSION['member']['account'])) ? "logInOut" : "logInOut"?>>
+                <?= (isset($_SESSION['member']['account'])) ? "登出" : "登入|註冊"?>
                 </a>
             </ul>
         </div>
