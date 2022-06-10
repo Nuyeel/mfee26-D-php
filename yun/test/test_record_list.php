@@ -100,7 +100,7 @@ if ($totalRows > 0) {
       <?php foreach ($rows as $r) : ?>
         <tr>
           <td>
-            <a href="javascript: delete_it(<?= $r['sid'] ?>)">
+            <a href="javascript: delete_it(<?= $r['member_sid'] ?>)">
               <i class="fa-solid fa-trash-can"></i>
             </a>
           </td>
@@ -117,7 +117,7 @@ if ($totalRows > 0) {
           <td><?= $r['test_score'] ?></td>
 
           <td>
-            <a href="test-edit.php?sid=<?= $r['sid'] ?>">
+            <a href="test_record_edit.php?member_sid=<?= $r['member_sid'] ?>">
               <i class="fa-solid fa-pen-to-square"></i>
             </a>
           </td>
@@ -136,7 +136,7 @@ if ($totalRows > 0) {
 <script>
   function delete_it(member_sid) {
     if (confirm(`確定要刪除編號為 ${member_sid} 的資料嗎?`)) {
-      location.href = `test-delete.php?sid=${member_sid}`;
+      location.href = `test_record_delete.php?member_sid=${member_sid}`;
     }
   }
 </script>

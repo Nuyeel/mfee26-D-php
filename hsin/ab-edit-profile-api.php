@@ -13,7 +13,13 @@ $sid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
 $name = $_POST['name'];
 $birthdate = empty($_POST['birthdate']) ? NULL : $_POST['birthdate'];
 $deathdate = empty($_POST['deathdate']) ? NULL : $_POST['deathdate'];
-$mobile = $_POST['mobile'] ?? '';
+if (isset($_POST['mobile'])) {
+    $mobileReceive = $_POST['mobile'];
+    $mobileFormalized = str_replace('-', '', $mobileReceive);
+    $mobile = $mobileFormalized;
+} else {
+    $mobile = '';
+}
 $email = $_POST['email'] ?? '';
 
 if (!empty($email) and filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
