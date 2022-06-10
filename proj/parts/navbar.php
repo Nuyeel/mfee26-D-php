@@ -101,7 +101,7 @@ if (!isset($pageName)) {
                     <a class="nav-link <?= $pageName == 'reborn' ? 'active' : '' ?>" href="/mfee26-D-php/proj/avatar.php">轉生形象</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="place.php">良辰吉地</a>
+                    <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="/mfee26-D-php/proj/place.php">良辰吉地</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= $pageName == 'activity' ? 'active' : '' ?>" href="/mfee26-D-php/proj/xuan-event-manage/npo-list.php">Activity</a>
@@ -126,7 +126,7 @@ if (!isset($pageName)) {
                 </li>
             </ul>
             <ul class="navbar-nav navbar-icon mb-2 mb-lg-0">
-                <a href="cart.php">
+                <a href="/mfee26-D-php/proj/xuan-event-manage/cart-list.php">
                     <i class="fa-solid fa-cart-shopping navbar-lefticons"></i>
                 </a>
                 <a href="ab-profile.php" title="會員中心">
