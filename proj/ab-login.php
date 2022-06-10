@@ -1,8 +1,8 @@
 <?php require __DIR__ . "./parts/connect_db.php" ?>
 
 <?php
-$pageName = 'login';
-$title = '會員登入 - 靈魂轉生平台';
+$pageName = 'ab-login';
+$title = '會員登入 - 來生投放所';
 ?>
 
 <?php include __DIR__ . "./parts/html-head.php" ?>
@@ -24,14 +24,14 @@ $title = '會員登入 - 靈魂轉生平台';
                 <div class="bg-white border rounded-5">
                     <section class="w-100 p-4 d-flex justify-content-center pb-4">
                         <div style="width: 26rem;">
-                            <!-- <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="ab-login.php" role="tab" aria-controls="pills-login" aria-selected="true">登入</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="tab-register" data-mdb-toggle="pill" href="ab-register.php" role="tab" aria-controls="pills-register" aria-selected="false">註冊</a>
                                 </li>
-                            </ul> -->
+                            </ul>
                             <div class="tab-content">
                                 <div class="tab-pane fade active show"" id=" pills-login" role="tabpanel" aria-labelledby="tab-login">
                                     <form name="form1" onsubmit="sendData();return false;" novalidate>

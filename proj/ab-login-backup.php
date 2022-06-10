@@ -1,10 +1,11 @@
-<?php require __DIR__ . '/parts-2/connect_db-2.php';
-$pageName = 'ab-login';
-$title = '註冊會員 - 靈魂轉生平台';
+<?php require __DIR__ . "./parts/connect_db.php";
+// $pageName = 'ab-login';
+// $title = '註冊會員 - 來生投放所';
 
 ?>
-<?php include __DIR__ . '/parts-2/html-head-2.php' ?>
-<?php include __DIR__ . '/parts-2/navbar-2.php' ?>
+<?php include __DIR__ . "./parts/html-head.php" ?>
+<?php include __DIR__ . "./parts/navbar.php" ?>
+
 <style>
     .form-control.red {
         border: 1px solid red;
@@ -104,7 +105,9 @@ $title = '註冊會員 - 靈魂轉生平台';
     </div>
 </div>
 </div>
-<?php include __DIR__ . '/parts-2/scripts-2.php' ?>
+
+<?php include __DIR__ . "./parts/scripts.php" ?>
+
 <script>
     const info_bar = document.querySelector('#info-bar');
 
@@ -165,4 +168,5 @@ $title = '註冊會員 - 靈魂轉生平台';
         }
     }
 </script>
-<?php include __DIR__ . '/parts-2/html-foot-2.php' ?>
+
+<?php include __DIR__ . "./parts/html-foot.php" ?>

@@ -10,7 +10,6 @@ if (!isset($pageName)) {
         font-weight: 800;
         border-radius: 5px;
     }
-
 </style>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
@@ -36,6 +35,12 @@ if (!isset($pageName)) {
                     <li class="nav-item">
                         <a class="nav-link <?= $pageName == 'ab-profile' ? 'active' : '' ?>" href="ab-profile.php">會員中心</a>
                     </li> -->
+                </ul>
+                <ul class="navbar-nav ">
+                    <li class="nav-item">
+                        <a class="nav-link" <?= $pageName == 'ab-logout' ? 'active' : '' ?> href="ab-logout.php">管理員登出</a>
+                        <!-- <a class="nav-link" onclick="logout(); return false;" <?= $pageName == 'ab-logout' ? 'active' : '' ?> href="ab-logout.php">會員登出</a> -->
+                    </li>
                 </ul>
             </div>
         </div>

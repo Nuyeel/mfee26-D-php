@@ -35,6 +35,24 @@ if (!isset($pageName)) {
         border-radius: 5px;
     }
 
+    .nav-bg {
+        background-color: #266aaa;
+    }
+
+
+    a.nav-link {
+        color: #fff;
+        font-size: 18px;
+        margin-left: 10px;
+        transition: .2s;
+    }
+
+    a.nav-link:hover,
+    .navbar .navbar-nav .nav-link.active {
+        color: #ebd367;
+        background-color: rgba(0, 0, 0, 0);
+    }
+
     .navbar-icon>a+a {
         padding-left: 1px;
     }
@@ -45,17 +63,38 @@ if (!isset($pageName)) {
         }
     }
 
-    .navbar-icon>a>i {
-        color: #33A5DB;
+
+    .navbar-lefticons {
+        color: #fff;
+        font-size: 20px;
+        margin-right: 5px;
+        transition: .5s;
+    }
+
+    .navbar-lefticons:hover,
+    .navbar-lefticons.active {
+        color: #ebd367;
     }
 
     #adminTitle {
         color: red;
     }
+
+    .logInOut {
+        color: #fff;
+        text-decoration: none;
+        font-size: 17px;
+        font-weight: bold;
+    }
+
+    .logInOut:hover,
+    .logInOut.active {
+        color: #50bcae;
+    }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid py-2">
+<nav class="navbar navbar-expand-lg -navbar-light -bg-light nav-bg py-0 px-5">
+    <div class="container-fluid">
 
 
 
@@ -66,51 +105,62 @@ if (!isset($pageName)) {
 
 
 
-        <a class="navbar-brand" href="/mfee26-D-php/proj/index/mapdrag.html">濟善救世公司</a>
+        <!-- <a class="navbar-brand" href="/mfee26-D-php/proj/index/mapdrag.html">濟善救世公司</a> -->
+        <a class="navbar-brand" href="/mfee26-D-php/proj/index/mapdrag.html">
+            <div class="d-flex align-items-center justify-content-center">
+                <img src="./index/map.img/LOGO.svg" alt="" style="height: 75px" />
+                <img src="./index/map.img/TITLE2.svg" alt="" style="height: 30px;" />
+            </div>
+        </a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse align-items-end" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'intro' ? 'active' : '' ?>" href="intro.php">Intro</a>
+                    <a class="nav-link pb-0 <?= $pageName == 'news_index' ? 'active' : '' ?>" href="/mfee26-D-php/proj/news_index.php">最新消息</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'news' ? 'active' : '' ?>" href="news.php">最新消息</a>
+                    <a class="nav-link pb-0 <?= $pageName == 'avatar' ? 'active' : '' ?>" href="/mfee26-D-php/proj/avatar.php">轉生形象</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'reborn' ? 'active' : '' ?>" href="/mfee26-D-php/proj/avatar.php">轉生形象</a>
+                    <a class="nav-link pb-0 <?= $pageName == 'place' ? 'active' : '' ?>" href="/mfee26-D-php/proj/place.php">良辰吉地</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="/mfee26-D-php/proj/place.php">良辰吉地</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'activity' ? 'active' : '' ?>" href="/mfee26-D-php/proj/xuan-event-manage/npo-list.php">Activity</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'social' ? 'active' : '' ?>" href="social.php">Social</a>
+                    <a class="nav-link pb-0 <?= $pageName == 'npo-list' ? 'active' : '' ?>" href="/mfee26-D-php/proj/xuan-event-manage/npo-list.php">Activity</a>
                 </li>
                 <!-- 設定管理者登入才會出現? -->
-                <li class="nav-item dropdown admin-menu">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="adminTitle">管理頁面</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="news-admin.php">最新消息</a></li>
-                        <li><a class="dropdown-item" href="reborn-admin.php">轉生形象</a></li>
-                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/place-admin.php">良辰吉地</a></li>
-                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/npo-act-add.php">活動-新增</a></li>
-                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/event-manage.php">活動-管理</a></li>
-                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-add.php">NPO-新增</a></li>
-                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-manage.php">NPO-管理</a></li>
-                        <li><a class="dropdown-item" href="member-admin.php">會員管理</a></li>
-                    </ul>
-                </li>
+                <?php if (isset($_SESSION['member']['account']) and $_SESSION['member']['account'] == 'Admin') { ?>
+                    <li class="nav-item dropdown admin-menu">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" id="adminTitle">管理頁面</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="news_add.php">最新消息-新增</a></li>
+                            <li><a class="dropdown-item" href="news_list.php">最新消息-管理</a></li>
+                            <li><a class="dropdown-item" href="reborn-admin.php">轉生形象</a></li>
+                            <li><a class="dropdown-item" href="place-admin.php">良辰吉地-管理</a></li>
+                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/npo-act-add.php">活動-新增</a></li>
+                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/event-manage.php">活動-管理</a></li>
+                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-add.php">NPO-新增</a></li>
+                            <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-manage.php">NPO-管理</a></li>
+                            <li><a class="dropdown-item" href="ab-list.php">會員-管理</a></li>
+                        </ul>
+                    </li>
+                <?php } ?>
             </ul>
             <ul class="navbar-nav navbar-icon mb-2 mb-lg-0">
-                <a href="cart.php">
-                    <i class="fa-solid fa-cart-shopping"></i>
+                <a href="/mfee26-D-php/proj/xuan-event-manage/cart-list.php">
+                    <i class="fa-solid fa-cart-shopping navbar-lefticons"></i>
                 </a>
-                <a href="member.php">
-                    <i class="fa-solid fa-circle-user"></i>
+                <a href="ab-profile.php" title="會員中心">
+                    <!-- 要放登入頁面還是會員中心? -->
+                    <!-- 應該釋放會員中心連結, profile頁面加驗證, 如果沒登入就導登入頁? -->
+                    <i class="fa-solid fa-circle-user navbar-lefticons <?= $pageName == 'ab-profile' ? 'active' : '' ?>"></i>
+                </a>
+
+                <a href="<?= (isset($_SESSION['member']['account'])) ? "ab-logout.php" : "ab-login.php" ?>" class="<?= (isset($_SESSION['member']['account'])) ? "logInOut" : "logInOut" ?> <?= $pageName == 'ab-login' ? 'active' : '' ?>">
+                    <?= (isset($_SESSION['member']['account'])) ? "登出" : "登入|註冊" ?>
+
                 </a>
             </ul>
         </div>

@@ -10,16 +10,34 @@ $output = [
     'error' => ''
 ];
 
-$mid = '1';
-// $eyes = $_POST['eyes'];
-// $eyeColor = $_POST['eyeColor'];
+$mid = $_POST['mid'];
+$eyes = $_POST['eyes'];
+$nose = $_POST['nose'];
+$mouth = $_POST['mouth'];
+$ear = $_POST['ear'];
+$hair = $_POST['hair'];
 
-// $combination = [
-//     'eyes' => $eyes,
-//     'eyeColor' => $eyeColor
-// ];
+$eyesColor = $_POST['eyesColor'];
+$noseColor = $_POST['noseColor'];
+$mouthColor = $_POST['mouthColor'];
+$earColor = $_POST['earColor'];
+$hairColor = $_POST['hairColor'];
 
-$combinationJSON = json_encode($_POST, JSON_UNESCAPED_UNICODE);
+
+$combination = [
+    'eyes' => $eyes,
+    'nose' => $nose,
+    'mouth' => $mouth,
+    'ear' => $ear,
+    'hair' => $hair,
+    'eyesColor' => $eyesColor,
+    'noseColor' => $noseColor,
+    'mouthColor' => $mouthColor,
+    'earColor' => $earColor,
+    'hairColor' => $hairColor
+];
+
+$combinationJSON = json_encode($combination, JSON_UNESCAPED_UNICODE);
 
 $sql = "INSERT INTO `showcase`(
     `member_sid`, `combination`, `avatar_created_at`
