@@ -26,7 +26,8 @@ $title = '濟善救世公司-良辰吉地';
 
 <style>
     body {
-        background: linear-gradient(to right, rgb(40, 92, 199), rgb(174, 61, 209));
+        background: linear-gradient(to right, #56a2aa, #ddd4a5);
+        /* background: linear-gradient(0deg, #69d0ff 0%, #ffa4e9 100%); */
     }
 
     .time-area,
@@ -477,7 +478,7 @@ $title = '濟善救世公司-良辰吉地';
     // 篩選資料 filter
     async function filtData() {
         const fd = new FormData(document.filterForm);
-        const r = await fetch('filter-api.php', {
+        const r = await fetch('place-filter-api.php', {
             method: 'POST',
             body: fd
         });
@@ -500,7 +501,7 @@ $title = '濟善救世公司-良辰吉地';
     // 時間區間篩選 filter
     async function filtDate() {
         const fd = new FormData(document.searchDateForm);
-        const r = await fetch('time-filter-api.php', {
+        const r = await fetch('place-time-filter-api.php', {
             method: 'POST',
             body: fd
         });
@@ -566,7 +567,7 @@ $title = '濟善救世公司-良辰吉地';
     const dist = document.querySelector('#dist');
 
     function renderCountry() {
-        fetch("render-dist-api.php").then(r => r.json()).then(obj => {
+        fetch("place-render-dist-api.php").then(r => r.json()).then(obj => {
             renderData = obj;
             // console.log(renderData);
 

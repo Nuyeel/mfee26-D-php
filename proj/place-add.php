@@ -109,7 +109,7 @@ $title = '新增良辰吉地';
     const dist = document.querySelector('#dist');
 
     function renderCountry() {
-        fetch("render-dist-api.php").then(r => r.json()).then(obj => {
+        fetch("place-render-dist-api.php").then(r => r.json()).then(obj => {
             renderData = obj;
             // console.log(renderData);
 
