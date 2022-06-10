@@ -2,6 +2,11 @@
 <?php
 $pageName = 'avatar';
 $title = '濟善救世公司-轉生形象';
+
+if (!$_SESSION['member']['account']) {
+    header('location:ab-login.php');
+    // exit;
+}
 ?>
 <?php include __DIR__ . './parts/html-head.php' ?>
 <style>
@@ -53,7 +58,7 @@ $title = '濟善救世公司-轉生形象';
             </div>
             <form action="" name="form1" id="form1" onsubmit="sendData(); return false;" style="display:none;">
                 <div class="mb-3">
-                    <label for="" class="form-label">眼睛</label>
+                    <input class="form-check-input" type="text" name="mid" value="<?php echo $_SESSION['member']['sid'];?>" checked>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="eyes" value="0" checked>
                         <input class="form-check-input" type="radio" name="nose" value="0" checked>
