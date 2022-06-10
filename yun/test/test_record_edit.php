@@ -1,24 +1,24 @@
-<?php require __DIR__ . '/parts/connect_db.php';
-$pageName = 'ab-edit';
-$title = '編輯通訊錄資料 - 小新的網站';
+<?php require __DIR__ . '/test-parts/connect_data.php';
+$pageName = 'record-edit';
+$title = '編輯會員資料';
 
-$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
-if (empty($sid)) {
-    header('Location: ab-list.php');
+$member_sid = isset($_GET['member_sid']) ? intval($_GET['member_sid']) : 0;
+if (empty($member_sid)) {
+    header('Location: test_record_list.php');
     exit;
 }
 
-$row = $pdo->query("SELECT * FROM address_book WHERE sid=$sid")->fetch();
+$row = $pdo->query("SELECT * FROM good_deed_test_record WHERE member_sid=$member_sid")->fetch();
 if (empty($row)) {
-    header('Location: ab-list.php');
+    header('Location: test_record_list.php');
     exit;
 }
 
 
 
 ?>
-<?php include __DIR__ . '/parts/html-head.php' ?>
-<?php include __DIR__ . '/parts/navbar.php' ?>
+<?php include __DIR__ . '/test-parts/test-head.php' ?>
+<?php include __DIR__ . '/test-parts/test-nav.php' ?>
 <style>
     .form-control.red {
         border: 1px solid red;
@@ -33,32 +33,57 @@ if (empty($row)) {
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">編輯資料</h5>
-                    <form name="form1" onsubmit="sendData();return false;" novalidate>
-                        <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
+                    <h5 class="card-title">編輯會員資料</h5>
+                    <form name="formEdit" onsubmit="sendData();return false;" novalidate>
+                        <input type="hidden" name="membersid" value="<?= $row['member_sid'] ?>">
                         <div class="mb-3">
-                            <label for="name" class="form-label">* name</label>
-                            <input type="text" class="form-control" id="name" name="name" required value="<?= htmlentities($row['name']) ?>">
+                            <label for="account" class="form-label">帳號</label>
+                            <input type="text" class="form-control" id="account" name="account" required value="<?= htmlentities($row['member_account']) ?>">
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="<?= $row['email'] ?>">
+                            <label for="name" class="form-label">姓名</label>
+                            <input type="text" class="form-control" id="name" name="name" value="<?= $row['member_name'] ?>">
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="mobile" class="form-label">mobile</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile" pattern="09\d{8}" value="<?= $row['mobile'] ?>">
+                            <label for="birth" class="form-label">生日</label>
+                            <input type="date" class="form-control" id="birth" name="birth" value="<?= $row['member_birth'] ?>">
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="birthday" class="form-label">birthday</label>
-                            <input type="date" class="form-control" id="birthday" name="birthday" value="<?= $row['birthday'] ?>">
+                            <label for="death" class="form-label">忌日</label>
+                            <input type="date" class="form-control" id="death" name="death" value="<?= $row['member_death'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="address" class="form-label">address</label>
-                            <textarea class="form-control" name="address" id="address" cols="30" rows="3"><?= $row['address'] ?></textarea>
+                            <label for="q1" class="form-label">Q1</label>                            
+                            <input type="text" class="form-control" id="q1" name="q1" pattern="d{1}" value="<?= $row['test_Q1'] ?>">
+                            <div class="form-text"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="q2" class="form-label">Q2</label>                            
+                            <input type="text" class="form-control" id="q2" name="q2" pattern="d{1}" value="<?= $row['test_Q2'] ?>">
+                            <div class="form-text"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="q3" class="form-label">Q3</label>                            
+                            <input type="text" class="form-control" id="q3" name="q3" pattern="d{1}" value="<?= $row['test_Q3'] ?>">
+                            <div class="form-text"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="q4" class="form-label">Q4</label>                            
+                            <input type="text" class="form-control" id="q4" name="q4" pattern="d{1}" value="<?= $row['test_Q4'] ?>">
+                            <div class="form-text"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="q5" class="form-label">Q5</label>                            
+                            <input type="text" class="form-control" id="q5" name="q5" pattern="d{1}" value="<?= $row['test_Q5'] ?>">
+                            <div class="form-text"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="score" class="form-label"> score </label>                            
+                            <input type="text" class="form-control" id="score" name="score"  value="<?= $row['test_score'] ?>">
                             <div class="form-text"></div>
                         </div>
 
@@ -73,20 +98,31 @@ if (empty($row)) {
     </div>
 
 </div>
-<?php include __DIR__ . '/parts/scripts.php' ?>
+<?php include __DIR__ . '/test-parts/test-scripts.php' ?>
 <script>
     const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE); ?>;
 
+    const q1_re = /d{1}/;
+    const q2_re = /d{1}/;
+    const q3_re = /d{1}/;
+    const q4_re = /d{1}/;
+    const q5_re = /d{1}/;
 
-    const email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zAZ]{2,}))$/;
-    const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
 
     const info_bar = document.querySelector('#info-bar');
-    const name_f = document.form1.name;
-    const email_f = document.form1.email;
-    const mobile_f = document.form1.mobile;
 
-    const fields = [name_f, email_f, mobile_f];
+    const account_f = document.formEdit.account;
+    const name_f = document.formEdit.name;
+    const q1_f = document.formEdit.q1;
+    const q2_f = document.formEdit.q2;
+    const q3_f = document.formEdit.q3;
+    const q4_f = document.formEdit.q4;
+    const q5_f = document.formEdit.q5;
+    const score_f = document.formEdit.score;
+
+
+
+    const fields = [account_f,name_f,q1_f,q2_f,q3_f,q4_f,q5_f];
     const fieldTexts = [];
     for (let f of fields) {
         fieldTexts.push(f.nextElementSibling);
@@ -104,26 +140,46 @@ if (empty($row)) {
 
         // TODO: 欄位檢查, 前端的檢查
         let isPass = true; // 預設是通過檢查的
-
-        if (name_f.value.length < 2) {
-            // alert('姓名至少兩個字');
-            // name_f.classList.add('red');
-            // name_f.nextElementSibling.classList.add('red');
-            // name_f.closest('.mb-3').querySelector('.form-text').classList.add('red');
+        if (account_f.value.length < 6) {
             fields[0].classList.add('red');
-            fieldTexts[0].innerText = '姓名至少兩個字';
+            fieldTexts[0].innerText = '帳號至少六個字元以上';
             isPass = false;
         }
-        if (email_f.value && !email_re.test(email_f.value)) {
-            // alert('email 格式錯誤');
+        if (name_f.value.length < 2) {
             fields[1].classList.add('red');
-            fieldTexts[1].innerText = 'email 格式錯誤';
+            fieldTexts[1].innerText = '姓名至少兩個字';
             isPass = false;
         }
-        if (mobile_f.value && !mobile_re.test(mobile_f.value)) {
-            // alert('手機號碼格式錯誤');
+        if (q1_f.value && !q1_re.test(q1_f.value)) {
+            // alert('email 格式錯誤');
             fields[2].classList.add('red');
-            fieldTexts[2].innerText = '手機號碼格式錯誤';
+            fieldTexts[2].innerText = '分數限制為個位數';
+            isPass = false;
+        }
+        if (q2_f.value && !q2_re.test(q2_f.value)) {
+            // alert('email 格式錯誤');
+            fields[3].classList.add('red');
+            fieldTexts[3].innerText = '分數限制為個位數';
+            isPass = false;
+        }
+        if (q3_f.value && !q3_re.test(q3_f.value)) {
+            // alert('email 格式錯誤');
+            fields[4].classList.add('red');
+            fieldTexts[4].innerText = '分數限制為個位數';
+            isPass = false;
+        
+        }
+        if (q4_f.value && !q4_re.test(q4_f.value)) {
+            // alert('email 格式錯誤');
+            fields[5].classList.add('red');
+            fieldTexts[5].innerText = '分數限制為個位數';
+            isPass = false;
+        
+        }i
+        f (q5_f.value && !q1_re.test(q5_f.value)) {
+            // alert('email 格式錯誤');
+            fields[6].classList.add('red');
+            fieldTexts[6].innerText = '分數限制為個位數';
             isPass = false;
         }
 
@@ -131,8 +187,8 @@ if (empty($row)) {
             return; // 結束函式
         }
 
-        const fd = new FormData(document.form1);
-        const r = await fetch('ab-edit-api.php', {
+        const fd = new FormData(document.formEdit);
+        const r = await fetch('test_record_edit-api.php', {
             method: 'POST',
             body: fd,
         });
@@ -155,4 +211,4 @@ if (empty($row)) {
 
     }
 </script>
-<?php include __DIR__ . '/parts/html-foot.php' ?>
+<?php include __DIR__ . '/test-parts/test-foot.php' ?>

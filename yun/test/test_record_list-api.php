@@ -1,6 +1,7 @@
-<?php require __DIR__ . '/parts/connect_db.php';
-$pageName = 'ab-list';
-$title = '通訊錄列表 - 小新的網站';
+<?php require __DIR__ . '/test-parts/connect_data.php';
+$pageName = 'testpage';
+$title = '陰德值測驗後台';
+
 
 $perPage = 20; // 每一頁有幾筆
 
@@ -11,7 +12,7 @@ if ($page < 1) {
     exit;
 }
 
-$t_sql = "SELECT COUNT(1) FROM address_book";
+$t_sql = "SELECT COUNT(1) FROM good_deed_test_record";
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0]; // 總筆數
 
 $totalPages = ceil($totalRows / $perPage); // 總共有幾頁
@@ -25,7 +26,7 @@ if ($totalRows > 0) {
         exit;
     }
 
-    $sql = sprintf("SELECT * FROM address_book ORDER BY sid DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+    $sql = sprintf("SELECT * FROM good_deed_test_record ORDER BY sid DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
     $rows = $pdo->query($sql)->fetchAll();
 }
 
