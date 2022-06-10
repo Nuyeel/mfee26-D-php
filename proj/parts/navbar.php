@@ -82,7 +82,7 @@ if (!isset($pageName)) {
                     <a class="nav-link <?= $pageName == 'reborn' ? 'active' : '' ?>" href="/mfee26-D-php/proj/avatar.php">轉生形象</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="/mfee26-D-php/proj/place/place.php">良辰吉地</a>
+                    <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="/mfee26-D-php/proj/place.php">良辰吉地</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= $pageName == 'activity' ? 'active' : '' ?>" href="/mfee26-D-php/proj/xuan-event-manage/npo-list.php">Activity</a>
@@ -96,7 +96,7 @@ if (!isset($pageName)) {
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="news-admin.php">最新消息</a></li>
                         <li><a class="dropdown-item" href="reborn-admin.php">轉生形象</a></li>
-                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/place/place-admin.php">良辰吉地</a></li>
+                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/place-admin.php">良辰吉地</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/npo-act-add.php">活動-新增</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/event-manage.php">活動-管理</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-add.php">NPO-新增</a></li>
