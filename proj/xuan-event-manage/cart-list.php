@@ -13,7 +13,7 @@ require __DIR__ .  '/../parts/connect_db.php' ;
 // 葉宥廷
 // $_SESSION['member']['sid'] = 11;
 // // $_SESSION['member']['deathdate'] = '2022-06-06';
-$_SESSION['member']['account'] = 'HappyCat03';
+// $_SESSION['member']['account'] = 'HappyCat03';
 
 
 $rows = [];
@@ -152,10 +152,12 @@ if (!empty($_SESSION['cart'])) {
 
     <div class="row mt-2" style="width:21%; margin-left:auto">
         <div class="col">
-            <?php if (isset($_SESSION['member']['account'])) : ?>
+
+        <?= (isset($_SESSION['member']['account'])) ? "登出" : "登入|註冊"?>
+            <?php if (isset($_SESSION['member']['account'])) : ?> 
 
             <a class="btn btn-danger" href="#">前往結帳</a>  
-                                 <!-- //這邊記得要放連結 -->
+                                  //這邊記得要放連結 
                                 
                 <div class="alert alert-warning thanks" role="alert" style="display:none">
                     感謝您的購買！
@@ -165,7 +167,14 @@ if (!empty($_SESSION['cart'])) {
 
             <div class="alert alert-danger notice" role="alert" style="display:none">
                 請登入會員後再結帳 
-            </div>
+            </div> -->
+
+
+            <a href=<?= (isset($_SESSION['member']['account'])) ? "ab-logout.php" : "ab-login.php"?> class=<?= (isset($_SESSION['member']['account'])) ? "logInOut" : "logInOut"?>>
+                <?= (isset($_SESSION['member']['account'])) ? "登出" : "登入|註冊"?>
+                </a>
+
+
 
             <?php endif; ?>
         </div>
