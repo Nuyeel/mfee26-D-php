@@ -94,7 +94,7 @@ $rows = $pdo->query($sql)->fetchAll();
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
 
         <!-- 不會進結帳頁面，跳已加入的通知 -->
-        <button class="btn btn-danger add-to-cart-btn" data-sid="<?= $r['sid']?>"  style="margin-right:10px; font-size:16px" href="#" role="button">
+        <button class="btn btn-danger add-to-cart-btn" id="zxAddToCartBtn" data-sid="<?= $r['sid']?>"  style="margin-right:10px; font-size:16px" href="#" role="button">
         <i class="fa-solid fa-cart-shopping"></i>&nbsp 加入購物車 
         </button>  
 
@@ -134,10 +134,10 @@ $('.add-to-cart-btn').on('click', event => {
     // const quantity = btn.closest('.card').find('select').val();
 
 
-    console.log({
-        sid,
-        quantity
-    });
+    // console.log({
+    //     sid,
+    //     quantity
+    // });
 
 
 
@@ -147,10 +147,10 @@ $('.add-to-cart-btn').on('click', event => {
             sid,
             quantity
         }, function(data) {
-            console.log(data['cart']);
-            console.log(Object.keys(data['cart']).length);
-            //showCount(data);
-            document.querySelector('#cart_amount').innerText=Object.keys(data['cart']).length;
+            // console.log(data['cart']);
+            // console.log(Object.keys(data['cart']).length);
+            // showCount(data);
+            // document.querySelector('#cart_amount').innerText=Object.keys(data['cart']).length;
         }, 'json');
 
 });
@@ -173,6 +173,11 @@ $('.add-to-cart-btn').on('click', event => {
 
 // }
 // cartAmount();
+
+
+const zxAddToCartBtn = document.querySelector('#zxAddToCartBtn');
+zxAddToCartBtn.addEventListener('click', renderActCart, false);
+
 
 
 </script> 
