@@ -200,16 +200,32 @@
             /* 小靈魂們 */
             .soul-box {
                 width: 480px;
-                height: 170px;
+                height: 130px;
                 /* background-color: rgba(250, 244, 249, 0.434); */
                 position: absolute;
-                top: 52.9%;
-                left: 32%;
+                top: 15%;
+                right: 92%;
                 padding: 20px;
             }
             .soul-box > img {
                 opacity: 90%;
                 margin: 2px;
+            }
+            .soul-box > .sep-line:nth-child(1) {
+                width: 85%;
+                height: 1px;
+                position: absolute;
+                top: -30px;
+                left: 25px;
+                border-bottom: 5px double rgba(255, 255, 255, 0.8);
+            }
+            .soul-box > .sep-line:nth-child(2) {
+                width: 85%;
+                height: 1px;
+                position: absolute;
+                bottom: -30px;
+                left: 25px;
+                border-bottom: 5px double rgba(255, 255, 255, 0.8);
             }
 
             /* 最新消息 */
@@ -225,7 +241,7 @@
                 /* border-radius: 50%; */
                 position: absolute;
                 top: 62%;
-                left: 39%;
+                left: -72%;
                 margin-left: -25px;
                 margin-top: -25px;
             }
@@ -258,7 +274,7 @@
                 /* border-radius: 50%; */
                 position: absolute;
                 top: 62.5%;
-                left: 64.5%;
+                left: 110%;
                 margin-left: -25px;
                 margin-top: -25px;
                 overflow: hidden;
@@ -373,21 +389,21 @@
             .box3 {
                 border-radius: 15px;
                 /* outline: 2px solid rgb(255, 255, 255); */
-                width: 320px;
+                width: 330px;
                 height: 220px;
                 background: url("./map.img/place-map.JPG") no-repeat center
                     center;
                 background-size: 470px 300px;
                 position: absolute;
-                top: 51%;
-                right: 24%;
+                top: 10%;
+                left: 110%;
                 margin-left: -25px;
                 margin-top: -25px;
             }
 
             .box3 > div.m-title {
                 padding: 4px 20px;
-                width: 320px;
+                width: 330px;
                 text-align: center;
                 background-color: #1f7da9;
                 /* outline: 2px solid rgb(255, 255, 255); */
@@ -409,8 +425,8 @@
                 height: 120px;
                 background-color: rgb(168, 230, 76);
                 position: absolute;
-                top: 72.3%;
-                left: 35%;
+                top: 109%;
+                right: 30%;
                 margin-left: -25px;
                 margin-top: -25px;
             }
@@ -492,115 +508,129 @@
             <!-- 中心方塊 -->
             <div class="child">
                 <div class="child_center" id="btn">
-                    <div class="sep-line"></div>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <h5 class="center-s-title s-title-top">GOODBYE OLD</h5>
-                    <div class="center-title">
+                    <div>
+                        <div class="sep-line"></div>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <h5 class="center-s-title s-title-top">GOODBYE OLD</h5>
+                        <div class="center-title">
+                            <img
+                                src="./map.img/TITLE-mid.svg"
+                                alt=""
+                                style="height: 80px"
+                            />
+                            <img
+                                src="./map.img/TITLE-mid2.svg"
+                                alt=""
+                                style="height: 80px"
+                            />
+                        </div>
+                        <h5 class="center-s-title s-title-bottom">HELLO NEW</h5>
                         <img
-                            src="./map.img/TITLE-mid.svg"
+                            class="center-ufo"
+                            src="./map.img/UFO.svg"
                             alt=""
-                            style="height: 80px"
-                        />
-                        <img
-                            src="./map.img/TITLE-mid2.svg"
-                            alt=""
-                            style="height: 80px"
-                        />
-                    </div>
-                    <h5 class="center-s-title s-title-bottom">HELLO NEW</h5>
-                    <img
-                        class="center-ufo"
-                        src="./map.img/UFO.svg"
-                        alt=""
-                        style="width: 200px"
-                    />
-                </div>
-
-                <!-- 其他方塊 -->
-                <div class="box box1">
-                    <!-- 最新消息 -->
-                    <img
-                        src="./map.img/word-news.svg"
-                        alt=""
-                        style="width: 150px"
-                    />
-                    <img src="./map.img/news.svg" alt="" style="width: 80px" />
-                    <span></span>
-                </div>
-
-                <!-- small souls -->
-                <div class="box soul-box">
-                    <img src="./map.img/ghost.svg" alt="" style="width: 40px" />
-                    <img src="./map.img/ghost.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-g.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-y.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-y.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-r.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-b.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-b.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-g.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-y.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-y.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-r.svg" style="width: 40px" />
-                    <img src="./map.img/ghost.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-b.svg" style="width: 40px" />
-                    <img src="./map.img/ghost.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-y.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-p.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-r.svg" style="width: 40px" />
-                    <img src="./map.img/ghost.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-b.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-g.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-y.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-p.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-r.svg" style="width: 40px" />
-                    <img src="./map.img/ghost.svg" style="width: 40px" />
-                    <img src="./map.img/ghost.svg" style="width: 40px" />
-                    <img src="./map.img/ghost-p.svg" style="width: 40px" />
-                </div>
-
-                <!-- 形象 -->
-                <div class="box box2">
-                    <div class="m-title">轉生形象</div>
-                    <div class="avatar-p">選擇來世形象<br />迎接美好未來</div>
-                    <div class="soul-wrap">
-                        <img
-                            src="./map.img/soul02.svg"
-                            alt=""
-                            style="width: 50px"
-                        />
-                        <img
-                            src="./map.img/soul01.svg"
-                            alt=""
-                            style="width: 50px"
-                        />
-                        <img
-                            src="./map.img/soul05.svg"
-                            alt=""
-                            style="width: 50px"
-                        />
-                        <img
-                            src="./map.img/soul03.svg"
-                            alt=""
-                            style="width: 50px"
+                            style="width: 200px"
                         />
                     </div>
-                </div>
-                <!-- 良辰吉地 -->
-                <div class="box box3">
-                    <div class="m-title">
-                        <i class="fa-solid fa-location-dot"></i> 良辰吉地
-                        <i class="fa-solid fa-location-dot"></i>
-                    </div>
-                </div>
 
-                <!-- 活動 -->
-                <div class="box box4">
-                    <div class="sep-line"></div>
-                    <div class="m-title">Activity</div>
+                    <!-- 其他方塊 -->
+                    <div class="box box1">
+                        <!-- 最新消息 -->
+                        <img
+                            src="./map.img/word-news.svg"
+                            alt=""
+                            style="width: 150px"
+                        />
+                        <img
+                            src="./map.img/news.svg"
+                            alt=""
+                            style="width: 80px"
+                        />
+                        <span></span>
+                    </div>
+
+                    <!-- small souls -->
+                    <div class="box soul-box">
+                        <div class="sep-line"></div>
+                        <img
+                            src="./map.img/ghost.svg"
+                            alt=""
+                            style="width: 40px"
+                        />
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-g.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-r.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-b.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-b.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-g.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-r.svg" style="width: 40px" />
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-b.svg" style="width: 40px" />
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-p.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-r.svg" style="width: 40px" />
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-b.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-g.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-p.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-r.svg" style="width: 40px" />
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-p.svg" style="width: 40px" />
+                        <div class="sep-line"></div>
+                    </div>
+
+                    <!-- 形象 -->
+                    <div class="box box2">
+                        <div class="m-title">轉生形象</div>
+                        <div class="avatar-p">
+                            選擇來世形象<br />迎接美好未來
+                        </div>
+                        <div class="soul-wrap">
+                            <img
+                                src="./map.img/soul02.svg"
+                                alt=""
+                                style="width: 50px"
+                            />
+                            <img
+                                src="./map.img/soul01.svg"
+                                alt=""
+                                style="width: 50px"
+                            />
+                            <img
+                                src="./map.img/soul05.svg"
+                                alt=""
+                                style="width: 50px"
+                            />
+                            <img
+                                src="./map.img/soul03.svg"
+                                alt=""
+                                style="width: 50px"
+                            />
+                        </div>
+                    </div>
+                    <!-- 良辰吉地 -->
+                    <div class="box box3">
+                        <div class="m-title">
+                            <i class="fa-solid fa-location-dot"></i> 良辰吉地
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                    </div>
+
+                    <!-- 活動 -->
+                    <div class="box box4">
+                        <div class="sep-line"></div>
+                        <div class="m-title">Activity</div>
+                    </div>
                 </div>
             </div>
         </div>
