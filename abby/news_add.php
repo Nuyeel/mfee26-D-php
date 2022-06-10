@@ -193,7 +193,10 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
             }
         }
 
-     //console.log(img_f.value)
+     console.log(img_f.files.length)
+
+     const imgtext = document.querySelector('#imgtext');
+            imgtext.innerText = '';
 
         type.innerText = '';
 
@@ -219,16 +222,10 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
             isPass = false;
         }
 
-        if (img_f.file == undefined ) {
+        if (img_f.files.length < 1) {
             const imgtext = document.querySelector('#imgtext');
             imgtext.innerText = '請上傳圖片';
             isPass = false;
-        }
-
-        if (img_f.value) {
-            const imgtext = document.querySelector('#imgtext');
-            imgtext.innerText = '';
-            isPass = true;
         }
 
         if (location_f.value == '') {
@@ -280,6 +277,5 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
                 console.log(r)
             });
     }
-
 </script>
 <?php include __DIR__ . '/parts/html-foot.php' ?>
