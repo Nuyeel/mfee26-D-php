@@ -2,6 +2,11 @@
 <?php
 $pageName = 'avatar';
 $title = '濟善救世公司-轉生形象';
+
+if (!$_SESSION['member']['account']) {
+    header('location:ab-login.php');
+    // exit;
+}
 ?>
 <?php include __DIR__ . './parts/html-head.php' ?>
 <style>
@@ -53,7 +58,7 @@ $title = '濟善救世公司-轉生形象';
             </div>
             <form action="" name="form1" id="form1" onsubmit="sendData(); return false;" style="display:none;">
                 <div class="mb-3">
-                    <label for="" class="form-label">眼睛</label>
+                    <input class="form-check-input" type="text" name="mid" value="<?php echo $_SESSION['member']['sid'];?>" checked>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="eyes" value="0" checked>
                         <input class="form-check-input" type="radio" name="nose" value="0" checked>
@@ -340,7 +345,7 @@ $title = '濟善救世公司-轉生形象';
     async function sendData() {
         const fd = new FormData(document.form1);
         let aPi = './avatar-order-add-api.php';
-        if (location.search.length > 0) {
+        if (editAvatarorder > 0) {
             console.log(111);
             aPi = './avatar-order-edit-api.php';
         };
@@ -355,6 +360,7 @@ $title = '濟善救世公司-轉生形象';
         }
     }
 
+    let editAvatarorder = 0;
     //如果有location.search會變成修改
     if (location.search.length > 0) {
         console.log('search is alive!!');
@@ -379,10 +385,14 @@ $title = '濟善救世公司-轉生形象';
                 btns[a[parts[i]]].click();
                 colorbtns[a[parts[i] + "Color"]].click();
             }
+            if (result[0]['member_sid']=== <?php echo $_SESSION['member']['sid'];?>){
+                editAvatarorder = 1;
+            }
 
-        }
+        };
         getEditdata();
-    }
+        
+    };
 </script>
 
 <?php include __DIR__ . './parts/html-foot.php' ?>

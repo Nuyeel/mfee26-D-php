@@ -9,8 +9,8 @@ $output = [
     'error' => ''
 ];
 
-$member_sid = isset($_POST['member_sid']) ? intval($_POST['member_sid']) : 0;
-if (empty($member_sid) or empty($_POST['member_account'])) {
+$member_sid = isset($_POST['membersid']) ? intval($_POST['membersid']) : 0;
+if (empty($member_sid) or empty($_POST['account'])) {
     $output['error'] = '沒有該帳號';
     $output['code'] = 400;
     echo json_encode($output, JSON_UNESCAPED_UNICODE);

@@ -58,7 +58,8 @@ foreach ($rows as $r) {
 
 
 <?php include __DIR__ . '/parts/html-head.php' ?>
-<?php include __DIR__ . '/parts/navbar.php' ?>
+
+<?php include __DIR__ . "./parts/navbar.php" ?>
 
 <style>
     .imgwrap {

@@ -34,7 +34,7 @@ if (empty($row)) {
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">編輯會員資料</h5>
-                    <form name="formEdit" onsubmit="sendData();return false;" novalidate>
+                    <form name="formEdit" onsubmit=" sendData(); return false; " novalidate="novalidate">
                         <input type="hidden" name="membersid" value="<?= $row['member_sid'] ?>">
                         <div class="mb-3">
                             <label for="account" class="form-label">帳號</label>
@@ -57,33 +57,33 @@ if (empty($row)) {
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="q1" class="form-label">Q1</label>                            
+                            <label for="q1" class="form-label">Q1</label>
                             <input type="text" class="form-control" id="q1" name="q1" pattern="d{1}" value="<?= $row['test_Q1'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="q2" class="form-label">Q2</label>                            
+                            <label for="q2" class="form-label">Q2</label>
                             <input type="text" class="form-control" id="q2" name="q2" pattern="d{1}" value="<?= $row['test_Q2'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="q3" class="form-label">Q3</label>                            
+                            <label for="q3" class="form-label">Q3</label>
                             <input type="text" class="form-control" id="q3" name="q3" pattern="d{1}" value="<?= $row['test_Q3'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="q4" class="form-label">Q4</label>                            
+                            <label for="q4" class="form-label">Q4</label>
                             <input type="text" class="form-control" id="q4" name="q4" pattern="d{1}" value="<?= $row['test_Q4'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="q5" class="form-label">Q5</label>                            
+                            <label for="q5" class="form-label">Q5</label>
                             <input type="text" class="form-control" id="q5" name="q5" pattern="d{1}" value="<?= $row['test_Q5'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
-                            <label for="score" class="form-label"> score </label>                            
-                            <input type="text" class="form-control" id="score" name="score"  value="<?= $row['test_score'] ?>">
+                            <label for="score" class="form-label"> score </label>
+                            <input type="text" class="form-control" id="score" name="score" value="<?= $row['test_score'] ?>">
                             <div class="form-text"></div>
                         </div>
 
@@ -102,12 +102,11 @@ if (empty($row)) {
 <script>
     const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE); ?>;
 
-    const q1_re = /d{1}/;
-    const q2_re = /d{1}/;
-    const q3_re = /d{1}/;
-    const q4_re = /d{1}/;
-    const q5_re = /d{1}/;
-
+    const q1_re = /^\d$/;
+    const q2_re = /^\d$/;
+    const q3_re = /^\d$/;
+    const q4_re = /^\d$/;
+    const q5_re = /^\d$/;
 
     const info_bar = document.querySelector('#info-bar');
 
@@ -122,7 +121,7 @@ if (empty($row)) {
 
 
 
-    const fields = [account_f,name_f,q1_f,q2_f,q3_f,q4_f,q5_f];
+    const fields = [account_f, name_f, q1_f, q2_f, q3_f, q4_f, q5_f];
     const fieldTexts = [];
     for (let f of fields) {
         fieldTexts.push(f.nextElementSibling);
@@ -167,22 +166,21 @@ if (empty($row)) {
             fields[4].classList.add('red');
             fieldTexts[4].innerText = '分數限制為個位數';
             isPass = false;
-        
+
         }
         if (q4_f.value && !q4_re.test(q4_f.value)) {
             // alert('email 格式錯誤');
             fields[5].classList.add('red');
             fieldTexts[5].innerText = '分數限制為個位數';
             isPass = false;
-        
-        }i
-        f (q5_f.value && !q1_re.test(q5_f.value)) {
+
+        }
+        if (q5_f.value && !q1_re.test(q5_f.value)) {
             // alert('email 格式錯誤');
             fields[6].classList.add('red');
             fieldTexts[6].innerText = '分數限制為個位數';
             isPass = false;
         }
-
         if (!isPass) {
             return; // 結束函式
         }

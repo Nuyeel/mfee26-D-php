@@ -57,7 +57,7 @@ foreach ($rows as $r) {
 ?>
 <?php include __DIR__ . '/parts/html-head.php' ?>
 <?php include __DIR__ . '/parts/navbar.php' ?>
-<div class="container">
+<div class="container mt-3">
     <div class="bd-example">
         <table class="table table-striped">
             <thead>
