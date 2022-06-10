@@ -168,13 +168,13 @@ if (!isset($pageName)) {
                     <i class="fa-solid fa-cart-shopping navbar-lefticons"></i>
                 </a>
                 
-                <a href="ab-profile.php" title="會員中心">
+                <a href="../ab-profile.php" title="會員中心">
                     <!-- 要放登入頁面還是會員中心? -->
                     <!-- 應該釋放會員中心連結, profile頁面加驗證, 如果沒登入就導登入頁? -->
                     <i class="fa-solid fa-circle-user navbar-lefticons <?= $pageName == 'ab-profile' ? 'active' : '' ?>"></i>
                 </a>
 
-                <a href="<?= (isset($_SESSION['member']['account'])) ? "ab-logout.php" : "ab-login.php" ?>" class="logInOut <?= $pageName == 'ab-login' ? 'active' : '' ?>">
+                <a href="<?= (isset($_SESSION['member']['account'])) ? "../ab-logout.php" : "../ab-login.php" ?>" class="logInOut <?= $pageName == 'ab-login' ? 'active' : '' ?>">
                     <?= (isset($_SESSION['member']['account'])) ? "登出" : "登入|註冊" ?>
 
                 </a>
