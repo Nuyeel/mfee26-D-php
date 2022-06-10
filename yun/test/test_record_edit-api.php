@@ -9,26 +9,27 @@ $output = [
     'error' => ''
 ];
 
-$sid = isset($_POST['sid']) ? intval($_POST['sid']) : 0;
-if (empty($sid) or empty($_POST['name'])) {
-    $output['error'] = '沒有登入';
+$member_sid = isset($_POST['member_sid']) ? intval($_POST['member_sid']) : 0;
+if (empty($member_sid) or empty($_POST['member_account'])) {
+    $output['error'] = '沒有該帳號';
     $output['code'] = 400;
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit;
 }
 $account = $_POST['account'];
-$password = $_POST['password'];
 $name = $_POST['name'];
 $birth = $_POST['birth'];
+
 $death = empty($_POST['death']) ? NULL : $_POST['death'];
 
 
-$q1 = empty($_POST['Q1']) ? NULL : $_POST['Q1'];
-$q2 = empty($_POST['Q2']) ? NULL : $_POST['Q2'];
-$q3 = empty($_POST['Q3']) ? NULL : $_POST['Q3'];
-$q4 = empty($_POST['Q4']) ? NULL : $_POST['Q4'];
-$q5 = empty($_POST['Q5']) ? NULL : $_POST['Q5'];
+$q1 = empty($_POST['q1']) ? NULL : $_POST['q1'];
+$q2 = empty($_POST['q2']) ? NULL : $_POST['q2'];
+$q3 = empty($_POST['q3']) ? NULL : $_POST['q3'];
+$q4 = empty($_POST['q4']) ? NULL : $_POST['q4'];
+$q5 = empty($_POST['q5']) ? NULL : $_POST['q5'];
 
+$score = empty($_POST['score']) ? NULL : $_POST['score'];
 
 $sql = "UPDATE `good_deed_test_record` SET `member_sid`=?,`member_account`=?,`member_id`=?,`member_name`=?,`member_birth`=?,`member_death`=?,`test_Q1`=?,`test_Q2`=?,`test_Q3`=?,`test_Q4`=?,`test_Q5`=?,`test_score`=? WHERE `sid`=$sid ";
 $stmt = $pdo->prepare($sql);
@@ -44,6 +45,7 @@ $stmt->execute([
   $q3,
   $q4,
   $q5,
+  $score
 ]);
 
 
@@ -55,3 +57,5 @@ if ($stmt->rowCount() == 1) {
 
 
 echo json_encode($output, JSON_UNESCAPED_UNICODE);
+
+
