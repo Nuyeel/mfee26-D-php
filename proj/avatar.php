@@ -13,7 +13,7 @@ if (!$_SESSION['member']['account']) {
     body {
         height: 100vh;
         background-color: #261E47;
-    background-image: linear-gradient(0deg, #261E47 0%, #005CAF 100%);
+    background-image: linear-gradient(0deg, #261E47 0%, #266AAA 85%);
     }
     .boxes button {
         width: 50px;
