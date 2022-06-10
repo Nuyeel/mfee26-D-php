@@ -11,7 +11,9 @@ if (!$_SESSION['member']['account']) {
 <?php include __DIR__ . './parts/html-head.php' ?>
 <style>
     body {
-        background-color: #2f4f4f;
+        height: 100vh;
+        background-color: #261E47;
+    background-image: linear-gradient(0deg, #261E47 0%, #005CAF 100%);
     }
     .boxes button {
         width: 50px;
