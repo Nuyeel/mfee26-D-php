@@ -1,4 +1,4 @@
-<?php require __DIR__ . "/../parts/connect_db.php" ?>
+<?php require __DIR__ . "./parts/connect_db.php" ?>
 
 <?php
 $pageName = 'place';
@@ -7,28 +7,22 @@ $title = '濟善救世公司-良辰吉地';
 
 <?php
 
-// 先塞資料驗證
-
-// $_SESSION = [
-//     'member' => [
-//         'sid' => 605,
-//         'name' => '獨行俠',
-//         'deathdate' => NULL
-//     ], 
-// ];
+// 假會員資料
 
 // 葉宥廷
-$_SESSION['member']['sid'] = 11;
-$_SESSION['member']['deathdate'] = '2022-06-06';
+// $_SESSION['member']['sid'] = 11;
+// $_SESSION['member']['deathdate'] = '2022-06-06';
 // $_SESSION['member']['account'] = 'HappyCat03';
 
 // 陳怡雯
-// $_SESSION['member']['sid'] = 12; 
+// $_SESSION['member']['sid'] = 12;
 // $_SESSION['member']['deathdate'] = NULL; 
 
 ?>
 
-<link rel="stylesheet" href="../fontawesome-free-6.1.1-web/css/all.min.css">
+
+<?php include __DIR__ . "./parts/html-head.php" ?>
+
 
 <style>
     body {
@@ -36,19 +30,21 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
     }
 
     .time-area,
-    .news-area {
+    .sort-area {
         /* outline: 1px solid #aaa; */
+        border: none;
         border-radius: 10px;
         overflow: hidden;
         background-color: rgba(255, 255, 255, .8);
     }
 
     .time-area .time-title,
-    .place-left .news-title {
+    .place-left .sort-title {
         background-color: #37508c;
         /* background-color: #407672; */
         color: rgb(255, 255, 255);
     }
+
 
     .filter-section {
         /* background-color: rgb(203, 207, 212); */
@@ -156,7 +152,6 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
         width: 100%;
         position: fixed;
         bottom: 0;
-        z-index: 9;
     }
 
     .mapBtn {
@@ -165,6 +160,7 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
         width: 150px;
         height: 50px;
         transition: .5s;
+        z-index: 9;
     }
 
     .mapBtn:hover {
@@ -173,17 +169,24 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
 </style>
 
 
-<?php include __DIR__ . "/../parts/html-head.php" ?>
-<?php include __DIR__ . "/../parts/navbar.php" ?>
+<?php include __DIR__ . "./parts/navbar.php" ?>
 
 <div class="container">
     <div class="row mt-5">
         <!-- 左側欄 -->
         <div class="place-left col-md-2 px-2">
             <div id="timeArea" class="time-area text-center mb-4">
-                <div class="time-title fs-5 fw-bold py-1">現在時間</div>
-                <div id="nowYM" class="fs-4 fw-bolder border-bottom py-2 mx-2 my-2"></div>
+                <div class="time-title fs-6 fw-bold py-1">現在時間</div>
+                <div id="nowYM" class="fs-4 fw-bolder border-bottom py-2 mx-2 my-1"></div>
                 <div id="nowTime" class="fs-4 p-1 my-1"></div>
+            </div>
+            <div class="sort-area px-4 py-3">
+                <h6>排序：</h6>
+                <input id="sortASC" type="radio" name="sort" onchange="sortByYear(event)">
+                <label for="sortASC">依年份遞增</label>
+                <br>
+                <input id="sortDESC" type="radio" name="sort" onchange="sortByYear(event)">
+                <label for="sortDESC">依年份遞增</label>
             </div>
             <!-- <div id="newsArea" class="news-area text-center">
                 <div class="news-title fs-5 fw-bold py-1">最新消息</div>
@@ -247,56 +250,11 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
                             </div>
                         </form>
                     </div>
-                    <!--
-                    <div class="col-md-2">
-                        <div class="input-group d-flex">
-                            <input type="search" name="search" id="search" placeholder="搜尋" aria-label="search" class="form-control" aria-describedby="button-addon2" />
-                            <button class="btn btn-outline-secondary" type="button" id="searchBtn">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <!-- 列表區 -->
             <div class="list-section px-1 py-2">
                 <div id="placeArea">
-                    <!--
-                    <div class="place-row-wrap col-12 p-2">
-                        <div class="place-row m-1 d-flex justify-content-center align-items-center">
-                            <input type="hidden" value="1">
-                            <div class="place-info d-flex col-8">
-                                <div class="place-time col-6 d-flex align-item-center">
-                                    <div class="title col-4">
-                                        <i class="fa-solid fa-clock"></i>
-                                        <h4>良辰</h4>
-                                    </div>
-                                    <div class="col-8 d-flex align-items-center justify-content-center">
-                                        <p class="year">2023年 2月</p>
-                                    </div>
-                                </div>
-                                <div class="place-location col-6 d-flex">
-                                    <div class="title col-4">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <h4>吉地</h4>
-                                    </div>
-                                    <div class="col-8">
-                                        <p class="country">台灣</p>
-                                        <p class="city">台北市 信義區</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="place-quota col-2">
-                                <p class="quota col">轉生限額：3</p>
-                                <p class="remain col">剩餘名額：1</p>
-                            </div>
-                            <div class="place-buttoms col-2 d-flex justify-content-center align-items-center">
-                                <button class="saveBtn btn btn-warning p-2 me-2"><i class="fa-brands fa-gratipay"></i> 收藏</button>
-                                <button class="chooseBtn btn btn-success p-2"><i class="fa-solid fa-cart-arrow-down"></i>加入轉生訂單</button>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
                 <h6 id="nodata" style="text-align: center; color: #888;"></h6>
             </div>
@@ -319,8 +277,13 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
     </div>
 </div>
 
+<!-- <div class="map-area d-flex justify-content-center align-items-center my-2">
+    <button class="btn btn-dark mapBtn" href="place-map.php"><i class="fa-solid fa-map-location-dot"></i> 顯示地圖</button>
 
-<?php include __DIR__ . "/../parts/scripts.php" ?>
+</div> -->
+
+
+<?php include __DIR__ . "./parts/scripts.php" ?>
 
 <script>
     let data;
@@ -391,9 +354,9 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
         let b = quota - booked;
         return `
         <div class="place-row-wrap col-12 p-2">
-            <div class="place-row mt-2 d-flex justify-content-center align-items-center">
+            <div class="place-row mt-1 d-flex justify-content-center align-items-center">
                 <input type="hidden" value="${sid}">
-                <div class="place-info d-flex col-8">
+                <div class="place-info d-flex col-7">
                     <div class="place-time col-6 d-flex align-item-center">
                         <div class="title col-4">
                             <i class="fa-solid fa-clock"></i>
@@ -483,7 +446,6 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
     }
 
 
-
     // 加入轉生訂單
     async function AddPlaceToCart(sid, b, replace) {
         if (b == 0) {
@@ -504,6 +466,8 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
                         } else {
                             alert(`訂單沒有更改`);
                         }
+                    } else if (result == false) {
+                        window.location.href = 'ab-login.php';
                     }
                 })
         }
@@ -549,7 +513,6 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
         renderPagination();
     }
 
-
     // 資料排序
     async function sortByYear(e) {
         const sortASC = document.querySelector('#sortASC');
@@ -580,6 +543,7 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
         }
 
     };
+
 
 
     // 現在時間
@@ -659,4 +623,4 @@ $_SESSION['member']['deathdate'] = '2022-06-06';
 </script>
 
 
-<?php include __DIR__ . "/../parts/html-foot.php" ?>
+<?php include __DIR__ . "./parts/html-foot.php" ?>

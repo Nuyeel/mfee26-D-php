@@ -3,13 +3,29 @@ $pageName = 'test_page';
 $title = '陰德值測驗';
 
 $rows = [];
-$t_sql = "SELECT COUNT(1) FROM good_deed_test";
+$t_sql = "SELECT COUNT(*) FROM good_deed_test";
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 $sql = sprintf("SELECT * FROM good_deed_test ORDER BY sid ASC");
 $rows = $pdo->query($sql)->fetchAll();
+?>
+<?php
 
+//先做一筆假資料測試用
+$_SESSION['member']['sid'] = 100;
+$_SESSION['member']['account'] = 'meowmeow';
+$_SESSION['member']['name'] = '卯咪';
 
+//若要重整假資料時可以先做清除
+// if (isset($_SESSION['member']['account'])){
+//   unset($_SESSION['member']['sid']);
+//   unset($_SESSION['member']['account']);
+//   unset($_SESSION['member']['name']);
 
+// }
+//如果是空值的話 跳轉回余欣的登入頁面
+// if (empty($_SESSION['member']['account'])) {
+//     header(location:login.php);
+// }
 ?>
 <?php include __DIR__ . '/test-parts/test-head.php' ?>
 <?php include __DIR__ . '/test-parts/test-nav.php' ?>
@@ -29,51 +45,13 @@ $rows = $pdo->query($sql)->fetchAll();
 </style>
 
 <div class="container">
-    <!-- <div class="row ">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body formLogin">
-                    <form name="formLogin" onsubmit="sendData();return false;" novalidate>
-
-                        <div class="mb-3">
-                            <label for="account" class="form-label">account</label>
-                            <input type="text" class="form-control" id="account" name="account">
-                            <div class="form-text red"></div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">password</label>
-                            <input type="text" class="form-control" id="password" name="password" pattern="09\d{8}">
-                            <div class="form-text red"></div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">name </label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                            <div class="form-text red"></div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="birth" class="form-label">birth</label>
-                            <input type="date" class="form-control" id="birth" name="birth">
-                            <div class="form-text"></div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="death" class="form-label">death</label>
-                            <input type="date" class="form-control" id="death" name="death">
-                            <div class="form-text"></div>
-                        </div>
-                    </form>
-
-                </div>
-                <div id="info-bar" class="alert alert-success" role="alert" style="display:none;">
-                    登入成功！
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div class="row">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">陰德值測驗</h5>
+                    <h5> </h5>
+                    <h5 class="card-title">你好！<?= $_SESSION['member']['name'] ?> 歡迎進行陰德值測驗！</h5>
+                    <p>測驗機會一世只有一次，請謹慎作答</p>
                     <form name="formTest" onsubmit="sendData();return false;" novalidate>
                         <div class="mb-3">
                             <?php foreach ($rows as $q) : ?>
@@ -189,7 +167,7 @@ $rows = $pdo->query($sql)->fetchAll();
         }
 
         const fd = new FormData(document.formTest);
-        const r = await fetch('test-api.php', {
+        const r = await fetch('test_page-api.php', {
             method: 'POST',
             body: fd,
         });

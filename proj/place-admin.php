@@ -1,19 +1,104 @@
-<?php require __DIR__ . "/../parts/connect_db.php" ?>
+<?php require __DIR__ . "./parts/connect_db.php" ?>
 
 <?php
 $pageName = 'place-admin';
 $title = '良辰吉地';
 ?>
 
-<?php include __DIR__ . "/../parts/html-head.php" ?>
-<?php include __DIR__ . "/../parts/navbar.php" ?>
+<?php include __DIR__ . "./parts/html-head.php" ?>
+<?php include __DIR__ . "./parts/navbar.php" ?>
 
+<style>
+    .filter-section {
+        /* background-color: rgb(203, 207, 212); */
+        background-color: rgba(255, 255, 255, .6);
+        border-radius: 10px;
+    }
+
+    .place-row p,
+    .place-row h4 {
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    .place-row {
+        /* border: 2px solid #aaa; */
+        border-radius: 20px;
+        padding: 15px;
+        transform: translate(0);
+        transition: .5s;
+        background-color: rgba(255, 255, 255, .8);
+    }
+
+    .place-time,
+    .place-location,
+    .place-quota {
+        padding: 0 10px 0;
+        line-height: 28px;
+        border-right: 1px solid #ccc;
+    }
+
+    .title {
+        text-align: center;
+    }
+
+    .title h4,
+    .title i {
+        font-weight: bold;
+        font-size: 22px;
+        color: rgb(57, 89, 114);
+        transition: 1s;
+    }
+
+    .place-row:hover .float-icon {
+        transform: translateY(-8px);
+    }
+
+    .place-row-wrap:hover .place-row {
+        transform: translate(-2px, -1px);
+        background-color: rgba(255, 255, 255, 1);
+    }
+
+    p.year,
+    p.month,
+    p.country {
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    p.city {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    p.remain {
+        color: #f45e35;
+        font-weight: bold;
+    }
+
+    .place-buttoms .chooseBtn {
+        height: 34px;
+        background-color: #37508c;
+        border: none;
+        transition: .2s;
+        font-size: 14px;
+    }
+
+
+    .chooseBtn:hover {
+        background-color: #0b3863;
+    }
+
+    .place-quota {
+        border-right: 0;
+    }
+</style>
 
 <div class="container mt-5">
     <div class="top-area d-flex">
         <!-- 篩選搜尋 -->
         <div class="filter-section px-2 py-2 mb-2 d-flex col-12">
-            <form name="filterForm" action="" onsubmit="filtData(); return false" class="col-8 me-3">
+            <form name="filterForm" action="" onsubmit="filtData(); return false" class="col-7 me-3">
                 <div class="d-flex mb-3">
                     <div class="col-md-6">
                         <div class="input-group pe-2">
@@ -53,7 +138,8 @@ $title = '良辰吉地';
                     </div>
                 </div>
             </form>
-            <div class="d-flex col-4">
+            <!-- 時間區間篩選 -->
+            <div class="d-flex col-5">
                 <div class="col-md-12">
                     <form name="searchDateForm" action="" onsubmit="filtDate(); return false">
                         <div class="input-group pe-2">
@@ -176,10 +262,11 @@ $title = '良辰吉地';
 </div>
 
 
-<?php include __DIR__ . "/../parts/scripts.php" ?>
+<?php include __DIR__ . "./parts/scripts.php" ?>
 <script>
     let data;
     let page = +location.search.slice(6);
+    let sort = 0; // 預設
 
     // 頁數頁碼
     const renderPageBtn = (pageNum) => {
@@ -274,24 +361,25 @@ $title = '良辰吉地';
     }
 
     // 換頁render
-    // console.log(page);
-    if (!page) {
-        fetch("place-list-api.php?page=1")
+    if (!page && !sort) {
+        fetch("place-list-api.php?page=1&sort=0")
             .then((response) => response.json())
             .then((obj) => {
                 data = obj;
                 renderTable();
                 renderPagination(1);
                 history.pushState(page, "", "?page=" + 1);
+                window.scrollTo(0, 0);
             });
     } else {
-        fetch(`place-list-api.php?page=${page}`)
+        fetch(`place-list-api.php?page=${page}&sort=${sort}`)
             .then((response) => response.json())
             .then((obj) => {
                 data = obj;
                 renderTable();
                 renderPagination(page);
                 history.pushState(page, "", "?page=" + page);
+                window.scrollTo(0, 0);
             });
     }
 
@@ -299,13 +387,19 @@ $title = '良辰吉地';
         // 轉換成數字
         const page = +e.target.innerHTML;
 
-        fetch(`place-list-api.php?page=${page}`)
+        fetch(`place-list-api.php?page=${page}&sort=${sort}`)
             .then((r) => r.json())
             .then((obj) => {
                 data = obj;
                 renderTable();
                 renderPagination(page);
-                history.pushState(page, '', '?page=' + page);
+
+                const state = {
+                    'page': page,
+                    'sort': sort
+                };
+                history.pushState(state, '', '?page=' + page + '&sort=' + sort);
+                window.scrollTo(0, 0);
             });
     }
 
@@ -369,7 +463,6 @@ $title = '良辰吉地';
         const icon = sortIcon.children;
         console.log(icon);
 
-        let sort = 0; // 預設
         if (icon[0].style.display == "inline") {
             sort = 1;
             fetch('place-list-api.php?sort=1')
@@ -501,4 +594,4 @@ $title = '良辰吉地';
 </script>
 
 
-<?php include __DIR__ . "/../parts/html-foot.php" ?>
+<?php include __DIR__ . "./parts/html-foot.php" ?>
