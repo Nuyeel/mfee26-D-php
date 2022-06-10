@@ -37,7 +37,7 @@ $rows = $pdo->query($sql)->fetchAll();
 <!-- 從這邊開始是HTML內容(=V =呈現) -->
 <?php include __DIR__ . '/../parts/html-head.php' ?>
 
-<?php include __DIR__ . '/../parts/navbar.php' ?> 
+<?php include __DIR__ . '/../parts/navbar-xuan.php' ?> 
 
 
 
