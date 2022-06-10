@@ -345,7 +345,7 @@ if (!$_SESSION['member']['account']) {
     async function sendData() {
         const fd = new FormData(document.form1);
         let aPi = './avatar-order-add-api.php';
-        if (location.search.length > 0) {
+        if (editAvatarorder > 0) {
             console.log(111);
             aPi = './avatar-order-edit-api.php';
         };
@@ -360,6 +360,7 @@ if (!$_SESSION['member']['account']) {
         }
     }
 
+    let editAvatarorder = 0;
     //如果有location.search會變成修改
     if (location.search.length > 0) {
         console.log('search is alive!!');
@@ -384,10 +385,14 @@ if (!$_SESSION['member']['account']) {
                 btns[a[parts[i]]].click();
                 colorbtns[a[parts[i] + "Color"]].click();
             }
+            if (result[0]['member_sid']=== <?php echo $_SESSION['member']['sid'];?>){
+                editAvatarorder = 1;
+            }
 
-        }
+        };
         getEditdata();
-    }
+        
+    };
 </script>
 
 <?php include __DIR__ . './parts/html-foot.php' ?>
