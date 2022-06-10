@@ -1,12 +1,14 @@
-<?php require __DIR__ . "/../parts/connect_db.php" ?>
+<?php require __DIR__ . "./parts/connect_db.php" ?>
 
 <?php
 $pageName = 'place-add';
 $title = '新增良辰吉地';
 ?>
 
-<?php include __DIR__ . "/../parts/html-head.php" ?>
-<?php include __DIR__ . "/../parts/navbar.php" ?>
+
+<?php include __DIR__ . "./parts/html-head.php" ?>
+
+<?php include __DIR__ . "./parts/navbar.php" ?>
 
 
 <div class="container">
@@ -54,100 +56,102 @@ $title = '新增良辰吉地';
                         </div>
                     </form>
                 </div>
-
-                <div id=" infoBar" class="alert alert-success" role="alert" style="display: none; margin-top:5px;">
-                                資料新增成功！
+                <!-- <div id=" infoBar" class="alert alert-success" role="alert" style="display: none; margin-top:5px;">
+                                資料新增成功
                         </div>
-                </div>
+                </div> -->
+            </div>
+            <div id="infoBar" class="alert alert-success" role="alert" style="display: none; margin-top:5px;">
+                資料新增成功
             </div>
         </div>
     </div>
+</div>
 
 
-    <?php include __DIR__ . "/../parts/scripts.php" ?>
+<?php include __DIR__ . "./parts/scripts.php" ?>
 
-    <script>
-        const infoBar = document.querySelector('#infoBar');
+<script>
+    const infoBar = document.querySelector('#infoBar');
 
+    async function sendData() {
+        // 欄位檢查
 
-        async function sendData() {
-            // 欄位檢查
+        const fd = new FormData(document.form1);
+        const r = await fetch('place-add-api.php', {
+            method: 'POST',
+            body: fd,
+        });
+        const result = await r.json();
+        console.log(result);
 
-            const fd = new FormData(document.form1);
-            const r = await fetch('place-add-api.php', {
-                method: 'POST',
-                body: fd,
-            });
-            const result = await r.json();
-            console.log(result);
+        infoBar.style.display = 'block';
+        if (result.success) {
+            infoBar.classList.remove('alert-danger');
+            infoBar.classList.add('alert-success');
+            infoBar.innerHTML = '資料新增成功';
 
-            infoBar.style.display = 'block';
-            if (result.success) {
-                infoBar.classList.remove('alert-danger');
-                infoBar.classList.add('alert-success');
-                infoBar.innerHTML = '資料新增成功';
-
-                setTimeout(() => {
-                    location.href = 'place-backstage.php';
-                }, 1000)
-            } else {
-                infoBar.classList.remove('alert-success');
-                infoBar.classList.add('alert-danger');
-                infoBar.innerHTML = result.error || '資料新增失敗';
-            }
+            setTimeout(() => {
+                location.href = 'place-admin.php';
+            }, 1000)
+        } else {
+            infoBar.classList.remove('alert-success');
+            infoBar.classList.add('alert-danger');
+            infoBar.innerHTML = result.error || '資料新增失敗';
         }
+    }
 
 
-        // 國家城市三層選單
-        let renderData;
-        const country = document.querySelector("#country");
-        const city = document.querySelector('#city');
-        const dist = document.querySelector('#dist');
+    // 國家城市三層選單
+    let renderData;
+    const country = document.querySelector("#country");
+    const city = document.querySelector('#city');
+    const dist = document.querySelector('#dist');
 
-        function renderCountry() {
-            fetch("render-dist-api.php").then(r => r.json()).then(obj => {
-                renderData = obj;
-                // console.log(renderData);
-
-                const countrys = renderData.countrys;
-                for (let k in countrys) {
-                    country.innerHTML += `<option value="${k}">${k}</option>`;
-                };
-            });
-        };
-        renderCountry();
-
-        function changeCity(value) {
-            // 先清空city選單
-            city.innerHTML = `<option selected disabled>選擇城市...</option>`;
+    function renderCountry() {
+        fetch("render-dist-api.php").then(r => r.json()).then(obj => {
+            renderData = obj;
+            // console.log(renderData);
 
             const countrys = renderData.countrys;
-            const distList = renderData.distList;
-
             for (let k in countrys) {
-                if (value == k) {
-                    countrys[k].forEach(e => {
-                        city.innerHTML += `<option value="${e}">${e}</option>`;
-                    });
-                }
+                country.innerHTML += `<option value="${k}">${k}</option>`;
             };
+        });
+    };
+    renderCountry();
+
+    function changeCity(value) {
+        // 先清空city選單
+        city.innerHTML = `<option selected disabled>選擇城市...</option>`;
+
+        const countrys = renderData.countrys;
+        const distList = renderData.distList;
+
+        for (let k in countrys) {
+            if (value == k) {
+                countrys[k].forEach(e => {
+                    city.innerHTML += `<option value="${e}">${e}</option>`;
+                });
+            }
         };
+    };
 
-        function changeDist(value) {
-            // 先清空選單
-            dist.innerHTML = `<option selected disabled>選擇地區...</option>`;
-            // 找出城市的地區陣列
-            const distList = renderData.distList;
-            // console.log(distList);
+    function changeDist(value) {
+        // 先清空選單
+        dist.innerHTML = `<option selected disabled>選擇地區...</option>`;
+        // 找出城市的地區陣列
+        const distList = renderData.distList;
+        // console.log(distList);
 
-            for (let k in distList) {
-                if (value == k) {
-                    distList[k].forEach(e => {
-                        dist.innerHTML += `<option value="${e}">${e}</option>`;
-                    });
-                }
-            };
-        }
-    </script>
+        for (let k in distList) {
+            if (value == k) {
+                distList[k].forEach(e => {
+                    dist.innerHTML += `<option value="${e}">${e}</option>`;
+                });
+            }
+        };
+    }
+</script>
 
-    <?php include __DIR__ . "/../parts/html-foot.php" ?>
+<?php include __DIR__ . "./parts/html-foot.php" ?>

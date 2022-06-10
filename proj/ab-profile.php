@@ -1,18 +1,16 @@
-<?php require __DIR__ . '/parts-2/connect_db-2.php';
-$pageName = 'ab-profile';
-$title = '會員中心 - 靈魂轉生平台';
+<?php require __DIR__ . "./parts/connect_db.php" ?>
 
-if ($_SESSION['member']['account'] == 'Admin') {
-    header('location:ab-list.php');
-    // exit;
-} else if (!$_SESSION['member']['account']) {
+<?php
+$pageName = 'ab-profile';
+$title = '會員中心 - 來生投放所';
+
+
+
+
+if (!$_SESSION['member']['account']) {
     header('location:ab-login.php');
     // exit;
 }
-// if (!$_SESSION['member']['account']) {
-//     header('location:ab-login.php');
-//     // exit;
-// }
 
 $sid = isset($_SESSION['member']['sid']) ? intval($_SESSION['member']['sid']) : 0;
 $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
@@ -23,8 +21,10 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
 // exit;
 
 ?>
-<?php include __DIR__ . '/parts-2/html-head-2.php' ?>
-<?php include __DIR__ . '/parts-2/navbar-3.php' ?>
+
+<?php include __DIR__ . "./parts/html-head.php" ?>
+<?php include __DIR__ . "./parts/navbar.php" ?>
+
 <br>
 <div class="container">
     <div class="row">
@@ -90,8 +90,11 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
     </div>
 </div>
 </div>
-<?php include __DIR__ . '/parts-2/scripts-2.php' ?>
+
+<?php include __DIR__ . "./parts/scripts.php" ?>
 
 <script>
 </script>
-<?php include __DIR__ . '/parts-2/html-foot-2.php' ?>
+
+
+<?php include __DIR__ . "./parts/html-foot.php" ?>

@@ -45,8 +45,16 @@ if (!isset($pageName)) {
         }
     }
 
-    .navbar-icon>a>i {
+
+    .navbar-lefticons {
         color: #33A5DB;
+        font-size: 20px;
+        margin-right: 5px;
+        transition: .5s;
+    }
+
+    .navbar-lefticons:hover {
+        color: #226787;
     }
 
     #adminTitle {
@@ -82,7 +90,7 @@ if (!isset($pageName)) {
                     <a class="nav-link <?= $pageName == 'reborn' ? 'active' : '' ?>" href="/mfee26-D-php/proj/avatar.php">轉生形象</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="/mfee26-D-php/proj/place/place.php">良辰吉地</a>
+                    <a class="nav-link <?= $pageName == 'place' ? 'active' : '' ?>" href="/mfee26-D-php/proj/place.php">良辰吉地</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= $pageName == 'activity' ? 'active' : '' ?>" href="/mfee26-D-php/proj/xuan-event-manage/npo-list.php">Activity</a>
@@ -96,21 +104,26 @@ if (!isset($pageName)) {
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="news-admin.php">最新消息</a></li>
                         <li><a class="dropdown-item" href="reborn-admin.php">轉生形象</a></li>
-                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/place/place-admin.php">良辰吉地</a></li>
+                        <li><a class="dropdown-item" href="/mfee26-D-php/proj/place-admin.php">良辰吉地</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/npo-act-add.php">活動-新增</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-event-manage/event-manage.php">活動-管理</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-add.php">NPO-新增</a></li>
                         <li><a class="dropdown-item" href="/mfee26-D-php/proj/xuan-npo-manage/npo-manage.php">NPO-管理</a></li>
-                        <li><a class="dropdown-item" href="member-admin.php">會員管理</a></li>
+                        <li><a class="dropdown-item" href="ab-list.php">會員管理</a></li>
                     </ul>
                 </li>
             </ul>
             <ul class="navbar-nav navbar-icon mb-2 mb-lg-0">
-                <a href="cart.php">
-                    <i class="fa-solid fa-cart-shopping"></i>
+                <a href="/mfee26-D-php/proj/xuan-event-manage/cart-list.php">
+                    <i class="fa-solid fa-cart-shopping navbar-lefticons"></i>
                 </a>
-                <a href="member.php">
-                    <i class="fa-solid fa-circle-user"></i>
+                <a href="ab-profile.php" title="會員中心">
+                    <!-- 要放登入頁面還是會員中心? -->
+                    <!-- 應該釋放會員中心連結, profile頁面加驗證, 如果沒登入就導登入頁? -->
+                    <i class="fa-solid fa-circle-user navbar-lefticons"></i>
+                </a>
+                <a href="ab-logout.php" title="會員登出">
+                    <i class="fa-solid fa-right-from-bracket navbar-lefticons"></i>
                 </a>
             </ul>
         </div>
