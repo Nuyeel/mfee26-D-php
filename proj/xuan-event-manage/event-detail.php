@@ -106,8 +106,6 @@ $rows = $pdo->query($sql)->fetchAll();
         
         <!-- 直接跳進結帳頁面 -->
         <!-- <a class="btn btn-warning mt-4" href="cart-list.php" role="button" style="margin-right:10px; font-size:16px"><i class="fa-solid fa-money-bill-1"></i> &nbsp 直接結帳</a> -->
-
-
     </div>
 </div>
 
@@ -124,6 +122,7 @@ $rows = $pdo->query($sql)->fetchAll();
 
 // 這邊是跟購物車有關的JS
 
+// 把內容加到 cart-list 裡的Jquery
 $('.add-to-cart-btn').on('click', event => {
     // 用箭頭函式這邊不用要this
     const btn = $(event.currentTarget);
@@ -140,17 +139,40 @@ $('.add-to-cart-btn').on('click', event => {
         quantity
     });
 
-    // Jquery GET寫法
-    $.get('cart-api.php', {
-        sid,
-        quantity
-    }, function(data) {
-        console.log(data);
-        showCount(data);
-    }, 'json');
 
+
+    // const cartAmount = document.querySelector('#cart_amount');
+    // Jquery GET寫法
+        $.get('cart-api.php', {
+            sid,
+            quantity
+        }, function(data) {
+            console.log(data['cart']);
+            console.log(Object.keys(data['cart']).length);
+            //showCount(data);
+            document.querySelector('#cart_amount').innerText=Object.keys(data['cart']).length;
+        }, 'json');
 
 });
+
+// function cartAmount(){
+//     const a = document.querySelector('.add-to-cart-btn');
+//     const sid = a.dataset;
+//     const quantity = '1';
+// // const cartAmount = document.querySelector('#cart_amount');
+// // Jquery GET寫法
+//     $.get('cart-api.php', {
+//         sid,
+//         quantity
+//     }, function(data) {
+//         console.log(data['cart']);
+//         console.log(Object.keys(data['cart']).length);
+//         //showCount(data);
+//         document.querySelector('#cart_amount').innerText=Object.keys(data['cart']).length;
+//     }, 'json');
+
+// }
+// cartAmount();
 
 
 </script> 

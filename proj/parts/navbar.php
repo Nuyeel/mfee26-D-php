@@ -161,6 +161,10 @@ if (!isset($pageName)) {
                 <?php } ?>
             </ul>
             <ul class="navbar-nav navbar-icon mb-2 mb-lg-0">
+                
+            <!-- 活動購物車數量 -->
+            <div id="cart_amount" style="width:20px;height:20px;border-radius:50%;background-color:white;margin-right:10px;text-align:center;font-weight:bold"></div>
+
                 <a href="/mfee26-D-php/proj/xuan-event-manage/cart-list.php">
                     <i class="fa-solid fa-cart-shopping navbar-lefticons"></i>
                 </a>

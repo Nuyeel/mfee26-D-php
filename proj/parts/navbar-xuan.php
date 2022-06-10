@@ -160,9 +160,14 @@ if (!isset($pageName)) {
                 <?php } ?>
             </ul>
             <ul class="navbar-nav navbar-icon mb-2 mb-lg-0">
+
+                <!-- 購物車數量 -->
+                <div id="cart_amount" style="width:20px;height:20px;border-radius:50%;background-color:white;margin-right:10px;text-align:center;font-weight:bold">1</div>
+
                 <a href="/mfee26-D-php/proj/xuan-event-manage/cart-list.php">
                     <i class="fa-solid fa-cart-shopping navbar-lefticons"></i>
                 </a>
+                
                 <a href="ab-profile.php" title="會員中心">
                     <!-- 要放登入頁面還是會員中心? -->
                     <!-- 應該釋放會員中心連結, profile頁面加驗證, 如果沒登入就導登入頁? -->
