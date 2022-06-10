@@ -8,6 +8,7 @@ if ($_SESSION['member']['account'] <> 'Admin') {
   header("Location: yun_mainpage.php");
   exit;
 }
+
 $perPage = 20; // 每一頁有幾筆
 
 // 用戶要看第幾頁
@@ -16,6 +17,7 @@ if ($page < 1) {
   header('Location: ?page=1');
   exit;
 }
+
 
 $t_sql = "SELECT COUNT(*) FROM good_deed_test_record";
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0]; // 總筆數
@@ -31,9 +33,11 @@ if ($totalRows > 0) {
     exit;
   }
 
-  $sql = sprintf("SELECT * FROM good_deed_test_record ORDER BY sid ASC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
-  $rows = $pdo->query($sql)->fetchAll();
+  $sql = sprintf(
+    "SELECT * FROM `good_deed_test_record` JOIN `member` ON  `good_deed_test_record`.`member_sid`= `member`.`sid` ORDER BY `member`.`sid` ASC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+    $rows = $pdo->query($sql)->fetchAll();
 }
+
 
 ?>
 <?php include __DIR__ . './parts/html-head.php' ?>
@@ -96,10 +100,10 @@ if ($totalRows > 0) {
         <th scope="col">Q4</th>
         <th scope="col">Q5</th>
         <th scope="col">總分</th>
+        <th scope="col">DELETE</th>
 
 
 
-        <th scope="col"><i class="fa-solid fa-pen-to-square"></i></th>
       </tr>
     </thead>
     <tbody>
@@ -111,8 +115,8 @@ if ($totalRows > 0) {
             </a>
           </td>
           <td><?= $r['member_sid'] ?></td>
-          <td><?= htmlentities($r['member_account']) ?></td>
-          <td><?= htmlentities($r['member_name']) ?></td>
+          <td><?= htmlentities($r['account']) ?></td>
+          <td><?= htmlentities($r['name']) ?></td>
           <td><?= $r['member_birth'] ?></td>
           <td><?= $r['member_death'] ?></td>
           <td><?= $r['test_Q1'] ?></td>

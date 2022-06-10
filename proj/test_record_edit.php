@@ -1,21 +1,17 @@
 <?php require __DIR__ . "./parts/connect_db.php";
+
 $pageName = 'record-edit';
 $title = '編輯會員資料';
 
-$member_sid = isset($_SESSION['member']['sid']) ? intval($_SESSION['member']['sid']) : 0;
 
-if (empty($member_sid)) {
+// 修改功能
+$sid = isset($_GET['member_sid']) ? intval($_GET['member_sid']) : 0;
+if (empty($sid)) {
     header('Location: test_record_list.php');
     exit;
 }
 
-$row = $pdo->query("SELECT * FROM `good_deed_test_record` WHERE `member_sid` = $member_sid")->fetch();
-
-if (empty($row)) {
-    header('Location: test_record_list.php');
-    exit;
-}
-
+$row = $pdo->query("SELECT * FROM `good_deed_test_record` JOIN `member` ON  `good_deed_test_record`.`member_sid`= `member`.`sid` WHERE `member_sid` = '$sid' ")->fetch();
 
 
 ?>
@@ -40,23 +36,23 @@ if (empty($row)) {
                         <input type="hidden" name="membersid" value="<?= $row['member_sid'] ?>">
                         <div class="mb-3">
                             <label for="account" class="form-label">帳號</label>
-                            <input type="text" class="form-control" id="account" name="account" required value="<?= htmlentities($row['member_account']) ?>" disabled>
+                            <input type="text" class="form-control" id="account" name="account" required value="<?= htmlentities($row['account']) ?>" disabled>
 
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">姓名</label>
-                            <input type="text" class="form-control" id="name" name="name" value="<?= $row['member_name'] ?>" disabled>
+                            <input type="text" class="form-control" id="name" name="name" value="<?= $row['name'] ?>" disabled>
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="birth" class="form-label">生日</label>
-                            <input type="date" class="form-control" id="birth" name="birth" value="<?= $row['member_birth'] ?>" disabled>
+                            <input type="date" class="form-control" id="birth" name="birth" value="<?= $row['birthdate'] ?>" disabled>
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="death" class="form-label">忌日</label>
-                            <input type="date" class="form-control" id="death" name="death" value="<?= $row['member_death'] ?>" disabled>
+                            <input type="date" class="form-control" id="death" name="death" value="<?= $row['deathdate'] ?>" disabled>
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
