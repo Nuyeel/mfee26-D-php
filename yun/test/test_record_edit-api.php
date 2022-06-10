@@ -32,15 +32,10 @@ if (empty($member_sid) or empty($_POST['account'])) {
 }
 
 
-$sql = "UPDATE `good_deed_test_record` SET `member_account`=?,`member_password`=?,`member_name`=?,`member_birth`=?,`member_death`=?,`test_Q1`=?,`test_Q2`=?,`test_Q3`=?,`test_Q4`=?,`test_Q5`=?,`test_score`=? WHERE `member_sid`=$member_sid ";
+$sql = "UPDATE `good_deed_test_record` SET `test_Q1`=?,`test_Q2`=?,`test_Q3`=?,`test_Q4`=?,`test_Q5`=?,`test_score`=? WHERE `member_sid`=$member_sid ";
 $stmt = $pdo->prepare($sql);
 
 $stmt->execute([
-  $account,
-  $password,
-  $name,
-  $birth,
-  $death,
   $q1,
   $q2,
   $q3,

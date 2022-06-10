@@ -39,22 +39,23 @@ if (empty($row)) {
                         <input type="hidden" name="membersid" value="<?= $row['member_sid'] ?>">
                         <div class="mb-3">
                             <label for="account" class="form-label">帳號</label>
-                            <input type="text" class="form-control" id="account" name="account" required value="<?= htmlentities($row['member_account']) ?>">
+                            <input type="text" class="form-control" id="account" name="account" required value="<?= htmlentities($row['member_account']) ?>" disabled>
+
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">姓名</label>
-                            <input type="text" class="form-control" id="name" name="name" value="<?= $row['member_name'] ?>">
+                            <input type="text" class="form-control" id="name" name="name" value="<?= $row['member_name'] ?>" disabled>
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="birth" class="form-label">生日</label>
-                            <input type="date" class="form-control" id="birth" name="birth" value="<?= $row['member_birth'] ?>">
+                            <input type="date" class="form-control" id="birth" name="birth" value="<?= $row['member_birth'] ?>" disabled>
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="death" class="form-label">忌日</label>
-                            <input type="date" class="form-control" id="death" name="death" value="<?= $row['member_death'] ?>">
+                            <input type="date" class="form-control" id="death" name="death" value="<?= $row['member_death'] ?>" disabled>
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
@@ -103,6 +104,7 @@ if (empty($row)) {
 <script>
     // const row = json_encode($row, JSON_UNESCAPED_UNICODE); ;
 
+
     const q1_re = /^\d$/;
     const q2_re = /^\d$/;
     const q3_re = /^\d$/;
@@ -111,8 +113,6 @@ if (empty($row)) {
 
     const info_bar = document.querySelector('#info-bar');
 
-    const account_f = document.formEdit.account;
-    const name_f = document.formEdit.name;
     const q1_f = document.formEdit.q1;
     const q2_f = document.formEdit.q2;
     const q3_f = document.formEdit.q3;
@@ -122,12 +122,21 @@ if (empty($row)) {
 
 
 
-    const fields = [account_f, name_f, q1_f, q2_f, q3_f, q4_f, q5_f];
+    const fields = [q1_f, q2_f, q3_f, q4_f, q5_f];
     const fieldTexts = [];
     for (let f of fields) {
         fieldTexts.push(f.nextElementSibling);
     }
-
+    // console.log(document.formEdit);
+    // const fd = new FormData(document.formEdit);
+    // console.log(fd);
+    // const r = fetch('test_record_edit-api.php', {
+    //     method: 'POST',
+    //     body: fd,
+    // });
+    // console.log(r);
+    // console.log(result);
+    // console.log('hi');
 
 
     async function sendData() {
@@ -140,47 +149,38 @@ if (empty($row)) {
 
         // TODO: 欄位檢查, 前端的檢查
         let isPass = true; // 預設是通過檢查的
-        
-        if (account_f.value.length < 4) {
-            fields[0].classList.add('red');
-            fieldTexts[0].innerText = '帳號至少四個字元以上';
-            isPass = false;
-        }
-        if (name_f.value.length < 2) {
-            fields[1].classList.add('red');
-            fieldTexts[1].innerText = '姓名至少兩個字';
-            isPass = false;
-        }
+
+
         if (q1_f.value && !q1_re.test(q1_f.value)) {
             // alert('email 格式錯誤');
-            fields[2].classList.add('red');
-            fieldTexts[2].innerText = '分數限制為個位數';
+            fields[0].classList.add('red');
+            fieldTexts[0].innerText = '分數限制為個位數';
             isPass = false;
         }
         if (q2_f.value && !q2_re.test(q2_f.value)) {
             // alert('email 格式錯誤');
-            fields[3].classList.add('red');
-            fieldTexts[3].innerText = '分數限制為個位數';
+            fields[1].classList.add('red');
+            fieldTexts[1].innerText = '分數限制為個位數';
             isPass = false;
         }
         if (q3_f.value && !q3_re.test(q3_f.value)) {
             // alert('email 格式錯誤');
-            fields[4].classList.add('red');
-            fieldTexts[4].innerText = '分數限制為個位數';
+            fields[2].classList.add('red');
+            fieldTexts[2].innerText = '分數限制為個位數';
             isPass = false;
 
         }
         if (q4_f.value && !q4_re.test(q4_f.value)) {
             // alert('email 格式錯誤');
-            fields[5].classList.add('red');
-            fieldTexts[5].innerText = '分數限制為個位數';
+            fields[3].classList.add('red');
+            fieldTexts[3].innerText = '分數限制為個位數';
             isPass = false;
 
         }
         if (q5_f.value && !q1_re.test(q5_f.value)) {
             // alert('email 格式錯誤');
-            fields[6].classList.add('red');
-            fieldTexts[6].innerText = '分數限制為個位數';
+            fields[4].classList.add('red');
+            fieldTexts[4].innerText = '分數限制為個位數';
             isPass = false;
         }
         if (!isPass) {
@@ -192,10 +192,11 @@ if (empty($row)) {
             method: 'POST',
             body: fd,
         });
-        
+        console.log(r);
+
         const result = await r.json();
         console.log(result);
-        info_bar.style.display = 'block'; 
+        info_bar.style.display = 'block';
         // 顯示訊息列
         if (result.success) {
             info_bar.classList.remove('alert-danger');
@@ -206,9 +207,13 @@ if (empty($row)) {
                 location.href = 'test_record_list.php'; // 跳轉到列表頁
             }, 2000);
         } else {
+            console.log(r);
+            console.log(result);
+            console.log('hello');
+
             info_bar.classList.remove('alert-success');
             info_bar.classList.add('alert-danger');
-            info_bar.innerText = result.error || '資料沒有修改';
+            info_bar.innerText = result.error || '資料沒有修改!!!';
         }
 
     }
