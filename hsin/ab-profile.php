@@ -2,10 +2,17 @@
 $pageName = 'ab-profile';
 $title = '會員中心 - 靈魂轉生平台';
 
-if (!$_SESSION['member']['account']) {
+if ($_SESSION['member']['account'] == 'Admin') {
+    header('location:ab-list.php');
+    // exit;
+} else if (!$_SESSION['member']['account']) {
     header('location:ab-login.php');
     // exit;
 }
+// if (!$_SESSION['member']['account']) {
+//     header('location:ab-login.php');
+//     // exit;
+// }
 
 $sid = isset($_SESSION['member']['sid']) ? intval($_SESSION['member']['sid']) : 0;
 $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();

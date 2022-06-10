@@ -28,10 +28,10 @@ if (!isset($pageName)) {
                     </li>
                 </ul>
                 <ul class="navbar-nav ">
-                <li class="nav-item">
-                        <a class="nav-link <?= $pageName == 'ab-register' ? 'active' : '' ?>" href="ab-register.php">登入｜註冊</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ab-register.php">登入｜註冊</a>
                     </li>
-                    </ul>
+                </ul>
             </div>
         </div>
     </nav>
