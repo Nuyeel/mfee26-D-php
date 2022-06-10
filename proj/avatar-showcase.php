@@ -1,4 +1,4 @@
-<?php include __DIR__ . './parts/connect_db.php' ?>
+<?php require __DIR__ . './parts/connect_db.php' ?>
 <?php
 $pageName = 'avatar-showcase';
 $title = '濟善救世公司-轉生形象-衣櫥';
