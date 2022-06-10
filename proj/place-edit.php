@@ -1,4 +1,4 @@
-<?php require __DIR__ . "/../parts/connect_db.php";
+<?php require __DIR__ . "./parts/connect_db.php";
 
 $pageName = 'place-edit';
 $title = '良辰吉地-修改';
@@ -22,7 +22,9 @@ if (empty($row)) {
 
 ?>
 
+
 <?php include __DIR__ . "/../parts/html-head.php" ?>
+<link rel="stylesheet" href="/../fontawesome-free-6.1.1-web/css/all.min.css">
 <?php include __DIR__ . "/../parts/navbar.php" ?>
 
 
