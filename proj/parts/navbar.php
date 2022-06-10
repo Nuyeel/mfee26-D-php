@@ -136,16 +136,8 @@ if (!isset($pageName)) {
                     <!-- 應該釋放會員中心連結, profile頁面加驗證, 如果沒登入就導登入頁? -->
                     <i class="fa-solid fa-circle-user navbar-lefticons"></i>
                 </a>
-<<<<<<< HEAD
-                <a href="/mfee26-D-php/proj/ab-logout.php" class="logInOut">
-                    登入|註冊
-                </a>
-                <a href="/mfee26-D-php/proj/ab-logout.php" class="logInOut">
-                    登出
-=======
                 <a href=<?= (isset($_SESSION['member']['account'])) ? "ab-logout.php" : "ab-login.php"?> class=<?= (isset($_SESSION['member']['account'])) ? "logInOut" : "logInOut"?>>
                 <?= (isset($_SESSION['member']['account'])) ? "登出" : "登入|註冊"?>
->>>>>>> 07011d9b90ef299bac5b3d09f062290c1898930e
                 </a>
             </ul>
         </div>
