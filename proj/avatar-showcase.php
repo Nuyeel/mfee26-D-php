@@ -10,6 +10,9 @@ $title = '濟善救世公司-轉生形象-衣櫥';
     }
 </style>
 <?php include __DIR__ . './parts/navbar.php' ?>
+<form action="" id="form1" name="form1" onsubmit="return false;" style="display: none;">
+<input class="form-check-input" type="text" name="mid" value="<?php echo $_SESSION['member']['sid'];?>" checked>
+</form>
 <div class="container">
     <div class="row" id="showcase"></div>
     <div id="showcases"></div>
@@ -55,9 +58,12 @@ $title = '濟善救世公司-轉生形象-衣櫥';
             <p>${f}</p>
         </div>`;
     };
+    const form1 = document.querySelector('#form1');
     async function getData() {
+        const fd = new FormData(form1)
         const r = await fetch('./avatar-getshowcase-api.php', {
             method: 'POST',
+            body: fd,
         });
         const result = await r.json();
         console.log(result);
