@@ -94,10 +94,10 @@ $title = '良辰吉地';
     }
 </style>
 
-<div class="container mt-5">
+<div class="container mt-4">
     <div class="top-area d-flex">
         <!-- 篩選搜尋 -->
-        <div class="filter-section px-2 py-2 mb-2 d-flex col-12">
+        <div class="filter-section px-2 py-1 d-flex col-12">
             <form name="filterForm" action="" onsubmit="filtData(); return false" class="col-7 me-3">
                 <div class="d-flex mb-3">
                     <div class="col-md-6">
@@ -406,7 +406,7 @@ $title = '良辰吉地';
     // 篩選資料 filter
     async function filtData() {
         const fd = new FormData(document.filterForm);
-        const r = await fetch('filter-api.php', {
+        const r = await fetch('place-filter-api.php', {
             method: 'POST',
             body: fd
         });
@@ -429,7 +429,7 @@ $title = '良辰吉地';
     // 時間區間篩選 filter
     async function filtDate() {
         const fd = new FormData(document.searchDateForm);
-        const r = await fetch('time-filter-api.php', {
+        const r = await fetch('place-time-filter-api.php', {
             method: 'POST',
             body: fd
         });
@@ -495,7 +495,7 @@ $title = '良辰吉地';
     const dist = document.querySelector('#dist');
 
     function renderCountry() {
-        fetch("render-dist-api.php").then(r => r.json()).then(obj => {
+        fetch("place-render-dist-api.php").then(r => r.json()).then(obj => {
             renderData = obj;
             // console.log(renderData);
 

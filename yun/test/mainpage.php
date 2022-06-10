@@ -8,10 +8,7 @@ $title = 'MainPage';
 
 <style>
   .card {
-    margin: 100px auto auto;
-   
-
-  }
+    margin: 100px auto auto; }
 
 
 </style>

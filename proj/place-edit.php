@@ -125,7 +125,7 @@ if (empty($row)) {
     const dist = document.querySelector('#dist');
 
 
-    fetch("render-dist-api.php").then(r => r.json()).then(obj => {
+    fetch("place-render-dist-api.php").then(r => r.json()).then(obj => {
         renderData = obj;
         // console.log(renderData);
     });
