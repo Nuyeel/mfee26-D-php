@@ -197,35 +197,45 @@
                 -webkit-user-drag: none;
             }
 
+            /* 上半身human */
+            .human-box {
+                position: absolute;
+                height: 110px;
+                overflow: hidden;
+                top: -9%;
+                left: -72%;
+                opacity: 90%;
+            }
+
             /* 小靈魂們 */
             .soul-box {
-                width: 480px;
+                width: 570px;
                 height: 130px;
                 /* background-color: rgba(250, 244, 249, 0.434); */
                 position: absolute;
-                top: 15%;
+                top: 14.5%;
                 right: 92%;
                 padding: 20px;
             }
             .soul-box > img {
                 opacity: 90%;
-                margin: 2px;
+                margin: 3px 2px;
             }
             .soul-box > .sep-line:nth-child(1) {
-                width: 85%;
+                width: 92%;
                 height: 1px;
                 position: absolute;
-                top: -30px;
-                left: 25px;
-                border-bottom: 5px double rgba(255, 255, 255, 0.8);
+                top: -4px;
+                left: 20px;
+                border-bottom: 8px double rgba(255, 255, 255, 0.6);
             }
             .soul-box > .sep-line:nth-child(2) {
-                width: 85%;
+                width: 92%;
                 height: 1px;
                 position: absolute;
-                bottom: -30px;
-                left: 25px;
-                border-bottom: 5px double rgba(255, 255, 255, 0.8);
+                top: 150px;
+                left: 20px;
+                border-bottom: 8px double rgba(255, 255, 255, 0.8);
             }
 
             /* 最新消息 */
@@ -259,6 +269,11 @@
                 left: 75px;
                 /* margin-left: -25px; */
                 /* margin-top: -25px; */
+            }
+            .box1 > img:nth-child(3) {
+                position: absolute;
+                top: 0;
+                left: -130px;
             }
 
             /* 轉生形象 */
@@ -303,7 +318,7 @@
                 left: 45px;
             }
 
-            .child_center > span:nth-child(1) {
+            .child_center .dot:nth-child(1) {
                 width: 15px;
                 height: 15px;
                 border-radius: 50%;
@@ -312,7 +327,7 @@
                 top: 15px;
                 left: 15px;
             }
-            .child_center > span:nth-child(2) {
+            .child_center .dot:nth-child(2) {
                 width: 15px;
                 height: 15px;
                 border-radius: 50%;
@@ -321,7 +336,7 @@
                 top: 15px;
                 right: 15px;
             }
-            .child_center > span:nth-child(3) {
+            .child_center .dot:nth-child(3) {
                 width: 15px;
                 height: 15px;
                 border-radius: 50%;
@@ -330,7 +345,7 @@
                 bottom: 15px;
                 left: 15px;
             }
-            .child_center > span:nth-child(4) {
+            .child_center .dot:nth-child(4) {
                 width: 15px;
                 height: 15px;
                 border-radius: 50%;
@@ -340,13 +355,21 @@
                 right: 15px;
             }
 
-            .child_center > .sep-line {
-                width: 95%;
+            .child_center .sep-line-1 {
+                width: 380px;
                 height: 1px;
                 position: absolute;
-                top: -30px;
-                left: 10px;
-                border-bottom: 12px dotted rgba(255, 255, 255, 0.8);
+                top: -7.5%;
+                left: 3%;
+                border-bottom: 12px dotted rgba(248, 248, 248, 0.8);
+            }
+            .child_center .sep-line-2 {
+                width: 1015px;
+                height: 1px;
+                position: absolute;
+                top: -17%;
+                left: -69%;
+                border-bottom: 12px dotted rgba(241, 241, 241, 0.8);
             }
 
             /* 中間標題 */
@@ -423,7 +446,7 @@
                 border-radius: 15px;
                 width: 700px;
                 height: 120px;
-                background-color: rgb(168, 230, 76);
+                background-color: rgb(155, 199, 89);
                 position: absolute;
                 top: 109%;
                 right: 30%;
@@ -438,6 +461,51 @@
                 top: -20px;
                 left: 10px;
                 border-bottom: 8px dotted rgba(255, 255, 255, 0.8);
+            }
+
+            .box4 > div.m-title {
+                padding: 10px 20px;
+                /* text-align: left; */
+                /* writing-mode: vertical-rl; */
+                font-size: 40px;
+                color: #fff;
+                font-family: "Potta One", cursive;
+            }
+
+            /* 控白色塊 */
+            .box5 {
+                border-radius: 15px;
+                width: 100px;
+                height: 400px;
+                background-color: rgb(178, 218, 240);
+                position: absolute;
+                top: 55%;
+                left: -145%;
+                padding: 2%;
+            }
+            .inner-boder {
+                width: 100%;
+                height: 100%;
+                border: 3px solid rgba(255, 255, 255, 0.5);
+                border-radius: 10px;
+            }
+
+            .box6 {
+                border-radius: 15px;
+                width: 120px;
+                height: 120px;
+                background-color: rgba(253, 212, 173, 0.8);
+                position: absolute;
+                top: 109%;
+                right: -4%;
+                margin-left: -25px;
+                margin-top: -25px;
+                text-align: center;
+            }
+            .box6 > i {
+                font-size: 80px;
+                color: #fff;
+                margin-top: 18%;
             }
         </style>
     </head>
@@ -508,12 +576,14 @@
             <!-- 中心方塊 -->
             <div class="child">
                 <div class="child_center" id="btn">
+                    <!-- center tilte -->
                     <div>
-                        <div class="sep-line"></div>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <div class="sep-line-1"></div>
+                        <div class="sep-line-2"></div>
                         <h5 class="center-s-title s-title-top">GOODBYE OLD</h5>
                         <div class="center-title">
                             <img
@@ -537,56 +607,63 @@
                     </div>
 
                     <!-- 其他方塊 -->
+                    <!-- 最新消息 -->
                     <div class="box box1">
-                        <!-- 最新消息 -->
                         <img
                             src="./map.img/word-news.svg"
-                            alt=""
                             style="width: 150px"
                         />
-                        <img
-                            src="./map.img/news.svg"
-                            alt=""
-                            style="width: 80px"
-                        />
-                        <span></span>
+                        <img src="./map.img/news.svg" style="width: 80px" />
+                        <img src="./map.img/UFO2.svg" style="height: 220px" />
+                        <!-- <span></span> -->
                     </div>
+
+                    <!-- 上半身human -->
+                    <box class="human-box">
+                        <img src="./map.img/soul01.svg" style="width: 50px" />
+                        <img src="./map.img/soul02.svg" style="width: 50px" />
+                        <img src="./map.img/soul03.svg" style="width: 50px" />
+                        <img src="./map.img/soul04.svg" style="width: 50px" />
+                        <img src="./map.img/soul05.svg" style="width: 50px" />
+                    </box>
 
                     <!-- small souls -->
                     <div class="box soul-box">
                         <div class="sep-line"></div>
-                        <img
-                            src="./map.img/ghost.svg"
-                            alt=""
-                            style="width: 40px"
-                        />
-                        <img src="./map.img/ghost.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-g.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-r.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-b.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-b.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-g.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-r.svg" style="width: 40px" />
-                        <img src="./map.img/ghost.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-b.svg" style="width: 40px" />
-                        <img src="./map.img/ghost.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-p.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-r.svg" style="width: 40px" />
-                        <img src="./map.img/ghost.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-b.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-g.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-p.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-r.svg" style="width: 40px" />
-                        <img src="./map.img/ghost.svg" style="width: 40px" />
-                        <img src="./map.img/ghost.svg" style="width: 40px" />
-                        <img src="./map.img/ghost-p.svg" style="width: 40px" />
                         <div class="sep-line"></div>
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-g.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-r.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-b.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-b.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-g.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-r.svg" style="width: 40px" />
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-b.svg" style="width: 40px" />
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-p.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-r.svg" style="width: 40px" />
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-b.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-g.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-p.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-r.svg" style="width: 40px" />
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-p.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-y.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-r.svg" style="width: 40px" />
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost.svg" style="width: 40px" />
+                        <img src="./map.img/ghost-p.svg" style="width: 40px" />
                     </div>
 
                     <!-- 形象 -->
@@ -629,8 +706,17 @@
                     <!-- 活動 -->
                     <div class="box box4">
                         <div class="sep-line"></div>
-                        <div class="m-title">Activity</div>
+                        <div class="m-title">Activity：</div>
                     </div>
+
+                    <!-- 空白色塊 -->
+                    <div class="box box5">
+                        <div class="inner-boder"></div>
+                    </div>
+                    <div class="box box6">
+                        <i class="fa-brands fa-gratipay"></i>
+                    </div>
+                    <div class="box box7"></div>
                 </div>
             </div>
         </div>
