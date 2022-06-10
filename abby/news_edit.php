@@ -23,10 +23,10 @@ WHERE news.sid = $sid")->fetchAll();
 
 //print_r($tagselected);`
 
-// if (empty($row)) {
-//     header('Location:news_list.php');
-//     exit;
-// }
+if (empty($row)) {
+    header('Location:news_list.php');
+    exit;
+}
 
 $opt = $pdo->query('SELECT * FROM `type`')->fetchAll();
 $loc = $pdo->query('SELECT * FROM `location`')->fetchAll();
@@ -205,12 +205,6 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
         reader.readAsDataURL(file);
     }
 
-
-
-    //echo json_encode($_FILES);
-
-
-
     async function checkData() {
 
         for (let i in fields) {
@@ -228,6 +222,7 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
             }
         }
 
+        type.innerText = '';
         let isPass = true;
 
 
@@ -244,11 +239,23 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
             isPass = false;
         }
 
-        // if (eventtype_f.value == 0) {
-        //     fields[2].classList.add('red');
-        //     fieldTexts[2].innerText = '請選擇類型';
-        //     isPass = false;
-        // }
+        if (type_f.value == '') {
+            const type = document.querySelector('#type');
+            type.innerText = '請選擇類型';
+            isPass = false;
+        }
+
+        if (img_f.file == undefined ) {
+            const imgtext = document.querySelector('#imgtext');
+            imgtext.innerText = '請上傳圖片';
+            isPass = false;
+        }
+
+        if (img_f.value) {
+            const imgtext = document.querySelector('#imgtext');
+            imgtext.innerText = '';
+            isPass = true;
+        }
 
         if (location_f.value == '') {
             fields[3].classList.add('red');
@@ -288,11 +295,10 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
                         location.href = 'news_index.php';
                     }, 1000);
                 } else {
-                    nfo_bar.classList.remove('alert-success');
+                    info_bar.classList.remove('alert-success');
                     info_bar.classList.add('alert-danger');
                     info_bar.innerText = result.error || '資料沒有修改';
                 }
-
 
             }).catch(r => {
 
