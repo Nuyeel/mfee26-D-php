@@ -42,8 +42,8 @@ if (empty($_POST['repeatpw'])) {
 
 $account = $_POST['account'];
 $email = $_POST['email'] ?? '';
-$password = $_POST['password'] ?? '';
-$repeatpw = $_POST['repeatpw'] ?? '';
+$password = $_POST['password'];
+$repeatpw = $_POST['repeatpw'];
 
 foreach ($acc as $v) {
     if (!empty($account) and $account === $v['account']) {
@@ -61,6 +61,16 @@ if (!empty($email) and filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
     exit;
 }
 
+if ($password <> $repeatpw) {
+    $output['error'] = '需與您先前輸入的密碼一致';
+    $output['code'] = 406;
+    echo json_encode($output, JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+$hash = password_hash($password, PASSWORD_DEFAULT);
+
+
 $sql = "INSERT INTO `member`(
     `account`, `email`, `password`
     ) VALUES (
@@ -72,9 +82,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([
     $account,
     $email,
-    $password,
-    // md5($password), 
-    //用MD5加密
+    $hash
 ]);
 
 if ($stmt->rowCount() == 1) {

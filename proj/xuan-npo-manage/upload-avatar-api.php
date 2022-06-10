@@ -13,7 +13,7 @@ $extMap = [
 $output = [
     'success' => false,
     'filename' => '',
-    'error' => '',
+    'error' => ''
 ];
 
 if (empty($_FILES['myfile'])) {

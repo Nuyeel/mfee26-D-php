@@ -7,11 +7,6 @@ if (!$_SESSION['member']['account']) {
     // exit;
 }
 
-if (!$_SESSION['member']['account']) {
-    header('location:ab-login.php');
-    // exit;
-}
-
 $sid = isset($_SESSION['member']['sid']) ? intval($_SESSION['member']['sid']) : 0;
 $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
 

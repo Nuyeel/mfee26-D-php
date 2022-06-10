@@ -27,12 +27,13 @@ $rows = $pdo->query($sql)->fetchAll();
         display: none;
     }
 </style>
+
 <div class="container">
-    <div class="row ">
+    <!-- <div class="row ">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-body form-login">
-                    <form name="form-login" onsubmit="sendData();return false;" novalidate>
+                <div class="card-body formLogin">
+                    <form name="formLogin" onsubmit="sendData();return false;" novalidate>
 
                         <div class="mb-3">
                             <label for="account" class="form-label">account</label>
@@ -67,13 +68,13 @@ $rows = $pdo->query($sql)->fetchAll();
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="row">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">陰德值測驗</h5>
-                    <form name="form-test" onsubmit="sendData();return false;" novalidate>
+                    <form name="formTest" onsubmit="sendData();return false;" novalidate>
                         <div class="mb-3">
                             <?php foreach ($rows as $q) : ?>
                                 <br>
@@ -100,9 +101,9 @@ $rows = $pdo->query($sql)->fetchAll();
 
                                 </div>
                                 <div class="form-text form-text-radio"></div>
-
+                                <br>
                             <?php endforeach; ?>
-                            <br>
+
                             <button type="submit" class="btn btn-primary">送出結果</button>
                     </form>
                     <div id="info-bar" class="alert alert-success" role="alert" style="display:none;">
@@ -117,23 +118,23 @@ $rows = $pdo->query($sql)->fetchAll();
 <script>
     const info_bar = document.querySelector('#info-bar');
 
-    const account_f = document.form - login.account;
-    const password_f = document.form - login.account;
-    const name_f = document.form - login.name;
+    // const account_f = document.formLogin.account;
+    // const password_f = document.formLogin.account;
+    // const name_f = document.formLogin.name;
 
 
-    const fields = [account_f, password_f, name_f];
-    const fieldTexts = [];
-    for (let f of fields) {
-        fieldTexts.push(f.nextElementSibling);
-    }
+    // const fields = [account_f, password_f, name_f];
+    // const fieldTexts = [];
+    // for (let f of fields) {
+    //     fieldTexts.push(f.nextElementSibling);
+    // }
 
-    const q1_f = document.form - test.Q1;
-    const q2_f = document.form - test.Q2;
+    const q1_f = document.formTest.Q1;
+    const q2_f = document.formTest.Q2;
     // const q2_btn = document.querySelectorAll('input[name="Q2"]');
-    const q3_f = document.form - test.Q3;
-    const q4_f = document.form - test.Q4;
-    const q5_f = document.form - test.Q5;
+    const q3_f = document.formTest.Q3;
+    const q4_f = document.formTest.Q4;
+    const q5_f = document.formTest.Q5;
 
 
 
@@ -145,12 +146,13 @@ $rows = $pdo->query($sql)->fetchAll();
 
         // TODO: 欄位檢查, 前端的檢查
         let isPass = true; // 預設是通過檢查的
-        if (name_f.value.length < 2) {
-            info_bar.style.display = 'block'; // 顯示訊息列
-            info_bar.classList.add('alert-danger');
-            info_bar.innerText = '沒有登入！需登入才能進行測驗！';
-            isPass = false;
-        }
+        // if (name_f.value.length < 2) {
+        //     info_bar.style.display = 'block'; // 顯示訊息列
+        //     info_bar.classList.add('alert-danger');
+        //     info_bar.innerText = '沒有登入！需登入才能進行測驗！';
+        //     isPass = false;
+        // }
+
         if (q1_f.value == '') {
             document.querySelector(".form-text-radio").innerText = '請選擇最符合你想法的選項';
             document.querySelector(".form-text-radio").classList.add('red');
@@ -186,7 +188,7 @@ $rows = $pdo->query($sql)->fetchAll();
             return; // 結束函式
         }
 
-        const fd = new FormData(document.form - test);
+        const fd = new FormData(document.formTest);
         const r = await fetch('test-api.php', {
             method: 'POST',
             body: fd,

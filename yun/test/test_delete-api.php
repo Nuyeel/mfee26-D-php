@@ -4,7 +4,7 @@ $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 if (!empty($sid)) {
     $pdo->query("DELETE FROM `good_deed_test_record` WHERE sid=$sid");
 }
-$come_from = 'test_backstage.php';
+$come_from = 'test_record_edit.php';
 if (!empty($_SERVER['HTTP_REFERER'])) {
     $come_from = $_SERVER['HTTP_REFERER'];
 }

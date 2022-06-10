@@ -1,5 +1,5 @@
 <?php 
-require __DIR__ .  '/parts/connect_db.php'; 
+require __DIR__ .  '/../parts/connect_db.php'; 
 
 header('Content-Type: application/json');
 
@@ -31,7 +31,14 @@ if (empty($sid)) {
     $ammount = $_POST['ammount'] ;
     $start = $_POST['start'] ;
     $end = $_POST['end'] ;
-    $avatar = $_POST['avatar'] ?? ''; //沒有填值的話，預設是空字串
+    // $avatar = $_POST['avatar'] ?? ''; //沒有填值的話，預設是空字串
+
+    if ($_POST['avatar'] == "") {
+        $row = $pdo->query("SELECT * FROM( (`npo_act` JOIN `npo_act_type` ON `npo_act`.`type_sid` = `npo_act_type`.`typesid`) INNER JOIN `npo_name` ON `npo_act`.`npo_name` = `npo_name`.`npo_name`) INNER JOIN `city_type` ON `npo_act`.`place_city`= `city_type`.`city_sid`")->fetch();
+        $avatar =  $row['img'];   
+    } else {
+        $avatar = $_POST['avatar'];
+    }
 
 
     $nponame = $_POST['npo_name'] ; //主辦單位名稱
@@ -62,6 +69,7 @@ $stmt = $pdo->prepare($sql);
 
 $stmt->execute([
         $avatar,
+        $type,
         $price,
         $value,
         $start,
@@ -71,7 +79,6 @@ $stmt->execute([
         $address,
         $address2,
         $ammount,
-        $type,
 ]);
     
 

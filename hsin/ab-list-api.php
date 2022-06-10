@@ -2,7 +2,7 @@
 $pageName = 'ab-list';
 $title = '會員總覽 - 靈魂管理中心';
 
-$perPage = 20; // 每一頁有幾筆
+$perPage = 15; // 每一頁有幾筆
 
 // 用戶要看第幾頁
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;

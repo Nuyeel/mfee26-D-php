@@ -3,12 +3,17 @@ header('Content-Type: application/json');
 
 $account = $_POST['account'];
 $password = $_POST['password'];
-
 // echo $account_1;
 // exit;
 // $sql = "SELECT * FROM `member` WHERE `member`.`account` = $account";
 $a_sql = "SELECT * FROM `member` WHERE `member`.`account` = '$account'";
 $row = $pdo->query($a_sql)->fetch();
+
+// if (password_verify($password, $row['password'])) {
+//     echo 'Password is valid!';
+// } else {
+//     echo 'Invalid password.';
+// }
 
 $output = [
     'success' => false,
@@ -43,8 +48,9 @@ if (empty($_POST['password'])) {
     exit;
 }
 
-if ($row['account'] == $account and $row['password'] == $password) {
-    // $_SESSION['account'] = $account;
+// $hash = password_hash($password, PASSWORD_DEFAULT);
+if ($row['account'] == $account and password_verify($password, $row['password'])) {
+    //解密加密過後的密碼
     $output['success'] = true;
     $output['code'] = 200;
     $_SESSION['member']['account'] = $account;
