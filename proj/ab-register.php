@@ -120,7 +120,7 @@ $title = '註冊會員 - 來生投放所';
         </div>
     </div>
 </div>
-<?php include __DIR__ . '/parts-2/scripts-2.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
     const account_re = /^[a-zA-Z0-9_]\w*$/;
     const email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zAZ]{2,}))$/;
