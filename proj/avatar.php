@@ -14,6 +14,7 @@ if (!$_SESSION['member']['account']) {
         height: 100vh;
         background-color: #261E47;
         background-image: linear-gradient(0deg, #261E47 0%, #266AAA 85%);
+        background-attachment: fixed;
     }
 
     .boxes button {
@@ -21,7 +22,6 @@ if (!$_SESSION['member']['account']) {
         height: 50px;
         border-radius: 10%;
         border: none;
-        margin-right: 10px;
     }
 
     .partscontrol,
@@ -82,9 +82,13 @@ if (!$_SESSION['member']['account']) {
     .nosecolorbtn,
     .mouthcolorbtn,
     .earcolorbtn,
-    .haircolorbtn,
-    .btn {
+    .haircolorbtn {
         margin: 5px;
+        box-shadow: 5px 5px 0px #261E47;
+        transition: .3s;
+    }
+    .btn{
+        margin: 20px 5px;
         box-shadow: 5px 5px 0px #261E47;
         transition: .3s;
     }
@@ -94,9 +98,11 @@ if (!$_SESSION['member']['account']) {
         background-color: #2E5C6E;
         border: #fff 1px solid;
     }
+
     .nav-link {
         color: #fff;
     }
+
     .nav-link:hover {
         color: #261E47;
     }
@@ -104,7 +110,7 @@ if (!$_SESSION['member']['account']) {
 <?php include __DIR__ . './parts/navbar.php' ?>
 <div class="container mt-5">
     <div class="row">
-        <div class="pictureFrame col-12 col-lg-7 d-flex justify-content-center align-items-center" id="pictureFrame"></div>
+        <div class="pictureFrame col-12 col-lg-7 d-flex justify-content-center align-items-center mb-3" id="pictureFrame"></div>
         <div class="controlArea col-12 col-lg-5" id="controlArea">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
