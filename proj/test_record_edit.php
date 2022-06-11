@@ -7,14 +7,14 @@ $title = '編輯會員資料';
 // 修改功能
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 if (empty($sid)) {
-    // header('Location: test_record_list.php');
+    header('Location: test_record_list.php');
     // exit;
 }
 
 $row = $pdo->query("SELECT * FROM `good_deed_test_record` WHERE sid = $sid")->fetch();
 // $row = $pdo->query("SELECT * FROM `place` WHERE sid=$sid")->fetch();
 
-print_r($row);
+
 
 ?>
 <?php include __DIR__ . '/parts/html-head.php' ?>
