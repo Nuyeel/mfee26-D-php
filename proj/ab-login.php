@@ -150,7 +150,7 @@ $title = '會員登入 - 來生投放所';
     </div>
 </div>
 </div>
-<?php include __DIR__ . '/parts-2/scripts-2.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
     const info_bar = document.querySelector('#info-bar');
 
