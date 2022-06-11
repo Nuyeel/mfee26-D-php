@@ -1,4 +1,4 @@
-<?php require __DIR__ . "/parts/connect_db.php"; ?>
+<?php require __DIR__ . "./parts/connect_db.php"; ?>
 
 <?php
 header('Content-Type: application/json');
@@ -18,6 +18,8 @@ if (isset($_SESSION['member']['sid'])) {
 } else {
     $sid = 0;
 }
+
+
 
 $q1 = intval($_POST['Q1']);
 $q2 = intval($_POST['Q2']);

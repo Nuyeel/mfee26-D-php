@@ -1,4 +1,4 @@
-<?php require __DIR__ . "/parts/connect_db.php";
+<?php require __DIR__ . "./parts/connect_db.php";
 
 $pageName = 'record-edit';
 $title = '編輯會員資料';
@@ -14,7 +14,7 @@ if (empty($sid)) {
 $row = $pdo->query("SELECT * FROM `good_deed_test_record` WHERE sid = $sid")->fetch();
 // $row = $pdo->query("SELECT * FROM `place` WHERE sid=$sid")->fetch();
 
-print_r($row);
+
 
 ?>
 <?php include __DIR__ . '/parts/html-head.php' ?>
@@ -34,7 +34,7 @@ print_r($row);
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">編輯會員資料</h5>
+                    <h5 class="card-title">編輯會員陰德值（如有必要才在此修正）</h5>
                     <form name="formEdit" onsubmit=" sendData(); return false; " novalidate="novalidate">
                         <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
                         <div class="mb-3">
@@ -85,7 +85,7 @@ print_r($row);
                         </div>
                         <div class="mb-3">
                             <label for="score" class="form-label"> score </label>
-                            <input type="text" class="form-control" id="score" name="score" value="<?= $row['test_score'] ?>">
+                            <input type="text" class="form-control" id="score" name="score" value="<?=$row['test_score'] ?>"disabled>
                             <div class="form-text"></div>
                         </div>
 
@@ -100,7 +100,7 @@ print_r($row);
     </div>
 
 </div>
-<?php include __DIR__ . '/parts/scripts.php' ?>
+<?php include __DIR__ . './parts/scripts.php' ?>
 <script>
     // const row = json_encode($row, JSON_UNESCAPED_UNICODE); ;
 
@@ -221,4 +221,4 @@ print_r($row);
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-<?php include __DIR__ . '/parts/html-foot.php' ?>
+<?php include __DIR__ . './parts/html-foot.php' ?>
