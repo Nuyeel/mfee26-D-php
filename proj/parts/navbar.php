@@ -140,7 +140,7 @@ if (!isset($pageName)) {
                     <a class="nav-link main-nav-link pb-0 <?= $pageName == 'place' ? 'active' : '' ?>" href="/mfee26-D-php/proj/place.php">良辰吉地</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link main-nav-link pb-0 <?= $pageName == 'npo-list' ? 'active' : '' ?>" href="/mfee26-D-php/proj/xuan-event-manage/npo-list.php">Activity</a>
+                    <a class="nav-link main-nav-link pb-0 <?= $pageName == 'npo-list' ? 'active' : '' ?>" href="/mfee26-D-php/proj/xuan-event-manage/npo-list.php">法喜充滿</a>
                 </li>
                 <!-- 設定管理者登入才會出現? -->
                 <?php if (isset($_SESSION['member']['account']) and $_SESSION['member']['account'] == 'Admin') { ?>

@@ -1,4 +1,4 @@
-<?php require __DIR__ . "./parts/connect_db.php"; ?>
+<?php require __DIR__ . "/parts/connect_db.php"; ?>
 
 <?php
 $pageName = 'test_page';
@@ -24,6 +24,9 @@ $sql = sprintf("SELECT * FROM `good_deed_test` ORDER BY sid ASC");
 $rows = $pdo->query($sql)->fetchAll();
 
 ?>
+
+<?php include __DIR__ . '/parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/navbar.php' ?>
 
 <style>
     .form-control.red {
@@ -87,7 +90,7 @@ $rows = $pdo->query($sql)->fetchAll();
         </div>
     </div>
 </div>
-<?php include __DIR__ . './parts/scripts.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
     const info_bar = document.querySelector('#info-bar');
 
@@ -160,7 +163,7 @@ $rows = $pdo->query($sql)->fetchAll();
         }
 
         const fd = new FormData(document.formTest);
-        const r = await fetch('./test_page-api.php', {
+        const r = await fetch('./test_page-api.php',{
             method: 'POST',
             body: fd,
         });
@@ -184,6 +187,5 @@ $rows = $pdo->query($sql)->fetchAll();
     }
 </script>
 
-<?php include __DIR__ . '/parts/html-head.php' ?>
-<?php include __DIR__ . '/parts/navbar.php' ?>
+
 <?php include __DIR__ . '/parts/html-foot.php' ?>
