@@ -19,6 +19,10 @@ if (isset($_SESSION['member']['sid'])) {
     $sid = 0;
 }
 
+$account = htmlentities($_SESSION['member']['account']);
+$name = htmlentities($_SESSION['member']['name']);
+$birth = $_SESSION['member']['birthdate'];
+$death = $_SESSION['member']['deathdate'];
 
 
 $q1 = intval($_POST['Q1']);
@@ -42,16 +46,24 @@ $rowNumber = $pdo->query($test_sql)->fetch(PDO::FETCH_NUM)[0];
 if ($rowNumber == 0) {
     $sql =
     "INSERT INTO `good_deed_test_record`(
+        `sid`, `member_account`, `member_name`, 
+        `member_birth`, `member_death`, 
         `test_Q1`, `test_Q2`, `test_Q3`, 
         `test_Q4`, `test_Q5`, `test_score`
     ) VALUES (
+        ?, ?, ?,
+        ?, ?,
         ?, ?, ?,
         ?, ?, ?
     )";
 
     $stmt = $pdo->prepare($sql);
 
-    $stmt->execute([
+    $stmt->execute([$sid,
+        $account,
+        $name,
+        $birth,
+        $death, 
         $q1,
         $q2,
         $q3,
