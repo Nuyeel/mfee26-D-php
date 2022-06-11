@@ -13,8 +13,9 @@ if (!$_SESSION['member']['account']) {
     body {
         height: 100vh;
         background-color: #261E47;
-    background-image: linear-gradient(0deg, #261E47 0%, #266AAA 85%);
+        background-image: linear-gradient(0deg, #261E47 0%, #266AAA 85%);
     }
+
     .boxes button {
         width: 50px;
         height: 50px;
@@ -22,12 +23,89 @@ if (!$_SESSION['member']['account']) {
         border: none;
         margin-right: 10px;
     }
+
+    .partscontrol,
+    .colorcontrol {
+        padding: 20px 0;
+    }
+
+    .eyesbtn,
+    .nosebtn,
+    .mouthbtn,
+    .earbtn,
+    .hairbtn {
+        position: relative;
+        margin: 5px;
+        background-color: #2f4f4f;
+        box-shadow: 5px 5px 0px #261E47;
+        transition: .3s;
+    }
+
+    .eyesbtn:hover,
+    .nosebtn:hover,
+    .mouthbtn:hover,
+    .earbtn:hover,
+    .hairbtn:hover,
+    .eyescolorbtn:hover,
+    .nosecolorbtn:hover,
+    .mouthcolorbtn:hover,
+    .earcolorbtn:hover,
+    .haircolorbtn:hover,
+    .btn:hover {
+        filter: contrast(120%);
+        box-shadow: 6px 6px 0px #261E47;
+    }
+
+    .eyesbtn:active,
+    .nosebtn:active,
+    .mouthbtn:active,
+    .earbtn:active,
+    .hairbtn:active,
+    .eyescolorbtn:active,
+    .nosecolorbtn:active,
+    .mouthcolorbtn:active,
+    .earcolorbtn:active,
+    .haircolorbtn:active {
+        box-shadow: 5px 5px 0px #261E47;
+    }
+
+    .eyesbtn img,
+    .nosebtn img,
+    .mouthbtn img,
+    .earbtn img,
+    .hairbtn img {
+        position: relative;
+        left: -5px;
+    }
+
+    .eyescolorbtn,
+    .nosecolorbtn,
+    .mouthcolorbtn,
+    .earcolorbtn,
+    .haircolorbtn,
+    .btn {
+        margin: 5px;
+        box-shadow: 5px 5px 0px #261E47;
+        transition: .3s;
+    }
+
+    .controlArea {
+        border-radius: 10px;
+        background-color: #2E5C6E;
+        border: #fff 1px solid;
+    }
+    .nav-link {
+        color: #fff;
+    }
+    .nav-link:hover {
+        color: #261E47;
+    }
 </style>
 <?php include __DIR__ . './parts/navbar.php' ?>
-<div class="container border-top mt-5">
+<div class="container mt-5">
     <div class="row">
-        <div class="pictureFrame col-12 col-lg-7 d-flex justify-content-center align-items-center border" id="pictureFrame"></div>
-        <div class="controlArea col-12 col-lg-5 border" id="controlArea">
+        <div class="pictureFrame col-12 col-lg-7 d-flex justify-content-center align-items-center" id="pictureFrame"></div>
+        <div class="controlArea col-12 col-lg-5" id="controlArea">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="eye-tab" data-bs-toggle="tab" data-bs-target="#eyesbox" type="button" role="tab" aria-controls="eyesbox" aria-selected="true">Eye</button>
@@ -60,7 +138,7 @@ if (!$_SESSION['member']['account']) {
             </div>
             <form action="" name="form1" id="form1" onsubmit="sendData(); return false;" style="display:none;">
                 <div class="mb-3">
-                    <input class="form-check-input" type="text" name="mid" value="<?php echo $_SESSION['member']['sid'];?>" checked>
+                    <input class="form-check-input" type="text" name="mid" value="<?php echo $_SESSION['member']['sid']; ?>" checked>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="eyes" value="0" checked>
                         <input class="form-check-input" type="radio" name="nose" value="0" checked>
@@ -135,8 +213,15 @@ if (!$_SESSION['member']['account']) {
     //部位總表
     const parts = ['eyes', 'nose', 'mouth', 'ear', 'hair']
 
+    const btnimgs = [];
+    btnimgs[0] = ["./img/avatar_img/eyes/0-s.png", "./img/avatar_img/eyes/1-s.png", "./img/avatar_img/eyes/2-s.png", "./img/avatar_img/eyes/3-s.png"];
+    btnimgs[1] = ["./img/avatar_img/nose/0-s.png"];
+    btnimgs[2] = ["./img/avatar_img/mouth/0-s.png"];
+    btnimgs[3] = ["./img/avatar_img/ear/0-s.png", "./img/avatar_img/ear/1-s.png", "./img/avatar_img/ear/2-s.png"];
+    btnimgs[4] = ["./img/avatar_img/hair/0-s.png", "./img/avatar_img/hair/1-s.png", "./img/avatar_img/hair/2-s.png"];
+
     //眼睛元件
-    const eyesimgs = ["./img/avatar_img/eyes/0.png", "./img/avatar_img/eyes/1.png", "./img/avatar_img/eyes/2.png", "./img/avatar_img/eyes/3.png"];  //之後要改為由資料庫引入
+    const eyesimgs = ["./img/avatar_img/eyes/0.png", "./img/avatar_img/eyes/1.png", "./img/avatar_img/eyes/2.png", "./img/avatar_img/eyes/3.png"]; //之後要改為由資料庫引入
     const items = [];
     items[0] = [];
     for (let i = 0; i < eyesimgs.length; i++) {
@@ -219,6 +304,9 @@ if (!$_SESSION['member']['account']) {
     const form1 = document.querySelector('#form1');
     const boxes = document.querySelectorAll('.boxes');
     for (let f = 0; f < parts.length; f++) {
+        const m = document.createElement('div');
+        m.className = "partscontrol";
+        boxes[f].appendChild(m);
         for (let x = 0; x < items[f].length; x++) {
             const a = document.createElement("input");
             a.type = "radio";
@@ -228,7 +316,7 @@ if (!$_SESSION['member']['account']) {
             form1.appendChild(a);
             const b = document.createElement("button");
             b.className = parts[f] + "btn";
-            b.innerText = x;
+            b.innerHTML = '<img src="' + btnimgs[f][x] + '" alt="" />';
             b.addEventListener(
                 "click",
                 function() {
@@ -265,8 +353,11 @@ if (!$_SESSION['member']['account']) {
                     avatar.stage.sortChildren();
                 }, false
             );
-            boxes[f].appendChild(b);
+            m.appendChild(b);
         }
+        const n = document.createElement('div');
+        n.className = "colorcontrol";
+        boxes[f].appendChild(n);
 
         //在畫面中製作顏色的按鈕
         //問題:發現會出現顏色不連動的BUG 還要再修改; 已解決
@@ -280,7 +371,7 @@ if (!$_SESSION['member']['account']) {
             const b = document.createElement("button");
             b.className = parts[f] + "colorbtn";
             b.id = parts[f] + "colorbtn" + i;
-            b.innerText = "c" + i;
+            //b.innerText = "c" + i;
             b.style.backgroundColor = "#" + colors[f][i].toString(16);
             b.addEventListener(
                 "click",
@@ -297,7 +388,7 @@ if (!$_SESSION['member']['account']) {
                 },
                 false
             );
-            boxes[f].appendChild(b);
+            n.appendChild(b);
         }
     }
 
@@ -387,13 +478,13 @@ if (!$_SESSION['member']['account']) {
                 btns[a[parts[i]]].click();
                 colorbtns[a[parts[i] + "Color"]].click();
             }
-            if (result[0]['member_sid']=== <?php echo $_SESSION['member']['sid'];?>){
+            if (result[0]['member_sid'] === <?php echo $_SESSION['member']['sid']; ?>) {
                 editAvatarorder = 1;
             }
 
         };
         getEditdata();
-        
+
     };
 </script>
 

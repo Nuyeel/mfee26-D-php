@@ -19,17 +19,14 @@ $title = '濟善救世公司-轉生形象-衣櫥';
         background-color: #2667A0;
         padding: 20px;
         border-radius: 20px;
-        border-right: #261E47 10px solid;
-        border-bottom: #261E47 10px solid;
-        transition: .1s;
+        box-shadow: 10px 10px 0px #261E47;
+        transition: .5s;
         color: #fff;
+        margin: 10px 20px;
         /* box-sizing: content-box; */
     }
     .avatarCard:hover {
-        border-top: #fff 7px solid;
-        border-left: #fff 7px solid;
-        border-right: #261E47 0px solid;
-        border-bottom: #261E47 0px solid;
+        box-shadow: 12px 12px 10px #261E47;
     }
     .avatarBox{
         margin: auto;

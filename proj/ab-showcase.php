@@ -41,18 +41,15 @@ $show = $pdo->query($showcase)->fetchAll();
         background-color: #2667A0;
         padding: 20px;
         border-radius: 20px;
-        border-right: #261E47 10px solid;
-        border-bottom: #261E47 10px solid;
-        transition: .1s;
+        box-shadow: 10px 10px 0px #261E47;
+        transition: .5s;
         color: #fff;
+        margin: 10px 20px;
         /* box-sizing: content-box; */
     }
 
     .avatarCard:hover {
-        border-top: skyblue 7px solid;
-        border-left: skyblue 7px solid;
-        border-right: #261E47 0px solid;
-        border-bottom: #261E47 0px solid;
+        box-shadow: 12px 12px 10px #261E47;
     }
 
     .avatarBox {
@@ -95,7 +92,7 @@ $show = $pdo->query($showcase)->fetchAll();
 
 
 
-                    <div class="container d-flex align-content-start flex-wrap w-75">
+                    <div class="container-fluid d-flex align-content-start flex-wrap w-75">
                         <form action="" id="form1" name="form1" onsubmit="return false;" style="display: none;">
                             <input class="form-check-input" type="text" name="mid" value="<?php echo $_SESSION['member']['sid']; ?>" checked>
                         </form>
