@@ -509,7 +509,7 @@ $title = '良辰吉地管理';
 
     function changeCity(value) {
         // 先清空city選單
-        city.innerHTML = `<option selected>選擇城市...</option>`;
+        city.innerHTML = `<option selected disabled>選擇城市...</option>`;
 
         const countrys = renderData.countrys;
         const distList = renderData.distList;
