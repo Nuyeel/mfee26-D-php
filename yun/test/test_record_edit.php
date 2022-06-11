@@ -192,13 +192,15 @@ if (empty($row)) {
             method: 'POST',
             body: fd,
         });
-        console.log('fd');
-        console.log(fd);
-        console.log('r')
-        console.log(r);
+        
+        // console.log('fd');
+        // console.log(fd);
+        // console.log('r')
+        // console.log(r);
 
 
-        const result = await r.text();
+        const result = await r.json();
+        // console.log('result')
         console.log(result);
         info_bar.style.display = 'block';
         // 顯示訊息列

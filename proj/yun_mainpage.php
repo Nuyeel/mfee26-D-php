@@ -1,12 +1,12 @@
-<?php require __DIR__ . "./parts/connect_db.php"; ?>
+<?php require __DIR__ . "/parts/connect_db.php"; ?>
 
 <?php
 $pageName = 'test_page';
 $title = 'Yun_MainPage';
 ?>
 
-<?php include __DIR__ . './parts/html-head.php' ?>
-<?php include __DIR__ . './parts/navbar.php' ?>
+<?php include __DIR__ . '/parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/navbar.php' ?>
 
 
 <style>
@@ -37,7 +37,7 @@ $title = 'Yun_MainPage';
 if (!empty($_SESSION['member']['account'])) {
   
   $sid = $_SESSION['member']['sid'];
-  $t_sql = "SELECT `test_score` FROM `good_deed_test_record` WHERE `member_sid`= $sid";
+  $t_sql = "SELECT `test_score` FROM `good_deed_test_record` WHERE `sid`= $sid";
   $row = $pdo->query($t_sql)->fetch();
   $score =  $row['test_score'];
   
@@ -106,20 +106,18 @@ if (!empty($_SESSION['member']['account'])) {
         </div>
       </div>
     </div>
-  <?php
+<?php
   }
 } else {
   // 跳轉到余欣的登入頁面
-  
-  header('location:ab-login.php');
+  header("location:ab-login.php");
 }
-
 ?>
 
 
 
 
-<?php include __DIR__ . './parts/scripts.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
 
 
-<?php include __DIR__ . './parts/html-foot.php' ?>
+<?php include __DIR__ . '/parts/html-foot.php' ?>

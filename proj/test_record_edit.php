@@ -1,22 +1,25 @@
-<?php require __DIR__ . "./parts/connect_db.php";
+<?php require __DIR__ . "/parts/connect_db.php";
 
 $pageName = 'record-edit';
 $title = '編輯會員資料';
 
 
 // 修改功能
-$sid = isset($_GET['member_sid']) ? intval($_GET['member_sid']) : 0;
+$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 if (empty($sid)) {
-    header('Location: test_record_list.php');
-    exit;
+    // header('Location: test_record_list.php');
+    // exit;
 }
 
-$row = $pdo->query("SELECT * FROM `good_deed_test_record` JOIN `member` ON  `good_deed_test_record`.`member_sid`= `member`.`sid` WHERE `member_sid` = '$sid' ")->fetch();
+$row = $pdo->query("SELECT * FROM `good_deed_test_record` WHERE sid = $sid")->fetch();
+// $row = $pdo->query("SELECT * FROM `place` WHERE sid=$sid")->fetch();
 
+print_r($row);
 
 ?>
-<?php include __DIR__ . './parts/html-head.php' ?>
-<?php include __DIR__ . './parts/navbar.php' ?>
+<?php include __DIR__ . '/parts/html-head.php' ?>
+<script src="https://kit.fontawesome.com/f528f6df02.js" crossorigin="anonymous"></script>
+<?php include __DIR__ . '/parts/navbar.php' ?>
 <style>
     .form-control.red {
         border: 1px solid red;
@@ -33,26 +36,26 @@ $row = $pdo->query("SELECT * FROM `good_deed_test_record` JOIN `member` ON  `goo
                 <div class="card-body">
                     <h5 class="card-title">編輯會員資料</h5>
                     <form name="formEdit" onsubmit=" sendData(); return false; " novalidate="novalidate">
-                        <input type="hidden" name="membersid" value="<?= $row['member_sid'] ?>">
+                        <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
                         <div class="mb-3">
                             <label for="account" class="form-label">帳號</label>
-                            <input type="text" class="form-control" id="account" name="account" required value="<?= htmlentities($row['account']) ?>" disabled>
+                            <input type="text" class="form-control" id="account" name="account" required value="<?= htmlentities($row['member_account']) ?>" disabled>
 
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">姓名</label>
-                            <input type="text" class="form-control" id="name" name="name" value="<?= $row['name'] ?>" disabled>
+                            <input type="text" class="form-control" id="name" name="name" value="<?= $row['member_name'] ?>" disabled>
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="birth" class="form-label">生日</label>
-                            <input type="date" class="form-control" id="birth" name="birth" value="<?= $row['birthdate'] ?>" disabled>
+                            <input type="date" class="form-control" id="birth" name="birth" value="<?= $row['member_birth'] ?>" disabled>
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="death" class="form-label">忌日</label>
-                            <input type="date" class="form-control" id="death" name="death" value="<?= $row['deathdate'] ?>" disabled>
+                            <input type="date" class="form-control" id="death" name="death" value="<?= $row['member_death'] ?>" disabled>
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
@@ -97,7 +100,7 @@ $row = $pdo->query("SELECT * FROM `good_deed_test_record` JOIN `member` ON  `goo
     </div>
 
 </div>
-<?php include __DIR__ . './parts/scripts.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
     // const row = json_encode($row, JSON_UNESCAPED_UNICODE); ;
 
@@ -189,10 +192,10 @@ $row = $pdo->query("SELECT * FROM `good_deed_test_record` JOIN `member` ON  `goo
             method: 'POST',
             body: fd,
         });
-        console.log(r);
+        // console.log(r);
 
         const result = await r.json();
-        console.log(result);
+        // console.log(result);
         info_bar.style.display = 'block';
         // 顯示訊息列
         if (result.success) {
@@ -204,8 +207,8 @@ $row = $pdo->query("SELECT * FROM `good_deed_test_record` JOIN `member` ON  `goo
                 location.href = 'test_record_list.php'; // 跳轉到列表頁
             }, 2000);
         } else {
-            console.log(r);
-            console.log(result);
+            // console.log(r);
+            // console.log(result);
             console.log('hello');
 
             info_bar.classList.remove('alert-success');
@@ -215,4 +218,7 @@ $row = $pdo->query("SELECT * FROM `good_deed_test_record` JOIN `member` ON  `goo
 
     }
 </script>
-<?php include __DIR__ . './parts/html-foot.php' ?>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<?php include __DIR__ . '/parts/html-foot.php' ?>
