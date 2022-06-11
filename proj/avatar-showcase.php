@@ -6,22 +6,50 @@ $title = '濟善救世公司-轉生形象-衣櫥';
 <?php include __DIR__ . './parts/html-head.php' ?>
 <style>
     body {
-        background-color: #2f4f4f;
+        height: 100vh;
+        background-color: #261E47;
+        background-image: linear-gradient(0deg, #261E47 0%, #266AAA 85%);
+    }
+    h3 {
+        color: #fff;
+        padding: 20px;
+    }
+    .avatarCard {
+        width: 250px;
+        background-color: #2667A0;
+        padding: 20px;
+        border-radius: 20px;
+        border-right: #261E47 10px solid;
+        border-bottom: #261E47 10px solid;
+        transition: .1s;
+        color: #fff;
+        /* box-sizing: content-box; */
+    }
+    .avatarCard:hover {
+        border-top: #fff 7px solid;
+        border-left: #fff 7px solid;
+        border-right: #261E47 0px solid;
+        border-bottom: #261E47 0px solid;
+    }
+    .avatarBox{
+        margin: auto;
+        text-align: center;
     }
 </style>
 <?php include __DIR__ . './parts/navbar.php' ?>
 <form action="" id="form1" name="form1" onsubmit="return false;" style="display: none;">
-<input class="form-check-input" type="text" name="mid" value="<?php echo $_SESSION['member']['sid'];?>" checked>
+    <input class="form-check-input" type="text" name="mid" value="<?php echo $_SESSION['member']['sid']; ?>" checked>
 </form>
 <div class="container">
-    <div class="row" id="showcase"></div>
-    <div id="showcases"></div>
+    <h3><img src="./index/map.img/ghost-g.svg" style="width: 40px">我的衣櫥</h3>
+    <div class="row" id="showcase">
+    </div>
 </div>
 <?php include __DIR__ . './parts/scripts.php' ?>
 <script src="https://pixijs.download/release/pixi.js"></script>
 <script>
     const showcase = document.querySelector('#showcase');
-    const showcases = document.querySelector('#showcases');
+
 
     //顏色列表
     const colors = [];
@@ -47,15 +75,18 @@ $title = '濟善救世公司-轉生形象-衣櫥';
 
     const avatarBox = (f, g) => {
         return `
-        <div class="avatarBox col-3">
+        <div class="avatarCard col-12 col-lg-4">
+            <div class="avatarBox"></div>
+            <div class="avatarInfo">
+                <p>形象編號:<br>${g}</p>
+                <p>創建時間:<br>${f}</p>
+            </div>
             <a href="javascript: edit_it(${g})" class="btn btn-info">
-            修改
+                修改
             </a>
             <a href="javascript: delete_it(${g})" class="btn btn-danger">
-            刪除
+                刪除
             </a>
-            <p>${g}</p>
-            <p>${f}</p>
         </div>`;
     };
     const form1 = document.querySelector('#form1');
@@ -68,8 +99,8 @@ $title = '濟善救世公司-轉生形象-衣櫥';
         const result = await r.json();
         console.log(result);
         let l = result.length;
-        if (result.length>5){
-            l=5;
+        if (result.length > 5) {
+            l = 5;
         };
         for (i = 0; i < l; i++) {
             showcase.innerHTML += avatarBox(result[i].avatar_created_at, result[i].avatar_id);
@@ -121,7 +152,7 @@ $title = '濟善救世公司-轉生形象-衣櫥';
             nose.y = 100;
             nose.zIndex = 2;
             nose.tint = colors[1][a[parts[1] + "Color"]];
-            
+
             avatar.stage.addChild(nose);
 
             //嘴巴
@@ -133,7 +164,7 @@ $title = '濟善救世公司-轉生形象-衣櫥';
             mouth.y = 100;
             mouth.zIndex = 2;
             mouth.tint = colors[2][a[parts[2] + "Color"]];
-            
+
             avatar.stage.addChild(mouth);
 
             //耳朵
@@ -145,7 +176,7 @@ $title = '濟善救世公司-轉生形象-衣櫥';
             ear.y = 100;
             ear.zIndex = 0;
             ear.tint = colors[3][a[parts[3] + "Color"]];
-            
+
             avatar.stage.addChild(ear);
 
             //頭髮
