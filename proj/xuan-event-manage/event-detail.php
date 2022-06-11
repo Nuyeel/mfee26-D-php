@@ -84,7 +84,7 @@ $rows = $pdo->query($sql)->fetchAll();
 
 
     <!-- 一鍵報名 + 價錢頁面 -->
-    <div class="card w-25 mt-5" style="width: 18rem; height:350px; padding:30px">
+    <div class="card w-25 mt-5" style="width: 18rem; height:500px; padding:30px">
         <div class="card-body">
         <span>贊助費用</span>    
         <h2 class="card-title mb-5 mt-2">NT$ <?= $r['price'] ?></h2>
@@ -94,14 +94,17 @@ $rows = $pdo->query($sql)->fetchAll();
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
 
         <!-- 不會進結帳頁面，跳已加入的通知 -->
-        <button class="btn btn-danger add-to-cart-btn" id="zxAddToCartBtn" data-sid="<?= $r['sid']?>"  style="margin-right:10px; font-size:16px" href="#" role="button">
+        <button class="btn btn-danger add-to-cart-btn" id="zxAddToCartBtn" data-sid="<?= $r['sid']?>"  style="margin-right:10px; font-size:16px; width: 140px" href="#" role="button">
         <i class="fa-solid fa-cart-shopping"></i>&nbsp 加入購物車 
         </button>  
 
         <!-- 直接跳進結帳頁面 -->
-        <a class="btn btn-warning add-to-cart-btn mt-3" data-sid="<?= $r['sid']?>"  style="margin-right:10px; font-size:16px" href="cart-list.php" role="button">
+        <a class="btn btn-warning add-to-cart-btn mt-3" data-sid="<?= $r['sid']?>"  style="margin-right:10px; font-size:16px; width: 140px" href="cart-list.php" role="button">
         <i class="fa-solid fa-money-bill-1"> </i>&nbsp 直接結帳
-        </a>  
+        </a>
+        
+        <!-- 繼續選購 -->
+        <a class="btn btn-primary mt-3" href="npo-list.php" role="button" style=" margin-bottom:10px; width: 140px "><i class="fa-solid fa-cart-plus"></i>&nbsp &nbsp繼續選購</a>
 
         
         <!-- 直接跳進結帳頁面 -->
