@@ -7,6 +7,7 @@ unset($_SESSION['member']['sid']);
 unset($_SESSION['member']['name']);
 unset($_SESSION['member']['birthdate']);
 unset($_SESSION['member']['deathdate']);
+unset($_SESSION['member']['isdead']);
 unset($_SESSION['member']['mobile']);
 unset($_SESSION['member']['email']);
 
