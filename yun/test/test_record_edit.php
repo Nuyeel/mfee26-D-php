@@ -39,23 +39,23 @@ if (empty($row)) {
                         <input type="hidden" name="membersid" value="<?= $row['member_sid'] ?>">
                         <div class="mb-3">
                             <label for="account" class="form-label">帳號</label>
-                            <input type="text" class="form-control" id="account" name="account" required value="<?= htmlentities($row['member_account']) ?>" disabled>
+                            <input type="text" class="form-control" id="account" name="account" required value="<?= htmlentities($row['member_account']) ?>">
 
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">姓名</label>
-                            <input type="text" class="form-control" id="name" name="name" value="<?= $row['member_name'] ?>" disabled>
+                            <input type="text" class="form-control" id="name" name="name" value="<?= $row['member_name'] ?>">
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="birth" class="form-label">生日</label>
-                            <input type="date" class="form-control" id="birth" name="birth" value="<?= $row['member_birth'] ?>" disabled>
+                            <input type="date" class="form-control" id="birth" name="birth" value="<?= $row['member_birth'] ?>">
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="death" class="form-label">忌日</label>
-                            <input type="date" class="form-control" id="death" name="death" value="<?= $row['member_death'] ?>" disabled>
+                            <input type="date" class="form-control" id="death" name="death" value="<?= $row['member_death'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
@@ -192,9 +192,15 @@ if (empty($row)) {
             method: 'POST',
             body: fd,
         });
-        console.log(r);
+        
+        // console.log('fd');
+        // console.log(fd);
+        // console.log('r')
+        // console.log(r);
+
 
         const result = await r.json();
+        // console.log('result')
         console.log(result);
         info_bar.style.display = 'block';
         // 顯示訊息列

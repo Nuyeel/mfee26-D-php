@@ -1,4 +1,4 @@
-<?php require __DIR__ . "./parts/connect_db.php"; ?>
+<?php require __DIR__ . "/parts/connect_db.php"; ?>
 
 <?php
 $pageName = 'test_page';
@@ -9,28 +9,10 @@ $t_sql = "SELECT COUNT(*) FROM `good_deed_test`";
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 $sql = sprintf("SELECT * FROM `good_deed_test` ORDER BY sid ASC");
 $rows = $pdo->query($sql)->fetchAll();
+
 ?>
-<?php
-
-//先做一筆假資料測試用
-// $_SESSION['member']['sid'] = 100;
-// $_SESSION['member']['account'] = 'meowmeow';
-// $_SESSION['member']['name'] = '卯咪';
-
-//若要重整假資料時可以先做清除
-// if (isset($_SESSION['member']['account'])){
-//   unset($_SESSION['member']['sid']);
-//   unset($_SESSION['member']['account']);
-//   unset($_SESSION['member']['name']);
-
-// }
-//如果是空值的話 跳轉回余欣的登入頁面
-// if (empty($_SESSION['member']['account'])) {
-//     header(location:login.php);
-// }
-?>
-<?php include __DIR__ . './parts/html-head.php' ?>
-<?php include __DIR__ . './parts/navbar.php' ?>
+<?php include __DIR__ . '/parts/navbar.php' ?>
+<?php include __DIR__ . '/parts/html-head.php' ?>
 
 <style>
     .form-control.red {
@@ -94,7 +76,7 @@ $rows = $pdo->query($sql)->fetchAll();
         </div>
     </div>
 </div>
-<?php include __DIR__ . './parts/scripts.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
     const info_bar = document.querySelector('#info-bar');
 
@@ -167,7 +149,7 @@ $rows = $pdo->query($sql)->fetchAll();
         }
 
         const fd = new FormData(document.formTest);
-        const r = await fetch('./test_page-api.php', {
+        const r = await fetch('./test_page-api.php',{
             method: 'POST',
             body: fd,
         });
@@ -190,4 +172,6 @@ $rows = $pdo->query($sql)->fetchAll();
         }
     }
 </script>
-<?php include __DIR__ . './parts/html-foot.php' ?>
+
+
+<?php include __DIR__ . '/parts/html-foot.php' ?>

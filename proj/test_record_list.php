@@ -1,4 +1,4 @@
-<?php require __DIR__ . "./parts/connect_db.php";
+<?php require __DIR__ . "/parts/connect_db.php";
 
 $pageName = 'testpage';
 $title = '陰德值測驗後台';
@@ -34,14 +34,14 @@ if ($totalRows > 0) {
   }
 
   $sql = sprintf(
-    "SELECT * FROM `good_deed_test_record` JOIN `member` ON  `good_deed_test_record`.`member_sid`= `member`.`sid` ORDER BY `member`.`sid` ASC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+    "SELECT * FROM `good_deed_test_record` ORDER BY `sid` ASC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
     $rows = $pdo->query($sql)->fetchAll();
 }
 
 
 ?>
-<?php include __DIR__ . './parts/html-head.php' ?>
-<?php include __DIR__ . './parts/navbar.php' 
+<?php include __DIR__ . '/parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/navbar.php' 
 ?>
 
 <div class="container">
@@ -100,7 +100,7 @@ if ($totalRows > 0) {
         <th scope="col">Q4</th>
         <th scope="col">Q5</th>
         <th scope="col">總分</th>
-        <th scope="col">DELETE</th>
+        <th scope="col"><i class="fa-solid fa-pen-to-square"></i></th>
 
 
 
@@ -110,13 +110,13 @@ if ($totalRows > 0) {
       <?php foreach ($rows as $r) : ?>
         <tr>
           <td>
-            <a href="javascript: delete_it(<?= $r['member_sid'] ?>)">
+            <a href="javascript: delete_it(<?= $r['sid'] ?>)">
               <i class="fa-solid fa-trash-can"></i>
             </a>
           </td>
-          <td><?= $r['member_sid'] ?></td>
-          <td><?= htmlentities($r['account']) ?></td>
-          <td><?= htmlentities($r['name']) ?></td>
+          <td><?= $r['sid'] ?></td>
+          <td><?= $r['member_account'] ?></td>
+          <td><?= $r['member_name'] ?></td>
           <td><?= $r['member_birth'] ?></td>
           <td><?= $r['member_death'] ?></td>
           <td><?= $r['test_Q1'] ?></td>
@@ -127,7 +127,7 @@ if ($totalRows > 0) {
           <td><?= $r['test_score'] ?></td>
 
           <td>
-            <a href="test_record_edit.php?member_sid=<?= $r['member_sid'] ?>">
+            <a href="test_record_edit.php?sid=<?= $r['sid'] ?>">
               <i class="fa-solid fa-pen-to-square"></i>
             </a>
           </td>
@@ -142,12 +142,12 @@ if ($totalRows > 0) {
 
 
 
-<?php include __DIR__ . './parts/scripts.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
-  function delete_it(member_sid) {
-    if (confirm(`確定要刪除編號為 ${member_sid} 的資料嗎?`)) {
-      location.href = `test_record_delete.php?member_sid=${member_sid}`;
+  function delete_it(sid) {
+    if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)) {
+      location.href = `test_record_delete.php?sid=${sid}`;
     }
   }
 </script>
-<?php include __DIR__ . './parts/html-foot.php' ?>
+<?php include __DIR__ . '/parts/html-foot.php' ?>

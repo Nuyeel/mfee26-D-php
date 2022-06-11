@@ -1,4 +1,4 @@
-<?php require __DIR__ . "./parts/connect_db.php"; ?>
+<?php require __DIR__ . "/parts/connect_db.php"; ?>
 
 <?php
 header('Content-Type: application/json');
@@ -14,7 +14,7 @@ $output = [
 
 //使用 sid 做比對 在對應位置填入資料
 if (isset($_SESSION['member']['sid'])) {
-    $sid = intval($_SESSION['member']['sid']) ;  
+    $sid = intval($_SESSION['member']['sid']);
 } else {
     $sid = 0;
 }
@@ -39,12 +39,10 @@ $rowNumber = $pdo->query($test_sql)->fetch(PDO::FETCH_NUM)[0];
 
 if ($rowNumber == 0) {
     $sql =
-        "INSERT INTO `good_deed_test_record`(
-        `member_sid`,
+    "INSERT INTO `good_deed_test_record`(
         `test_Q1`, `test_Q2`, `test_Q3`, 
         `test_Q4`, `test_Q5`, `test_score`
     ) VALUES (
-        ?, 
         ?, ?, ?,
         ?, ?, ?
     )";
@@ -52,7 +50,6 @@ if ($rowNumber == 0) {
     $stmt = $pdo->prepare($sql);
 
     $stmt->execute([
-        $sid,
         $q1,
         $q2,
         $q3,
@@ -73,13 +70,12 @@ if ($rowNumber == 0) {
 } else if ($rowNumber == 1) {
     $sql =
         "UPDATE `good_deed_test_record` 
-        SET `member_sid`=?, `test_Q1`=?,`test_Q2`=?,`test_Q3`=?,`test_Q4`=?,`test_Q5`=?,`test_score`=? 
+        SET  `test_Q1`=?,`test_Q2`=?,`test_Q3`=?,`test_Q4`=?,`test_Q5`=?,`test_score`=? 
         WHERE `sid`=$sid";
 
     $stmt = $pdo->prepare($sql);
 
     $stmt->execute([
-        $sid,
         $q1,
         $q2,
         $q3,

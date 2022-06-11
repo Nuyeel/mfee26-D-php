@@ -1,10 +1,10 @@
-<?php require __DIR__ . "./parts/connect_db.php"; ?>
+<?php require __DIR__ . "/parts/connect_db.php"; ?>
 
 <?php
 
-$member_sid = isset($_GET['member_sid']) ? intval($_GET['member_sid']) : 0;
-if (!empty($member_sid)) {
-    $pdo->query("DELETE FROM `good_deed_test_record` WHERE `member_sid`=$member_sid");
+$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
+if (!empty($sid)) {
+    $pdo->query("DELETE FROM `good_deed_test_record` WHERE `sid`=$sid");
 }
 $come_from = 'test_record_list.php';
 if (!empty($_SERVER['HTTP_REFERER'])) {
