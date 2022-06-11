@@ -2,7 +2,7 @@
 
 $output = [
     'success' => false,
-    'tag' => $_POST['tg_sid'],
+    'postData' =>$_POST,
     'filename' => '',
     'error' => ''
 ];
@@ -58,55 +58,70 @@ $stmt->execute([
 ]);
 
 
-if ($stmt->rowCount() == 1) {
-    $output['success'] = true;
-} else {
-    $output['error'] = '資料沒有修改';
-}
+// if ($stmt->rowCount() == 1) {
+//     $output['success'] = true;
+// } else {
+//     $output['error'] = '資料沒有修改';
+// }
 
 
 $tag = $pdo->query("SELECT*FROM `news_tag` WHERE news_tag.news_sid = $sid")->fetch();
 $t_sql = "INSERT INTO `news_tag`(`news_sid`, `tag_sid`) VALUES (?,?)";
+$ntrowcount = 0;
 
+if(empty($tag['tag_sid'])){
+    $tag['tag_sid']=[];
+}
+if(empty($_POST['tg_sid'])){
+    $_POST['tg_sid']=[];
+}
 
-if ($_POST['tg_sid'] != $tag['tag_sid'] && !empty($_POST['tg_sid'])) {
+if($_POST['tg_sid'] != $tag['tag_sid']){
 
-    $editTag= $pdo->prepare("DELETE FROM `news_tag` WHERE news_tag.news_sid = $sid");
-    $editTag ->execute();
-
-  
-
+    $stmt = $pdo->prepare("DELETE FROM `news_tag` WHERE news_tag.news_sid = $sid")->execute();
+    if(!empty($_POST['tg_sid'])){
     $checkbox = $_POST['tg_sid'];
     foreach ($checkbox as $c) {
-        $editTag = $pdo->prepare($t_sql);
-        $editTag->execute([$sid,$c]);
-    }
-} else if (empty($_POST['tg_sid'])) {
-
+    $stmt = $pdo->prepare($t_sql)->execute([
+            $sid,
+            $c
+        ]);
+    }}
+    $ntrowcount = 1;
     
+}
+
+if($tag['tag_sid']>0 && empty($_POST['tg_sid'])){
     $delete = $pdo->prepare("DELETE FROM `news_tag` WHERE news_tag.news_sid = $sid");
     $delete->execute();
+    $ntrowcount = 1;
 }
 
 if (!empty($_POST['tag_add'])) {
-    $sql = "INSERT INTO `tag`(
-    `tag_name`) VALUES(?)";
+    $sql = "INSERT INTO `tag`(`tag_name`) VALUES(?)";
 
-    $stmt = $pdo->prepare($sql)
-        ->execute([
-            $_POST['tag_add'],
-        ]);
+    $stmt = $pdo->prepare($sql);
+    $stmt ->execute([$_POST['tag_add']]);
 
     $tagId = $pdo->lastInsertId();
 
-    $stmt = $pdo->prepare($t_sql)
-        ->execute([
+    $stmt = $pdo->prepare($t_sql);
+    $stmt->execute([
             $sid,
             $tagId
         ]);
+        $ntrowcount = 1;
 }
 
-
+if ($ntrowcount == 1) {
+    $output['success'] = true;
+} 
+else if ($stmt->rowCount()==1) {
+    $output['success'] = true;
+} 
+else {
+    $output['error'] = '資料沒有修改';
+}
 
 $json = json_encode($output, JSON_UNESCAPED_UNICODE);
 
