@@ -145,7 +145,7 @@ $area = $pdo->query($area_type)->fetchAll();
         </div>
         <div class="carousel-inner" style=" width:100%; height:300px;">
             <div class="carousel-item active">
-                <img src="./list-img/dog03.jpg" class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover ">
+                <img src="./list-img/dog02.jpg" class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover ">
                 <div class="carousel-caption d-none d-md-block ">
                     <h5>拉拉拉</h5>
                     <p>Some representative placeholder content for the first slide.</p>
@@ -159,7 +159,7 @@ $area = $pdo->query($area_type)->fetchAll();
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="./list-img/dog03.jpg" class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover ">
+                <img src="./list-img/dog04.jpg" class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover ">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Third slide label</h5>
                     <p>Some representative placeholder content for the third slide.</p>
