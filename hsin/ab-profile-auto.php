@@ -22,7 +22,6 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
 // echo json_encode($_SESSION, JSON_UNESCAPED_UNICODE);
 // exit;
 
-
 ?>
 <?php include __DIR__ . '/parts-2/html-head-2.php' ?>
 <?php include __DIR__ . '/parts-2/navbar-3.php' ?>
@@ -150,80 +149,6 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                             </div>
                         </div>
                     </div>
-                    <?php
-                    if (!empty($_SESSION['member']['account'])) {
-
-                        $sid = $_SESSION['member']['sid'];
-                        $t_sql = "SELECT `test_score` FROM `good_deed_test_record` WHERE `member_sid`= $sid";
-                        $t_row = $pdo->query($t_sql)->fetch();
-                        // $score =  $t_row['test_score'];
-
-                        $account =  $_SESSION['member']['account'];
-                        $name = $_SESSION['member']['name'];
-
-                    ?>
-
-                        <?php
-                        if (!empty($t_row['test_score'])) {
-
-                        ?>
-                            <!-- 這邊我改用$t_row['test_score']讓沒分數的帳戶在該欄位留空，避開php error code顯示 -->
-
-                            <!-- <div class="card" style="width: 18rem;"> -->
-                            <div class="card">
-
-                                <!-- <img src="..." class="card-img-top" alt="..."> -->
-                                <div class="card-body">
-                                    <h5 class="card-title format">
-                                        Hi <?= $_SESSION['member']['name'] ?> ！
-                                        你的陰德值為:<?= $t_row['test_score'] ?? 0 ?>
-                                    </h5>
-                                    <p class="card-text" style="font-size: 1rem; color: #707070;">
-                                        覺得陰德值太少嗎?
-                                        你可以透過下列方式增加你的陰德值!
-                                    </p>
-                                    <a href="#" class="btn btn-primary format">
-                                        慈善捐款
-                                    </a>
-                                    <a href="#" class="btn btn-primary format">
-                                        <!-- 這邊可以放容瑄的連結 -->
-
-                                        參與慈善活動
-                                    </a>
-                                    <a href="./yun_gamespage.php" class="btn btn-primary format">
-                                        遊玩慈善遊戲
-                                    </a>
-                                </div>
-                            </div>
-
-                        <?php } else { ?>
-                            <!-- 沒有分數的話就做測驗 -->
-
-                            <!-- <div class="card" style="width: 18rem;"> -->
-                            <div class="card">
-                                <!-- <img src="..." class="card-img-top" alt="..."> -->
-                                <div class="card-body">
-                                    <h5 class="card-title format">
-                                        Hi <?= $_SESSION['member']['name'] ? $_SESSION['member']['name'] : "" ?> ！
-                                    </h5>
-                                    <p class="card-text" style="font-size: 1rem; color: #707070;">
-                                        想知道你有多少陰德值嗎?
-                                        來測測看吧!
-                                    </p>
-                                    <a href="./test_page.php" class="btn btn-primary format">
-                                        陰德值測驗 Go！
-                                    </a>
-                                </div>
-                            </div>
-
-                    <?php
-                        }
-                    } else {
-
-                        header('location:ab-login.php');
-                    }
-
-                    ?>
                 </div>
             </div>
         </div>

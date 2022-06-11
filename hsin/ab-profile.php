@@ -22,6 +22,7 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
 // echo json_encode($_SESSION, JSON_UNESCAPED_UNICODE);
 // exit;
 
+
 ?>
 <?php include __DIR__ . '/parts-2/html-head-2.php' ?>
 <?php include __DIR__ . '/parts-2/navbar-3.php' ?>
@@ -149,6 +150,82 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                             </div>
                         </div>
                     </div>
+                    <?php
+                    if (!empty($_SESSION['member']['account'])) {
+
+                        $sid = $_SESSION['member']['sid'];
+                        $t_sql = "SELECT `test_score` FROM `good_deed_test_record` WHERE `member_sid`= $sid";
+                        $t_row = $pdo->query($t_sql)->fetch();
+                        // $score =  $t_row['test_score'];
+
+                        $account =  $_SESSION['member']['account'];
+                        $name = $_SESSION['member']['name'];
+
+                    ?>
+
+                        <?php
+                        if (!empty($t_row['test_score'])) {
+
+                        ?>
+                            <!-- 這邊我改用$t_row['test_score']讓沒分數的帳戶在該欄位留空，避開php error code顯示 -->
+
+                            <!-- <div class="card" style="width: 18rem;"> -->
+                            <div class="card">
+
+                                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                                <div class="card-body">
+                                    <h5 class="card-title format" style="text-align: center;">
+                                        Hi <?= $_SESSION['member']['name'] ?> ！
+                                        您目前的陰德值為：<?= $t_row['test_score'] ?? 0 ?>
+                                    </h5>
+                                    <p class="card-text" style="font-size: 1rem; color: #707070; text-align: center;">
+                                        陰德值太少嗎？
+                                        透過下列方式增加您的陰德值！
+                                    </p>
+                                    <div class="btn-2 d-flex justify-content-around">
+                                        <a href="#" class="btn btn-primary format">
+                                            響應慈善捐款
+                                        </a>
+                                        <a href="#" class="btn btn-primary format">
+                                            <!-- 這邊可以放容瑄的連結 -->
+
+                                            參與慈善活動
+                                        </a>
+                                        <a href="./yun_gamespage.php" class="btn btn-primary format">
+                                            遊玩慈善遊戲
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php } else { ?>
+                            <!-- 沒有分數的話就做測驗 -->
+
+                            <!-- <div class="card" style="width: 18rem;"> -->
+                            <div class="card">
+                                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                                <div class="card-body">
+                                    <h5 class="card-title format" style="text-align:center;">
+                                        Hi <?= $_SESSION['member']['name'] ? $_SESSION['member']['name'] : "" ?> ！
+                                    </h5>
+                                    <p class="card-text" style="font-size: 1rem; color: #707070; text-align:center;">
+                                        想知道您目前擁有多少陰德值嗎？
+                                        現在就測測看吧！
+                                    </p>
+                                    <a href="./test_page.php" class="btn btn-primary format d-flex justify-content-around" style="text-align:center;">
+                                        陰德值測驗 Go！
+                                    </a>
+                                </div>
+                            </div>
+
+                    <?php
+                        }
+                    } else {
+
+                        header('location:ab-login.php');
+                    }
+
+                    ?>
                 </div>
             </div>
         </div>
