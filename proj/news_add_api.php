@@ -11,8 +11,6 @@ $extMap = [
 
 $output = [
     'success' => false,
-    // 'postData' => $_POST,
-    // 'filename' => '',
     'error' => '',
 ];
 
@@ -101,8 +99,7 @@ if (!empty($_POST['tg_sid'])) {
                 $newsId,
                 $c
             ]);
-    }
-}
+    }}
 
 $json = json_encode($output, JSON_UNESCAPED_UNICODE);
 echo $json;

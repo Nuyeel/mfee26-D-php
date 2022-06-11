@@ -16,7 +16,6 @@ $output = [
     'lastInsertId' => 0
 ];
 
-$_SESSION['member']['sid'] = 11;
 $member_sid = $_SESSION['member']['sid'];
 
 // 購物車必須不是空的

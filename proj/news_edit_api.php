@@ -2,7 +2,7 @@
 
 $output = [
     'success' => false,
-    'postData' => $_POST,
+    'tag' => $_POST['tg_sid'],
     'filename' => '',
     'error' => ''
 ];
@@ -15,7 +15,7 @@ $row = $pdo->query("SELECT*FROM `news`
 WHERE news.sid = $sid")->fetch();
 
 
-if (empty($_POST['sid']) or empty($_POST['topic'])) {
+if (empty($_POST['sid']) || empty($_POST['topic'])) {
     $output['error'] = '沒有標題名稱';
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit;
@@ -25,7 +25,7 @@ if (empty($_POST['sid']) or empty($_POST['topic'])) {
 
 $oldName = $row['img'];
 
-if ($_FILES['img']['error'] == 0 and !empty($extMap[$_FILES['img']['type']])) {
+if ($_FILES['img']['error'] == 0 && !empty($extMap[$_FILES['img']['type']])) {
 
     $extMap = [
         'image/jpeg' => '.jpg',
@@ -66,25 +66,26 @@ if ($stmt->rowCount() == 1) {
 
 
 $tag = $pdo->query("SELECT*FROM `news_tag` WHERE news_tag.news_sid = $sid")->fetch();
+$t_sql = "INSERT INTO `news_tag`(`news_sid`, `tag_sid`) VALUES (?,?)";
 
 
-if ($_POST['tg_sid'] != $tag['tag_sid'] and !empty($_POST['tg_sid'])) {
+if ($_POST['tg_sid'] != $tag['tag_sid'] && !empty($_POST['tg_sid'])) {
 
-    $stmt = $pdo->query("DELETE FROM `news_tag` WHERE news_tag.news_sid = $sid")->fetch();
+    $editTag= $pdo->prepare("DELETE FROM `news_tag` WHERE news_tag.news_sid = $sid");
+    $editTag ->execute();
 
-    $t_sql = "INSERT INTO `news_tag`(`news_sid`, `tag_sid`) VALUES (?,?)";
+  
 
     $checkbox = $_POST['tg_sid'];
     foreach ($checkbox as $c) {
-        $stmt = $pdo->prepare($t_sql)
-            ->execute([
-                $sid,
-                $c
-            ]);
+        $editTag = $pdo->prepare($t_sql);
+        $editTag->execute([$sid,$c]);
     }
 } else if (empty($_POST['tg_sid'])) {
 
-    $stmt = $pdo->query("DELETE FROM `news_tag` WHERE news_tag.news_sid = $sid")->fetch();
+    
+    $delete = $pdo->prepare("DELETE FROM `news_tag` WHERE news_tag.news_sid = $sid");
+    $delete->execute();
 }
 
 if (!empty($_POST['tag_add'])) {

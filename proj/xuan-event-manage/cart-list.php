@@ -36,7 +36,8 @@ if (!empty($_SESSION['cart'])) {
 
 ?>
 <?php include __DIR__ . '/../parts/html-head.php' ?>
-<?php include __DIR__ . '/../parts/navbar.php' ?>
+<?php include __DIR__ . '/../parts/navbar-xuan.php' ?>
+
 <div class="container mt-5" style="text-align:center">
     <div class="row">
         <div class="col">
