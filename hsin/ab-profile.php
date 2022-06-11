@@ -154,7 +154,7 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                     if (!empty($_SESSION['member']['account'])) {
 
                         $sid = $_SESSION['member']['sid'];
-                        $t_sql = "SELECT `test_score` FROM `good_deed_test_record` WHERE `member_sid`= $sid";
+                        $t_sql = "SELECT `test_score` FROM `good_deed_test_record` WHERE `sid`= $sid";
                         $t_row = $pdo->query($t_sql)->fetch();
                         // $score =  $t_row['test_score'];
 
