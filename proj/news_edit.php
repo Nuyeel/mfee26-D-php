@@ -36,8 +36,8 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
 
 
 ?>
-<?php include __DIR__ . '/parts/html-head.php' ?>
-<?php include __DIR__ . '/parts/navbar.php' ?>
+<?php include __DIR__ . './parts/html-head.php' ?>
+<?php include __DIR__ . './parts/navbar.php' ?>
 <style>
     .form-control.red {
         border: 1px solid red;
@@ -106,7 +106,7 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
                         <input type="hidden" name="oldimg">
                         <input type="file" id="img" class="form-control" name="img" accept="image/*" onchange="changeImg()">
                         <div id="imgwrap" class="imgwrap mt-3">
-                            <img class="img" name="simg" src="./uploaded/<?= $row['img'] ?>" alt="">
+                            <img class="img" name="simg" src="./img/uploaded/<?= $row['img'] ?>" alt="">
                         </div>
                     </div>
                 </div>
@@ -172,7 +172,7 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
     </div>
 </div>
 
-<?php include __DIR__ . '/parts/scripts.php' ?>
+<?php include __DIR__ . './parts/scripts.php' ?>
 
 <script>
     const topic_f = document.form1.topic;
@@ -303,4 +303,4 @@ $tags = $pdo->query('SELECT * FROM `tag`')->fetchAll();
     }
 </script>
 
-<?php include __DIR__ . '/parts/html-foot.php' ?>
+<?php include __DIR__ . './parts/html-foot.php' ?>

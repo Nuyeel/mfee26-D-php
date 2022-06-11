@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/parts/connect_db.php';
+<?php require __DIR__ . './parts/connect_db.php';
 
 $output = [
     'success' => false,
@@ -35,7 +35,7 @@ if ($_FILES['img']['error'] == 0 && !empty($extMap[$_FILES['img']['type']])) {
 
     $ext = $extMap[$_FILES['img']['type']];
     $filename = md5($_FILES['img']['name'] . rand()) . $ext;
-    $folder = __DIR__ . '/img/uploaded/';
+    $folder = __DIR__ . './img/uploaded/';
     move_uploaded_file($_FILES['img']['tmp_name'], $folder . $filename);
 } else {
     $filename = $oldName;
