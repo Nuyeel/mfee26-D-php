@@ -6,7 +6,7 @@ $title = 'Yun_MainPage';
 ?>
 
 <?php include __DIR__ . '/parts/html-head.php' ?>
-<?php include __DIR__ . '/parts/navbar.php' ?>
+
 
 
 <style>
@@ -116,7 +116,7 @@ if (!empty($_SESSION['member']['account'])) {
 
 
 
-
+<?php include __DIR__ . '/parts/navbar.php' ?>
 <?php include __DIR__ . '/parts/scripts.php' ?>
 
 
