@@ -8,8 +8,11 @@ $title = '濟善救世公司-轉生形象-衣櫥';
     body {
         height: 100vh;
         background-color: #261E47;
-        background-image: linear-gradient(0deg, #261E47 0%, #266AAA 85%);
+        background-image: linear-gradient(0deg, #0B1013 0%, #261E47 30%, #266AAA 85%);
         background-attachment: fixed;
+    }
+    canvas {
+        border-radius: 10px;
     }
     h3 {
         color: #fff;

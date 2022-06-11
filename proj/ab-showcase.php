@@ -36,6 +36,10 @@ $show = $pdo->query($showcase)->fetchAll();
         padding: 20px;
     }
 
+    canvas {
+        border-radius: 10px;
+    }
+
     .avatarCard {
         width: 250px;
         background-color: #2667A0;

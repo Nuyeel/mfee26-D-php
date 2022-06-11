@@ -13,7 +13,7 @@ if (!$_SESSION['member']['account']) {
     body {
         height: 100vh;
         background-color: #261E47;
-        background-image: linear-gradient(0deg, #261E47 0%, #266AAA 85%);
+        background-image: linear-gradient(0deg, #0B1013 0%, #261E47 30%, #266AAA 85%);
         background-attachment: fixed;
     }
 
@@ -95,7 +95,7 @@ if (!$_SESSION['member']['account']) {
 
     .controlArea {
         border-radius: 10px;
-        background-color: #2E5C6E;
+        background-color: #A5DEE4;
         border: #fff 1px solid;
     }
 
@@ -105,6 +105,9 @@ if (!$_SESSION['member']['account']) {
 
     .nav-link:hover {
         color: #261E47;
+    }
+    canvas {
+        border-radius: 10px;
     }
 </style>
 <?php include __DIR__ . './parts/navbar.php' ?>
