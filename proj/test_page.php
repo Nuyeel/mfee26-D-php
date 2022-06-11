@@ -25,6 +25,8 @@ $rows = $pdo->query($sql)->fetchAll();
 
 ?>
 
+<?php include __DIR__ . '/parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/navbar.php' ?>
 
 <style>
     .form-control.red {
@@ -185,6 +187,5 @@ $rows = $pdo->query($sql)->fetchAll();
     }
 </script>
 
-<?php include __DIR__ . '/parts/html-head.php' ?>
-<?php include __DIR__ . '/parts/navbar.php' ?>
+
 <?php include __DIR__ . '/parts/html-foot.php' ?>
