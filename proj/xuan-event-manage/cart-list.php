@@ -156,7 +156,7 @@ if (!empty($_SESSION['cart'])) {
 
             <?php if (isset($_SESSION['member']['account'])) : ?> 
 
-            <a class="btn btn-danger" href="#">前往結帳</a>  
+            <!-- <a class="btn btn-danger" href="#">前往結帳</a>   -->
                                 
                 <div class="alert alert-warning thanks" role="alert" style="display:none">
                     感謝您的購買！
