@@ -2,7 +2,7 @@
 
 <?php
 $pageName = 'place-admin';
-$title = '良辰吉地';
+$title = '良辰吉地管理';
 ?>
 
 <?php include __DIR__ . "./parts/html-head.php" ?>
@@ -509,7 +509,7 @@ $title = '良辰吉地';
 
     function changeCity(value) {
         // 先清空city選單
-        city.innerHTML = `<option selected disabled>選擇城市...</option>`;
+        city.innerHTML = `<option selected>選擇城市...</option>`;
 
         const countrys = renderData.countrys;
         const distList = renderData.distList;

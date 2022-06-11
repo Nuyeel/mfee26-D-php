@@ -2,7 +2,7 @@
 
 <?php
 $pageName = 'place';
-$title = '濟善救世公司-良辰吉地';
+$title = '良辰吉地 - 來生投放所';
 ?>
 
 <?php
