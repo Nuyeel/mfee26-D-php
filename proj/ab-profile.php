@@ -187,7 +187,7 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                                         <a href="#" class="btn btn-primary format">
                                             響應慈善捐款
                                         </a>
-                                        <a href="#" class="btn btn-primary format">
+                                        <a href="/mfee26-D-php/proj/xuan-event-manage/npo-list.php" class="btn btn-primary format">
                                             <!-- 這邊可以放容瑄的連結 -->
 
                                             參與慈善活動
