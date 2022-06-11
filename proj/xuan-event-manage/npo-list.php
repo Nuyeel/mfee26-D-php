@@ -337,9 +337,9 @@ $area = $pdo->query($area_type)->fetchAll();
                     <span class="bg-info text-white" style="padding:3px 10px;border-radius:5px"><?= $r['name'] ?></span>
                 </div>
 
-                <div style=" width:100%;height:150px;overflow:hidden">
+                <div style=" width:100%;height:150px;overflow:hidden; display: flex; justify-content:center;align-items:center">
 
-                    <img src="./list-img/<?= $r['img'] ?>" class="card-img-top" alt="..." style="width:100%;hight:100%;">
+                    <img src="./list-img/<?= $r['img'] ?>" class="card-img-top" alt="..." style="width:100%;">
 
                 </div>
 
