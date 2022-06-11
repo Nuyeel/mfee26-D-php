@@ -152,7 +152,7 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
     </div>
 
 </div>
-<?php include __DIR__ . '/parts-2/scripts-2.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
     const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE) ?>;
     const name_re = /^[a-zA-Z0-9_\u4e00-\u9fa5\s]*$/;
