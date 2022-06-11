@@ -232,7 +232,8 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
     </div>
 </div>
 </div>
-<?php include __DIR__ . '/parts-2/scripts-2.php' ?>
+
+<?php include __DIR__ . '/parts/scripts.php' ?>
 
 <script>
 </script>
