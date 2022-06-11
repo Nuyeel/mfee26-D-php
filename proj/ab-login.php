@@ -158,14 +158,25 @@ if (isset($_SESSION['member']['account'])) {
         });
         const result = await r.json();
         // console.log(result);
-        console.log(result.postData);
+        // console.log(result.postData);
+        // console.log(result.account);
+
+        // 2022/06/12 01:25
+        // 涼枕在 output 新增了 account 欄位
+        // 所以這裡會拿到
+        const userAccount = result.account;
         info_bar.style.display = 'block';
         if (result.success) {
             info_bar.classList.remove('alert-danger');
             info_bar.classList.add('alert-success');
             info_bar.innerText = '您已成功登入';
+            // 是管理員的話去 ab-list.php
             setTimeout(() => {
-                location.href = 'ab-profile.php';
+                if (userAccount === 'Admin') {
+                    location.href = 'ab-list.php';
+                } else {
+                    location.href = 'ab-profile.php';
+                }
             }, 2000);
         } else {
             info_bar.classList.remove('alert-success');
