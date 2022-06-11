@@ -87,7 +87,8 @@ if (!$_SESSION['member']['account']) {
         box-shadow: 5px 5px 0px #261E47;
         transition: .3s;
     }
-    .btn{
+
+    .btn {
         margin: 20px 5px;
         box-shadow: 5px 5px 0px #261E47;
         transition: .3s;
@@ -106,6 +107,7 @@ if (!$_SESSION['member']['account']) {
     .nav-link:hover {
         color: #261E47;
     }
+
     canvas {
         border-radius: 10px;
     }
@@ -192,7 +194,7 @@ if (!$_SESSION['member']['account']) {
         width: 500,
         height: 500
     });
-    avatar.renderer.backgroundColor = 0x2f4f4f;
+    avatar.renderer.backgroundColor = 0x143879;
     pictureFrame.appendChild(avatar.view);
     //基礎底圖
     let circle = PIXI.Sprite.from('./img/avatar_img/basic/circle-01.png');
@@ -200,7 +202,7 @@ if (!$_SESSION['member']['account']) {
     circle.scale.set(0.5);
     circle.x = 240;
     circle.y = 250;
-    //circle.tint = 0xdda0dd;
+    circle.tint = 0x86AED1;
     avatar.stage.addChild(circle);
     let body = PIXI.Sprite.from('./img/avatar_img/basic/body-shadow(gray)-01.png');
     body.anchor.set(0.5);
@@ -208,16 +210,16 @@ if (!$_SESSION['member']['account']) {
     body.x = 240;
     body.y = 250;
     body.zIndex = 1;
-    body.tint = 0xdda0dd;
+    body.tint = 0x82BBF0;
     avatar.stage.addChild(body);
 
     //顏色列表
     const colors = [];
-    colors[0] = [0xffffff, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700, 0xed1848];
-    colors[1] = [0xffffff, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700];
-    colors[2] = [0xffffff, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700];
-    colors[3] = [0xdda0dd, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700];
-    colors[4] = [0xffffff, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700, 0xaee0d7];
+    colors[0] = [0x3481C5, 0xB4BF5A, 0x2DA428, 0xAB6600, 0xB840BB, 0x8fbc8f, 0xffd700, 0xccffcc, 0xccccff, 0xed1848];
+    colors[1] = [0x3481C5, 0xB4BF5A, 0x2DA428, 0xAB6600, 0xB840BB, 0x8fbc8f, 0xffd700, 0xccffcc, 0xccccff, 0xed1848];
+    colors[2] = [0x3481C5, 0xB4BF5A, 0x2DA428, 0xAB6600, 0xB840BB, 0x8fbc8f, 0xffd700, 0xccffcc, 0xccccff, 0xed1848];
+    colors[3] = [0x82BBF0, 0xF391A0, 0xB4BF5A, 0x7CD679, 0xD5AB68, 0xE58AE6];
+    colors[4] = [0x3481C5, 0xB4BF5A, 0x2DA428, 0xAB6600, 0xB840BB, 0x8fbc8f, 0xffd700, 0xccffcc, 0xccccff, 0xed1848, 0xaee0d7, 0xcccccc, 0x333333];
 
     //部位總表
     const parts = ['eyes', 'nose', 'mouth', 'ear', 'hair']
@@ -240,6 +242,7 @@ if (!$_SESSION['member']['account']) {
         //畫布上的位置
         eye.x = 240;
         eye.y = 250;
+        eye.tint = colors[0][0];
         eye.zIndex = 2;
         items[0].push(eye); //存入陣列中備用
     }
@@ -255,6 +258,7 @@ if (!$_SESSION['member']['account']) {
         //畫布上的位置
         nose.x = 240;
         nose.y = 250;
+        nose.tint = colors[1][0];
         nose.zIndex = 2;
         items[1].push(nose); //存入陣列中備用
     }
@@ -270,6 +274,7 @@ if (!$_SESSION['member']['account']) {
         //畫布上的位置
         mouth.x = 240;
         mouth.y = 250;
+        mouth.tint = colors[2][0];
         mouth.zIndex = 2;
         items[2].push(mouth); //存入陣列中備用
     }
@@ -286,7 +291,7 @@ if (!$_SESSION['member']['account']) {
         ear.x = 240;
         ear.y = 250;
         ear.zIndex = 0;
-        ear.tint = 0xdda0dd;
+        ear.tint = colors[3][0];
         items[3].push(ear); //存入陣列中備用
     }
     avatar.stage.addChild(items[3][0]);
@@ -301,6 +306,7 @@ if (!$_SESSION['member']['account']) {
         //畫布上的位置
         hair.x = 240;
         hair.y = 250;
+        hair.tint = colors[4][0];
         hair.zIndex = 2;
         items[4].push(hair); //存入陣列中備用
     }

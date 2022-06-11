@@ -129,11 +129,11 @@ $show = $pdo->query($showcase)->fetchAll();
 
     //顏色列表
     const colors = [];
-    colors[0] = [0xffffff, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700, 0xed1848];
-    colors[1] = [0xffffff, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700];
-    colors[2] = [0xffffff, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700];
-    colors[3] = [0xdda0dd, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700];
-    colors[4] = [0xffffff, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700, 0xaee0d7];
+    colors[0] = [0x3481C5, 0xB4BF5A, 0x2DA428, 0xAB6600, 0xB840BB, 0x8fbc8f, 0xffd700, 0xccffcc, 0xccccff, 0xed1848];
+    colors[1] = [0x3481C5, 0xB4BF5A, 0x2DA428, 0xAB6600, 0xB840BB, 0x8fbc8f, 0xffd700, 0xccffcc, 0xccccff, 0xed1848];
+    colors[2] = [0x3481C5, 0xB4BF5A, 0x2DA428, 0xAB6600, 0xB840BB, 0x8fbc8f, 0xffd700, 0xccffcc, 0xccccff, 0xed1848];
+    colors[3] = [0x82BBF0, 0xF391A0, 0xB4BF5A, 0x7CD679, 0xD5AB68, 0xE58AE6];
+    colors[4] = [0x3481C5, 0xB4BF5A, 0x2DA428, 0xAB6600, 0xB840BB, 0x8fbc8f, 0xffd700, 0xccffcc, 0xccccff, 0xed1848, 0xaee0d7, 0xcccccc, 0x333333];
 
     //部位總表
     const parts = ['eyes', 'nose', 'mouth', 'ear', 'hair']
@@ -189,7 +189,7 @@ $show = $pdo->query($showcase)->fetchAll();
                 width: 200,
                 height: 200
             });
-            avatar.renderer.backgroundColor = 0x1f4f5f;
+            avatar.renderer.backgroundColor = 0x143879;
             avatarBoxes[i].appendChild(avatar.view);
             //基礎底圖
             let circle = PIXI.Sprite.from('./img/avatar_img/basic/circle-01.png');
@@ -197,6 +197,7 @@ $show = $pdo->query($showcase)->fetchAll();
             circle.scale.set(0.2);
             circle.x = 100;
             circle.y = 100;
+            circle.tint = 0x86AED1;
             avatar.stage.addChild(circle);
             let body = PIXI.Sprite.from('./img/avatar_img/basic/body-shadow(gray)-01.png');
             body.anchor.set(0.5);
@@ -204,7 +205,7 @@ $show = $pdo->query($showcase)->fetchAll();
             body.x = 100;
             body.y = 100;
             body.zIndex = 1;
-            body.tint = 0xdda0dd;
+            body.tint = 0x82BBF0;
             avatar.stage.addChild(body);
 
             //眼睛
