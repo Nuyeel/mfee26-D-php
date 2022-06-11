@@ -15,11 +15,15 @@ $row = $pdo->query($a_sql)->fetch();
 //     echo 'Invalid password.';
 // }
 
+
+// 2022/06/12 01:25
+// 涼枕在 output 新增了 account 欄位
 $output = [
     'success' => false,
     'postData' => '',
     'code' => 0,
-    'error' => ''
+    'error' => '',
+    'account' => ''
 ];
 
 if (empty($_POST['account'])) {
@@ -53,10 +57,12 @@ if ($row['account'] == $account and password_verify($password, $row['password'])
     //解密加密過後的密碼
     $output['success'] = true;
     $output['code'] = 200;
+    $output['account'] = $account;
     $_SESSION['member']['account'] = $account;
     $_SESSION['member']['name'] = $row['name'];
     $_SESSION['member']['birthdate'] = $row['birthdate'];
     $_SESSION['member']['deathdate'] = $row['deathdate'];
+    $_SESSION['member']['isdead'] = $row['isdead'];
     $_SESSION['member']['mobile'] = $row['mobile'];
     $_SESSION['member']['email'] = $row['email'];
     $_SESSION['member']['sid'] = $row['sid'];
