@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 
 
 $country = isset($_POST['country']) ? $_POST['country'] : "";
-$city = isset($_POST['city']) ? $_POST['city'] : "";
+$city = isset($_POST['city'])  ? $_POST['city'] : "";
 $year = $_POST['year'];
 $month = $_POST['month'];
 

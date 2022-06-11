@@ -4,6 +4,19 @@
 $pageName = 'test_page';
 $title = '陰德值測驗';
 
+if (empty($_SESSION['member']['sid'])) {
+    header('Location: ab-login.php');
+    exit;
+}
+
+$member_sid = intval($_SESSION['member']['sid']);
+$r_sql = "SELECT COUNT(*) FROM `good_deed_test_record` WHERE `sid` = $member_sid";
+$rowNum = $pdo->query($r_sql)->fetch(PDO::FETCH_NUM)[0];
+if ($rowNum == 1) {
+    header('Location: ab-profile.php');
+    exit;
+}
+
 $rows = [];
 $t_sql = "SELECT COUNT(*) FROM `good_deed_test`";
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
@@ -11,21 +24,6 @@ $sql = sprintf("SELECT * FROM `good_deed_test` ORDER BY sid ASC");
 $rows = $pdo->query($sql)->fetchAll();
 
 ?>
-<?php include __DIR__ . './parts/html-head.php' ?>
-
-<?php
-if (!empty($_SESSION['member']['sid'])) {
-
-    $sid = $_SESSION['member']['sid'];
-    $t_sql = "SELECT `test_score` FROM `good_deed_test_record` WHERE `sid`= $sid";
-    $row = $pdo->query($t_sql)->fetch();
-    if (!empty($row['test_score'])) {
-        header("location:ab-login.php");
-    }
-}
-
-?>
-<?php include __DIR__ . './parts/navbar.php' ?>
 
 <style>
     .form-control.red {
@@ -176,7 +174,7 @@ if (!empty($_SESSION['member']['sid'])) {
             info_bar.innerText = '測驗完成！';
 
             setTimeout(() => {
-                location.href = 'yun_mainpage.php'; // 跳轉到列表頁
+                location.href = 'ab-profile.php'; // 跳轉到列表頁
             }, 2000);
         } else {
             info_bar.classList.remove('alert-success');
@@ -186,5 +184,6 @@ if (!empty($_SESSION['member']['sid'])) {
     }
 </script>
 
-
-<?php include __DIR__ . './parts/html-foot.php' ?>
+<?php include __DIR__ . '/parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/navbar.php' ?>
+<?php include __DIR__ . '/parts/html-foot.php' ?>

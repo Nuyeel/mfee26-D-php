@@ -140,7 +140,7 @@ if (!empty($_SESSION['cart'])) {
                 <span>陰德值總回饋</span> &nbsp  <span id="total-price-2"></span>
             </div>
 
-            <a class="btn btn-warning text-white mt-2" href="npo-list.php" role="button" style="margin-left:10px">繼續選購</a>
+            <a class="btn btn-warning text-white mt-2" href="npo-list.php" role="button" style="margin-left:10px; margin-bottom:10px">繼續選購</a>
             <a class="btn btn-primary" id="zxCartBtn" href="#" role="button" style="margin-left:10px">前往結帳</a>
 
 
@@ -156,7 +156,7 @@ if (!empty($_SESSION['cart'])) {
 
             <?php if (isset($_SESSION['member']['account'])) : ?> 
 
-            <a class="btn btn-danger" href="#">前往結帳</a>  
+            <!-- <a class="btn btn-danger" href="#">前往結帳</a>   -->
                                 
                 <div class="alert alert-warning thanks" role="alert" style="display:none">
                     感謝您的購買！

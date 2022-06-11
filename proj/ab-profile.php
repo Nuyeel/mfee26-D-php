@@ -74,9 +74,53 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                                 <a href="place.php" class="btn btn-primary">開始預約</a>
                             </div>
                         </div>
-                        <div class="card d-flex justify-content-evenly align-items-center" style="width: 18rem;">
-                            <div class="col-md-9 mb-md-0 p-md-4 d-flex flex-row justify-content-center">
-                                <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 2.5rem; color: #0d6efd;"></i>
+                    </div>
+                    <?php
+                    if (!empty($_SESSION['member']['account'])) {
+
+                        $sid = $_SESSION['member']['sid'];
+                        $t_sql = "SELECT `test_score` FROM `good_deed_test_record` WHERE `sid`= $sid";
+                        $t_row = $pdo->query($t_sql)->fetch();
+                        // $score =  $t_row['test_score'];
+
+                        $account =  $_SESSION['member']['account'];
+                        $name = $_SESSION['member']['name'];
+
+                    ?>
+
+                        <?php
+                        if (!empty($t_row['test_score'])) {
+
+                        ?>
+                            <!-- 這邊我改用$t_row['test_score']讓沒分數的帳戶在該欄位留空，避開php error code顯示 -->
+
+                            <!-- <div class="card" style="width: 18rem;"> -->
+                            <div class="card">
+
+                                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                                <div class="card-body">
+                                    <h5 class="card-title format" style="text-align: center;">
+                                        Hi <?= $_SESSION['member']['name'] ?> ！
+                                        您目前的陰德值為：<?= $t_row['test_score'] ?? 0 ?>
+                                    </h5>
+                                    <p class="card-text" style="font-size: 1rem; color: #707070; text-align: center;">
+                                        陰德值太少嗎？
+                                        透過下列方式增加您的陰德值！
+                                    </p>
+                                    <div class="btn-2 d-flex justify-content-around">
+                                        <a href="#" class="btn btn-primary format">
+                                            響應慈善捐款
+                                        </a>
+                                        <a href="/mfee26-D-php/proj/xuan-event-manage/npo-list.php" class="btn btn-primary format">
+                                            <!-- 這邊可以放容瑄的連結 -->
+
+                                            參與慈善活動
+                                        </a>
+                                        <a href="./yun_gamespage.php" class="btn btn-primary format">
+                                            遊玩慈善遊戲
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title" style="text-align: center;">打造您的下一份來生</h5>
