@@ -58,15 +58,18 @@ $stmt->execute([
 ]);
 
 
-// if ($stmt->rowCount() == 1) {
-//     $output['success'] = true;
-// } else {
-//     $output['error'] = '資料沒有修改';
-// }
 
 
-$tag = $pdo->query("SELECT*FROM `news_tag` WHERE news_tag.news_sid = $sid")->fetch();
+$tag = $pdo->query("SELECT tag_sid FROM `news_tag` WHERE news_tag.news_sid = $sid")->fetchAll();
 $t_sql = "INSERT INTO `news_tag`(`news_sid`, `tag_sid`) VALUES (?,?)";
+
+$tagsid = [];
+foreach($tag as $tg){
+    array_push($tagsid,$tg['tag_sid']);
+}
+
+
+$output['tag_sid']=$tagsid;
 $ntrowcount = 0;
 
 if(empty($tag['tag_sid'])){
@@ -76,47 +79,44 @@ if(empty($_POST['tg_sid'])){
     $_POST['tg_sid']=[];
 }
 
-if($_POST['tg_sid'] != $tag['tag_sid']){
+if($_POST['tg_sid'] != $tagsid){
 
-    $stmt = $pdo->prepare("DELETE FROM `news_tag` WHERE news_tag.news_sid = $sid")->execute();
-    if(!empty($_POST['tg_sid'])){
-    $checkbox = $_POST['tg_sid'];
-    foreach ($checkbox as $c) {
-    $stmt = $pdo->prepare($t_sql)->execute([
-            $sid,
-            $c
-        ]);
-    }}
-    $ntrowcount = 1;
+    $dtag = $pdo->prepare("DELETE FROM `news_tag` WHERE news_tag.news_sid = $sid");
+    $dtag->execute();
+    $ntrowcount = $dtag->rowCount();
+        if(!empty($_POST['tg_sid'])){
+        $checkbox = $_POST['tg_sid'];
+        foreach ($checkbox as $c) {
+            $ntag = $pdo->prepare($t_sql);
+            $ntag->execute([
+                    $sid,
+                    $c
+                ]);
+        }   
+        $ntrowcount = $ntag->rowCount();
     
+    }
 }
 
-if($tag['tag_sid']>0 && empty($_POST['tg_sid'])){
-    $delete = $pdo->prepare("DELETE FROM `news_tag` WHERE news_tag.news_sid = $sid");
-    $delete->execute();
-    $ntrowcount = 1;
-}
+
 
 if (!empty($_POST['tag_add'])) {
     $sql = "INSERT INTO `tag`(`tag_name`) VALUES(?)";
 
-    $stmt = $pdo->prepare($sql);
-    $stmt ->execute([$_POST['tag_add']]);
+    $atag = $pdo->prepare($sql);
+    $atag -> execute([$_POST['tag_add']]);
 
     $tagId = $pdo->lastInsertId();
 
-    $stmt = $pdo->prepare($t_sql);
-    $stmt->execute([
+    $atag = $pdo->prepare($t_sql);
+    $atag->execute([
             $sid,
             $tagId
         ]);
-        $ntrowcount = 1;
+        $ntrowcount = $atag->rowCount();
 }
 
-if ($ntrowcount == 1) {
-    $output['success'] = true;
-} 
-else if ($stmt->rowCount()==1) {
+if ($stmt->rowCount()==1 || $ntrowcount > 0 ) {
     $output['success'] = true;
 } 
 else {
