@@ -1,24 +1,22 @@
-<?php
-
-// 先塞資料驗證
-
-// $_SESSION = [
-//     'member' => [
-//         'sid' => 605,
-//         'name' => '獨行俠',
-//         'deathdate' => NULL
-//     ], 
-// ];
-
-
-?>
-
-<?php
+<?php require __DIR__ . "./parts/connect_db.php";
 
 if (!$_SESSION['member']['account'] or $_SESSION['member']['isdead'] == 'false') {
-    header('location:ab-login.php');
+    header('location:/mfee26-D-php/proj/ab-login.php');
     exit;
 }
+
+$sid = $_SESSION['member']['sid'];
+
+$where = " WHERE `member_sid` = $sid";
+$r_sql = "SELECT COUNT(*) FROM `cube`" . $where;
+$rowNum = $pdo->query($r_sql)->fetch(PDO::FETCH_NUM)[0];
+
+if ($rowNum >= 1) {
+    // header('location:https://google.com');
+    echo '快去投胎拉QQ';
+    exit;
+} 
+
 
 ?>
 
