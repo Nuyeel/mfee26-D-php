@@ -1,4 +1,5 @@
-<?php require __DIR__ . "./parts/connect_db.php";
+<?php require __DIR__ . "/parts/connect_db.php"; ?>
+<?php
 $pageName = 'ab-showcase';
 $title = '會員衣櫥間';
 
@@ -6,6 +7,7 @@ if (!$_SESSION['member']['account']) {
     header('location:ab-login.php');
     // exit;
 }
+include __DIR__ . "/alive-confirm.php";
 
 // 先用session抓到會員的ID
 $sid = isset($_SESSION['member']['sid']) ? intval($_SESSION['member']['sid']) : 0;
@@ -358,4 +360,4 @@ $show = $pdo->query($showcase)->fetchAll();
     getData();
 </script>
 
-<?php include __DIR__ . "./parts/html-foot.php" ?>
+<?php include __DIR__ . "/parts/html-foot.php" ?>
