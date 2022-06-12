@@ -581,7 +581,7 @@ $title = '良辰吉地 - 來生投放所';
 
     function changeCity(value) {
         // 先清空city選單
-        city.innerHTML = `<option selected disabled>選擇城市...</option>`;
+        city.innerHTML = `<option selected disabled>不限城市</option>`;
 
         const countrys = renderData.countrys;
         const distList = renderData.distList;

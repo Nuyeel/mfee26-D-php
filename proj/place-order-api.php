@@ -6,6 +6,7 @@ header('Content-Type: application/json');
 //     // exit;
 // }
 
+// 判斷是否登入
 if (!$_SESSION['member']['account']) {
     echo 'false';
     // header('location:ab-login.php');
@@ -17,10 +18,11 @@ $place_sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 $replace = isset($_GET['replace']) ? intval($_GET['replace']) : 0;
 
 
-// 還要判斷是否登入?? 前端判斷?
+// 
 $member = $_SESSION['member']['sid'];
 
 
+// 是要替換訂單時
 if ($replace == 1) {
 
     $output = [
@@ -31,27 +33,45 @@ if ($replace == 1) {
         'replace' => 1,
     ];
 
+    // 原本的訂單 booking數 -1
+    $sql_m_place = "SELECT * FROM `place_order` WHERE `member_sid` = $member";
+    $stmt_m_place = $pdo->query($sql_m_place)->fetch();
+    $m_place = $stmt_m_place['place_sid'];
+    // var_dump($stmt_m_place);
+    // exit;
+    $sql_update1 = "UPDATE `place` SET `booked` = `booked`-1 WHERE `place`.`sid` = ?;";
+
+    // 刪掉原本訂單
     $sql_del = "DELETE FROM `place_order` WHERE `member_sid` = $member";
     $stmt_del = $pdo->query($sql_del);
 
+    // 新增新訂單
     $sql_add = "INSERT INTO `place_order` (
         `member_sid`, `place_sid`, `date_price`, `place_price`
         ) VALUES (
             ?, ?, '50', '150');";
 
-    $sql_update = "UPDATE `place` SET `booked` = `booked`+1 WHERE `place`.`sid` = ?;";
+    // 新訂單 booking 數 +1
+    $sql_update2 = "UPDATE `place` SET `booked` = `booked`+1 WHERE `place`.`sid` = ?;";
 
 
+    $stmt_update1 = $pdo->prepare($sql_update1);
     $stmt_add = $pdo->prepare($sql_add);
-    $stmt_update = $pdo->prepare($sql_update);
+    $stmt_update2 = $pdo->prepare($sql_update2);
+
+
+    $stmt_update1->execute([
+        $m_place,
+    ]);
 
     $stmt_add->execute([
         $member,
         $place_sid,
     ]);
-    $stmt_update->execute([
+    $stmt_update2->execute([
         $place_sid,
     ]);
+
 
 
     // 值是1的話 => true
