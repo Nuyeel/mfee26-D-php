@@ -92,6 +92,16 @@ $area = $pdo->query($area_type)->fetchAll();
 
 <!-- 這邊是側邊欄位的CSS -->
 <style>
+
+    /* body{
+        /* background-color: #ffc768;
+background-image: linear-gradient(0deg, #ffc768 0%, #ffffff 93%); */
+
+/* background-color: #ffe268;
+background-image: linear-gradient(0deg, #ffe268 0%, #ffffff 100%); */
+
+    /* }  */
+
     /* 讓左側dropdowmn變hover */
     .dropdown:hover .dropdown-menu {
         display: block;
@@ -126,17 +136,17 @@ $area = $pdo->query($area_type)->fetchAll();
 
 
 <!-- 麵包屑 -->
-<div class="container w-75 mt-5">
+<!-- <div class="container w-75 mt-5">
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">報名活動</li>
         </ol>
     </nav>
-</div>
+</div> -->
 
 <!-- 輪播牆 -->
-<div class="container w-75 mt-3" style="width:100%; height:300px;">
+<div class="container w-75 mt-5" style="width:100%; height:300px;">
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -145,7 +155,7 @@ $area = $pdo->query($area_type)->fetchAll();
         </div>
         <div class="carousel-inner" style=" width:100%; height:300px;">
             <div class="carousel-item active">
-                <img src="./list-img/dog03.jpg" class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover ">
+                <img src="./list-img/dog02.jpg" class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover ">
                 <div class="carousel-caption d-none d-md-block ">
                     <h5>拉拉拉</h5>
                     <p>Some representative placeholder content for the first slide.</p>
@@ -159,7 +169,7 @@ $area = $pdo->query($area_type)->fetchAll();
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="./list-img/dog03.jpg" class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover ">
+                <img src="./list-img/dog04.jpg" class="d-block w-100" alt="..." style="width:100%; height:100%;object-position: center; object-fit:cover ">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Third slide label</h5>
                     <p>Some representative placeholder content for the third slide.</p>
@@ -334,12 +344,12 @@ $area = $pdo->query($area_type)->fetchAll();
 
                 <a href="event-detail.php"></a>
                 <div class="d-flex justify-content-between" style="padding:10px 15px">
-                    <span class="bg-info text-white" style="padding:3px 10px;border-radius:5px"><?= $r['name'] ?></span>
+                    <span class=" text-white" style="background-color:rgb(38,106,170);padding:3px 10px;border-radius:5px"><?= $r['name'] ?></span>
                 </div>
 
-                <div style=" width:100%;height:150px;overflow:hidden">
+                <div style=" width:100%;height:150px;overflow:hidden; display: flex; justify-content:center;align-items:center">
 
-                    <img src="./list-img/<?= $r['img'] ?>" class="card-img-top" alt="..." style="width:100%;hight:100%;">
+                    <img src="./list-img/<?= $r['img'] ?>" class="card-img-top" alt="..." style="width:100%;">
 
                 </div>
 
@@ -356,7 +366,10 @@ $area = $pdo->query($area_type)->fetchAll();
                     <!-- <button class="add-to-cart-btn" data-sid="<?= $r['sid'] ?>" >加入購物車</button> -->
 
 
-                    <p class="card-text text-white bg-danger  mb-3 mt-5" style="border-radius:5px;padding:6px;text-align:center;width:50%;margin-left:auto"><?= "陰德值回饋：{$r['value']}" ?></p>
+                    <p class="card-text text-white mb-3 mt-5" style="border-radius:5px;padding:6px;text-align:center;margin-left:auto; background-color:rgb(80,188,174)">
+                    <i class="fa-solid fa-seedling"></i>
+                    &nbsp
+                    <?= "陰德值：{$r['value']}" ?></p>
                     <!-- <a href="#" class="btn btn-primary" style="width:4rem"><?= $r['type_sid'] ?></a> -->
                 </div>
             </div>

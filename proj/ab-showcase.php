@@ -60,28 +60,100 @@ $show = $pdo->query($showcase)->fetchAll();
         margin: auto;
         text-align: center;
     }
+
+    body {
+        background-color: #69d0ff;
+        background-image: linear-gradient(0deg, #69d0ff 0%, #ffa4e9 100%);
+        background-position: 100%;
+        background-repeat: no-repeat;
+        height: 100vh;
+    }
+
+    .format {
+        font-size: 18px;
+        font-weight: 600;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+    .format2 {
+        font-size: 18px;
+        font-weight: 600;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        color: #ebd367;
+    }
+
+    .pb-4 {
+        background-color: rgba(255, 255, 255, 0.6);
+        background-position: 100%;
+        background-repeat: no-repeat;
+    }
+
+    .btn-primary {
+        background-color: rgb(38, 106, 170);
+    }
+
+    .btn-primary:hover {
+        background-color: #fff;
+        color: rgb(38, 106, 170);
+    }
+
+    .btn-outline-primary {
+        border-color: rgb(38, 106, 170);
+        ;
+        color: rgb(38, 106, 170);
+    }
+
+    .btn-outline-primary:hover {
+        color: #fff;
+        background-color: rgb(38, 106, 170);
+    }
+
+    .row {
+        margin-left: 15%;
+        /* margin-right: 50%; */
+    }
+
+    .icon {
+        text-decoration: none;
+        font-size: 2.6rem;
+        transition: .3s;
+        color: rgb(38, 106, 170);
+        color: rgb(38, 106, 170);
+    }
+
+    .icon:hover {
+        color: #ebd367;
+    }
+
+    .format3 {
+        font-size: 20px;
+        font-weight: 600;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        color: rgb(38, 106, 170);
+    }
 </style>
-<br>
+
 <div class="container">
     <div class="row">
         <div class="col">
             <div class="card_2 d-flex">
                 <div class="card" style="width: 20rem;font-size: 1.2rem;">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><a href="ab-profile.php" style="text-decoration: none; color: #212529">會員中心總覽 </a></li>
-                        <li class="list-group-item"><a href="ab-edit-profile.php" style="text-decoration: none; color: #212529">會員資料</a></a></li>
-                        <li class="list-group-item"><a href="ab-place.php" style="text-decoration: none; color: #212529">訂單總覽</a></li>
+                    <ul class="list-group list-group-flush format">
+                        <li class="list-group-item" ><a href="ab-profile.php" style="text-decoration: none; color: #212529">會員中心總覽 </a></li>
+                        <li class="list-group-item"><a href="ab-edit-profile.php" style="text-decoration: none; color: #212529">會員資料</a></li>
+                        <li class="list-group-item"><a href="ab-place.php"style="text-decoration: none; color: #212529">訂單總覽</a></li>
                         <li class="list-group-item"><a href="ab-event.php" style="text-decoration: none; color: #212529">活動紀錄</a></li>
-                        <li class="list-group-item" style="background-color: #f0f0f0;"><a href="ab-event.php" style="text-decoration: none; color: #0d6efd">衣櫥間</a></li>
+                        <li class="list-group-item" style="background-color: #f0f0f0;"><a href="ab-showcase.php" style="text-decoration: none; color: rgb(38, 106, 170);">衣櫥間 </a></li>
+                        <!--
                         <li class="list-group-item">常見問題</li>
-                        <li class="list-group-item">我有問題</li>
+                        <li class="list-group-item">我有問題</li> -->
                     </ul>
                 </div>
 
                 <!-- 這一段放各類別要呈現的內容（選項列的右邊那塊） -->
-                <div class="card" style="width: 60rem; padding-bottom:20px">
+                <div class="card" style="min-width:30rem;max-width:52rem; padding-bottom:20px">
                     <div class="card-body">
-                        <h4 class="card-title" style="font-size:18px; font-weight:bold">訂單總覽</h4>
+                        <h4 class="card-title format3" >衣櫥間</h4>
                         <br>
 
                         <!-- 這邊導入會員名稱 -->
@@ -96,13 +168,13 @@ $show = $pdo->query($showcase)->fetchAll();
 
 
 
-                    <div class="container-fluid d-flex align-content-start flex-wrap w-75">
+                    <div class="container-fluid d-flex align-content-start flex-wrap " style="padding:0px 5px;margin:0px 5px;">
                         <form action="" id="form1" name="form1" onsubmit="return false;" style="display: none;">
                             <input class="form-check-input" type="text" name="mid" value="<?php echo $_SESSION['member']['sid']; ?>" checked>
                         </form>
 
                         <!-- 這邊放要展示的資料，用php foreach下去跑， -->
-                        <div class="row" id="showcase">
+                        <div class="row " id="showcase" style="margin-left:5px;margin-right:5px; ">
                         </div>
 
                     </div>
@@ -129,11 +201,11 @@ $show = $pdo->query($showcase)->fetchAll();
 
     //顏色列表
     const colors = [];
-    colors[0] = [0xffffff, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700, 0xed1848];
-    colors[1] = [0xffffff, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700];
-    colors[2] = [0xffffff, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700];
-    colors[3] = [0xdda0dd, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700];
-    colors[4] = [0xffffff, 0xffcccc, 0xccffcc, 0xccccff, 0x8fbc8f, 0xffd700, 0xaee0d7];
+    colors[0] = [0x3481C5, 0xB4BF5A, 0x2DA428, 0xAB6600, 0xB840BB, 0x8fbc8f, 0xffd700, 0xccffcc, 0xccccff, 0xed1848];
+    colors[1] = [0x3481C5, 0xB4BF5A, 0x2DA428, 0xAB6600, 0xB840BB, 0x8fbc8f, 0xffd700, 0xccffcc, 0xccccff, 0xed1848];
+    colors[2] = [0x3481C5, 0xB4BF5A, 0x2DA428, 0xAB6600, 0xB840BB, 0x8fbc8f, 0xffd700, 0xccffcc, 0xccccff, 0xed1848];
+    colors[3] = [0x82BBF0, 0xF391A0, 0xB4BF5A, 0x7CD679, 0xD5AB68, 0xE58AE6];
+    colors[4] = [0x3481C5, 0xB4BF5A, 0x2DA428, 0xAB6600, 0xB840BB, 0x8fbc8f, 0xffd700, 0xccffcc, 0xccccff, 0xed1848, 0xaee0d7, 0xcccccc, 0x333333];
 
     //部位總表
     const parts = ['eyes', 'nose', 'mouth', 'ear', 'hair']
@@ -189,7 +261,7 @@ $show = $pdo->query($showcase)->fetchAll();
                 width: 200,
                 height: 200
             });
-            avatar.renderer.backgroundColor = 0x1f4f5f;
+            avatar.renderer.backgroundColor = 0x143879;
             avatarBoxes[i].appendChild(avatar.view);
             //基礎底圖
             let circle = PIXI.Sprite.from('./img/avatar_img/basic/circle-01.png');
@@ -197,6 +269,7 @@ $show = $pdo->query($showcase)->fetchAll();
             circle.scale.set(0.2);
             circle.x = 100;
             circle.y = 100;
+            circle.tint = 0x86AED1;
             avatar.stage.addChild(circle);
             let body = PIXI.Sprite.from('./img/avatar_img/basic/body-shadow(gray)-01.png');
             body.anchor.set(0.5);
@@ -204,7 +277,7 @@ $show = $pdo->query($showcase)->fetchAll();
             body.x = 100;
             body.y = 100;
             body.zIndex = 1;
-            body.tint = 0xdda0dd;
+            body.tint = 0x82BBF0;
             avatar.stage.addChild(body);
 
             //眼睛

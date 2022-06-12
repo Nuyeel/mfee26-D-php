@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2022-06-10 15:36:52
+-- 產生時間： 2022-06-11 21:07:05
 -- 伺服器版本： 10.4.24-MariaDB
 -- PHP 版本： 7.4.29
 
@@ -40,7 +40,10 @@ CREATE TABLE `act_order` (
 INSERT INTO `act_order` (`act_order_sid`, `member_sid`, `last_modified_at`) VALUES
 (1, 11, '2022-06-10 16:39:11'),
 (2, 11, '2022-06-10 16:40:13'),
-(3, 52, '2022-06-10 16:44:00');
+(3, 52, '2022-06-10 16:44:00'),
+(4, 11, '2022-06-11 00:16:55'),
+(5, 44, '2022-06-11 00:19:14'),
+(6, 76, '2022-06-12 00:50:36');
 
 -- --------------------------------------------------------
 
@@ -68,7 +71,13 @@ INSERT INTO `act_order_details` (`order_create_sid`, `order_sid`, `order_act_sid
 (7, 3, 98),
 (8, 3, 21),
 (9, 3, 75),
-(10, 3, 22);
+(10, 3, 22),
+(11, 4, 98),
+(12, 4, 21),
+(13, 5, 75),
+(14, 5, 22),
+(15, 6, 98),
+(16, 6, 21);
 
 -- --------------------------------------------------------
 
@@ -134,24 +143,23 @@ CREATE TABLE `cube` (
   `member_sid` int(11) NOT NULL,
   `cube_sid` int(11) NOT NULL,
   `cube_text` varchar(255) DEFAULT NULL,
-  `cube_style` varchar(255) NOT NULL,
-  `cube_style_id` int(11) NOT NULL
+  `cube_style_sid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- 傾印資料表的資料 `cube`
 --
 
-INSERT INTO `cube` (`member_sid`, `cube_sid`, `cube_text`, `cube_style`, `cube_style_id`) VALUES
-(11, 1, '我是誰？我在哪？', 'entertainment', 1),
-(12, 2, 'PHP 和 MySQL 是好朋友！', 'art', 3),
-(13, 3, 'jQuery 和 Bootstrap 是好朋友！', 'sports', 2),
-(14, 4, '偶和二路大人是好朋友！', 'school', 3),
-(15, 5, '喇叭和 Justin Bieber 是好朋友！', 'private', 1),
-(16, 6, '我和 UI/UX 是好朋友！', 'business', 2),
-(17, 7, '哇嘎怪奇素務所係好朋友', 'international', 2),
-(18, 8, '我沒有朋友...', 'others', 1),
-(41, 10, '下過雨的小魚更有活力，淋過雨的青草更顯翠綠。', '', 0);
+INSERT INTO `cube` (`member_sid`, `cube_sid`, `cube_text`, `cube_style_sid`) VALUES
+(1000001, 1, '遇見你是我這一生中最美好的事！', 2),
+(1000002, 2, '妳可知道妳的名字解釋了我的一生...', 3),
+(1000003, 3, '讓我再嘗一口秋天的酒，一直往南方開不會太久。', 4),
+(1000004, 4, '你若對自己誠實，日積月累，就無法對別人不忠了。', 5),
+(1000005, 5, '我愛你，我愛你。', 7),
+(1000006, 6, '我們總是記得一些逼自己忘記的事...', 8),
+(1000007, 7, '有你我很開心！', 9),
+(1000008, 8, '練習成為一個柔軟的人。', 10),
+(1000009, 10, '我和你道歉，也和你道別，再和自己道謝。', 11);
 
 -- --------------------------------------------------------
 
@@ -349,11 +357,9 @@ INSERT INTO `good_deed_test` (`sid`, `test_sid`, `test_content`, `op1_content`, 
 
 CREATE TABLE `good_deed_test_record` (
   `sid` int(11) NOT NULL,
-  `member_sid` int(11) NOT NULL,
   `member_account` varchar(255) NOT NULL,
-  `member_password` varchar(255) NOT NULL,
   `member_name` varchar(255) NOT NULL,
-  `member_birth` date NOT NULL,
+  `member_birth` date DEFAULT NULL,
   `member_death` date DEFAULT NULL,
   `test_Q1` int(11) DEFAULT NULL,
   `test_Q2` int(11) DEFAULT NULL,
@@ -362,6 +368,13 @@ CREATE TABLE `good_deed_test_record` (
   `test_Q5` int(11) DEFAULT NULL,
   `test_score` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `good_deed_test_record`
+--
+
+INSERT INTO `good_deed_test_record` (`sid`, `member_account`, `member_name`, `member_birth`, `member_death`, `test_Q1`, `test_Q2`, `test_Q3`, `test_Q4`, `test_Q5`, `test_score`) VALUES
+(33, 'HappyCat32', '', NULL, NULL, 2, 3, 5, 5, 3, 1336);
 
 -- --------------------------------------------------------
 
@@ -522,7 +535,7 @@ INSERT INTO `member` (`sid`, `name`, `birthdate`, `deathdate`, `isdead`, `mobile
 (99, '', NULL, NULL, 'false', '', 'HappyCat98@gmail.com', 'HappyCat98', '$2y$10$.CdtzoocaY4YOYIxkxm6j.B5QeG01NbHPhwXkQrWB9L7NwUVjRG3S', '2022-06-09 19:50:09'),
 (100, '', NULL, NULL, 'false', '', 'HappyCat99@gmail.com', 'HappyCat99', '$2y$10$Aaoh2lzg8fPn4Mb/ScmnEOhglXdwr8mLL0hf4CY3X4A.BC8tLIo3y', '2022-06-09 19:50:20'),
 (101, '', NULL, NULL, 'false', '', 'HappyCat100@gmail.com', 'HappyCat100', '$2y$10$RscDUr0vT/ndUx9ndYpvNe49wvxixQYYBQmL7rUNP1frBs/Tc9FVG', '2022-06-09 19:51:04'),
-(102, '涼枕', '1993-03-08', '2022-03-08', 'false', '0955667788', 'coolpilla@ggqq.com', 'coolpillow', '$2y$10$a11J3a0Jruj0y2dr3z2vYuYaqwMt4QB/puKbyQxphIJRc8t5tuZce', '2022-06-10 13:35:14');
+(102, '涼枕', '1993-03-08', '2022-03-08', 'true', '0955667788', 'coolpilla@ggqq.com', 'coolpillow', '$2y$10$a11J3a0Jruj0y2dr3z2vYuYaqwMt4QB/puKbyQxphIJRc8t5tuZce', '2022-06-10 13:35:14');
 
 -- --------------------------------------------------------
 
@@ -774,14 +787,14 @@ CREATE TABLE `place` (
 --
 
 INSERT INTO `place` (`sid`, `year`, `month`, `country`, `city`, `dist`, `quota`, `booked`, `place_price`) VALUES
-(2, 2025, 10, '美國', '紐約', '布魯克林', 2, 1, 200),
-(4, 2032, 1, '台灣', '新北市', '三峽區', 5, 2, 200),
+(2, 2025, 10, '美國', '紐約', '布魯克林', 2, 2, 200),
+(4, 2032, 1, '台灣', '新北市', '三峽區', 5, 4, 200),
 (5, 2072, 2, '台灣', '台南市', '安平區', 2, 2, 200),
-(6, 2030, 5, '台灣', '台南市', '中西區', 5, 2, 200),
+(6, 2030, 5, '台灣', '台南市', '中西區', 5, 3, 200),
 (7, 2055, 8, '台灣', '台北市', '大安區', 5, 3, 200),
-(10, 2025, 12, '台灣', '台南市', '安平區', 4, 2, 200),
-(12, 2025, 12, '台灣', '台北市', '大安區', 3, 2, 200),
-(13, 2022, 12, '美國', '加州', '聖荷西', 2, 1, 200),
+(10, 2025, 12, '台灣', '台南市', '安平區', 4, 3, 200),
+(12, 2025, 12, '台灣', '台北市', '大安區', 3, 3, 200),
+(13, 2022, 12, '美國', '加州', '聖荷西', 2, 2, 200),
 (14, 2027, 5, '台灣', '台北市', '大安區', 2, 1, 200),
 (15, 2026, 10, '台灣', '台北市', '大安區', 3, 1, 200),
 (16, 2030, 6, '台灣', '台北市', '內湖區', 1, 1, 200),
@@ -969,7 +982,9 @@ INSERT INTO `place_order` (`sid`, `member_sid`, `place_sid`, `date_price`, `plac
 (12, '15', 4, 50, 150, '2022-06-09'),
 (15, '20', 5, 50, 150, '2022-06-09'),
 (18, '12', 13, 50, 150, '2022-06-09'),
-(19, '1', 66, 50, 150, '2022-06-10');
+(19, '1', 66, 50, 150, '2022-06-10'),
+(20, '56', 4, 50, 150, '2022-06-10'),
+(26, '33', 6, 50, 150, '2022-06-11');
 
 -- --------------------------------------------------------
 
@@ -1036,11 +1051,10 @@ CREATE TABLE `showcase` (
 --
 
 INSERT INTO `showcase` (`avatar_id`, `member_sid`, `avatar_created_at`, `combination`) VALUES
-(9, 1, '2022-06-09 17:11:19', '{\"eyes\":\"0\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"noseColor\":\"0\",\"mouthColor\":\"0\",\"earColor\":\"0\",\"hairColor\":\"0\",\"eyesColor\":\"5\"}'),
-(10, 1, '2022-06-09 17:17:46', '{\"eyes\":\"0\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"mouthColor\":\"0\",\"earColor\":\"0\",\"hairColor\":\"0\",\"eyesColor\":\"6\",\"noseColor\":\"5\"}'),
-(11, 1, '2022-06-09 17:18:11', '{\"eyes\":\"0\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"earColor\":\"0\",\"eyesColor\":\"6\",\"noseColor\":\"5\",\"mouthColor\":\"5\",\"hairColor\":\"5\"}'),
-(12, 1, '2022-06-09 17:18:18', '{\"eyes\":\"0\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"eyesColor\":\"6\",\"noseColor\":\"5\",\"mouthColor\":\"5\",\"earColor\":\"3\",\"hairColor\":\"5\"}'),
-(13, 1, '2022-06-09 17:18:26', '{\"eyes\":\"0\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"eyesColor\":\"1\",\"noseColor\":\"5\",\"mouthColor\":\"5\",\"earColor\":\"3\",\"hairColor\":\"5\"}');
+(15, 33, '2022-06-11 09:24:23', '{\"eyes\":\"0\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"eyesColor\":\"0\",\"noseColor\":\"2\",\"mouthColor\":\"5\",\"earColor\":\"4\",\"hairColor\":\"6\"}'),
+(16, 69, '2022-06-11 22:39:42', '{\"eyes\":\"2\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"1\",\"eyesColor\":\"4\",\"noseColor\":\"0\",\"mouthColor\":\"3\",\"earColor\":\"4\",\"hairColor\":\"5\"}'),
+(17, 28, '2022-06-11 22:49:06', '{\"eyes\":\"2\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"eyesColor\":\"1\",\"noseColor\":\"1\",\"mouthColor\":\"0\",\"earColor\":\"0\",\"hairColor\":\"5\"}'),
+(18, 28, '2022-06-11 22:49:24', '{\"eyes\":\"3\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"eyesColor\":\"6\",\"noseColor\":\"5\",\"mouthColor\":\"5\",\"earColor\":\"5\",\"hairColor\":\"1\"}');
 
 -- --------------------------------------------------------
 
@@ -1187,12 +1201,6 @@ ALTER TABLE `good_deed_test`
   ADD PRIMARY KEY (`sid`);
 
 --
--- 資料表索引 `good_deed_test_record`
---
-ALTER TABLE `good_deed_test_record`
-  ADD PRIMARY KEY (`sid`);
-
---
 -- 資料表索引 `location`
 --
 ALTER TABLE `location`
@@ -1316,13 +1324,13 @@ ALTER TABLE `type`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `act_order`
 --
 ALTER TABLE `act_order`
-  MODIFY `act_order_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `act_order_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `act_order_details`
 --
 ALTER TABLE `act_order_details`
-  MODIFY `order_create_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `order_create_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `body_parts`
@@ -1340,7 +1348,7 @@ ALTER TABLE `city_type`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `cube`
 --
 ALTER TABLE `cube`
-  MODIFY `cube_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `cube_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `cube_category`
@@ -1377,12 +1385,6 @@ ALTER TABLE `good_deed_score`
 --
 ALTER TABLE `good_deed_test`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- 使用資料表自動遞增(AUTO_INCREMENT) `good_deed_test_record`
---
-ALTER TABLE `good_deed_test_record`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `location`
@@ -1442,7 +1444,7 @@ ALTER TABLE `place`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `place_order`
 --
 ALTER TABLE `place_order`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `reincarnation_order`
@@ -1454,7 +1456,7 @@ ALTER TABLE `reincarnation_order`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `showcase`
 --
 ALTER TABLE `showcase`
-  MODIFY `avatar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `avatar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `tag`

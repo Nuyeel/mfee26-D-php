@@ -1,26 +1,29 @@
-<?php require __DIR__ . "./parts/connect_db.php" ?>
+<?php require __DIR__ . "/parts/connect_db.php" ?>
 
 <?php
 $pageName = 'ab-login';
 $title = '會員登入 - 來生投放所';
+
+if (isset($_SESSION['member']['account'])) {
+    header('Location: ab-profile.php');
+}
 ?>
 
-<?php include __DIR__ . "./parts/html-head.php" ?>
-<?php include __DIR__ . "./parts/navbar.php" ?>
+<?php include __DIR__ . "/parts/html-head.php" ?>
+<?php include __DIR__ . "/parts/navbar.php" ?>
 
 <style>
-    /* body {
+    body {
         background-color: #69d0ff;
         background-image: linear-gradient(0deg, #69d0ff 0%, #ffa4e9 100%);
         background-position: 100%;
         background-repeat: no-repeat;
     }
-
     .pb-4 {
         background-color: rgba(255, 255, 255, 0.6);
         background-position: 100%;
         background-repeat: no-repeat;
-    } */
+    }
 
     /* background-color: rgb(38, 106, 170); */
 
@@ -42,14 +45,6 @@ $title = '會員登入 - 來生投放所';
         font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     }
 
-    .form-control.red {
-        border: 1px solid red;
-    }
-
-    .form-text.red {
-        color: red;
-    }
-
     .login {
         color: rgb(38, 106, 170);
         border-color: rgb(38, 106, 170);
@@ -58,6 +53,13 @@ $title = '會員登入 - 來生投放所';
     .login:hover {
         background-color: rgb(38, 106, 170);
         color: #fff;
+    }
+    .form-control.red {
+        border: 1px solid red;
+    }
+
+    .form-text.red {
+        color: red;
     }
 </style>
 <div class="container">
@@ -144,13 +146,15 @@ $title = '會員登入 - 來生投放所';
                             </div>
                         </div>
                     </div>
+                </div>
+                <!-- </section> -->
             </div>
-            <!-- </section> -->
         </div>
     </div>
 </div>
-</div>
-<?php include __DIR__ . '/parts/scripts.php' ?>
+
+<?php include __DIR__ . "./parts/scripts.php" ?>
+
 <script>
     const info_bar = document.querySelector('#info-bar');
 
@@ -195,14 +199,25 @@ $title = '會員登入 - 來生投放所';
         });
         const result = await r.json();
         // console.log(result);
-        console.log(result.postData);
+        // console.log(result.postData);
+        // console.log(result.account);
+
+        // 2022/06/12 01:25
+        // 涼枕在 output 新增了 account 欄位
+        // 所以這裡會拿到
+        const userAccount = result.account;
         info_bar.style.display = 'block';
         if (result.success) {
             info_bar.classList.remove('alert-danger');
             info_bar.classList.add('alert-success');
             info_bar.innerText = '您已成功登入';
+            // 是管理員的話去 ab-list.php
             setTimeout(() => {
-                location.href = 'ab-profile.php';
+                if (userAccount === 'Admin') {
+                    location.href = 'ab-list.php';
+                } else {
+                    location.href = 'ab-profile.php';
+                }
             }, 2000);
         } else {
             info_bar.classList.remove('alert-success');
@@ -212,4 +227,4 @@ $title = '會員登入 - 來生投放所';
     }
 </script>
 
-<?php include __DIR__ . "./parts/html-foot.php" ?>
+<?php include __DIR__ . "/parts/html-foot.php" ?>

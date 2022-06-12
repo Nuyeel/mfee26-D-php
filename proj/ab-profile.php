@@ -1,4 +1,4 @@
-<?php require __DIR__ . "./parts/connect_db.php" ?>
+<?php require __DIR__ . "/parts/connect_db.php" ?>
 
 <?php
 $pageName = 'ab-profile';
@@ -24,8 +24,8 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
 
 ?>
 
-<?php include __DIR__ . "./parts/html-head.php" ?>
-<?php include __DIR__ . "./parts/navbar.php" ?>
+<?php include __DIR__ . "/parts/html-head.php" ?>
+<?php include __DIR__ . "/parts/navbar.php" ?>
 <style>
     body {
         background-color: #69d0ff;
@@ -112,11 +112,13 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                             <div class="card-body d-flex align-items-center">
                                 <div class="card_pro"></div>
                                 <div class="col-md-9 mb-md-0 p-md-4">
-                                    <p class="card-title format">歡迎回來，<?php if (!empty($row['name'])) {
-                                                                            echo htmlentities($row['name']);
-                                                                        } else {
-                                                                            echo htmlentities($row['account']);
-                                                                        } ?></h5>
+                                    <h5 class="card-title format">
+                                        歡迎回來，<?php if (!empty($row['name'])) {
+                                            echo htmlentities($row['name']);
+                                        } else {
+                                            echo htmlentities($row['account']);
+                                        } ?>
+                                    </h5>
                                     <p class="card-text" style="font-size: 1rem; color: #707070;">請點擊下方按鈕瀏覽您的資料</p>
                                 </div>
                                 <div class="col-md-9 mb-md-0 p-md-4 d-flex flex-row">
@@ -130,7 +132,7 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                         <div class="cards-2 d-flex justify-content-evenly align-items-center">
                             <div class="card d-flex justify-content-evenly align-items-center" style="width: 18rem;">
                                 <div class="col-md-9 mb-md-0 p-md-4 d-flex flex-row justify-content-center">
-                                    <a href="place.php" i class="fa-solid fa-earth-asia icon"></a>
+                                    <a href="place.php"><i class="fa-solid fa-earth-asia icon"></i></a>
                                 </div>
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title format" style="text-align: center;">立即預訂下一份來生</h5>
@@ -140,7 +142,7 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                             </div>
                             <div class="card d-flex justify-content-evenly align-items-center" style="width: 18rem;">
                                 <div class="col-md-9 mb-md-0 p-md-4 d-flex flex-row justify-content-center">
-                                    <a href="avatar.php" i class="fa-solid fa-wand-magic-sparkles icon"></a>
+                                    <a href="avatar.php"><i class="fa-solid fa-wand-magic-sparkles icon"></i></a>
                                 </div>
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title format" style="text-align: center;">打造您的下一份來生</h5>
@@ -187,7 +189,7 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                                         <a href="#" class="btn btn-primary format">
                                             響應慈善捐款
                                         </a>
-                                        <a href="#" class="btn btn-primary format">
+                                        <a href="/mfee26-D-php/proj/xuan-event-manage/npo-list.php" class="btn btn-primary format">
                                             <!-- 這邊可以放容瑄的連結 -->
 
                                             參與慈善活動

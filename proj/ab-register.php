@@ -6,25 +6,8 @@ $title = '註冊會員 - 來生投放所';
 
 <?php include __DIR__ . "./parts/html-head.php" ?>
 <?php include __DIR__ . "./parts/navbar.php" ?>
+
 <style>
-    .area {
-        font-size: 18px;
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    }
-
-    .format {
-        font-size: 18px;
-        font-weight: 600;
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    }
-
-    .format2 {
-        font-size: 18px;
-        font-weight: 600;
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        color: rgb(38, 106, 170);
-    }
-
     .form-control.red {
         border: 1px solid red;
     }
@@ -32,30 +15,20 @@ $title = '註冊會員 - 來生投放所';
     .form-text.red {
         color: red;
     }
-
-    .register {
-        color: rgb(38, 106, 170);
-        border-color: rgb(38, 106, 170);
-    }
-
-    .register:hover {
-        background-color: rgb(38, 106, 170);
-        color: #fff;
-    }
 </style>
 <div class="container">
     <div class="row">
         <div class="col">
             <section class="pb-4">
                 <div class="bg-white border rounded-5">
-                    <section class="w-100 p-4 d-flex justify-content-center pb-4 area">
+                    <section class="w-100 p-4 d-flex justify-content-center pb-4">
                         <div style="width: 26rem;">
                             <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link format" id="tab-login" data-mdb-toggle="pill" href="ab-login.php" role="tab" aria-controls="pills-login" aria-selected="false" style="color: rgb(38, 106, 170);">登入</a>
+                                    <a class="nav-link" id="tab-login" data-mdb-toggle="pill" href="ab-login.php" role="tab" aria-controls="pills-login" aria-selected="false">登入</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link active" id="tab-register" data-mdb-toggle="pill" href="ab-register.php" role="tab" aria-controls="pills-register" aria-selected="true" style="background-color: rgb(38, 106, 170);">註冊</a>
+                                    <a class="nav-link active" id="tab-register" data-mdb-toggle="pill" href="ab-register.php" role="tab" aria-controls="pills-register" aria-selected="true">註冊</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -64,22 +37,22 @@ $title = '註冊會員 - 來生投放所';
                                 <div class="tab-pane fade active show" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
                                     <form name="form1" onsubmit="sendData();return false;" novalidate>
                                         <div class="mb-3">
-                                            <label for="account" class="form-label format2">使用者帳戶</label>
+                                            <label for="account" class="form-label">使用者帳戶</label>
                                             <input type="text" class="form-control" id="account" name="account" required>
                                             <div class="form-text red"></div>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="email" class="form-label format2">電子信箱</label>
+                                            <label for="email" class="form-label">電子信箱</label>
                                             <input type="email" class="form-control" id="email" name="email" required>
                                             <div class="form-text red"></div>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="password" class="form-label format2">密碼</label>
+                                            <label for="password" class="form-label">密碼</label>
                                             <input type="password" class="form-control" id="password" name="password" required>
                                             <div class="form-text red"></div>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="repeatpw" class="form-label format2">重新輸入密碼</label>
+                                            <label for="repeatpw" class="form-label">重新輸入密碼</label>
                                             <input type="password" class="form-control" id="repeatpw" name="repeatpw" required>
                                             <div class=" form-text red">
                                             </div>
@@ -87,13 +60,13 @@ $title = '註冊會員 - 來生投放所';
                                         <div class="text-center mb-3">
                                             <p>以其他方式註冊：</p>
                                             <button type="button" class="btn btn-link btn-floating mx-1">
-                                                <i class="fab fa-facebook-f" style="color: rgb(38, 106, 170);"></i>
+                                                <i class="fab fa-facebook-f"></i>
                                             </button>
                                             <button type="button" class="btn btn-link btn-floating mx-1">
-                                                <i class="fab fa-google" style="color: rgb(38, 106, 170);"></i>
+                                                <i class="fab fa-google"></i>
                                             </button>
                                             <button type="button" class="btn btn-link btn-floating mx-1">
-                                                <i class="fab fa-twitter" style="color: rgb(38, 106, 170);"></i>
+                                                <i class="fab fa-twitter"></i>
                                             </button>
                                         </div>
                                         <!-- Checkbox -->
@@ -105,7 +78,7 @@ $title = '註冊會員 - 來生投放所';
                                         </div> -->
                                         <!-- Submit button -->
                                         <div class="d-grid gap-2">
-                                            <button type="submit" class="btn btn-outline-primary register format" type="button">確認註冊</button>
+                                            <button type="submit" class="btn btn-outline-primary" type="button">確認註冊</button>
                                         </div>
                                         <br>
                                     </form>
@@ -120,7 +93,9 @@ $title = '註冊會員 - 來生投放所';
         </div>
     </div>
 </div>
-<?php include __DIR__ . '/parts/scripts.php' ?>
+
+<?php include __DIR__ . "./parts/scripts.php" ?>
+
 <script>
     const account_re = /^[a-zA-Z0-9_]\w*$/;
     const email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zAZ]{2,}))$/;

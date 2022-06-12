@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/parts/connect_db.php";
+require __DIR__ . "./parts/connect_db.php";
 header('Content-Type: application/json');
 
 $output = [
@@ -23,6 +23,12 @@ $q4 = empty($_POST['q4']) ? NULL : $_POST['q4'];
 $q5 = empty($_POST['q5']) ? NULL : $_POST['q5'];
 
 $score = empty($_POST['score']) ? NULL : $_POST['score'];
+
+if(isset($_POST['q1']) and isset($_POST['q2']) and isset($_POST['q3'])and isset($_POST['q4']) and isset($_POST['q5']))
+{
+$score = $q1 * rand(50, 99) + $q2 * rand(50, 99) + $q3 * rand(50, 99) + $q4 * rand(50, 99) + $q5 * rand(50, 99);
+
+}
 
 // if (empty($sid) or empty($_POST['account'])) {
 //     $output['error'] = '沒有該帳號';

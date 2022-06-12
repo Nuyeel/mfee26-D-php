@@ -1,4 +1,4 @@
-<?php require __DIR__ . "./parts/connect_db.php";
+<?php require __DIR__ . '/parts/connect_db.php';
 $pageName = 'ab-edit-profile';
 $title = '修改會員資料 - 靈魂管理中心';
 
@@ -15,10 +15,8 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
 // echo json_encode($_SESSION, JSON_UNESCAPED_UNICODE);
 // exit;
 ?>
-
-<?php include __DIR__ . "./parts/html-head.php" ?>
-<?php include __DIR__ . "./parts/navbar.php" ?>
-
+<?php include __DIR__ . '/parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/navbar.php' ?>
 <style>
     body {
         background-color: #69d0ff;
@@ -89,9 +87,8 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                         <li class="list-group-item"><a href="ab-place.php"style="text-decoration: none; color: #212529">訂單總覽</a></li>
                         <li class="list-group-item"><a href="ab-event.php" style="text-decoration: none; color: #212529">活動紀錄</a></li>
                         <li class="list-group-item"><a href="ab-showcase.php" style="text-decoration: none; color: #212529">衣櫥間</a></li>
-                        <!--
-                        <li class="list-group-item">常見問題</li>
-                        <li class="list-group-item">我有問題</li> -->
+                        <!-- <li class="list-group-item">常見問題</li> -->
+                        <!-- <li class="list-group-item">我有問題</li> -->
                     </ul>
                 </div>
                 <!-- <div class="card" style="width: 20rem;font-size: 1.2rem;">
@@ -226,4 +223,4 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
 
     }
 </script>
-<?php include __DIR__ . "./parts/html-foot.php" ?>
+<?php include __DIR__ . '/parts/html-foot.php' ?>

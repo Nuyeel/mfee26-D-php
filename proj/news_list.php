@@ -1,4 +1,4 @@
-<?php require __DIR__ . './parts/connect_db.php';
+<?php require __DIR__ . '/parts/connect_db.php';
 $pageName = 'news_list';
 $title = '最新消息清單 - 來生投放所';
 
@@ -55,8 +55,8 @@ foreach ($rows as $r) {
 }
 
 ?>
-<?php include __DIR__ . './parts/html-head.php' ?>
-<?php include __DIR__ . './parts/navbar.php' ?>
+<?php include __DIR__ . '/parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/navbar.php' ?>
 <div class="container mt-3">
     <div class="bd-example">
         <table class="table table-striped">
@@ -152,5 +152,5 @@ foreach ($rows as $r) {
         </nav>
     </div>
 </div>
-<?php include __DIR__ . './parts/scripts.php' ?>
-<?php include __DIR__ . './parts/html-foot.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
+<?php include __DIR__ . '/parts/html-foot.php' ?>

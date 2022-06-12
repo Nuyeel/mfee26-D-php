@@ -1,6 +1,6 @@
 <?php require __DIR__ . "./parts/connect_db.php";
 
-$folder = __DIR__ . './img/uploaded/';
+$folder = __DIR__ . '/img/uploaded/';
 
 $extMap = [
     'image/jpeg' => '.jpg',

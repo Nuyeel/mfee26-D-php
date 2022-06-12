@@ -3,8 +3,8 @@ $db_host = 'localhost';
 $db_name = 'mfee26-d-php';
 $db_charset = 'utf8mb4';
 $db_collate = 'utf8mb4_general_ci';
-$db_user = 'cm';
-$db_pass = 'admin123';
+$db_user = 'root';
+$db_pass = '0922';
 
 $dsn = "mysql:host={$db_host};dbname={$db_name};charset={$db_charset}";
 

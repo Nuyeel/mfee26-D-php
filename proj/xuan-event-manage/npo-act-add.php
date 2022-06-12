@@ -462,11 +462,11 @@ $title = '上架活動';
         // const result = await r.test;
         console.log(result);
 
-        // if (result.success) {
-        //     setTimeout(() => {
-        //             location.href = 'event-manage.php'; // 跳轉到活動一覽頁
-        //         }, 1000);
-        //     };
+        if (result.success) {
+            setTimeout(() => {
+                    location.href = 'event-manage.php'; // 跳轉到活動一覽頁
+                }, 1000);
+            };
 
     }
 

@@ -2,7 +2,7 @@
 
 <?php
 $pageName = 'place-admin';
-$title = '良辰吉地管理';
+$title = '良辰吉地';
 ?>
 
 <?php include __DIR__ . "./parts/html-head.php" ?>
