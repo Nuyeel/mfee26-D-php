@@ -1,6 +1,7 @@
 <!-- 下面資料的目的：M(處理)V(呈現)C(互動) -->
 
 <?php require __DIR__ .  '/../parts/connect_db.php';
+include __DIR__ . "/../alive-confirm.php";
 
 $pageName = 'event-detail';
 $title = '活動細節頁';
