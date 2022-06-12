@@ -1,11 +1,19 @@
-<?php require __DIR__ . "./parts/connect_db.php";
+<?php require __DIR__ . "/parts/connect_db.php";
 $pageName = 'ab-event';
 $title = '會員良辰吉時清單';
+
+
 
 if (!$_SESSION['member']['account']) {
     header('location:ab-login.php');
     // exit;
 }
+
+
+
+include __DIR__ . "/alive-confirm.php";
+
+
 
 // 先用session抓到會員的ID，$row可以讀到會員的資料
 $sid = isset($_SESSION['member']['sid']) ? intval($_SESSION['member']['sid']) : 0;
@@ -25,8 +33,8 @@ $place = $pdo->query($rebornplace)->fetchAll();
 
 ?>
 
-<?php include __DIR__ . "./parts/html-head.php" ?>
-<?php include __DIR__ . "./parts/navbar.php" ?>
+<?php include __DIR__ . "/parts/html-head.php" ?>
+<?php include __DIR__ . "/parts/navbar.php" ?>
 
 <style>
     .form-control.red {
@@ -189,9 +197,9 @@ $place = $pdo->query($rebornplace)->fetchAll();
 
 
 <script>
-    const row = <?= json_encode(row, JSON_UNESCAPED_UNICODE) ?>;
+    const row = <?= json_encode($row, JSON_UNESCAPED_UNICODE) ?>;
 
 
 </script>
 
-<?php include __DIR__ . "./parts/html-foot.php" ?>
+<?php include __DIR__ . "/parts/html-foot.php" ?>
