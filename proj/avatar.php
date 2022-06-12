@@ -1,4 +1,4 @@
-<?php include __DIR__ . './parts/connect_db.php' ?>
+<?php include __DIR__ . '/parts/connect_db.php' ?>
 <?php
 $pageName = 'avatar';
 $title = '濟善救世公司-轉生形象';
@@ -7,8 +7,10 @@ if (!$_SESSION['member']['account']) {
     header('location:ab-login.php');
     // exit;
 }
+
+include __DIR__ . "/alive-confirm.php";
 ?>
-<?php include __DIR__ . './parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/html-head.php' ?>
 <style>
     body {
         height: 100vh;
@@ -185,7 +187,7 @@ if (!$_SESSION['member']['account']) {
     </div>
 </div>
 
-<?php include __DIR__ . './parts/scripts.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
 <script src="https://pixijs.download/release/pixi.js"></script>
 <script>
     //畫布定義
@@ -503,4 +505,4 @@ if (!$_SESSION['member']['account']) {
     };
 </script>
 
-<?php include __DIR__ . './parts/html-foot.php' ?>
+<?php include __DIR__ . '/parts/html-foot.php' ?>
