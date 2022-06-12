@@ -1,9 +1,17 @@
-<?php require __DIR__ . './parts/connect_db.php' ?>
+<?php require __DIR__ . '/parts/connect_db.php' ?>
 <?php
 $pageName = 'avatar-showcase';
 $title = '濟善救世公司-轉生形象-衣櫥';
+
+
+if (!$_SESSION['member']['account']) {
+    header('Location: ab-login.php');
+}
+
+include __DIR__ . "/alive-confirm.php";
+
 ?>
-<?php include __DIR__ . './parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/html-head.php' ?>
 <style>
     body {
         height: 100vh;
@@ -37,7 +45,7 @@ $title = '濟善救世公司-轉生形象-衣櫥';
         text-align: center;
     }
 </style>
-<?php include __DIR__ . './parts/navbar.php' ?>
+<?php include __DIR__ . '/parts/navbar.php' ?>
 <form action="" id="form1" name="form1" onsubmit="return false;" style="display: none;">
     <input class="form-check-input" type="text" name="mid" value="<?php echo $_SESSION['member']['sid']; ?>" checked>
 </form>
@@ -46,7 +54,7 @@ $title = '濟善救世公司-轉生形象-衣櫥';
     <div class="row" id="showcase">
     </div>
 </div>
-<?php include __DIR__ . './parts/scripts.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
 <script src="https://pixijs.download/release/pixi.js"></script>
 <script>
     const showcase = document.querySelector('#showcase');
@@ -210,4 +218,4 @@ $title = '濟善救世公司-轉生形象-衣櫥';
     }
     getData();
 </script>
-<?php include __DIR__ . './parts/html-foot.php' ?>
+<?php include __DIR__ . '/parts/html-foot.php' ?>
