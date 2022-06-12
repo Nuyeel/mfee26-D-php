@@ -1,8 +1,20 @@
-<?php require __DIR__ . "./parts/connect_db.php" ?>
+<?php require __DIR__ . "/parts/connect_db.php" ?>
 
 <?php
 $pageName = 'news_edit';
 $title = '修改最新消息 - 來生投放所';
+
+if (!$_SESSION['member']['account']) {
+    header('location:ab-login.php');
+    // exit;
+}
+
+if ($_SESSION['member']['account'] <> 'Admin') {
+    header('location:ab-profile.php');
+    // exit;
+}
+
+include __DIR__ . "/alive-confirm.php";
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 
