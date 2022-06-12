@@ -1,15 +1,26 @@
-<?php require __DIR__ . "./parts/connect_db.php";
+<?php require __DIR__ . "/parts/connect_db.php";
 
 $pageName = 'record-edit';
 $title = '編輯會員資料';
 
+if (!$_SESSION['member']['account']) {
+    header('location:ab-login.php');
+    // exit;
+}
+
+if ($_SESSION['member']['account'] <> 'Admin') {
+    header('location:ab-profile.php');
+    // exit;
+}
 
 // 修改功能
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 if (empty($sid)) {
-    // header('Location: test_record_list.php');
+    header('Location: test_record_list.php');
     // exit;
 }
+
+include __DIR__ . "/alive-confirm.php";
 
 $row = $pdo->query("SELECT * FROM `good_deed_test_record` WHERE sid = $sid")->fetch();
 // $row = $pdo->query("SELECT * FROM `place` WHERE sid=$sid")->fetch();
@@ -17,9 +28,9 @@ $row = $pdo->query("SELECT * FROM `good_deed_test_record` WHERE sid = $sid")->fe
 
 
 ?>
-<?php include __DIR__ . './parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/html-head.php' ?>
 <script src="https://kit.fontawesome.com/f528f6df02.js" crossorigin="anonymous"></script>
-<?php include __DIR__ . './parts/navbar.php' ?>
+<?php include __DIR__ . '/parts/navbar.php' ?>
 <style>
     .form-control.red {
         border: 1px solid red;
@@ -100,7 +111,7 @@ $row = $pdo->query("SELECT * FROM `good_deed_test_record` WHERE sid = $sid")->fe
     </div>
 
 </div>
-<?php include __DIR__ . './parts/scripts.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
     // const row = json_encode($row, JSON_UNESCAPED_UNICODE); ;
 
@@ -221,4 +232,4 @@ $row = $pdo->query("SELECT * FROM `good_deed_test_record` WHERE sid = $sid")->fe
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-<?php include __DIR__ . './parts/html-foot.php' ?>
+<?php include __DIR__ . '/parts/html-foot.php' ?>
