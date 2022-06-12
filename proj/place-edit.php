@@ -8,7 +8,7 @@ $title = '良辰吉地-修改';
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 
 if (empty($sid)) {
-    header('Location: place-backstage.php');
+    header('Location: place-admin.php');
     exit;
 };
 
@@ -16,7 +16,7 @@ $row = $pdo->query("SELECT * FROM `place` WHERE sid=$sid")->fetch();
 // print_r($row);
 
 if (empty($row)) {
-    header('Location: place-backstage.php');
+    header('Location: place-admin.php');
     exit;
 };
 
@@ -108,7 +108,7 @@ if (empty($row)) {
             infoBar.innerHTML = '資料修改成功';
 
             setTimeout(() => {
-                location.href = 'place-backstage.php';
+                location.href = 'place-admin.php';
             }, 1000)
         } else {
             infoBar.classList.remove('alert-success');
