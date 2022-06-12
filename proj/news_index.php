@@ -2,6 +2,8 @@
 $pageName = 'news_index';
 $title = '最新消息 - 來生投放所';
 
+include __DIR__ . "/alive-confirm.php";
+
 $perPage = 8;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 if ($page < 1) {
