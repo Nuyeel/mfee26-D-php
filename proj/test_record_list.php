@@ -1,11 +1,11 @@
-<?php require __DIR__ . "./parts/connect_db.php";
+<?php require __DIR__ . "/parts/connect_db.php";
 
 $pageName = 'testpage';
 $title = '陰德值測驗後台';
 
 
 if ($_SESSION['member']['account'] <> 'Admin') {
-  header("Location: yun_mainpage.php");
+  header("Location: ab-profile.php");
   exit;
 }
 
@@ -43,8 +43,8 @@ if ($totalRows > 0) {
 
 
 ?>
-<?php include __DIR__ . './parts/html-head.php' ?>
-<?php include __DIR__ . './parts/navbar.php'
+<?php include __DIR__ . '/parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/navbar.php'
 ?>
 
 
@@ -161,7 +161,7 @@ if ($totalRows > 0) {
 
 
 
-<?php include __DIR__ . './parts/scripts.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
 <script>
   function delete_it(sid) {
     if (confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)) {
@@ -169,4 +169,4 @@ if ($totalRows > 0) {
     }
   }
 </script>
-<?php include __DIR__ . './parts/html-foot.php' ?>
+<?php include __DIR__ . '/parts/html-foot.php' ?>
