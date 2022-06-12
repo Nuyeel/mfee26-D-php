@@ -1,4 +1,4 @@
-<?php require __DIR__ . "./parts/connect_db.php";
+<?php require __DIR__ . "/parts/connect_db.php";
 
 $pageName = 'place-edit';
 $title = '良辰吉地-修改';
@@ -23,8 +23,8 @@ if (empty($row)) {
 ?>
 
 
-<?php include __DIR__ . "./parts/html-head.php" ?>
-<?php include __DIR__ . "./parts/navbar.php" ?>
+<?php include __DIR__ . "/parts/html-head.php" ?>
+<?php include __DIR__ . "/parts/navbar.php" ?>
 
 
 <div class="container">
@@ -85,7 +85,7 @@ if (empty($row)) {
 </div>
 
 
-<?php include __DIR__ . "./parts/scripts.php" ?>
+<?php include __DIR__ . "/parts/scripts.php" ?>
 <script>
     const infoBar = document.querySelector('#infoBar');
 
@@ -172,4 +172,4 @@ if (empty($row)) {
     }
 </script>
 
-<?php include __DIR__ . "./parts/html-foot.php" ?>
+<?php include __DIR__ . "/parts/html-foot.php" ?>
