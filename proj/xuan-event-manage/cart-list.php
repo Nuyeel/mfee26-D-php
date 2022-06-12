@@ -5,6 +5,7 @@ $title = '購物車列表';
 // require '/../parts/connect_db.php';
 
 require __DIR__ .  '/../parts/connect_db.php' ;
+include __DIR__ . '/../alive-confirm.php';
 
 // $pageName = 'cart';
 // $title = '購物車列表';
