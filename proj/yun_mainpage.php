@@ -1,12 +1,19 @@
-<?php require __DIR__ . "./parts/connect_db.php"; ?>
+<?php require __DIR__ . "/parts/connect_db.php"; ?>
 
 <?php
 $pageName = 'test_page';
 $title = 'Yun_MainPage';
+
+// 現階段而言這頁面是隱藏的
+// 所以直接跳去會員中心就好
+// 因為目前這兩個頁面等價
+
+header("location:ab-profile.php");
+
 ?>
 
-<?php include __DIR__ . './parts/html-head.php' ?>
-<?php include __DIR__ . './parts/navbar.php' ?>
+<?php include __DIR__ . '/parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/navbar.php' ?>
 
 
 <style>
@@ -117,7 +124,7 @@ if (!empty($_SESSION['member']['account'])) {
 
 
 
-<?php include __DIR__ . './parts/scripts.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
 
 
-<?php include __DIR__ . './parts/html-foot.php' ?>
+<?php include __DIR__ . '/parts/html-foot.php' ?>
