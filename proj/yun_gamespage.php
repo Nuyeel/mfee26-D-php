@@ -1,8 +1,10 @@
-<?php require __DIR__ . "./parts/connect_db.php"; ?>
+<?php require __DIR__ . "/parts/connect_db.php"; ?>
 
 <?php
 $pageName = 'games_page';
 $title = '積陰德小遊戲';
+
+include __DIR__ . "/alive-confirm.php";
 
 $rows = [];
 $t_sql = "SELECT COUNT(*) FROM good_deed_games";
@@ -11,8 +13,8 @@ $sql = sprintf("SELECT * FROM good_deed_games ORDER BY sid ASC");
 $rows = $pdo->query($sql)->fetchAll();
 
 ?>
-<?php include __DIR__ . './parts/html-head.php' ?>
-<?php include __DIR__ . './parts/navbar.php' ?>
+<?php include __DIR__ . '/parts/html-head.php' ?>
+<?php include __DIR__ . '/parts/navbar.php' ?>
 
 <style>
   .container {
@@ -23,6 +25,17 @@ $rows = $pdo->query($sql)->fetchAll();
   .card {
     margin-top: 50px;
   }
+
+  .btn {
+    /* color: rgb(38, 106, 170); */
+    background-color: rgb(38, 106, 170);
+    border-color: rgb(38, 106, 170);
+  }
+  
+  .btn:hover {
+    background-color: rgb(38, 106, 170);
+  }
+
 </style>
 <div class="container">
   <div class="col">
@@ -83,6 +96,6 @@ $rows = $pdo->query($sql)->fetchAll();
 
 </div>
 
-<?php include __DIR__ . './parts/scripts.php' ?>
+<?php include __DIR__ . '/parts/scripts.php' ?>
 
-<?php include __DIR__ . './parts/html-foot.php' ?>
+<?php include __DIR__ . '/parts/html-foot.php' ?>
