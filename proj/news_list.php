@@ -2,6 +2,18 @@
 $pageName = 'news_list';
 $title = '最新消息清單 - 來生投放所';
 
+if (!$_SESSION['member']['account']) {
+    header('location:ab-login.php');
+    // exit;
+}
+
+if ($_SESSION['member']['account'] <> 'Admin') {
+    header('location:ab-profile.php');
+    // exit;
+}
+
+include __DIR__ . "/alive-confirm.php";
+
 $perPage = 15;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 if ($page < 1) {
