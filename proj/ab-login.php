@@ -4,9 +4,13 @@
 $pageName = 'ab-login';
 $title = '會員登入 - 來生投放所';
 
+
 if (isset($_SESSION['member']['account'])) {
     header('Location: ab-profile.php');
 }
+
+include __DIR__ . "/alive-confirm.php";
+
 ?>
 
 <?php include __DIR__ . "/parts/html-head.php" ?>
