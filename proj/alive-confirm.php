@@ -508,7 +508,7 @@ if (!$_SESSION['member']['account'] or $_SESSION['member']['isdead'] == 'false')
             position: absolute;
             left: 0;
             right: 0;
-            bottom: 200px;
+            bottom: 150px;
             margin: auto;
             transition: 1s;
             font-size: 32px;
@@ -975,10 +975,10 @@ if (!$_SESSION['member']['account'] or $_SESSION['member']['isdead'] == 'false')
 
             camera.position.y =
                 400 *
-                Math.sin((mouseY - camera.position.y) * 0.00035 + 1);
+                Math.sin((mouseY - camera.position.y) * 0.00035 + 0.9);
             camera.position.z =
                 400 *
-                Math.cos((mouseY - camera.position.y) * 0.00035 + 1);
+                Math.cos((mouseY - camera.position.y) * 0.00035 + 0.9);
             camera.lookAt(0, 0, 0);
 
             // 第 0 個 children 是 dirLight
@@ -1579,91 +1579,91 @@ if (!$_SESSION['member']['account'] or $_SESSION['member']['isdead'] == 'false')
 
             const geometryQQ = new THREE.BoxBufferGeometry(32, 32, 32);
 
-            let a_;
-            let b_;
-            let c_;
-            let d_;
-            let e_;
-            let f_;
+            let swapMix;
+            let swapTop;
 
-            // a_ is side-right
-            a_ = new THREE.TextureLoader().load("./box/2_a.png");
-            a_.anisotropy = 4;
-            a_.minFilter = THREE.LinearFilter;
-            a_.magFilter = THREE.LinearFilter;
+            let swapMixArray = [
+                './box/mix/0_Mix.png',
+                './box/mix/1_Mix.png',
+                './box/mix/6_Mix.png',
+                './box/mix/15_Mix.png',
+                './box/mix/20_Mix.png',
+                './box/mix/21_Mix.png',
+                './box/mix/22_Mix.png',
+                './box/mix/23_Mix.png',
+                './box/mix/24_Mix.png',
+                './box/mix/25_Mix.png',
+                './box/mix/27_Mix.png',
+                './box/mix/30_Mix.png',
+                './box/mix/34_Mix.png',
+                './box/mix/35_Mix.png'
+            ];
 
-            // b_ is side-left
-            b_ = new THREE.TextureLoader().load("./box/2_a.png");
-            b_.anisotropy = 4;
-            b_.minFilter = THREE.LinearFilter;
-            b_.magFilter = THREE.LinearFilter;
+            let swapTopArray = [
+                './box/mix/0_Top.png',
+                './box/mix/1_Top.png',
+                './box/mix/6_Top.png',
+                './box/mix/15_Top.png',
+                './box/mix/20_Top.png',
+                './box/mix/21_Top.png',
+                './box/mix/22_Top.png',
+                './box/mix/23_Top.png',
+                './box/mix/24_Top.png',
+                './box/mix/25_Top.png',
+                './box/mix/27_Top.png',
+                './box/mix/30_Top.png',
+                './box/mix/34_Top.png',
+                './box/mix/35_Top.png'
+            ];
 
-            // c_ is top
-            c_ = new THREE.TextureLoader().load("./box/2_t.png");
-            c_.anisotropy = 4;
-            c_.minFilter = THREE.LinearFilter;
-            c_.magFilter = THREE.LinearFilter;
+            
 
-            // d_ is bottom
-            d_ = new THREE.TextureLoader().load("./box/2_t.png");
-            d_.anisotropy = 4;
-            d_.minFilter = THREE.LinearFilter;
-            d_.magFilter = THREE.LinearFilter;
+            for (let i = 0; i < swapMixArray.length ; i++) {
+                swapMix = new THREE.TextureLoader().load(swapMixArray[i]);
+                swapMix.anisotropy = 4;
+                swapMix.minFilter = THREE.LinearFilter;
+                swapMix.magFilter = THREE.LinearFilter;
 
-            // e_ is side-front
-            e_ = new THREE.TextureLoader().load("./box/2_a.png");
-            e_.anisotropy = 4;
-            e_.minFilter = THREE.LinearFilter;
-            e_.magFilter = THREE.LinearFilter;
+                swapTop = new THREE.TextureLoader().load(swapTopArray[i]);
+                swapTop.anisotropy = 4;
+                swapTop.minFilter = THREE.LinearFilter;
+                swapTop.magFilter = THREE.LinearFilter;
 
-            // f_ is side-back
-            f_ = new THREE.TextureLoader().load("./box/2_a.png");
-            f_.anisotropy = 4;
-            f_.minFilter = THREE.LinearFilter;
-            f_.magFilter = THREE.LinearFilter;
+                const material_swapMix = new THREE.MeshBasicMaterial({
+                    map: swapMix,
+                    transparent: true
+                });
 
-            const material_1 = new THREE.MeshBasicMaterial({
-                map: a_
-            });
-            const material_2 = new THREE.MeshBasicMaterial({
-                map: b_
-            });
-            const material_3 = new THREE.MeshBasicMaterial({
-                map: c_
-            });
-            const material_4 = new THREE.MeshBasicMaterial({
-                map: d_
-            });
-            const material_5 = new THREE.MeshBasicMaterial({
-                map: e_
-            });
-            const material_6 = new THREE.MeshBasicMaterial({
-                map: f_
-            });
+                const material_swapTop = new THREE.MeshBasicMaterial({
+                    map: swapTop,
+                    transparent: true
+                });
 
-            const materials = [];
+                const materials = [];
+    
+                materials.push(material_swapMix);
+                materials.push(material_swapMix);
+                materials.push(material_swapTop);
+                materials.push(material_swapTop);
+                materials.push(material_swapMix);
+                materials.push(material_swapMix);
 
-            materials.push(material_1);
-            materials.push(material_2);
-            materials.push(material_3);
-            materials.push(material_4);
-            materials.push(material_5);
-            materials.push(material_6);
+                for (let k = 0; k < 15; k++) {
+                    const mesh = new THREE.Mesh(geometryQQ, materials);
+    
+                    mesh.position.x = Math.random() * 900 - 450;
+                    mesh.position.y = Math.random() * 900 - 450;
+                    mesh.position.z = Math.random() * 900 - 450;
+    
+                    mesh.scale.setScalar(Math.random() * 1.2 + 1);
+    
+                    mesh.rotation.x = Math.random() * Math.PI;
+                    mesh.rotation.y = Math.random() * Math.PI;
+                    mesh.rotation.z = Math.random() * Math.PI;
+    
+                    groupQQ.add(mesh);
+                }
 
-            for (let i = 0; i < 25; i++) {
-                const mesh = new THREE.Mesh(geometryQQ, materials);
-
-                mesh.position.x = Math.random() * 500 - 250;
-                mesh.position.y = Math.random() * 500 - 250;
-                mesh.position.z = Math.random() * 500 - 250;
-
-                mesh.scale.setScalar(Math.random() * 1.5 + 1);
-
-                mesh.rotation.x = Math.random() * Math.PI;
-                mesh.rotation.y = Math.random() * Math.PI;
-                mesh.rotation.z = Math.random() * Math.PI;
-
-                groupQQ.add(mesh);
             }
 
             sceneQQ.add(groupQQ);
@@ -1724,6 +1724,12 @@ if (!$_SESSION['member']['account'] or $_SESSION['member']['isdead'] == 'false')
 
             groupQQ.rotation.y += clockQQ.getDelta() * 0.1;
 
+            for (let i = 0 ; i < sceneQQ.children.length ; i++) {
+                const child = sceneQQ.children[i];
+                child.rotation.x += 0.005;
+                child.rotation.y -= 0.005;
+                child.rotation.z += 0.005;
+            }
             composerQQ.render();
         }
 
@@ -2010,7 +2016,7 @@ if (!$_SESSION['member']['account'] or $_SESSION['member']['isdead'] == 'false')
                 completeYeah.classList.add('complete-yeah');
                 completeYeah.classList.add('cpemerge');
                 completeYeah.classList.add('cphidden');
-                completeYeah.innerHTML = 'NICE CUBE!';
+                completeYeah.innerHTML = 'NICE HOPE!';
                 document.querySelector('body').appendChild(completeYeah);
 
                 // for (let i = 1; i < 5; i++) {
@@ -2052,24 +2058,33 @@ if (!$_SESSION['member']['account'] or $_SESSION['member']['isdead'] == 'false')
                 nowRein.innerHTML = '<p>你已經留下了你的遺言與企盼。<br />現在是時候投胎了。<br />但在那之前...</p>';
                 document.querySelector('body').appendChild(nowRein);
 
-            }, 7000);
+            }, 8000);
 
             setTimeout(() => {
                 completeYeah.remove();
                 nowRein.classList.add('cpemerge');
                 nowRein.classList.add('cphidden');
-            }, 8000);
+            }, 9000);
 
             setTimeout(() => {
                 nowRein.classList.remove('cpvanish');
                 nowRein.classList.remove('cphidden');
                 nowRein.classList.add('cpshown');
+                
+            }, 10000);
 
+            setTimeout(() => {
+                nowRein.classList.remove('cpshown');
+                nowRein.classList.add('cphidden');
+
+            }, 12000);
+
+            setTimeout(() => {
                 initQQ();
-
                 animateQQ();
+            }, 14000);
 
-            }, 9000);
+
 
             // await setTimeout(() => {
             //     for (let i = 0; i <= 100 ;  i++ ) {
