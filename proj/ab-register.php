@@ -1,11 +1,17 @@
-<?php require __DIR__ . "./parts/connect_db.php";
+<?php require __DIR__ . "/parts/connect_db.php";
 $pageName = 'ab-register';
 $title = '註冊會員 - 來生投放所';
 
+if (isset($_SESSION['member']['account'])) {
+    header('Location: ab-profile.php');
+}
+
+include __DIR__ . "/alive-confirm.php";
+
 ?>
 
-<?php include __DIR__ . "./parts/html-head.php" ?>
-<?php include __DIR__ . "./parts/navbar.php" ?>
+<?php include __DIR__ . "/parts/html-head.php" ?>
+<?php include __DIR__ . "/parts/navbar.php" ?>
 
 <style>
     body {
@@ -214,4 +220,4 @@ $title = '註冊會員 - 來生投放所';
     }
 </script>
 
-<?php include __DIR__ . "./parts/html-foot.php" ?>
+<?php include __DIR__ . "/parts/html-foot.php" ?>
