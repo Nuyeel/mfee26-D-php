@@ -1,4 +1,4 @@
-<?php require __DIR__ . "./parts/connect_db.php" ?>
+<?php require __DIR__ . "/parts/connect_db.php" ?>
 
 <?php
 $pageName = 'place';
@@ -18,10 +18,12 @@ $title = '濟善救世公司-良辰吉地';
 // $_SESSION['member']['sid'] = 12;
 // $_SESSION['member']['deathdate'] = NULL; 
 
+include __DIR__ . "/alive-confirm.php";
+
 ?>
 
 
-<?php include __DIR__ . "./parts/html-head.php" ?>
+<?php include __DIR__ . "/parts/html-head.php" ?>
 
 
 <style>
@@ -170,7 +172,7 @@ $title = '濟善救世公司-良辰吉地';
 </style>
 
 
-<?php include __DIR__ . "./parts/navbar.php" ?>
+<?php include __DIR__ . "/parts/navbar.php" ?>
 
 <div class="container">
     <div class="row mt-5">
@@ -624,4 +626,4 @@ $title = '濟善救世公司-良辰吉地';
 </script>
 
 
-<?php include __DIR__ . "./parts/html-foot.php" ?>
+<?php include __DIR__ . "/parts/html-foot.php" ?>
