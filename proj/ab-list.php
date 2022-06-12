@@ -1,6 +1,14 @@
-<?php require __DIR__ . "./parts/connect_db.php";
+<?php require __DIR__ . "/parts/connect_db.php";
 $pageName = 'ab-list';
 $title = '會員總覽 - 來生投放所';
+
+if (!$_SESSION['member']['account']) {
+    header('location: ab-login.php');
+}
+
+if ($_SESSION['member']['account'] <> 'Admin') {
+    header('location: ab-login.php');
+}
 
 $perPage = 15; // 每一頁有幾筆
 
