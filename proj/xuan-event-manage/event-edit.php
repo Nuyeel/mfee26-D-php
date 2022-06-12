@@ -1,4 +1,5 @@
 <?php require __DIR__ .  '/../parts/connect_db.php' ;
+include __DIR__ . "/../alive-confirm.php";
 
 $pageName = 'event-edit';
 $title = '活動修改';
