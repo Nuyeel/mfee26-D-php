@@ -202,8 +202,8 @@
                 position: absolute;
                 height: 110px;
                 overflow: hidden;
-                top: -9%;
-                left: -72%;
+                top: -10.5%;
+                left: -102%;
                 opacity: 90%;
             }
 
@@ -258,19 +258,19 @@
 
             .box1 > img:nth-child(1) {
                 position: absolute;
-                top: 70px;
-                left: 75px;
+                top: 22px;
+                left: 45px;
                 /* margin-left: -25px; */
                 /* margin-top: -25px; */
             }
-            .box1 > img:nth-child(2) {
+            /* .box1 > img:nth-child(2) {
                 position: absolute;
                 top: 127px;
                 left: 75px;
                 /* margin-left: -25px; */
                 /* margin-top: -25px; */
-            }
-            .box1 > img:nth-child(3) {
+            /* } */ 
+            .box1 > img:nth-child(2) {
                 position: absolute;
                 top: 0;
                 left: -130px;
@@ -445,8 +445,9 @@
             .box4 {
                 border-radius: 15px;
                 width: 700px;
-                height: 120px;
+                height: 190px;
                 background-color: rgb(155, 199, 89);
+                /* background-color: #50BCAE; */
                 position: absolute;
                 top: 109%;
                 right: 30%;
@@ -464,23 +465,25 @@
             }
 
             .box4 > div.m-title {
-                padding: 10px 20px;
+                padding: 20px 30px;
                 /* text-align: left; */
                 /* writing-mode: vertical-rl; */
-                font-size: 40px;
+                font-size: 35px;
                 color: #fff;
-                font-family: "Potta One", cursive;
+                font-family: "M PLUS Rounded 1c", sans-serif;
+                letter-spacing: 2px;
+                /* font-family: "Potta One", cursive; */
             }
 
             /* 控白色塊 */
             .box5 {
                 border-radius: 15px;
-                width: 100px;
+                width: 250px;
                 height: 400px;
                 background-color: rgb(178, 218, 240);
                 position: absolute;
-                top: 55%;
-                left: -145%;
+                top: 53%;
+                left: -183%;
                 padding: 2%;
             }
             .inner-boder {
@@ -507,6 +510,58 @@
                 color: #fff;
                 margin-top: 18%;
             }
+
+            /* 小白色方塊 */
+            /* .cube{
+                position: absolute;
+                top: 109%;
+                right: -4%;
+                width: 50px;
+                height: 200px;
+                outline: 1px solid red;
+            } */
+
+            .cube {
+                border-radius: 15px;
+                width: 80px;
+                height: 400px;
+                /* background-color: rgba(255, 255, 255, 0.7); */
+                position: absolute;
+                top: 62.5%;
+                left: 190%;
+                margin-left: -25px;
+                margin-top: -25px;
+                overflow: hidden;
+                padding: 10px;
+            }
+
+            .cube>img{
+                width: 40px;
+                opacity: .8;
+                margin-bottom: 8px;
+            }
+
+            .cube-right {
+                border-radius: 15px;
+                width: 80px;
+                height: 400px;
+                /* background-color: rgba(255, 255, 255, 0.7); */
+                position: absolute;
+                top: 62.5%;
+                left: 204%;
+                margin-left: -25px;
+                margin-top: -25px;
+                overflow: hidden;
+                padding: 10px;
+            }
+
+            /* 法喜充滿內文 */
+            .event-bg{
+                width: 450px;
+                position:absolute;
+                top:20px;
+            }
+
         </style>
     </head>
 
@@ -607,24 +662,35 @@
                     </div>
 
                     <!-- 其他方塊 -->
+
                     <!-- 最新消息 -->
                     <div class="box box1">
                         <img
-                            src="./map.img/word-news.svg"
-                            style="width: 150px"
+                            src="./map.img/news_bg.svg"
+                            style="width: 230px"
                         />
-                        <img src="./map.img/news.svg" style="width: 80px" />
+                        <!-- <img src="./map.img/news.svg" style="width: 80px" /> -->
                         <img src="./map.img/UFO2.svg" style="height: 220px" />
                         <!-- <span></span> -->
                     </div>
 
                     <!-- 上半身human -->
                     <box class="human-box">
+                        <!-- 藍 -->
                         <img src="./map.img/soul01.svg" style="width: 50px" />
+                        <!-- 黃 -->
                         <img src="./map.img/soul02.svg" style="width: 50px" />
+                        <!-- 綠 -->
                         <img src="./map.img/soul03.svg" style="width: 50px" />
+                        <!-- 粉 -->
                         <img src="./map.img/soul04.svg" style="width: 50px" />
+                        <!-- 紅 -->
                         <img src="./map.img/soul05.svg" style="width: 50px" />
+                        <!-- 黃 -->
+                        <img src="./map.img/soul02.svg" style="width: 50px" />
+                        <!-- 綠 -->
+                        <img src="./map.img/soul03.svg" style="width: 50px" />
+
                     </box>
 
                     <!-- small souls -->
@@ -671,7 +737,7 @@
                         <div class="m-title">轉生形象</div>
                         <div class="avatar-p">
                             選擇來世形象<br />迎接美好未來
-                        </div>
+                        </div> 
                         <div class="soul-wrap">
                             <img
                                 src="./map.img/soul02.svg"
@@ -695,6 +761,7 @@
                             />
                         </div>
                     </div>
+
                     <!-- 良辰吉地 -->
                     <div class="box box3">
                         <div class="m-title">
@@ -703,23 +770,67 @@
                         </div>
                     </div>
 
-                    <!-- 活動 -->
-                    <div class="box box4">
+                    <!-- 法喜充滿 -->
+                    <div class="box box4" style="overflow:hidden" >
                         <div class="sep-line"></div>
-                        <div class="m-title">Activity：</div>
+                        <!-- <div class="m-title">法喜充滿</div> -->
+                        <img src="./map.img/event-bg.svg" alt="" class="event-bg">
+                        <img src="./map.img/act-monster.svg" alt="" style="width:180px;position:absolute;right: 0px; top:15px">
                     </div>
 
                     <!-- 空白色塊 -->
-                    <div class="box box5">
-                        <div class="inner-boder"></div>
+                    <div class="box box5" >
+                        <div class="inner-boder" style="text-align: center;padding-top: 25px;">
+                            <img src="./map.img/blank-bg.svg" alt="" style="width:85%;opacity: .8;">
+                        </div>
+
                     </div>
+
+                        <!-- 愛心方塊 -->
                     <div class="box box6">
                         <i class="fa-brands fa-gratipay"></i>
+                    </div> 
+
+
+                    <div class="box box7"></div> 
+
+
+                    <!-- 白色方塊裝飾 -->
+                    <div class="box cube">
+                        <img src="./map.img/white-cube.svg" alt="" >
+                        <img src="./map.img/white-cube.svg" alt="" >
+                        <img src="./map.img/white-cube.svg" alt="" >
+                        <img src="./map.img/white-cube.svg" alt="" >
+                        <img src="./map.img/white-cube.svg" alt="" >
+                        <img src="./map.img/white-cube.svg" alt="" >
+                        <img src="./map.img/white-cube.svg" alt="" >
                     </div>
-                    <div class="box box7"></div>
+                    <div class="box cube cube-right">
+                        <img src="./map.img/white-cube.svg" alt="" >
+                        <img src="./map.img/white-cube.svg" alt="" >
+                        <img src="./map.img/white-cube.svg" alt="" >
+                        <img src="./map.img/white-cube.svg" alt="" >
+                        <img src="./map.img/white-cube.svg" alt="" >
+                        <img src="./map.img/white-cube.svg" alt="" >
+                        <img src="./map.img/white-cube.svg" alt="" >
+                    </div>
+
+
+
+
+
+
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+
+
 
         <script>
             // 表格清零
