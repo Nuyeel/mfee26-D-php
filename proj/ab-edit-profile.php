@@ -2,10 +2,14 @@
 $pageName = 'ab-edit-profile';
 $title = '修改會員資料 - 靈魂管理中心';
 
+include __DIR__ . "/alive-confirm.php";
+
 if (!$_SESSION['member']['account']) {
     header('location:ab-login.php');
     // exit;
 }
+
+
 
 $sid = isset($_SESSION['member']['sid']) ? intval($_SESSION['member']['sid']) : 0;
 $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
