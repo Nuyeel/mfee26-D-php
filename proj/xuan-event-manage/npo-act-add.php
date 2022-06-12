@@ -1,4 +1,5 @@
 <?php require __DIR__ .  '/../parts/connect_db.php';
+include __DIR__ . "/../alive-confirm.php";
 
 $pageName = 'npo-act-add';
 $title = '上架活動';
