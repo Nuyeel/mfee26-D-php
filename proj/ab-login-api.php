@@ -70,7 +70,7 @@ if ($row['account'] == $account and password_verify($password, $row['password'])
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit;
 } else {
-    $output['error'] = '您輸入的使用者帳戶或密碼有誤';
+    $output['error'] = '您輸入的密碼與使用者帳戶不符';
     $output['code'] = 404;
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit;
