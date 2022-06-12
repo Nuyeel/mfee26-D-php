@@ -1,12 +1,24 @@
-<?php require __DIR__ . "./parts/connect_db.php" ?>
+<?php require __DIR__ . "/parts/connect_db.php" ?>
+
+<?php 
+if (!$_SESSION['member']['account']) {
+    header('location: ab-login.php');
+}
+
+if ($_SESSION['member']['account'] <> 'Admin') {
+    header('location: ab-login.php');
+}
+?>
+
+<?php include __DIR__ . "/alive-confirm.php"; ?>
 
 <?php
 $pageName = 'login';
 $title = '會員新增 - 靈魂轉生平台';
 ?>
 
-<?php include __DIR__ . "./parts/html-head.php" ?>
-<?php include __DIR__ . "./parts/navbar.php" ?>
+<?php include __DIR__ . "/parts/html-head.php" ?>
+<?php include __DIR__ . "/parts/navbar.php" ?>
 <style>
     .form-control.red {
         border: 1px solid red;
@@ -62,7 +74,7 @@ $title = '會員新增 - 靈魂轉生平台';
 
 </div>
 
-<?php include __DIR__ . "./parts/scripts.php" ?>
+<?php include __DIR__ . "/parts/scripts.php" ?>
 
 <script>
     const email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zAZ]{2,}))$/;
@@ -140,4 +152,4 @@ $title = '會員新增 - 靈魂轉生平台';
     }
 </script>
 
-<?php include __DIR__ . "./parts/html-foot.php" ?>
+<?php include __DIR__ . "/parts/html-foot.php" ?>
