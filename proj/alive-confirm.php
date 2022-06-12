@@ -1,9 +1,11 @@
 <?php require __DIR__ . "./parts/connect_db.php";
 
-if (!$_SESSION['member']['account'] or $_SESSION['member']['isdead'] == 'false') {
-    header('location:/mfee26-D-php/proj/ab-login.php');
-    exit;
-}
+// if (!$_SESSION['member']['account'] or $_SESSION['member']['isdead'] == 'false') {
+    // header('location:/mfee26-D-php/proj/ab-login.php');
+    // exit;
+// }
+
+if ($_SESSION['member']['isdead'] == 'true') {
 
 $sid = $_SESSION['member']['sid'];
 
@@ -2667,4 +2669,5 @@ if ($rowNum >= 1) {
 <?php include __DIR__ . "/parts/navbar.php" ?>
 <?php include __DIR__ . "/parts/scripts.php" ?>
 <?php include __DIR__ . "/parts/html-foot.php" ?>
+<?php } ?>
 <?php exit; ?>
