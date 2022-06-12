@@ -100,7 +100,7 @@ $rows = $pdo->query($sql)->fetchAll();
 
         <!-- 直接跳進結帳頁面 -->
         <a class="btn btn-warning add-to-cart-btn mt-3" data-sid="<?= $r['sid']?>"  style="margin-right:10px; font-size:16px; width: 140px" href="cart-list.php" role="button">
-        <i class="fa-solid fa-money-bill-1"> </i>&nbsp 直接結帳
+        <i class="fa-solid fa-money-bill-1"> </i>&nbsp &nbsp直接結帳
         </a>
         
         <!-- 繼續選購 -->
