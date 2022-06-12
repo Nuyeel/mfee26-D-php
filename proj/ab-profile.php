@@ -1,5 +1,4 @@
 <?php require __DIR__ . "/parts/connect_db.php" ?>
-
 <?php
 $pageName = 'ab-profile';
 $title = '會員中心 - 來生投放所';
@@ -9,10 +8,14 @@ $title = '會員中心 - 來生投放所';
 if ($_SESSION['member']['account'] == 'Admin') {
     header('location:ab-list.php');
     // exit;
-} else if (!$_SESSION['member']['account']) {
+}
+
+if (!$_SESSION['member']['account']) {
     header('location:ab-login.php');
     // exit;
 }
+
+include __DIR__ . "/alive-confirm.php";
 
 $sid = isset($_SESSION['member']['sid']) ? intval($_SESSION['member']['sid']) : 0;
 $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
@@ -225,7 +228,7 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
                         }
                     } else {
 
-                        header('location:ab-login.php');
+                        // header('location:ab-login.php');
                     }
 
                     ?>
@@ -242,4 +245,4 @@ $row = $pdo->query("SELECT * FROM member WHERE `sid`='$sid'")->fetch();
 </script>
 
 
-<?php include __DIR__ . "./parts/html-foot.php" ?>
+<?php include __DIR__ . "/parts/html-foot.php" ?>
