@@ -1,14 +1,28 @@
-<?php require __DIR__ . "./parts/connect_db.php" ?>
+<?php require __DIR__ . "/parts/connect_db.php" ?>
 
 <?php
 $pageName = 'place-add';
 $title = '新增良辰吉地';
+
+if (!$_SESSION['member']['account']) {
+    header('location:ab-login.php');
+    // exit;
+}
+
+if ($_SESSION['member']['account'] <> 'Admin') {
+    header('location:ab-profile.php');
+    // exit;
+}
+
+include __DIR__ . "/alive-confirm.php";
+
+
 ?>
 
 
-<?php include __DIR__ . "./parts/html-head.php" ?>
+<?php include __DIR__ . "/parts/html-head.php" ?>
 
-<?php include __DIR__ . "./parts/navbar.php" ?>
+<?php include __DIR__ . "/parts/navbar.php" ?>
 
 
 <div class="container">
@@ -154,4 +168,4 @@ $title = '新增良辰吉地';
     }
 </script>
 
-<?php include __DIR__ . "./parts/html-foot.php" ?>
+<?php include __DIR__ . "/parts/html-foot.php" ?>
