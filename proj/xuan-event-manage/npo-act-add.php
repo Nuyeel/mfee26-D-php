@@ -93,26 +93,6 @@ $title = '上架活動';
                 <form name="form1" action="npo-act-add-api.php" method="post" enctype="multipart/form-data" class="image_upload" style="height: 250px; display:none" ;>
 
 
-
-                    <!-- <h5 class="card-title text-center" >開始建立活動資訊！</h5>
-                    //上傳活動照片
-
-                    <div class="pic-load mt-4" style="text-align:center;position:relative" > 
-                        <p style="margin-top:110px">就缺一張好看的活動照！請上傳【1080x540】pixel且小於【4MB】</p>
-                        //<button type="button" class="btn btn-lg bg-danger text-white" style="margin-top:10px">上傳圖片</button> 
-
-                        <label for="file-input">
-                        <div class="btn btn-lg bg-danger text-white" style="margin-top:10px;z-index:10;position:absolute;top:150px;left:210px;z-index:10">上傳圖片</div>
-                        </label>
-
-                        <input id="file-input" type="file" name="myfile" accept="image/png,image/jpeg" onchange="changeImg(event)" />
-                        
-                        <div class="upload_img" style="width:100%;height:100%;position:absolute;top:0px;"><img src="" alt="" id="myimg" style="width:100%;"  /></div>
-
-                    </div> -->
-
-
-
                     <input type="file" name="myfile" accept="image/png,image/jpeg" />
 
 
@@ -130,10 +110,10 @@ $title = '上架活動';
                     <form name="form_npo_act" onsubmit="sendData();return false;" novalidate>
 
                         <div class="mb-4">
-                            <label for="npo_name" class="form-label ">主辦單位 <i class="fa-solid fa-asterisk ml-4" style="font-size:11px ; color:red"></i></label>
-                            <input type="text" class="form-control-lg form-control  " id="npo_name" name="npo_name" placeholder="請填寫主辦單位">
+                            <label for="npo_name" class="form-label ">主辦單位 <i class="fa-solid fa-asterisk ml-4" style="font-size:11px; color:red"></i></label>
+                            <input type="text" class="form-control-lg form-control  npo_name" id="npo_name" name="npo_name" placeholder="請填寫主辦單位" >
                             <!-- 下面是錯誤時跳出的提示通知 -->
-                            <div class="form-text "></div>
+                            <div class="form-text npo_n"></div>
                         </div>
 
                         <div class="mb-4">
@@ -351,6 +331,7 @@ $title = '上架活動';
     const endtime_f = document.form_npo_act.end;
     const price_f = document.form_npo_act.price;
     const value_f = document.form_npo_act.value;
+    const npo_f = document.form_npo_act.npo_name;
 
 
     // 將三項列成陣列，改用索引取值
@@ -399,6 +380,10 @@ $title = '上架活動';
             document.querySelector(".form-text-radio").classList.add('red');
             // document.querySelector("#myimg").src = reader.result;
             isPass = false;
+        } else{
+            document.querySelector(".form-text-radio").innerText = '';
+            document.querySelector(".form-text-radio").classList.remove('red');
+
         }
 
         // 檢查詳細地址是否有填
@@ -408,6 +393,11 @@ $title = '上架活動';
             document.querySelector(".address_2").classList.add('red');
             document.querySelector(".address2").classList.add('red');
             isPass = false;
+        }else{
+            document.querySelector(".address2").innerText = '';
+            // document.querySelector(".address").classList.add('red') ;
+            document.querySelector(".address_2").classList.remove('red');
+            document.querySelector(".address2").classList.remove('red');
         }
 
         // 檢查地址縣市是否有填
@@ -417,6 +407,11 @@ $title = '上架活動';
             document.querySelector(".address_1").classList.add('red');
             document.querySelector(".address1").classList.add('red');
             isPass = false;
+        } else{
+            document.querySelector(".address1").innerText = '';
+            // document.querySelector(".address").classList.add('red') ;
+            document.querySelector(".address_1").classList.remove('red');
+            document.querySelector(".address1").classList.remove('red');
         }
 
         // 檢查活動開始時間是否有填
@@ -425,6 +420,10 @@ $title = '上架活動';
             // document.querySelector(".address").classList.add('red') ;
             document.querySelector(".starttime").classList.add('red');
             isPass = false;
+        }else{
+            document.querySelector(".start_time").innerText = '';
+            // document.querySelector(".address").classList.add('red') ;
+            document.querySelector(".starttime").classList.remove('red');
         }
 
         // 檢查活動結束時間是否有填
@@ -433,6 +432,10 @@ $title = '上架活動';
             // document.querySelector(".address").classList.add('red') ;
             document.querySelector(".endtime").classList.add('red');
             isPass = false;
+        }else{
+            document.querySelector(".end_time").innerText = '';
+            // document.querySelector(".address").classList.add('red') ;
+            document.querySelector(".endtime").classList.remove('red');
         }
 
 
@@ -450,14 +453,34 @@ $title = '上架活動';
             document.querySelector(".price_n").classList.add('red');
             document.querySelector(".price").classList.add('red');
             isPass = false;
+        }else{
+            document.querySelector(".price_n").innerText = '';
+            document.querySelector(".price_n").classList.remove('red');
+            document.querySelector(".price").classList.remove('red');
         }
         
         // 檢查陰德值回饋是否有填
-        if (ammount_f.value == '') {
+        if (value_f.value == '') {
             document.querySelector(".value_n").innerText = '必填';
             document.querySelector(".value_n").classList.add('red');
             document.querySelector(".value").classList.add('red');
             isPass = false;
+        }else{
+            document.querySelector(".value_n").innerText = '';
+            document.querySelector(".value_n").classList.remove('red');
+            document.querySelector(".value").classList.remove('red');
+        }
+
+        // 檢查主辦單位是否有填
+        if (npo_f.value.length < 1) {
+            document.querySelector(".npo_n").innerText = '必填';
+            document.querySelector(".npo_n").classList.add('red');
+            document.querySelector(".npo_name").classList.add('red');
+            isPass = false;
+        } else{
+            document.querySelector(".npo_n").innerText = '';
+            document.querySelector(".npo_n").classList.remove('red');
+            document.querySelector(".npo_name").classList.remove('red');
         }
 
 
