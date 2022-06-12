@@ -120,4 +120,4 @@ if (!empty($_SESSION['member']['account'])) {
 <?php include __DIR__ . './parts/scripts.php' ?>
 
 
-<?php include __DIR__ . '/parts/html-foot.php' ?>
+<?php include __DIR__ . './parts/html-foot.php' ?>

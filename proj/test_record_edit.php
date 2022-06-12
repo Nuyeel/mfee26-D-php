@@ -17,9 +17,9 @@ $row = $pdo->query("SELECT * FROM `good_deed_test_record` WHERE sid = $sid")->fe
 
 
 ?>
-<?php include __DIR__ . '/parts/html-head.php' ?>
+<?php include __DIR__ . './parts/html-head.php' ?>
 <script src="https://kit.fontawesome.com/f528f6df02.js" crossorigin="anonymous"></script>
-<?php include __DIR__ . '/parts/navbar.php' ?>
+<?php include __DIR__ . './parts/navbar.php' ?>
 <style>
     .form-control.red {
         border: 1px solid red;

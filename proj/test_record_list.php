@@ -34,17 +34,36 @@ if ($totalRows > 0) {
   }
 
   $sql = sprintf(
-    "SELECT * FROM `good_deed_test_record` ORDER BY `sid` ASC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
-    $rows = $pdo->query($sql)->fetchAll();
+    "SELECT * FROM `good_deed_test_record` ORDER BY `sid` ASC LIMIT %s, %s",
+    ($page - 1) * $perPage,
+    $perPage
+  );
+  $rows = $pdo->query($sql)->fetchAll();
 }
 
 
 ?>
 <?php include __DIR__ . './parts/html-head.php' ?>
-<?php include __DIR__ . './parts/navbar.php' 
+<?php include __DIR__ . './parts/navbar.php'
 ?>
 
+
+<style>
+  .breadcrumb {
+    margin: 20px auto;
+  }
+</style>
 <div class="container">
+  <div class="row">
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">管理員介面</a></li>
+        <li class="breadcrumb-item active" aria-current="page">陰德值測驗管理</li>
+      </ol>
+    </nav>
+
+  </div>
   <div class="row">
     <div class="col">
       <nav aria-label="Page navigation example">

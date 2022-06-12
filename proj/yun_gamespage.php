@@ -27,16 +27,17 @@ $rows = $pdo->query($sql)->fetchAll();
 <div class="container">
   <div class="col">
     <div class="card" style="width: 18rem;">
-      <img src="./img/froggy.jpeg" class="card-img-top" alt="...">
+      <img src="./img/game_img/gomi_water.png" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">
-          扶老奶奶過馬路
+          超級淨灘任務
         </h5>
         <p class="card-text">
-          遊戲描述
+          當海岸不斷堆積垃圾時 淨灘不失為一種行善的好方法！
         </p>
+        <!-- 俄羅斯方塊 -->
         <a href="#" class="btn btn-primary">
-          GO
+          建置中 暫不開放
         </a>
 
       </div>
@@ -44,33 +45,36 @@ $rows = $pdo->query($sql)->fetchAll();
   </div>
   <div class="col">
     <div class="card" style="width: 18rem;">
-      <img src="./img/froggy.jpeg" class="card-img-top" alt="...">
+      <img src="./img/game_img/onbu_furyou_obaasan.png" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">
-          扶老奶奶過馬路
+          扶奶奶過馬路
         </h5>
         <p class="card-text">
-          遊戲描述
+          有許多不知道斑馬線為何物的地方奶奶 急需你的幫助！
         </p>
+        <!-- 青蛙過河 -->
         <a href="#" class="btn btn-primary">
-          GO
+          建置中 暫不開放
         </a>
+
 
       </div>
     </div>
   </div>
   <div class="col">
     <div class="card" style="width: 18rem;">
-      <img src="./img/froggy.jpeg" class="card-img-top" alt="...">
+      <img src="./img/game_img/hakujou_walk_kaijo_woman.png" class="card-img-top" alt="...">
       <div class="card-body">
         <h5 class="card-title">
-          扶老奶奶過馬路
+          行善不欲人知
         </h5>
         <p class="card-text">
-          遊戲描述
+          當你在做善事的時候 不可以讓人發現！！
         </p>
+        <!-- packman -->
         <a href="#" class="btn btn-primary">
-          GO
+          建置中 暫不開放
         </a>
 
       </div>
@@ -81,4 +85,4 @@ $rows = $pdo->query($sql)->fetchAll();
 
 <?php include __DIR__ . './parts/scripts.php' ?>
 
-  <?php include __DIR__ . './parts/html-foot.php' ?>
+<?php include __DIR__ . './parts/html-foot.php' ?>
