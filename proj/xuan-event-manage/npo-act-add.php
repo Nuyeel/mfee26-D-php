@@ -224,15 +224,15 @@ $title = '上架活動';
                             <div style="margin-right:20px">
                                 <label for="price" class="form-label ">報名費用 <i class="fa-solid fa-asterisk ml-4" style="font-size:11px ; color:red"> </i></label>
                                 <div class="form-text text-secondary"></div>
-                                <input type="text" class=" form-control " id="price" name="price" placeholder="請填寫報名費用">
-                                <div class="form-text"></div>
+                                <input type="text" class=" form-control price" id="price" name="price" placeholder="請填寫報名費用">
+                                <div class="form-text price_n"></div>
                             </div>
 
                             <div>
                                 <label for="value" class="form-label ">陰德值回饋 <i class="fa-solid fa-asterisk ml-4" style="font-size:11px ; color:red"> </i></label>
                                 <div class="form-text text-secondary"></div>
-                                <input type="text" class=" form-control " id="value" name="value" placeholder="請填寫陰德值回饋">
-                                <div class="form-text"></div>
+                                <input type="text" class=" form-control value" id="value" name="value" placeholder="請填寫陰德值回饋">
+                                <div class="form-text value_n"></div>
                             </div>
 
 
@@ -349,6 +349,8 @@ $title = '上架活動';
     const address2_f = document.form_npo_act.act_address_2;
     const starttime_f = document.form_npo_act.start;
     const endtime_f = document.form_npo_act.end;
+    const price_f = document.form_npo_act.price;
+    const value_f = document.form_npo_act.value;
 
 
     // 將三項列成陣列，改用索引取值
@@ -439,6 +441,22 @@ $title = '上架活動';
             fields[1].classList.add('red');
             fieldTexts[1].classList.add('red');
             fieldTexts[1].innerText = '必填';
+            isPass = false;
+        }
+
+        // 檢查報名費用是否有填
+        if (price_f.value == '') {
+            document.querySelector(".price_n").innerText = '必填';
+            document.querySelector(".price_n").classList.add('red');
+            document.querySelector(".price").classList.add('red');
+            isPass = false;
+        }
+        
+        // 檢查陰德值回饋是否有填
+        if (ammount_f.value == '') {
+            document.querySelector(".value_n").innerText = '必填';
+            document.querySelector(".value_n").classList.add('red');
+            document.querySelector(".value").classList.add('red');
             isPass = false;
         }
 
