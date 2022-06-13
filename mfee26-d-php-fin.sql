@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2022-06-12 15:43:03
+-- 產生時間： 2022-06-13 13:04:58
 -- 伺服器版本： 10.4.24-MariaDB
 -- PHP 版本： 7.4.29
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `act_order` (
   `act_order_sid` int(11) NOT NULL,
-  `member_sid` int(11) NOT NULL,
-  `last_modified_at` varchar(255) NOT NULL
+  `member_sid` int(11) DEFAULT NULL,
+  `last_modified_at` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -43,7 +43,10 @@ INSERT INTO `act_order` (`act_order_sid`, `member_sid`, `last_modified_at`) VALU
 (3, 52, '2022-06-10 16:44:00'),
 (4, 11, '2022-06-11 00:16:55'),
 (5, 44, '2022-06-11 00:19:14'),
-(6, 76, '2022-06-12 00:50:36');
+(6, 76, '2022-06-12 00:50:36'),
+(7, 3, '2022-06-13 08:56:13'),
+(8, 33, '2022-06-13 08:59:55'),
+(9, 23, '2022-06-13 11:23:47');
 
 -- --------------------------------------------------------
 
@@ -53,8 +56,8 @@ INSERT INTO `act_order` (`act_order_sid`, `member_sid`, `last_modified_at`) VALU
 
 CREATE TABLE `act_order_details` (
   `order_create_sid` int(11) NOT NULL,
-  `order_sid` int(11) NOT NULL,
-  `order_act_sid` int(11) NOT NULL
+  `order_sid` int(11) DEFAULT NULL,
+  `order_act_sid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -77,7 +80,10 @@ INSERT INTO `act_order_details` (`order_create_sid`, `order_sid`, `order_act_sid
 (13, 5, 75),
 (14, 5, 22),
 (15, 6, 98),
-(16, 6, 21);
+(16, 6, 21),
+(17, 7, 25),
+(18, 8, 25),
+(19, 9, 25);
 
 -- --------------------------------------------------------
 
@@ -87,9 +93,9 @@ INSERT INTO `act_order_details` (`order_create_sid`, `order_sid`, `order_act_sid
 
 CREATE TABLE `body_parts` (
   `parts_sid` int(11) NOT NULL,
-  `part` varchar(255) NOT NULL,
-  `part_id` int(11) NOT NULL,
-  `part_cost` int(11) NOT NULL
+  `part` varchar(255) DEFAULT NULL,
+  `part_id` int(11) DEFAULT NULL,
+  `part_cost` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -102,7 +108,7 @@ CREATE TABLE `city_type` (
   `city_sid` int(11) NOT NULL,
   `city` varchar(255) DEFAULT NULL,
   `area_sid` int(11) DEFAULT NULL,
-  `area_name` varchar(255) NOT NULL
+  `area_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -140,10 +146,10 @@ INSERT INTO `city_type` (`city_sid`, `city`, `area_sid`, `area_name`) VALUES
 --
 
 CREATE TABLE `cube` (
-  `member_sid` int(11) NOT NULL,
+  `member_sid` int(11) DEFAULT NULL,
   `cube_sid` int(11) NOT NULL,
   `cube_text` varchar(255) DEFAULT NULL,
-  `cube_style_sid` int(11) NOT NULL
+  `cube_style_sid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -160,7 +166,7 @@ INSERT INTO `cube` (`member_sid`, `cube_sid`, `cube_text`, `cube_style_sid`) VAL
 (7, 7, '有你我很開心！', 9),
 (8, 8, '下輩子也要當一個柔軟的人，簡稱軟軟人。', 10),
 (9, 10, '我和你道歉，也和你道別，再和自己道謝。', 11),
-(102, 13, 'BANG', 7);
+(11, 14, 'YEE', 16);
 
 -- --------------------------------------------------------
 
@@ -170,10 +176,10 @@ INSERT INTO `cube` (`member_sid`, `cube_sid`, `cube_text`, `cube_style_sid`) VAL
 
 CREATE TABLE `cube_category` (
   `cube_style_sid` int(11) NOT NULL,
-  `cube_img_a` varchar(255) NOT NULL,
+  `cube_img_a` varchar(255) DEFAULT NULL,
   `cube_img_b` varchar(255) DEFAULT NULL,
   `cube_img_c` varchar(255) DEFAULT NULL,
-  `cube_img_t` varchar(255) NOT NULL,
+  `cube_img_t` varchar(255) DEFAULT NULL,
   `cube_color_1` varchar(255) DEFAULT NULL,
   `cube_color_2` varchar(255) DEFAULT NULL,
   `cube_color_font` varchar(255) DEFAULT NULL
@@ -218,8 +224,8 @@ INSERT INTO `cube_category` (`cube_style_sid`, `cube_img_a`, `cube_img_b`, `cube
 
 CREATE TABLE `cube_music` (
   `cube_music_sid` int(11) NOT NULL,
-  `cube_music_type` varchar(255) NOT NULL,
-  `cube_music_name` varchar(255) NOT NULL
+  `cube_music_type` varchar(255) DEFAULT NULL,
+  `cube_music_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -240,7 +246,7 @@ INSERT INTO `cube_music` (`cube_music_sid`, `cube_music_type`, `cube_music_name`
 
 CREATE TABLE `date_price` (
   `year` int(11) NOT NULL,
-  `price` int(11) NOT NULL
+  `price` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -261,8 +267,8 @@ INSERT INTO `date_price` (`year`, `price`) VALUES
 
 CREATE TABLE `good_deed_games` (
   `sid` int(11) NOT NULL,
-  `game_id` int(11) NOT NULL,
-  `game_name` varchar(255) NOT NULL,
+  `game_id` int(11) DEFAULT NULL,
+  `game_name` varchar(255) DEFAULT NULL,
   `game_detail` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -282,14 +288,14 @@ INSERT INTO `good_deed_games` (`sid`, `game_id`, `game_name`, `game_detail`) VAL
 
 CREATE TABLE `good_deed_games_record` (
   `sid` int(11) NOT NULL,
-  `member_sid` int(11) NOT NULL,
-  `member_account` varchar(255) NOT NULL,
-  `member_name` varchar(255) NOT NULL,
-  `member_birth` date NOT NULL,
+  `member_sid` int(11) DEFAULT NULL,
+  `member_account` varchar(255) DEFAULT NULL,
+  `member_name` varchar(255) DEFAULT NULL,
+  `member_birth` date DEFAULT NULL,
   `member_death` date DEFAULT NULL,
-  `play_date` datetime NOT NULL,
-  `game_id` int(11) NOT NULL,
-  `game_score` int(11) NOT NULL
+  `play_date` datetime DEFAULT NULL,
+  `game_id` int(11) DEFAULT NULL,
+  `game_score` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -308,11 +314,11 @@ INSERT INTO `good_deed_games_record` (`sid`, `member_sid`, `member_account`, `me
 
 CREATE TABLE `good_deed_score` (
   `sid` int(11) NOT NULL,
-  `member_sid` int(11) NOT NULL,
-  `member_account` varchar(255) NOT NULL,
-  `member_password` int(255) NOT NULL,
-  `member_name` int(255) NOT NULL,
-  `member_birth` date NOT NULL,
+  `member_sid` int(11) DEFAULT NULL,
+  `member_account` varchar(255) DEFAULT NULL,
+  `member_password` int(255) DEFAULT NULL,
+  `member_name` int(255) DEFAULT NULL,
+  `member_birth` date DEFAULT NULL,
   `member_death` date DEFAULT NULL,
   `test_score` int(11) DEFAULT NULL,
   `event_score` int(11) DEFAULT NULL,
@@ -329,10 +335,10 @@ CREATE TABLE `good_deed_score` (
 
 CREATE TABLE `good_deed_test` (
   `sid` int(11) NOT NULL,
-  `test_sid` varchar(255) NOT NULL,
-  `test_content` varchar(255) NOT NULL,
-  `op1_content` varchar(255) NOT NULL,
-  `op1_score` int(11) NOT NULL,
+  `test_sid` varchar(255) DEFAULT NULL,
+  `test_content` varchar(255) DEFAULT NULL,
+  `op1_content` varchar(255) DEFAULT NULL,
+  `op1_score` int(11) DEFAULT NULL,
   `op2_content` varchar(255) DEFAULT NULL,
   `op2_score` int(11) DEFAULT NULL,
   `op3_content` varchar(255) DEFAULT NULL,
@@ -357,9 +363,9 @@ INSERT INTO `good_deed_test` (`sid`, `test_sid`, `test_content`, `op1_content`, 
 --
 
 CREATE TABLE `good_deed_test_record` (
-  `sid` int(11) NOT NULL,
-  `member_account` varchar(255) NOT NULL,
-  `member_name` varchar(255) NOT NULL,
+  `sid` int(11) DEFAULT NULL,
+  `member_account` varchar(255) DEFAULT NULL,
+  `member_name` varchar(255) DEFAULT NULL,
   `member_birth` date DEFAULT NULL,
   `member_death` date DEFAULT NULL,
   `test_Q1` int(11) DEFAULT NULL,
@@ -375,7 +381,8 @@ CREATE TABLE `good_deed_test_record` (
 --
 
 INSERT INTO `good_deed_test_record` (`sid`, `member_account`, `member_name`, `member_birth`, `member_death`, `test_Q1`, `test_Q2`, `test_Q3`, `test_Q4`, `test_Q5`, `test_score`) VALUES
-(33, 'HappyCat32', '', NULL, NULL, 2, 3, 5, 5, 3, 1336);
+(33, 'HappyCat32', '', NULL, NULL, 2, 3, 5, 3, 3, 1203),
+(5, 'HappyCat05', '偷尼史塔克 Tony Stark ', '1990-06-14', '2022-06-02', 3, 5, 5, 3, 3, 1417);
 
 -- --------------------------------------------------------
 
@@ -385,7 +392,7 @@ INSERT INTO `good_deed_test_record` (`sid`, `member_account`, `member_name`, `me
 
 CREATE TABLE `location` (
   `l_sid` int(11) NOT NULL,
-  `location` varchar(255) NOT NULL
+  `location` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -419,15 +426,15 @@ INSERT INTO `location` (`l_sid`, `location`) VALUES
 
 CREATE TABLE `member` (
   `sid` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
   `deathdate` date DEFAULT NULL,
   `isdead` varchar(255) DEFAULT 'false',
-  `mobile` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `account` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `mobile` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `account` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `create_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -445,7 +452,7 @@ INSERT INTO `member` (`sid`, `name`, `birthdate`, `deathdate`, `isdead`, `mobile
 (8, '咖啡因成癮重症患者', NULL, NULL, 'false', '', 'HappyCat08@gmail.com', 'HappyCat08', '$2y$10$hfdvXtFq2/leKrM2jLXxf.L1YiKAr5wMCq7.rp69fiSgoG3pnJlsK', '2022-06-09 05:55:47'),
 (9, '陳怡君', NULL, NULL, 'false', '', 'HappyCat09@gmail.com', 'HappyCat09', '$2y$10$7zyt3mR2ghfGKn9xkEWgdeXlmxoRy4rm3DmrP/3kDFMXoIPPEj/wy', '2022-06-09 05:56:28'),
 (10, '總有幾隻貓的', NULL, NULL, 'false', '', 'HappyCat10@gmail.com', 'HappyCat10', '$2y$10$n3p/32p42bi1QqX/U0KjBe4Yb0WdAI.8UaoZH3tiRR8NbBaxHGcOK', '2022-06-09 05:56:51'),
-(11, 'unhappy cat', NULL, NULL, 'false', '', 'HappyCat11@gmail.com', 'HappyCat11', '$2y$10$JG.LjNM0flM7vAV8zkh6PO3Hb2bgA3c8xKW83W2qbgJgns/n/Hdoa', '2022-06-09 05:57:16'),
+(11, 'unhappy cat', NULL, NULL, 'true', '', 'HappyCat11@gmail.com', 'HappyCat11', '$2y$10$JG.LjNM0flM7vAV8zkh6PO3Hb2bgA3c8xKW83W2qbgJgns/n/Hdoa', '2022-06-09 05:57:16'),
 (12, '靈魂急轉彎', '1990-06-15', '2022-06-07', 'false', '', 'HappyCat12@gmail.com', 'HappyCat12', '$2y$10$7.aum6zzCAAX1XsrQyhOf.U8r5MrG586P2fdGiW27WfBOztqK4IHa', '2022-06-09 05:57:37'),
 (13, '', NULL, NULL, 'false', '', 'admin@gmail.com', 'Admin', '$2y$10$0DADDxhf55DPxOKcyISJt.L0uHOkeiSh7J/lTqQ73jMYj1qhLBrBW', '2022-06-09 17:51:04'),
 (14, '', NULL, NULL, 'false', '', 'HappyCat13@gmail.com', 'HappyCat13', '$2y$10$HX8f.Hc7la1jgapWVPVjtuSJ.RTjTgK9ZohqVUX5ean5kn2.OZgzC', '2022-06-09 19:26:43'),
@@ -467,7 +474,7 @@ INSERT INTO `member` (`sid`, `name`, `birthdate`, `deathdate`, `isdead`, `mobile
 (30, '', NULL, NULL, 'false', '', 'HappyCat29@gmail.com', 'HappyCat29', '$2y$10$gP3HIA0EXMDh9qvUJHPQSe/hp2U7qqgaCn9/szImsEsj3sAlwlaEu', '2022-06-09 19:33:10'),
 (31, '', NULL, NULL, 'false', '', 'HappyCat30@gmail.com', 'HappyCat30', '$2y$10$OpLdm4HUzxpgmE2AO1.VGuT9LNha8Uf3u7HPr5irykac.IzHsy5oq', '2022-06-09 19:33:22'),
 (32, '', NULL, NULL, 'false', '', 'HappyCat31@gmail.com', 'HappyCat31', '$2y$10$otVp1Ic9lSyMKkJPbwJM/ObXPky23VVmAx4UU/OIU9dtUQBYxPCga', '2022-06-09 19:33:35'),
-(33, '', NULL, NULL, 'false', '', 'HappyCat32@gmail.com', 'HappyCat32', '$2y$10$A4479RQRwSNLT5nSFUCFhecaDcEshF980fhqCE9HzuLjW83GWys1i', '2022-06-09 19:33:49'),
+(33, '快 樂 貓', NULL, NULL, 'false', '0988000111', 'HappyCat32@gmail.com', 'HappyCat32', '$2y$10$A4479RQRwSNLT5nSFUCFhecaDcEshF980fhqCE9HzuLjW83GWys1i', '2022-06-09 19:33:49'),
 (34, '', NULL, NULL, 'false', '', 'HappyCat33@gmail.com', 'HappyCat33', '$2y$10$nCEH1Lpgv82C.T7HsVbOJOU7Lhhi1I4CAlICGS5NOf/HEyFeclOhm', '2022-06-09 19:34:02'),
 (35, '', NULL, NULL, 'false', '', 'HappyCat34@gmail.com', 'HappyCat34', '$2y$10$b6qvb7RlxSExUOPcASuQD.toGgWKuTJlqUQd/fT6nyI3d7Y2km7Pm', '2022-06-09 19:34:29'),
 (36, '', NULL, NULL, 'false', '', 'HappyCat35@gmail.com', 'HappyCat35', '$2y$10$vRoey8TpPXJuH5osqirV/OAYl2vtPUYjgpbpSdd4bUENbGHN1gsCK', '2022-06-09 19:34:44'),
@@ -535,8 +542,9 @@ INSERT INTO `member` (`sid`, `name`, `birthdate`, `deathdate`, `isdead`, `mobile
 (98, '', NULL, NULL, 'false', '', 'HappyCat97@gmail.com', 'HappyCat97', '$2y$10$ioWw7u0Zk5l7C/1UDjQPt.01/3bOL5LPqIPVqYKLtWYuZ8H/0bTIq', '2022-06-09 19:49:59'),
 (99, '', NULL, NULL, 'false', '', 'HappyCat98@gmail.com', 'HappyCat98', '$2y$10$.CdtzoocaY4YOYIxkxm6j.B5QeG01NbHPhwXkQrWB9L7NwUVjRG3S', '2022-06-09 19:50:09'),
 (100, '', NULL, NULL, 'false', '', 'HappyCat99@gmail.com', 'HappyCat99', '$2y$10$Aaoh2lzg8fPn4Mb/ScmnEOhglXdwr8mLL0hf4CY3X4A.BC8tLIo3y', '2022-06-09 19:50:20'),
-(101, '', NULL, NULL, 'false', '', 'HappyCat100@gmail.com', 'HappyCat100', '$2y$10$RscDUr0vT/ndUx9ndYpvNe49wvxixQYYBQmL7rUNP1frBs/Tc9FVG', '2022-06-09 19:51:04'),
-(102, '涼枕', '1993-03-08', '2022-03-08', 'true', '0955667788', 'coolpilla@ggqq.com', 'coolpillow', '$2y$10$a11J3a0Jruj0y2dr3z2vYuYaqwMt4QB/puKbyQxphIJRc8t5tuZce', '2022-06-10 13:35:14');
+(101, '快樂貓', NULL, NULL, 'false', '0900111222', 'HappyCat100@gmail.com', 'HappyCat100', '$2y$10$RscDUr0vT/ndUx9ndYpvNe49wvxixQYYBQmL7rUNP1frBs/Tc9FVG', '2022-06-09 19:51:04'),
+(102, '涼枕', '1993-03-08', '2022-03-08', 'true', '0955667788', 'coolpilla@ggqq.com', 'coolpillow', '$2y$10$a11J3a0Jruj0y2dr3z2vYuYaqwMt4QB/puKbyQxphIJRc8t5tuZce', '2022-06-10 13:35:14'),
+(104, NULL, NULL, NULL, 'false', NULL, 'CarCat999@gmail.com', 'CarCat999', '$2y$10$Dz/WmrGg/nerW7t/sJmfaumz64j26FVWD6BzWmWZGBmcRbohmdSy6', '2022-06-13 04:51:54');
 
 -- --------------------------------------------------------
 
@@ -546,8 +554,8 @@ INSERT INTO `member` (`sid`, `name`, `birthdate`, `deathdate`, `isdead`, `mobile
 
 CREATE TABLE `music_category` (
   `music_type_sid` int(11) NOT NULL,
-  `music_type_en` varchar(255) NOT NULL,
-  `music_type_ch` varchar(255) NOT NULL
+  `music_type_en` varchar(255) DEFAULT NULL,
+  `music_type_ch` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -567,12 +575,12 @@ INSERT INTO `music_category` (`music_type_sid`, `music_type_en`, `music_type_ch`
 
 CREATE TABLE `news` (
   `sid` int(11) NOT NULL,
-  `topic` varchar(255) NOT NULL,
+  `topic` varchar(255) DEFAULT NULL,
   `event_time` date DEFAULT NULL,
-  `type_sid` int(11) NOT NULL,
+  `type_sid` int(11) DEFAULT NULL,
   `img` varchar(255) DEFAULT NULL,
-  `location_sid` int(11) NOT NULL,
-  `content` varchar(255) NOT NULL,
+  `location_sid` int(11) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
   `publish_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -600,8 +608,8 @@ INSERT INTO `news` (`sid`, `topic`, `event_time`, `type_sid`, `img`, `location_s
 
 CREATE TABLE `news_tag` (
   `nt_sid` int(11) NOT NULL,
-  `news_sid` int(11) NOT NULL,
-  `tag_sid` int(11) NOT NULL
+  `news_sid` int(11) DEFAULT NULL,
+  `tag_sid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -662,7 +670,18 @@ INSERT INTO `news_tag` (`nt_sid`, `news_sid`, `tag_sid`) VALUES
 (222, 26, 15),
 (223, 26, 23),
 (224, 26, 27),
-(225, 26, 28);
+(225, 26, 28),
+(226, 27, 1),
+(227, 27, 2),
+(229, 28, 1),
+(230, 28, 2),
+(231, 28, 3),
+(232, 28, 4),
+(233, 28, 5),
+(234, 28, 6),
+(235, 28, 7),
+(236, 28, 12),
+(237, 28, 29);
 
 -- --------------------------------------------------------
 
@@ -691,19 +710,20 @@ CREATE TABLE `npo_act` (
 --
 
 INSERT INTO `npo_act` (`sid`, `img`, `type_sid`, `price`, `value`, `start`, `end`, `npo_name`, `act_title`, `place_city`, `place_other`, `limit_num`, `intro`) VALUES
-(21, '6c124c50c7896a42846c0f0961e224c4.jpg', 2, 1000, 50, '2022-07-16 21:02:00', '2022-08-18 22:52:00', '財團法人桃園市私立寶貝潛能發展中心', '浪貓中途送養', 15, '松山區動保處', 70, '設立多元認養機制，提供民眾便利的認養地點與管道，增加收容動物認養機會。'),
 (22, 'e1c47a4f835af1a4a8588a048692bf3e.jpg', 3, 100, 50, '2022-07-14 21:02:00', '2022-07-22 22:52:00', '華山基金會', '「疫」起助老-愛心義賣活動', 16, '中正路420號7樓', 3, '※因現場人員需處理照護動物工作，場地/導覽人員人力有限，本會將視天候狀況及人力狀況審核是否同意志工服務，若天候不佳或是已有團體預約，就需要另擇他日喔!'),
 (23, 'bbaaff96e911967b5cbba0f7bcaf5bec.jpg', 3, 100, 50, '2022-06-11 21:02:00', '2022-07-22 22:52:00', '華山基金會', '家庭照顧者支持計畫', 2, '文山區萬和街6號4樓', 15, '1. 以弱勢社區及服務據點所提出的需求提供服務，並體驗當地生活和文化。\r\n2. 協助當地教學、活動帶領等為主，服務內容依實際狀況調整。'),
 (24, '5006073f5e1f9384b0f52ba001a41e7d.jpg', 3, 200, 50, '2022-07-22 21:02:00', '2022-07-21 22:52:00', '中華長照協會', 'for one挺好：「食物銀行。送愛」', 2, '中華路一段', 10, '服務內容：\r\n1.關懷服務：電話問安、送餐服務及社區關懷活動。\r\n2.陪伴服務：陪同就醫、讀報、陪伴運動及陪伴至社區或據點參與活動等服務。'),
-(25, 'ae7704bd25dbe4a3d73104c81637b338.jpg', 3, 50, 50, '2022-07-15 21:02:00', '2022-07-23 22:52:00', '財團法人桃園市私立寶貝潛能發展中心', '高風險家庭照顧關懷計畫', 4, '蘆竹區文中路一段108號（國道2號南桃園交流道附近）', 20, '馨禾老人長期照顧中心招募社會團體、學生團體與慈善愛心團體至院區服務與訪視住民老人，適時提供住民身心靈之撫慰與支持，並為住民生活帶來調劑與休閒娛樂，藉此提升住民之生活品質，更適時幫助住民在疾病上之舒緩與慰藉，並藉社會資源之力量達成社區照護模式與社會互動。'),
-(26, 'ec0d6962e72b23a95b11769c06234fb2.jpg', 5, 100, 50, '2022-06-17 21:02:00', '2022-06-23 22:52:00', '陽光社會福利基金會', '陪伴燒傷朋友勇敢重生', 2, '文山區萬和街6號4樓', 2, '哪裡有需要伊甸就在哪裡，每一個需要除了有員工，也需要熱心的志工夥伴協同，不論是櫃檯、文書等間接服務，或餵食、陪伴等直接服務，因為有志工的加入，服務的工作才能做得更好。'),
 (28, 'fbed9f64033cae7b8231c51e3cb1f383.png', 5, 50, 50, '2022-07-13 21:02:00', '2022-06-22 22:53:00', '愛盲基金會', '「看不見，我努力」為視多障者加油！', 4, '大溪老街', 4, '今年度，中心想透過志工協同領導的模式，由一位志工搭配 4 名身障者組成小隊，活動期間陪伴身障者於大溪老街中完成任務，中心期待透過此模式，增加身障者與一般民眾的接觸，雙方能夠進行良性互動，進而提升一般民眾對於身障者的認知，亦透過數位遊戲作為媒介，促使身心障礙者能活用網路科技、學習團隊合作、培養社會參與意識。'),
 (30, '321935d2d13d2d0bd2802b2e814a99a3.jpg', 6, 50, 50, '2022-06-29 21:02:00', '2022-06-18 22:53:00', '財團法人桃園市私立寶貝潛能發展中心', '伴弱勢癌友翻轉抗癌路', 2, '大安區敦化南路一段233巷28號B1台北愛樂文教基金會', 40, 'TICF18台北國際合唱音樂節規模龐大，涵蓋20餘場大小音樂會、4項合唱專業課程及首屆台北國際合唱大賽。行政團隊計畫培養節慶活動之幕後籌備人才，歡迎熱愛藝文活動的你/妳，加入我們一起來完成今夏亞洲最具規模的合唱盛事！'),
 (75, '052b5b84c830e59e7d4afadc2069f676.jpg', 2, 50, 50, '2022-06-22 21:02:00', '2022-07-15 21:02:00', '荒野保護協會', '一起手護台灣', 16, '國聖燈塔', 100, '會提供手套和垃圾袋，保險自理、自行攜帶飲用水 (盡量避免保特瓶或手搖飲)\r\nP.S我們民眾自發性舉辦的活動，故無法提供志工時數或感謝狀唷'),
 (102, 'ac669e5a675d1792f7af5b619fc6670c.jpg', 6, 200, 50, '2022-06-22 09:00:00', '2022-06-22 18:00:00', '台灣圖書室文化協會', '中部地區電話協談志工培訓', 15, '中正路420號7樓', 30, NULL),
 (103, '1a52ae873b4110a331d26c170544dc5b.jpg', 1, 100, 250, '2022-06-30 07:34:00', '2022-07-07 07:34:00', '荒野保護協會', '淨灘一起GO', 9, '濱海公路', 100, NULL),
 (104, '15f6e95a3287913a5eccfad23daf8d60.jpg', 1, 150, 200, '2022-06-29 06:35:00', '2022-06-30 06:35:00', '荒野保護協會', '海好有你 淨栗守護海洋', 18, '三仙台遊憩區', 100, NULL),
-(105, '9568610dfbc0a7584e24aaa79d325b2e.jpg', 4, 100, 100, '2022-06-28 09:00:00', '2022-06-28 17:00:00', '台灣全國兒少安置機構聯盟', '兒童權利教育志工', 21, '中正路694巷1弄3號', 5, NULL);
+(105, '9568610dfbc0a7584e24aaa79d325b2e.jpg', 4, 100, 100, '2022-06-28 09:00:00', '2022-06-28 17:00:00', '台灣全國兒少安置機構聯盟', '兒童權利教育志工', 21, '中正路694巷1弄3號', 5, NULL),
+(106, '3dbcc9393f53485faed46b0042150001.png', 2, 10, 10, '2022-06-22 11:26:00', '2022-06-30 11:26:00', '荒野保護協會', '咪咪', 15, '拉拉', 10, NULL),
+(107, '53602e395f4d6f31e1b4a3e0ef9662c2.png', 1, 100, 500, '2022-06-09 14:52:00', '2022-06-21 15:56:00', 'asdasdas', 'asdasdasdas', 17, 'asdasdsadas', 11, NULL),
+(108, 'c5c9b1bdc76cd324c535c7e0d9bd245a.jpg', 5, 100000, 0, '2022-06-15 03:03:00', '2022-06-27 03:01:00', '荒野保護協會', '二路兇一點好不好', 7, '111', 1, NULL),
+(109, 'c5c9b1bdc76cd324c535c7e0d9bd245a.jpg', 5, 100000, 0, '2022-06-15 03:03:00', '2022-06-27 03:01:00', '愛盲基金會', '二路兇一點好不好', 7, '111', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -713,7 +733,7 @@ INSERT INTO `npo_act` (`sid`, `img`, `type_sid`, `price`, `value`, `start`, `end
 
 CREATE TABLE `npo_act_type` (
   `typesid` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -750,15 +770,15 @@ CREATE TABLE `npo_name` (
 --
 
 INSERT INTO `npo_name` (`npo_sid`, `npo_name`, `npo_img`, `email`, `phone`, `mobile`, `npo_intro`, `create_at`) VALUES
-(3, '財團法人勵馨社會福利事業基金會', 'c513c688900de8ad71ae4823e31543c6.jpg', 'lknklnlkl@yahoo.com.tw', 29922310, '0966455233', '勵馨秉持基督精神，以追求公義與愛的決心，致力預防及消弭性侵害、性剥削、家庭暴力對婦女與兒少的傷害；深根社會改造， 創造性別平權的友善環境。', '2022-08-15 21:02:00'),
-(4, '陽光社會福利基金會', '20cf1ded90114f8006b46904ce7e981e.png', 'awslfkdnwqfkj@gmail.com', 25513456, '0966514852', '財團法人陽光社會福利基金會，簡稱陽光基金會，成立於1981年12月18日，是台灣社會福利團體之一。 陽光基金會的服務對象包含燒傷者及血管瘤、神經纖維瘤、口腔癌等先天、後天及其他不明原因致顏面病變損傷者，服務版圖遍及台灣各縣市。', '2022-05-15 21:02:00'),
+(4, '陽光社會福利基金會', '20cf1ded90114f8006b46904ce7e981e.png', 'awslfkdnwqfkj@gmail.com', 25513456, '', '', '2022-05-15 21:02:00'),
 (67, '財團法人桃園市私立寶貝潛能發展中心', 'b7613770120accced6b0e760c53af9ee.jpg', '123@yahoo.com.tw', 29901234, '0912095815', '之所以名為「寶貝」是意謂著每一個孩子都是我們的寶貝，我們真心疼愛每一個孩子，也希望每一個身心障礙的孩子都能得到良好的照顧。', '2022-06-01 23:59:07'),
-(84, '荒野保護協會', '8c96d2ddbe40b0d895a6fa0032472d94.jpg', '12345@gmail.com', 0, '0911456789', '', '2022-06-12 01:22:04'),
 (85, '華山基金會', 'e6468e81e9f99248127f02ce35743dea.jpg', '788221sfs@yahoo.com.tw', NULL, '0978456123', '華山基金會於1999年正式成立，投入三失(失能、失依、失智)老人免費到宅服務。 \r\n目前於台澎金馬設有約 400 個社區愛心天使站，服務近 3 萬名弱勢長輩。 ', '2022-06-12 01:26:55'),
 (86, '中華長照協會', 'f5f4ad87475efb5fd103b53bcc9eda9a.png', '456213@yahoo.com.tw', NULL, '0975645871', '中華長照協會旨在提供完善之長照服務，以解決家屬之照顧負擔與現今高齡化、獨居依等社會問題，建構幼有所長、壯有所用、老有所終之良善社會。', '2022-06-12 01:34:34'),
 (87, '愛盲基金會', '607897f2760ef943e495337671590bd8.png', '45622@yahoo.com.tw', 0, '0954678541', '財團法人愛盲基金會正式成立於民國八十年(1991年)底，原隸屬台北市政府教育局，八十六年(1997年)底改制為全國性的社會福利團體，九十五年改隸於內政部，一O二年八月主管機關改為「衛生福利部社會及家庭署」，是國內第一個為視覺障礙朋友以及其他身障朋友，在文教、職訓與視障福利政策方面，提供全面性服務與前瞻性規劃的基金會。', '2022-06-12 02:01:12'),
 (88, '台灣圖書室文化協會', '011d477857868aeedab2a26c1efe410c.jpg', 'adads@gmail.com', NULL, '0912645789', '1995年7月1日，當時任職省立嘉義醫院的張宏榮醫師與朋友們在嘉義市中正路成立台灣圖書室，聚集關心台灣本土文化的朋友一起舉辦讀書會與文化講座，而後於1997年底隨著張宏榮醫師返回屏東故里服務，圖書室因而結束營運。', '2022-06-12 02:04:42'),
-(89, '台灣全國兒少安置機構聯盟', '314715dd85c4deaae4fbe4a4b7a3a39a.jpg', '4562sfsv@gmail.com', 0, '0915478645', '我們以自律、平等、共學、共好為價值主張，期待透過安置機構間的串聯交流倡議完善安置政策環境，成為兒少保護的最後一道防線，不漏接任何一個孩子。郵政信箱23599中和郵局3-91號信箱', '2022-06-12 02:35:35');
+(89, '台灣全國兒少安置機構聯盟', '314715dd85c4deaae4fbe4a4b7a3a39a.jpg', '4562sfsv@gmail.com', 0, '0915478645', '我們以自律、平等、共學、共好為價值主張，期待透過安置機構間的串聯交流倡議完善安置政策環境，成為兒少保護的最後一道防線，不漏接任何一個孩子。郵政信箱23599中和郵局3-91號信箱', '2022-06-12 02:35:35'),
+(90, '瞇瞇瞇', 'ab3b2c7f994ff2f38f2e6633215fd804.png', '000@gmail.com', NULL, '', '', '2022-06-13 11:25:07'),
+(91, '二路兇一點協會', 'c7401e31f9a22748ea1d7c413245542a.jpg', 'nievesQQ@gmail.com', NULL, '0912345678', '二路兇一點', '2022-06-13 13:02:41');
 
 -- --------------------------------------------------------
 
@@ -768,14 +788,14 @@ INSERT INTO `npo_name` (`npo_sid`, `npo_name`, `npo_img`, `email`, `phone`, `mob
 
 CREATE TABLE `place` (
   `sid` int(11) NOT NULL,
-  `year` year(4) NOT NULL,
-  `month` int(11) NOT NULL,
-  `country` varchar(225) NOT NULL,
-  `city` varchar(225) NOT NULL,
-  `dist` varchar(225) NOT NULL,
-  `quota` int(11) NOT NULL,
-  `booked` int(11) NOT NULL,
-  `place_price` int(11) NOT NULL DEFAULT 200
+  `year` year(4) DEFAULT NULL,
+  `month` int(11) DEFAULT NULL,
+  `country` varchar(225) DEFAULT NULL,
+  `city` varchar(225) DEFAULT NULL,
+  `dist` varchar(225) DEFAULT NULL,
+  `quota` int(11) DEFAULT NULL,
+  `booked` int(11) DEFAULT NULL,
+  `place_price` int(11) DEFAULT 200
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -783,12 +803,6 @@ CREATE TABLE `place` (
 --
 
 INSERT INTO `place` (`sid`, `year`, `month`, `country`, `city`, `dist`, `quota`, `booked`, `place_price`) VALUES
-(2, 2025, 10, '美國', '紐約', '布魯克林', 2, 0, 200),
-(5, 2072, 2, '台灣', '台南市', '安平區', 2, 0, 200),
-(6, 2030, 5, '台灣', '台南市', '中西區', 5, 3, 200),
-(7, 2055, 8, '台灣', '台北市', '大安區', 5, 3, 200),
-(10, 2025, 12, '台灣', '台南市', '安平區', 4, 2, 200),
-(12, 2025, 12, '台灣', '台北市', '大安區', 3, 2, 200),
 (13, 2022, 12, '美國', '加州', '聖荷西', 2, 1, 200),
 (16, 2030, 6, '台灣', '台北市', '內湖區', 1, 1, 200),
 (17, 2029, 6, '台灣', '台南市', '中西區', 2, 1, 200),
@@ -855,7 +869,8 @@ INSERT INTO `place` (`sid`, `year`, `month`, `country`, `city`, `dist`, `quota`,
 (80, 2022, 11, '台灣', '新北市', '三峽區', 2, 1, 200),
 (81, 2022, 10, '台灣', '新竹縣', '竹北市', 3, 1, 200),
 (82, 2030, 2, '美國', '加州', '聖地牙哥', 2, 0, 200),
-(83, 2043, 9, '台灣', '桃園市', '中壢區', 2, 1, 200);
+(84, 2022, 11, '美國', '加州', '聖荷西', 3, 0, 200),
+(85, 2022, 11, '台灣', '桃園市', '中壢區', 5, 1, 200);
 
 -- --------------------------------------------------------
 
@@ -864,7 +879,7 @@ INSERT INTO `place` (`sid`, `year`, `month`, `country`, `city`, `dist`, `quota`,
 --
 
 CREATE TABLE `place_city` (
-  `country_id` varchar(225) NOT NULL,
+  `country_id` varchar(225) DEFAULT NULL,
   `city` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -901,7 +916,7 @@ INSERT INTO `place_city` (`country_id`, `city`) VALUES
 
 CREATE TABLE `place_country` (
   `country` varchar(225) NOT NULL,
-  `country_price` int(11) NOT NULL
+  `country_price` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -919,8 +934,8 @@ INSERT INTO `place_country` (`country`, `country_price`) VALUES
 --
 
 CREATE TABLE `place_dist` (
-  `country_id` varchar(225) NOT NULL,
-  `city_id` varchar(225) NOT NULL,
+  `country_id` varchar(225) DEFAULT NULL,
+  `city_id` varchar(225) DEFAULT NULL,
   `dist` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -969,11 +984,11 @@ INSERT INTO `place_dist` (`country_id`, `city_id`, `dist`) VALUES
 
 CREATE TABLE `place_order` (
   `sid` int(11) NOT NULL,
-  `member_sid` varchar(225) CHARACTER SET utf8mb4 NOT NULL,
-  `place_sid` int(225) NOT NULL,
-  `date_price` int(11) NOT NULL,
-  `place_price` int(11) NOT NULL,
-  `created_date` date NOT NULL DEFAULT current_timestamp()
+  `member_sid` varchar(225) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `place_sid` int(225) DEFAULT NULL,
+  `date_price` int(11) DEFAULT NULL,
+  `place_price` int(11) DEFAULT NULL,
+  `created_date` date DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -986,7 +1001,10 @@ INSERT INTO `place_order` (`sid`, `member_sid`, `place_sid`, `date_price`, `plac
 (12, '15', 4, 50, 150, '2022-06-09'),
 (15, '20', 5, 50, 150, '2022-06-09'),
 (19, '1', 66, 50, 150, '2022-06-10'),
-(29, '12', 4, 50, 150, '2022-06-12');
+(29, '12', 4, 50, 150, '2022-06-12'),
+(33, '3', 2, 50, 150, '2022-06-13'),
+(34, '33', 5, 50, 150, '2022-06-13'),
+(36, '23', 6, 50, 150, '2022-06-13');
 
 -- --------------------------------------------------------
 
@@ -995,9 +1013,9 @@ INSERT INTO `place_order` (`sid`, `member_sid`, `place_sid`, `date_price`, `plac
 --
 
 CREATE TABLE `reincarnation` (
-  `member_sid` int(11) NOT NULL,
-  `soul_id` int(11) NOT NULL,
-  `generation` int(11) NOT NULL DEFAULT 0
+  `member_sid` int(11) DEFAULT NULL,
+  `soul_id` int(11) DEFAULT NULL,
+  `generation` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -1022,17 +1040,17 @@ INSERT INTO `reincarnation` (`member_sid`, `soul_id`, `generation`) VALUES
 
 CREATE TABLE `reincarnation_order` (
   `reincarnation_order_sid` int(11) NOT NULL,
-  `order_id` varchar(255) NOT NULL,
-  `member_sid` int(11) NOT NULL,
-  `avatar_id` int(11) NOT NULL,
+  `order_id` varchar(255) DEFAULT NULL,
+  `member_sid` int(11) DEFAULT NULL,
+  `avatar_id` int(11) DEFAULT NULL,
   `time_id` date DEFAULT NULL,
-  `place_id` varchar(255) NOT NULL,
-  `avatar_price` int(11) NOT NULL,
-  `time_price` int(11) NOT NULL,
-  `place_price` int(11) NOT NULL,
-  `amount` int(11) NOT NULL DEFAULT 0,
-  `order_datetime` datetime NOT NULL,
-  `order_last_modified_datetime` datetime NOT NULL
+  `place_id` varchar(255) DEFAULT NULL,
+  `avatar_price` int(11) DEFAULT NULL,
+  `time_price` int(11) DEFAULT NULL,
+  `place_price` int(11) DEFAULT NULL,
+  `amount` int(11) DEFAULT 0,
+  `order_datetime` datetime DEFAULT NULL,
+  `order_last_modified_datetime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -1043,9 +1061,9 @@ CREATE TABLE `reincarnation_order` (
 
 CREATE TABLE `showcase` (
   `avatar_id` int(11) NOT NULL,
-  `member_sid` int(11) NOT NULL,
-  `avatar_created_at` datetime NOT NULL,
-  `combination` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`combination`))
+  `member_sid` int(11) DEFAULT NULL,
+  `avatar_created_at` datetime DEFAULT NULL,
+  `combination` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -1056,7 +1074,12 @@ INSERT INTO `showcase` (`avatar_id`, `member_sid`, `avatar_created_at`, `combina
 (15, 33, '2022-06-11 09:24:23', '{\"eyes\":\"0\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"eyesColor\":\"0\",\"noseColor\":\"2\",\"mouthColor\":\"5\",\"earColor\":\"4\",\"hairColor\":\"6\"}'),
 (16, 69, '2022-06-11 22:39:42', '{\"eyes\":\"2\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"1\",\"eyesColor\":\"4\",\"noseColor\":\"0\",\"mouthColor\":\"3\",\"earColor\":\"4\",\"hairColor\":\"5\"}'),
 (17, 28, '2022-06-11 22:49:06', '{\"eyes\":\"2\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"eyesColor\":\"1\",\"noseColor\":\"1\",\"mouthColor\":\"0\",\"earColor\":\"0\",\"hairColor\":\"5\"}'),
-(18, 28, '2022-06-11 22:49:24', '{\"eyes\":\"3\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"eyesColor\":\"6\",\"noseColor\":\"5\",\"mouthColor\":\"5\",\"earColor\":\"5\",\"hairColor\":\"1\"}');
+(18, 28, '2022-06-11 22:49:24', '{\"eyes\":\"3\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"eyesColor\":\"6\",\"noseColor\":\"5\",\"mouthColor\":\"5\",\"earColor\":\"5\",\"hairColor\":\"1\"}'),
+(19, 3, '2022-06-13 08:53:27', '{\"eyes\":\"0\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"eyesColor\":\"0\",\"noseColor\":\"0\",\"mouthColor\":\"0\",\"earColor\":\"0\",\"hairColor\":\"0\"}'),
+(20, 3, '2022-06-13 08:53:34', '{\"eyes\":\"1\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"eyesColor\":\"0\",\"noseColor\":\"0\",\"mouthColor\":\"5\",\"earColor\":\"0\",\"hairColor\":\"0\"}'),
+(21, 3, '2022-06-13 08:53:42', '{\"eyes\":\"1\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"1\",\"hair\":\"0\",\"eyesColor\":\"0\",\"noseColor\":\"0\",\"mouthColor\":\"4\",\"earColor\":\"0\",\"hairColor\":\"0\"}'),
+(23, 23, '2022-06-13 11:18:40', '{\"eyes\":\"1\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"0\",\"eyesColor\":\"8\",\"noseColor\":\"0\",\"mouthColor\":\"0\",\"earColor\":\"0\",\"hairColor\":\"0\"}'),
+(24, 23, '2022-06-13 11:18:49', '{\"eyes\":\"1\",\"nose\":\"0\",\"mouth\":\"0\",\"ear\":\"0\",\"hair\":\"2\",\"eyesColor\":\"0\",\"noseColor\":\"0\",\"mouthColor\":\"4\",\"earColor\":\"0\",\"hairColor\":\"9\"}');
 
 -- --------------------------------------------------------
 
@@ -1066,7 +1089,7 @@ INSERT INTO `showcase` (`avatar_id`, `member_sid`, `avatar_created_at`, `combina
 
 CREATE TABLE `tag` (
   `tg_sid` int(11) NOT NULL,
-  `tag_name` varchar(255) NOT NULL
+  `tag_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1100,7 +1123,8 @@ INSERT INTO `tag` (`tg_sid`, `tag_name`) VALUES
 (25, '狼小孩'),
 (26, '性別平等'),
 (27, '無人島'),
-(28, '生存挑戰');
+(28, '生存挑戰'),
+(29, 'hello');
 
 -- --------------------------------------------------------
 
@@ -1110,7 +1134,7 @@ INSERT INTO `tag` (`tg_sid`, `tag_name`) VALUES
 
 CREATE TABLE `type` (
   `ty_sid` int(11) NOT NULL,
-  `type_name` varchar(255) NOT NULL
+  `type_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -1326,13 +1350,13 @@ ALTER TABLE `type`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `act_order`
 --
 ALTER TABLE `act_order`
-  MODIFY `act_order_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `act_order_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `act_order_details`
 --
 ALTER TABLE `act_order_details`
-  MODIFY `order_create_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `order_create_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `body_parts`
@@ -1350,7 +1374,7 @@ ALTER TABLE `city_type`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `cube`
 --
 ALTER TABLE `cube`
-  MODIFY `cube_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `cube_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `cube_category`
@@ -1398,7 +1422,7 @@ ALTER TABLE `location`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `member`
 --
 ALTER TABLE `member`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `music_category`
@@ -1410,19 +1434,19 @@ ALTER TABLE `music_category`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `news`
 --
 ALTER TABLE `news`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `news_tag`
 --
 ALTER TABLE `news_tag`
-  MODIFY `nt_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=226;
+  MODIFY `nt_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `npo_act`
 --
 ALTER TABLE `npo_act`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `npo_act_type`
@@ -1431,16 +1455,22 @@ ALTER TABLE `npo_act_type`
   MODIFY `typesid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `npo_name`
+--
+ALTER TABLE `npo_name`
+  MODIFY `npo_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+
+--
 -- 使用資料表自動遞增(AUTO_INCREMENT) `place`
 --
 ALTER TABLE `place`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `place_order`
 --
 ALTER TABLE `place_order`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `reincarnation_order`
@@ -1452,13 +1482,13 @@ ALTER TABLE `reincarnation_order`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `showcase`
 --
 ALTER TABLE `showcase`
-  MODIFY `avatar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `avatar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `tg_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `tg_sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `type`
